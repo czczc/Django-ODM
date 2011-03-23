@@ -32,8 +32,16 @@ DATABASES = {
         'PASSWORD': '',      
         'HOST': '',          
         'PORT': '',          
-    }
+    },
+    'lbl' : {
+        'ENGINE': 'mysql',
+        'NAME': 'offline_db',
+        'USER': 'dayabay',
+        'PASSWORD': '3quarks',
+        'HOST': 'dayabaydb.lbl.gov',
+    },
 }
+DATABASE_ROUTERS = ['odm.router.DayaBayOfflineRouter', 'odm.router.LocalRouter']
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
 
@@ -48,7 +56,8 @@ TIME_ZONE = 'America/Los Angeles'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 USE_I18N = False
-USE_L10N = False
+USE_L10N = True
+# DATETIME_FORMAT = 'c'
 
 
 TEMPLATE_LOADERS = (
@@ -77,6 +86,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.admin',
+    'odm.runinfo',
 )
 
 SESSION_COOKIE_AGE = 86400 * 3
