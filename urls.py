@@ -9,6 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^$', direct_to_template, { 'template': 'index.html' }, 'index'),
+    (r'^test/$', direct_to_template, { 'template': 'test.html' }),
 )
 
 # media files
