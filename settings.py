@@ -5,6 +5,10 @@ PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 import socket
 HOST_NAME = socket.gethostname()
 
+from ConfigParser import SafeConfigParser
+conf = SafeConfigParser()
+conf.read(os.path.join(PROJECT_PATH, 'odm.conf'))
+
 SITE_LOCAL = SITE_NERSC = False
 if HOST_NAME.startswith('sgn'):
     SITE_NERSC = True
@@ -26,19 +30,19 @@ elif SITE_LOCAL:
     
 DATABASES = {
     'default': {
-        'ENGINE': 'sqlite3',
-        'NAME': PROJECT_PATH + '/db/odm.db',          
-        'USER': '',          
+        'ENGINE'  : 'sqlite3',
+        'NAME'    : PROJECT_PATH + conf.get('default_db', 'NAME'),          
+        'USER'    : '',          
         'PASSWORD': '',      
-        'HOST': '',          
-        'PORT': '',          
+        'HOST'    : '',          
+        'PORT'    : '',          
     },
     'lbl' : {
-        'ENGINE': 'mysql',
-        'NAME': 'offline_db',
-        'USER': 'dayabay',
-        'PASSWORD': '3quarks',
-        'HOST': 'dayabaydb.lbl.gov',
+        'ENGINE'  : 'mysql',
+        'NAME'    : conf.get('lbl_db', 'NAME'),
+        'USER'    : conf.get('lbl_db', 'USER'),
+        'PASSWORD': conf.get('lbl_db', 'PASSWORD'),
+        'HOST'    : conf.get('lbl_db', 'HOST'),
     },
 }
 DATABASE_ROUTERS = ['odm.router.DayaBayOfflineRouter', 'odm.router.LocalRouter']
@@ -51,7 +55,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 ROOT_URLCONF = 'odm.urls'
-SECRET_KEY = ')x6%ue!mjwlw3u)t3wxtc%hktov$ti!w@%v1n)q72-$%6g*kp9'
+SECRET_KEY = conf.get('common', 'SECRET_KEY')
 TIME_ZONE = 'America/Los Angeles'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
