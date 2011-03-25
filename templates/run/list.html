@@ -1,14 +1,17 @@
 {% extends "base.html" %}
 
-{# {% load pagination %} #}
+{% load pagination %}
 
 {% block content %}
     <div class = "grid_24">
          <h2>
-             List of {{ runtype }} Runs ({{ run_list|length }})
-             {# {% pagination %} #}
+             List of {{ description }} Runs ({{ count }})
+             {% paginator %}
         </h2>
-              
+    </div>
+    
+    <div class="clear"></div>    
+    <div class = "grid_24">          
         <table>
            <thead><tr>
               <th>Run No</th>
