@@ -2,13 +2,18 @@ from django.conf.urls.defaults import *
 from django.conf import settings
 from django.views.generic.simple import direct_to_template
 import os
+from odm.settings import SITE_ROOT
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
-    (r'^$', direct_to_template, { 'template': 'index.html' }, 'index'),
+    (r'^$', direct_to_template, 
+        { 'template': 'index.html', 
+          'extra_context': { 'SITE_ROOT' : SITE_ROOT, } 
+         }
+    ),
     (r'^test/$', direct_to_template, { 'template': 'test.html' }),
 )
 

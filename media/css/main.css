@@ -1,12 +1,11 @@
 /* main style for odm */
 
+/* comment the following line for production site*/
+/*.container_24{ background: #fff url(../img/24_col.gif) repeat-y; }*/
+
 /* text selection */
-::selection {
-	background: #ffcc89; /* Safari */
-	}
-::-moz-selection {
-	background: #ffcc89; /* Firefox */
-}
+::selection { background: #ffcc89; } /* Safari */ 
+::-moz-selection { background: #ffcc89; } /* Firefox */
 
 .hidden { display: none; }
 

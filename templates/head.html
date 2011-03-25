@@ -1,0 +1,52 @@
+<div class="container_24">
+    <div class="grid_12 suffix_9">
+        <img src="{{ MEDIA_URL }}img/logo.png" alt="ODM" />
+    </div>
+    <div class="grid_3">
+        {#id="top-bar"   #}
+        {#id="right-side"  #}
+        {# <a href='/runtype/All/' class='first'>Home&ensp;</a> #}
+        {# <a href='/currentrun/'>Current Run&ensp;</a> #}
+        {# <a href='/logout/'>Logout&ensp;</a> #}
+
+        <form action='/quick_search/' id='quick_search'>
+        {# <label for="search-field" id="search-field-label">Search</label> #}
+        <input type="text" tabindex="1" name="findrun" id="quick_search_field"/>
+        <input type="image" alt="Find" value="Find" src="{{ MEDIA_URL }}img/search.png" id="search-button"/>  
+        </form>
+    </div>
+    
+    <div class="clear"></div>
+    <div id="zone-bar" class="grid_24">
+        <ul>            
+            <li>
+                <a href="#" class="top_menu"><span>
+                    Runs&ensp;
+                    <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />
+                </span></a>
+                <ul class="sub_menu">
+                    <li><a href='{{ SITE_ROOT }}/run/current/'>Current</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/lastweek/'>Last Week</a></li>
+                    <li class="menu_separator"></li>
+                    <li><a href='{{ SITE_ROOT }}/run/type/All/'>All</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/type/Physics/'>Physics</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/type/ADCalib/'>ADCalib</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/type/Pedestal/'>Pedestal</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/type/FEEDiag/'>FEEDiag</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul>            
+            <li>
+                <a href="#" class="top_menu"><span>
+                    Actions&ensp;
+                    <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />
+                </span></a>
+                <ul class="sub_menu">
+                    <li><a href='{{ SITE_ROOT }}/profile/'>Profile</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+</div>

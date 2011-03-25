@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/test.css")?>
+{% endblock %}
+
+{% block title %}Layout Test{% endblock %}
+
 {% block content %}
     <h1>Layout Test</h1>
+{% endblock %}
+
+{% block footer %}
+<div class = 'grid_5 prefix_19'>
+    <p><a href="mailto:zhang@caltech.edu">Contact Webmaster</a></p>
+</div>
 {% endblock %}
