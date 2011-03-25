@@ -3,6 +3,9 @@
 /* comment the following line for production site*/
 /*.container_24{ background: #fff url(../img/24_col.gif) repeat-y; }*/
 
+/* defaults */
+body { font-family: Lucida Grande, Verdana, Geneva, Sans-serif; font-size: 13px; color: #333; background: #fff; }
+
 /* text selection */
 ::selection { background: #ffcc89; } /* Safari */ 
 ::-moz-selection { background: #ffcc89; } /* Firefox */
@@ -13,6 +16,10 @@
 a { color: #125ca2; background-color: transparent; text-decoration: none; font-weight: normal; outline-style: none; }
 a:visited { color: #125ca2; background-color: transparent; text-decoration: none; outline-style: none; }
 a:hover { color: #ff8f28; text-decoration: none; background-color: transparent; outline-style: none; }
+
+/* headings */
+#content h1 { color: #e13300; font-size: 24px; margin: 0 0 20px 0; padding: 3px 0 7px 3px; border-bottom: 1px solid #666; font-weight: normal; }
+#content h2 { color: #000; font-size: 18px; margin: 30px 0 16px 0; padding: 5px 0 6px 0; border-bottom: 1px solid #999; }
 
 /* bookmarks */
 #nav { background-color: #494949; margin: 0; padding: 0; }

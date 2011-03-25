@@ -1,10 +1,10 @@
 /* quick search box */
 #quick_search { position: relative; margin-top: 18px; }
-#quick_search_field { border: 1px solid #999; background: #eef6fb; height: 20px; width: 100px; font-size: 12px; }
-#search-button { position: absolute; right: -7px; top: -5px; width: 32px; border: none; }
+#quick_search_field { border: 2px solid #92b8cc; background: #eef6fb; height: 21px; width: 100px; font-size: 12px; padding-left: 5px;}
+#search-button { position: absolute; right: -9px; top: -2px; width: 32px; border: none; }
 
-/* menu */
-#zone-bar { background: #e3f9e2; height: 35px; padding-top: 5px; border-top: 1px solid #aaa;}
+/* menu #e3f9e2 */
+#zone-bar { background: #ebf3f6; height: 32px; padding-top: 7px; margin-top: 10px;/* border-top: 1px solid #aaa;*/}
 #zone-bar ul { list-style: none inside; display: block; float: left; }
 #zone-bar ul li { height: 18px; padding-top: 5px; margin-left: 20px; position: relative; float: left; }
 #zone-bar ul li:hover { background: url(../img/zonebar-navleft.png) center left no-repeat; }

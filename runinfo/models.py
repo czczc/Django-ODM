@@ -3,7 +3,7 @@ from django.db import models
 class RuninfoManager(models.Manager):
     def list_runtype(self, runtype):
         if runtype == 'All':
-            return self.get_query_set().select_related()
+            return self.select_related()
         return self.select_related().filter(runtype=runtype)
 
 #=====================================
@@ -25,6 +25,9 @@ class Daqruninfovld(models.Model):
     
     def __unicode__(self):
         return u'seq %d' % (self.seqno, )
+    
+    def runlength(self):
+        return self.timeend - self.timestart
 
 #=====================================
 class Daqruninfo(models.Model):

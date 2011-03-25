@@ -9,9 +9,11 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^$', direct_to_template, { 'template': 'index.html', }),
     (r'^test/$', direct_to_template, { 'template': 'test.html' }),
+    
+    (r'^run/', include('odm.runinfo.urls')),
 )
 
-from odm import settings
+from django.conf import settings
 # media files
 if settings.SITE_LOCAL:
     urlpatterns += patterns('',
