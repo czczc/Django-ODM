@@ -78,10 +78,17 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-
 TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     PROJECT_PATH + '/templates',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'odm.context_processors.setting',
 )
 
 INSTALLED_APPS = (
@@ -94,3 +101,5 @@ INSTALLED_APPS = (
 )
 
 SESSION_COOKIE_AGE = 86400 * 3
+
+VERSION = '1.0'
