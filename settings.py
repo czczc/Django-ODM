@@ -59,7 +59,7 @@ SECRET_KEY = conf.get('common', 'SECRET_KEY')
 TIME_ZONE = 'America/Los Angeles'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
-USE_I18N = False
+USE_I18N = True
 USE_L10N = False
 DATETIME_FORMAT = 'Y-m-d H:i:s' 
 
@@ -97,10 +97,15 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.admin',
+    'registration',
     'odm.templatelib',
     'odm.runinfo',
 )
 
 SESSION_COOKIE_AGE = 86400 * 3
+ACCOUNT_ACTIVATION_DAYS = 7
+LOGIN_URL = SITE_ROOT + '/accounts/login'
+LOGIN_REDIRECT_URL = SITE_ROOT + '/run/'
+LOGOUT_URL = SITE_ROOT + '/accounts/logout'
 
 VERSION = '1.0'

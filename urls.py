@@ -7,6 +7,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
+    (r'^accounts/', include('registration.backends.default.urls')),
+    (r'^accounts/profile/$', direct_to_template, {'template': 'registration/profile.html'}),
+    
     (r'^$', direct_to_template, { 'template': 'index.html', }),
     (r'^test/$', direct_to_template, { 'template': 'test.html' }),
     

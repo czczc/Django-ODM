@@ -39,11 +39,14 @@
         <ul>            
             <li>
                 <a href="#" class="top_menu"><span>
-                    Actions&ensp;
+                    Accounts&ensp;
                     <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />
                 </span></a>
                 <ul class="sub_menu">
-                    <li><a href='{{ SITE_ROOT }}/profile/'>Profile</a></li>
+                    <li><a href='{{ SITE_ROOT }}/accounts/profile/'>Profile</a></li>
+                    <li class="menu_separator"></li>
+                    <li><a href='{{ SITE_ROOT }}/accounts/logout/'>Logout</a></li>
+                    
                 </ul>
             </li>
         </ul>

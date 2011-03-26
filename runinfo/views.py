@@ -12,7 +12,7 @@ def test(request, runno):
     runinfo = Daqruninfo.objects.get(runno=runno)
     return HttpResponse(u'%s' % (runinfo.vld.timestart,))
 
-
+@login_required
 def run(request, runno):
     '''query a single run'''
     
@@ -21,7 +21,7 @@ def run(request, runno):
         { 'run' : run, },
         context_instance=RequestContext(request))
 
-# @login_required
+@login_required
 def runtype(request, runtype='All', page=1, records=500):
     '''query by run type'''
     
