@@ -19,12 +19,12 @@ a:hover { color: #ff8f28; text-decoration: none; background-color: transparent; 
 
 /* content */
 #content h1 { color: #e13300; font-size: 24px; margin: 0 0 20px 0; padding: 3px 0 7px 3px; border-bottom: 1px solid #666; font-weight: normal; }
-#content h2 { color: #000; font-size: 18px; margin: 30px 0 16px 0; padding: 5px 0 6px 0; border-bottom: 1px solid #999; }
+#content h2 { color: #000; font-size: 18px; margin: 30px 0 16px 0; padding: 5px 0 6px 5px; border-bottom: 1px solid #999; }
 #content h3 { color: #333; font-size: 16px; margin: 16px 0 15px 0; padding: 0; font-weight: bold; }
 #content h4 { color: #444; font-size: 14px; margin: 22px 0 0 0; font-weight: bold; }
 #content h5 { color: #444; font-size: 14px; font-weight: bold; display: inline; }
 #content h5 { color: #444; font-size: 12px; font-weight: bold; display: inline; }
-#content table { width: 99%; }
+#content table { width: 100%; }
 #content th { border: 1px solid #fff; font-weight: bold; text-align: left; font-size: 12px; background-color: #666; color: #fff; padding: 4px; margin: 10px;}
 #content td { border: 1px solid #fff; font-weight: normal; font-size: 12px; padding: 6px; background-color: #f3f3f3; }
 
@@ -41,3 +41,8 @@ a:hover { color: #ff8f28; text-decoration: none; background-color: transparent; 
 #nav_inner a { color: #eee; }
 #nav_inner a:visited { color: #eee; }
 #nav_inner a:hover { color: #ccc; }
+
+/* tables */
+#content td.descr { font-weight: bold; background-color: #deedf7; text-align: right; padding-right: 15px;}
+#content td.value { background-color: #e3f9e2; padding-left: 10px;}
+

@@ -4,7 +4,7 @@
 #search-button { position: absolute; right: -9px; top: -2px; width: 32px; border: none; }
 
 /* menu #e3f9e2 */
-#zone-bar { background: #ebf3f6; height: 32px; padding-top: 7px; margin-top: 10px;/* border-top: 1px solid #aaa;*/}
+#zone-bar { background: #deedf7; height: 32px; padding-top: 7px; margin-top: 10px;/* border-top: 1px solid #aaa;*/}
 #zone-bar ul { list-style: none inside; display: block; float: left; }
 #zone-bar ul li { height: 18px; padding-top: 5px; margin-left: 20px; position: relative; float: left; }
 #zone-bar ul li:hover { background: url(../img/zonebar-navleft.png) center left no-repeat; }

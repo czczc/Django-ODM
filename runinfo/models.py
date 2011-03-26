@@ -1,4 +1,7 @@
 from django.db import models
+from django.conf import settings
+
+import datetime
 
 class RuninfoManager(models.Manager):
     def list_runtype(self, runtype):
@@ -28,6 +31,12 @@ class Daqruninfovld(models.Model):
     
     def runlength(self):
         return self.timeend - self.timestart
+    
+    def timestart_beijing(self):
+        return self.timestart + datetime.timedelta(seconds=8*3600)   
+
+    def timeend_beijing(self):
+        return self.timeend + datetime.timedelta(seconds=8*3600)
 
 #=====================================
 class Daqruninfo(models.Model):
@@ -50,6 +59,9 @@ class Daqruninfo(models.Model):
         
     def __unicode__(self):
         return u'run %d' % (self.runno, )
+    
+    def get_absolute_url(self):
+        return "%s/run/%i/" % (settings.SITE_ROOT, self.runno)
 
 # =====================================
 class Daqcalibruninfo(models.Model):

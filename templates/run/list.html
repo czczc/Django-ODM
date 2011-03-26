@@ -16,8 +16,8 @@
            <thead><tr>
               <th>Run No</th>
               <th class='RunType'>Run Type</th>
-              <th class='StartTime'>Start Time [UTC]</th>
-              <th class='StartTimeBeijing hidden'>Start Time<br /> [Beijing]</th>
+              <th class='StartTime hidden'>Start Time [UTC]</th>
+              <th class='StartTimeBeijing'>Start Time [Beijing]</th>
               <th class='RunLength'>Run Length</th>
               <th class='PQMPlots'>PQM Plots</th>
               <th class='DiagnosticPlots'>Diagnostic Plots</th>
@@ -27,10 +27,10 @@
            <tbody>
                {% for run in run_list %}
                    <tr>
-                       <td>{{ run.runno }}</td>
+                       <td><a href="{{ run.get_absolute_url }}">{{ run.runno }}</td>
                        <td class='RunType'>{{ run.runtype }}</td>
                        <td class='StartTime hidden'>{{ run.vld.timestart }}</td>
-                       <td class='StartTimeBeijing'>{{ run.vld.timestart }}</td>
+                       <td class='StartTimeBeijing'>{{ run.vld.timestart_beijing }}</td>
                        <td class='RunLength'>{{ run.vld.runlength }}</td>
                        <td class='PQMPlots'>N/A</td>
                        <td class='DiagnosticPlots'>N/A</td>
