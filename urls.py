@@ -13,7 +13,8 @@ urlpatterns = patterns('',
     (r'^$', direct_to_template, { 'template': 'index.html', }),
     (r'^quick-search/$', 'odm.runinfo.views.quick_search'),
     
-    (r'^run/', include('odm.runinfo.urls')),    
+    (r'^run/', include('odm.runinfo.urls')), 
+    (r'^production/', include('odm.production.urls')),   
 )
 
 from django.conf import settings

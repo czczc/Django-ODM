@@ -16,12 +16,12 @@
            <thead><tr>
               <th>Run No</th>
               <th class='RunType'>Run Type</th>
-              <th class='Site'>Site-Detector</th>
+              <th class='Site'>Site</th>
               <th class='StartTime hidden'>Start Time [UTC]</th>
               <th class='StartTimeBeijing'>Start Time [Beijing]</th>
               <th class='RunLength'>Run Length</th>
-              <th class='PQMPlots'>PQM</th>
-              <th class='DiagnosticPlots'>Diagnostics</th>
+              <th class='PQM'>PQM</th>
+              <th class='Diagnostics'>Diagnostics</th>
               <th class='Comments'>Comments</th>
               <th class='Elog'>Elog</th>
            </tr></thead>
@@ -34,8 +34,8 @@
                        <td class='StartTime hidden'>{{ run.vld.timestart }}</td>
                        <td class='StartTimeBeijing'>{{ run.vld.timestart_beijing }}</td>
                        <td class='RunLength'>{{ run.vld.runlength }}</td>
-                       <td class='PQMPlots'></td>
-                       <td class='DiagnosticPlots'></td>
+                       <td class='PQM'></td>
+                       <td class='Diagnostics' runno='{{ run.runno }}'></td>
                        <td class='Comments'></td>
                        <td class='Elog'>
                            <a href="http://web.dyb.ihep.ac.cn:8099/Commissioning/?mode=full&reverse=0&reverse=1&npp=20&subtext={{run.runno}}">Elog</a>
@@ -48,5 +48,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/run.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/runlist.js"></script>
 {% endblock %}
