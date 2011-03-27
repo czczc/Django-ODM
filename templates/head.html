@@ -9,7 +9,7 @@
         {# <a href='/currentrun/'>Current Run&ensp;</a> #}
         {# <a href='/logout/'>Logout&ensp;</a> #}
 
-        <form action='/quick-search/' id='quick_search' method="post"> {% csrf_token %} 
+        <form action='{{ SITE_ROOT }}/quick-search/' id='quick_search' method="post"> {% csrf_token %} 
         <input type="text" tabindex="1" name="search_term" id="quick_search_field"/>
         <input type="image" alt="Find" value="Find" src="{{ MEDIA_URL }}img/search.png" id="search-button"/>  
         </form>
@@ -24,10 +24,11 @@
                     <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />
                 </span></a>
                 <ul class="sub_menu">
-                    <li><a href='{{ SITE_ROOT }}/run/current/'>Current</a></li>
-                    <li><a href='{{ SITE_ROOT }}/run/lastweek/'>Last Week</a></li>
-                    <li class="menu_separator"></li>
+                    {# <li><a href='{{ SITE_ROOT }}/run/current/'>Current</a></li> #}
                     <li><a href='{{ SITE_ROOT }}/run/type/All/'>All</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/latest/days/7/'>Last Week</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/latest/days/30/'>Last Month</a></li>
+                    <li class="menu_separator"></li>
                     <li><a href='{{ SITE_ROOT }}/run/type/Physics/'>Physics</a></li>
                     <li><a href='{{ SITE_ROOT }}/run/type/ADCalib/'>ADCalib</a></li>
                     <li><a href='{{ SITE_ROOT }}/run/type/Pedestal/'>Pedestal</a></li>

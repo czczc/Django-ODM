@@ -9,5 +9,7 @@ urlpatterns = patterns('odm.runinfo.views',
     (r'^type/(\w+)/', 'runtype'),
     (r'^$', 'runtype'),
     
-    (r'^test/(\d+)/$', 'test'),
+    (r'^latest/days/(?P<days>\d+)/page/(?P<page>\d+)/records/(?P<records>\d+)', 'latest'),
+    (r'^latest/days/(?P<days>\d+)', 'latest'),
+    (r'^latest/days/', 'latest')
 )

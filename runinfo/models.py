@@ -1,14 +1,20 @@
 from django.db import models
 from django.conf import settings
 
-import datetime
+from datetime import datetime, timedelta
 
 class RuninfoManager(models.Manager):
     def list_runtype(self, runtype):
+        '''list by run type'''
         if runtype == 'All':
             return self.select_related()
         return self.select_related().filter(runtype=runtype)
-
+        
+    def list_latest(self, days):
+        '''list latest runs'''
+        latest = datetime.utcnow() - timedelta(days=int(days))
+        return self.select_related().filter(vld__timestart__gte=latest)
+            
 #=====================================
 class Daqruninfovld(models.Model):
     seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
@@ -33,10 +39,10 @@ class Daqruninfovld(models.Model):
         return self.timeend - self.timestart
     
     def timestart_beijing(self):
-        return self.timestart + datetime.timedelta(seconds=8*3600)   
+        return self.timestart + timedelta(seconds=8*3600)   
 
     def timeend_beijing(self):
-        return self.timeend + datetime.timedelta(seconds=8*3600)
+        return self.timeend + timedelta(seconds=8*3600)
 
 #=====================================
 class Daqruninfo(models.Model):
@@ -62,6 +68,11 @@ class Daqruninfo(models.Model):
     
     def get_absolute_url(self):
         return "%s/run/%i/" % (settings.SITE_ROOT, self.runno)
+
+    def site(self):
+        '''return site string'''
+        # temporary: return site-detector until multiple-detector scheme is set
+        return ''.join(self.partitionname.split('_')[1:]).upper();     
 
 # =====================================
 class Daqcalibruninfo(models.Model):

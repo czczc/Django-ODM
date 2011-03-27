@@ -9,11 +9,6 @@ from django.conf import settings
 from odm.runinfo.models import Daqruninfo
 
 @login_required
-def test(request, runno):
-    runinfo = Daqruninfo.objects.get(runno=runno)
-    return HttpResponse(u'%s' % (runinfo.vld.timestart,))
-
-@login_required
 def quick_search(request):
     '''quick search box'''
     if request.method == 'POST':
@@ -34,6 +29,23 @@ def run(request, runno):
     return render_to_response('run/detail.html',
         { 'run' : run, },
         context_instance=RequestContext(request))
+
+@login_required
+def latest(request, days='7', page=1, records=500):
+    '''query by latest days'''
+    
+    run_list = Daqruninfo.objects.list_latest(days)
+    return object_list(request, 
+        template_name = 'run/list.html',
+        queryset = run_list, 
+        template_object_name = 'run',
+        paginate_by = int(records),
+        page = int(page),
+        extra_context = {
+            'description'  : 'Latest-' + days + '-day',
+            'count'        : run_list.count(),  # total count, not per page
+            'base_url'     : settings.SITE_ROOT + '/run/latest/days/' + days,
+        })
 
 @login_required
 def runtype(request, runtype='All', page=1, records=500):
