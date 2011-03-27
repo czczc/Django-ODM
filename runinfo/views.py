@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
@@ -8,10 +8,24 @@ from django.conf import settings
 
 from odm.runinfo.models import Daqruninfo
 
+@login_required
 def test(request, runno):
     runinfo = Daqruninfo.objects.get(runno=runno)
     return HttpResponse(u'%s' % (runinfo.vld.timestart,))
 
+@login_required
+def quick_search(request):
+    '''quick search box'''
+    if request.method == 'POST':
+        search_term = request.POST.get('search_term', '')
+        try:
+            runno = str(int(search_term))
+        except ValueError:
+            return HttpResponse('sorry, invalid search')
+        return HttpResponseRedirect(settings.SITE_ROOT + '/run/' + runno)
+    else:
+        return HttpResponseRedirect(settings.SITE_ROOT + '/run/')
+                
 @login_required
 def run(request, runno):
     '''query a single run'''

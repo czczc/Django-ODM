@@ -7,13 +7,13 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
-    (r'^accounts/', include('registration.backends.default.urls')),
     (r'^accounts/profile/$', direct_to_template, {'template': 'registration/profile.html'}),
+    (r'^accounts/', include('registration.backends.default.urls')),
     
     (r'^$', direct_to_template, { 'template': 'index.html', }),
-    (r'^test/$', direct_to_template, { 'template': 'test.html' }),
+    (r'^quick-search/$', 'odm.runinfo.views.quick_search'),
     
-    (r'^run/', include('odm.runinfo.urls')),
+    (r'^run/', include('odm.runinfo.urls')),    
 )
 
 from django.conf import settings

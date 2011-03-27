@@ -1,9 +1,9 @@
 /* quick search box */
 #quick_search { position: relative; margin-top: 18px; }
-#quick_search_field { border: 2px solid #92b8cc; background: #eef6fb; height: 21px; width: 100px; font-size: 12px; padding-left: 5px;}
-#search-button { position: absolute; right: -9px; top: -2px; width: 32px; border: none; }
+#quick_search_field { border: 2px solid #92b8cc; background: #eef6fb; height: 26px; width: 100px; font-size: 12px; padding-left: 5px;}
+#search-button { position: absolute; right: -7px; top: -2px; width: 32px; border: none; }
 
-/* menu #e3f9e2 */
+/* menu */
 #zone-bar { background: #deedf7; height: 34px; padding-top: 7px; margin-top: 10px;/* border-top: 1px solid #aaa;*/}
 #zone-bar ul { list-style: none inside; display: block; float: left; }
 #zone-bar ul li { height: 18px; padding-top: 5px; margin-left: 20px; position: relative; float: left; }

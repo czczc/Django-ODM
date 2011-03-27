@@ -9,9 +9,8 @@
         {# <a href='/currentrun/'>Current Run&ensp;</a> #}
         {# <a href='/logout/'>Logout&ensp;</a> #}
 
-        <form action='/quick_search/' id='quick_search'>
-        {# <label for="search-field" id="search-field-label">Search</label> #}
-        <input type="text" tabindex="1" name="findrun" id="quick_search_field"/>
+        <form action='/quick-search/' id='quick_search' method="post"> {% csrf_token %} 
+        <input type="text" tabindex="1" name="search_term" id="quick_search_field"/>
         <input type="image" alt="Find" value="Find" src="{{ MEDIA_URL }}img/search.png" id="search-button"/>  
         </form>
     </div>
