@@ -24,7 +24,7 @@ a:hover { color: #ff8f28; text-decoration: none; background-color: transparent; 
 #content h3 { color: #333; font-size: 16px; margin: 16px 0 15px 0; padding: 0; font-weight: bold; }
 #content h4 { color: #444; font-size: 14px; margin: 22px 0 0 0; font-weight: bold; }
 #content h5 { color: #444; font-size: 14px; font-weight: bold; display: inline; }
-#content h5 { color: #444; font-size: 12px; font-weight: bold; display: inline; }
+#content h6 { color: #444; font-size: 12px; font-weight: bold; display: inline; }
 
 /* content table */
 #content table { width: 100%; }
@@ -50,3 +50,8 @@ a:hover { color: #ff8f28; text-decoration: none; background-color: transparent; 
 /* content form */
 #content form th { font-weight: bold; text-align: right; vertical-align: middle; font-size: 12px; color: #333; padding: 4px; background-color: transparent; }
 #content form td { font-weight: normal; font-size: 12px; padding: 6px; background-color: transparent; }
+
+/* production plots */
+#content table.production td { color: #444; font-size: 12px; font-weight: bold; text-align: center; }
+#content table.production .figname { display: block; margin: 8px 0 6px 0; }
+#content img.loading { display:inline; padding-left: 10px; }

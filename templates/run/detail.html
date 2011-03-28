@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/modal.css")?>
+{% endblock %} 
+
 {% block content %}
     <div class = "grid_24">
          <h2>
@@ -29,11 +33,19 @@
               </tr>   
               <tr>    
                   <td class='descr'>PQM Plots</td><td class='value'>N/A</td>                  
-                  <td class='descr'>Diagnostic Plots</td><td class='value'>N/A</td>
+                  <td class='descr'>Diagnostic Plots</td><td class='value'><a href='#diagnostics'>Diagnostics</a></td>
                   <td class='descr'>File Information</td><td class='value'>N/A</td>
               </tr>                                    
            </tbody>
         </table>
         </div>
     </div>
+    
+    {% include "run/diagnostics.html" %}
+    
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal.1.4.1.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/run.js"></script>
 {% endblock %}
