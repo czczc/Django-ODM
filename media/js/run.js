@@ -10,7 +10,7 @@ var runno = remainder_url.substring(0, remainder_url.indexOf('/'));
 var diagnostics_base_url = '';
 var diagnostics_detector_list = [];
 var diagnostics_figure_list = {};
-var diagnostics_rootfileDir = '#';
+var diagnostics_rootfile_dir = '#';
 load_diagnostics();
 
 function load_diagnostics() {
@@ -19,18 +19,18 @@ function load_diagnostics() {
         var i, detname, site_detector, site, detector, det_cell;
         
         // enable rootfile dir button
-        diagnostics_base_url = data['base_url'];
-        diagnostics_rootfile_dir = diagnostics_base_url + data['rootfile_dir'];
+        diagnostics_base_url = data.base_url;
+        diagnostics_rootfile_dir = diagnostics_base_url + data.rootfile_dir;
         $("#diagnostics_rootfile_dir").click( function() {
            window.location =  diagnostics_rootfile_dir;
         });
         
         // initialize the diagnostics section
-        for (detname in data['detectors']) {
+        for (detname in data.detectors) {
             diagnostics_detector_list.push(detname);                
         }
         diagnostics_detector_list.sort();
-        diagnostics_figure_list = data['detectors'];
+        diagnostics_figure_list = data.detectors;
         if (diagnostics_detector_list.length>0) {
             
             // enable live detectors
@@ -78,9 +78,9 @@ function build_diagnostics(detname) {
     for (i=0; i<figure_list.length; i++) {
         if (column_index == 0) {html += '<tr>';}
         html += '<td><image class="img_db" src="'
-             + url_force_reload(diagnostics_base_url + figure_list[i]['figpath'])
+             + url_force_reload(diagnostics_base_url + figure_list[i].figpath)
              + '" width=300 height=225 />'
-             + '<span class="figname">' + figure_list[i]['figname'] + '</span></td>';
+             + '<span class="figname">' + figure_list[i].figname + '</span></td>';
         column_index++;
         if (column_index == 3) {html += "</tr>\n"; column_index=0;}
     }
