@@ -7,4 +7,5 @@ urlpatterns = patterns('odm.production.views',
     (r'^diagnostics/run/(\d+)/', 'diagnostics_run'),
     
     (r'^pqm/run/list/', 'pqm_runlist'),
+    (r'^pqm/run/(\d+)/', 'pqm_run'),
 )

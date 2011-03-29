@@ -31,3 +31,15 @@ def pqm_runlist(request):
         return HttpResponse(json.dumps(Pqm().run_list))
     else:
         raise Http404
+        
+def pqm_run(request, runno):
+    '''single run diagnostic info'''
+    
+    # for debug
+    # return HttpResponse('<pre>'+json.dumps(Pqm(runno).info, indent=4) + '</pre>')
+    
+    if request.is_ajax():
+        return HttpResponse(json.dumps(Pqm(runno).info))
+    else:
+        raise Http404
+        

@@ -32,7 +32,7 @@
                   <td class='descr'>Schema-Data-Base Version</td><td class='value'>{{ run.schemaversion }}-{{ run.dataversion }}-{{ run.baseversion }}</td>
               </tr>   
               <tr>    
-                  <td class='descr'>PQM Plots</td><td class='value'>N/A</td>                  
+                  <td class='descr'>PQM Plots</td><td class='value'><a href='#pqm'>PQM</a></td>                  
                   <td class='descr'>Diagnostic Plots</td><td class='value'><a href='#diagnostics'>Diagnostics</a></td>
                   <td class='descr'>File Information</td><td class='value'>N/A</td>
               </tr>                                    
@@ -43,6 +43,8 @@
     <div class="clear"></div>
     
     {% include "run/diagnostics.html" %}
+    
+    {% include "run/pqm.html" %}
     
 {% endblock %}
 
