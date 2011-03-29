@@ -5,9 +5,83 @@
          <img id="diagnostics_loading" class="loading" src="{{ MEDIA_URL }}img/loading.gif" alt="loading" />
     </h2>
 </div>
-
 <div class="clear"></div>
-<div class="grid_24" id="diagnostic_section">
+
+{# site/detector map #}
+<div id="diagnostics_site_det" class="grid_14" style='margin-top:10px;'>
+    <table class='det_table'>
+        <tr>
+            <td></td>
+            <td><h6>AD1</h6></td>
+            <td><h6>AD2</h6></td>
+            <td><h6>AD3</h6></td>
+            <td><h6>AD4</h6></td>
+            <td><h6>IWS</h6></td>
+            <td><h6>OWS</h6></td>
+            <td><h6>RPC</h6></td>
+        </tr>
+
+        <tr class="DayaBay">
+            <td><h6>DayaBay</h6></td>
+            <td class="AD1"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="AD2"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="AD3"><a class="no_det">X</a></td>
+            <td class="AD4"><a class="no_det">X</a></td>
+            <td class="IWS"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="OWS"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="RPC"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+        </tr>
+
+        <tr class="LingAo">
+            <td><h6>LingAo</h6></td>
+            <td class="AD1"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="AD2"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="AD3"><a class="no_det">X</a></td>
+            <td class="AD4"><a class="no_det">X</a></td>
+            <td class="IWS"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="OWS"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="RPC"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+        </tr>
+
+        <tr class="Far">
+            <td><h6>Far</h6></td>
+            <td class="AD1"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="AD2"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="AD3"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="AD4"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="IWS"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="OWS"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="RPC"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+        </tr>
+
+        <tr class="SAB">
+            <td><h6>SAB</h6></td>
+            <td class="AD1"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="AD2"><a class="det">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+            <td class="AD3"><a class="no_det">X</a></td>
+            <td class="AD4"><a class="no_det">X</a></td>
+            <td class="IWS"><a class="no_det">X</a></td>
+            <td class="OWS"><a class="no_det">X</a></td>
+            <td class="RPC"><a class="no_det">X</a></td>
+        </tr>
+
+    </table>
+</div>
+<div class="grid_7 prefix_2 suffix_1">
+    <h3 id="diagnostics_detector" style="text-align:center; padding: 5px; width:auto; color:white; background:#666;">
+    Detector (Loading ...)
+    </h3>
+    <table class='nostyle'>
+        <tr>
+            <td><button id="diagnostics_rootfile_dir">Root Files</button></td>
+            <td><button id="show_pmtmap">FEE / PMT Map</button><br/></td>
+        </tr>
+    </table>
+</div>
+<div class="clear"></div>
+
+{# diagnostic plots #}
+<div class="grid_24" id="diagnostic_section" style='margin-top:30px;'>
 
     <div style="border: 1px solid #999;">          
     <table id="table_diagnostic_plots" class='production'>
@@ -15,3 +89,4 @@
     </div>
 
 </div>
+<div class="clear"></div>
