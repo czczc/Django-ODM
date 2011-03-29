@@ -1,6 +1,9 @@
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from odm.production.diagnostics import Diagnostics
+from odm.production.pqm import Pqm
 import json
+
+# ======= Diagnostics =======
 
 def diagnostics_runlist(request):
     '''return list of processed diagnostics runs'''
@@ -17,5 +20,14 @@ def diagnostics_run(request, runno):
     
     if request.is_ajax():
         return HttpResponse(json.dumps(Diagnostics(runno).info))
+    else:
+        raise Http404
+        
+# =========== PQM ===========
+
+def pqm_runlist(request):
+    '''return list of processed pqm runs'''    
+    if request.is_ajax():
+        return HttpResponse(json.dumps(Pqm().run_list))
     else:
         raise Http404
