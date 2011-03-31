@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
@@ -7,6 +7,9 @@ from django.core.paginator import Paginator
 from django.conf import settings
 
 from odm.runinfo.models import Daqruninfo
+from odm.daqinfo.models import Daqrunconfig
+
+import json
 
 @login_required
 def quick_search(request):
@@ -63,3 +66,17 @@ def runtype(request, runtype='All', page=1, records=500):
             'count'        : run_list.count(),  # total count, not per page
             'base_url'     : settings.SITE_ROOT + '/run/type/' + runtype,
         })
+
+@login_required
+def daqinfo(request, runno):
+
+    Daqrunconfig.objects.runno = runno
+    Daqrunconfig.objects.fetch_all()
+    
+    # for debug
+    # return HttpResponse('<pre>'+ json.dumps(Daqrunconfig.objects.info, indent=4) + '</pre>')
+    
+    if request.is_ajax():
+        return HttpResponse(json.dumps(Daqrunconfig.objects.info))
+    else:
+        raise Http404

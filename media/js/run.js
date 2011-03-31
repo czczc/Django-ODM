@@ -1,4 +1,5 @@
 $("button").button();
+$(".draggable").draggable({ cursor: 'move', opacity: 0.35 });
 $('#show_pmtmap').click(function() {
     $("#pmt_section").slideToggle('fast');
 });
@@ -12,17 +13,96 @@ var Run = new Object;
 Run.runno = remainder_url.substring(0, remainder_url.indexOf('/'));
 Run.has_diagnostics = false;
 Run.has_pqm = false;
+Run.translation = new Object; Run.rtranslation = new Object;
+Run.translation.EH1 = 'DayaBay'; Run.rtranslation.DayaBay = 'EH1';
+Run.translation.EH2 = 'LingAo'; Run.rtranslation.LingAo = 'EH2';
+Run.translation.EH3 = 'Far'; Run.rtranslation.Far = 'EH3';
+Run.translation.WPI = 'IWS'; Run.rtranslation.IWS = 'WPI';
+Run.translation.WPO = 'OWS'; Run.rtranslation.OWS = 'WPO';
 
-// diagnostic variables
+//  load DAQ settings
+Run.daq_detector_list = [];
+load_daq('daq');
+
+// load Diagnostic plots
 Run.diagnostics_base_url = '';
 Run.diagnostics_detector_list = [];
 Run.diagnostics_rootfile_dir = '#';
-
-// pqm variables
-Run.pqm_detector_list = [];
-
 load_production('diagnostics');
+
+// load PQM plots
+Run.pqm_detector_list = [];
 load_production('pqm');
+
+function load_daq(name) {
+    // name: 'diagnostics' or 'pqm'
+    var url = base_url + 'run/daq/' + Run.runno + '/';
+    $.getJSON( url, function(data) {
+        var detector_list = Run.daq_detector_list;
+        var i, detname, site_detector, site, detector, det_cell;
+        for (detname in data.detectors) {
+            detector_list.push(detname);        
+        }
+        detector_list.sort();
+        if (detector_list.length>0) {
+            // enable live detectors
+            for (i=0; i<detector_list.length; i++) {                
+                site_detector = parse_detname(detector_list[i]);
+                site = site_detector[0];
+                detector = site_detector[1];    
+                det_cell = $("#"+ name + "_site_det tr." + site + " td." + detector + " a" );
+                det_cell.removeClass("det").addClass("live_det").attr("href", "#");
+            }
+            // build daq tables
+            build_daq_tables(name, detector_list[0], data);
+        }
+        else {
+            $("#"+name+"_detector").html('Plots Unavailable');
+            $("#"+name+"_section").empty();  
+        }
+        
+        $('#btn_more_daq').click( function(){
+           $('#daq_section .hidden').toggle(); 
+        });
+        // enable live detectors click
+        $("#"+name+"_site_det a.live_det").click( function(){
+            var td = $(this).parent();
+            var tr = td.parent();
+            var site = tr.attr("class");
+            var detector = td.attr("class");
+            if (Run.rtranslation[site]) { site = Run.rtranslation[site]; }
+            if (Run.rtranslation[detector]) { detector = Run.rtranslation[detector]; }
+            build_daq_tables(name, site+'-'+detector, data);
+            $("#"+name+"_section table").show('slide');
+            return false;
+        });
+        
+        // remove the loading animation
+        $("#"+name+"_loading").remove();
+    }); // .getJSON done
+}
+
+function build_daq_tables(name, detname, data) {
+    $("#"+name+"_detector").html(detname);
+    var daq = data.detectors[detname];
+    var attr, i;
+    var FEEnumber = FEEprefix = '';
+    var FEEregex = /(FEE.*_)(\d+)$/;
+    var html = '';
+    for (attr in daq) {
+        if (attr == 'FEEBoards') {
+            for (i in daq[attr]){
+                FEEnumber = daq[attr][i].replace('FEE_'+daq.FEEPrefix+'_', '');
+                html += '<a href="">' + FEEnumber + '</a>&nbsp;&nbsp;';
+            }
+            $('#FEEBoards').html(html);
+        }
+        else {
+            $('#'+attr).html(daq[attr]);
+        }
+    }
+    $('#FEEPrefix').html('FEE_' + daq.FEEPrefix);
+}
 
 function load_production(name) {
     // name: 'diagnostics' or 'pqm'
@@ -101,6 +181,7 @@ function build_plots(name, detname, data) {
     }
     figure_list = (data.detectors)[detname];
     var table_plots = $('#table_'+name+'_plots');
+    // table_plots.hide('slide');
     table_plots.empty();
     var column_index = 0;
     var html = '';
@@ -115,7 +196,7 @@ function build_plots(name, detname, data) {
         if (column_index == 3) {html += "</tr>\n"; column_index=0;}
     }
     table_plots.append(html);
-
+    table_plots.show('slide');
     // enable image double click to origninal size
     modal_by_dbclick('#table_'+name+'_plots .img_db');
 }
@@ -203,9 +284,20 @@ function build_pmtmap(name, detname) {
 
 // parse detname 'DayaBayAD1' into ['DayaBay', 'AD1']
 function parse_detname(detname) {
+    var index = detname.indexOf('-');
+    var site, detector;
+    
+    // DAQ convention
+    if (index>0) {
+        site = detname.substring(0, index);
+        detector = detname.substring(index+1);
+        if (Run.translation[site]) { site = Run.translation[site]; }
+        if (Run.translation[detector]) { detector = Run.translation[detector]; }
+        return [site, detector];
+    }
+    
+    // Analysis convention
     var sites = ['DayaBay', "LingAo", "Far", "SAB"];
-    var site = "";
-    var detector = "";
     var i=0;
     for (i=0; i<sites.length; i++) {
         site = sites[i];

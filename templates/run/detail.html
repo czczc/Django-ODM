@@ -4,10 +4,13 @@
     <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/modal.css")?>
 {% endblock %} 
 
+{% block title %}ODM | Run {{ run.runno }}{% endblock %}
+
 {% block content %}
     <div class = "grid_24">
          <h2>
-             General Information Run {{ run.runno }}
+             General Information &nbsp;|&nbsp; 
+             Run {{ run.runno }}
         </h2>
     </div>    
     <div class="clear"></div>    
@@ -41,6 +44,8 @@
         </div>
     </div>
     <div class="clear"></div>
+    
+    {% include "run/daq.html" %}
     
     {% include "run/diagnostics.html" %}
     

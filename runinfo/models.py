@@ -14,7 +14,7 @@ class RuninfoManager(models.Manager):
         '''list latest runs'''
         latest = datetime.utcnow() - timedelta(days=int(days))
         return self.select_related().filter(vld__timestart__gte=latest)
-            
+        
 #=====================================
 class Daqruninfovld(models.Model):
     seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
@@ -105,4 +105,4 @@ class Daqcalibruninfo(models.Model):
     
     def __unicode__(self):
         return u'calib run %d' % (self.runno, )
-        
+    

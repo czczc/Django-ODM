@@ -1,7 +1,8 @@
-<div class="grid_24">
+<div class="grid_24" style='margin-top:20px;'>
      <h2>
-         <a name="pqm"></a>
-         PQM Plots Run {{ run.runno }} 
+         PQM Plots &nbsp;|&nbsp; 
+         Run {{ run.runno }} &nbsp;|&nbsp; 
+         {{ run.runtype }} &nbsp;&nbsp;
          <img id="pqm_loading" class="loading" src="{{ MEDIA_URL }}img/loading.gif" alt="loading" />
     </h2>
 </div>
@@ -11,10 +12,8 @@
 <div id="pqm_site_det" class="grid_14" style='margin-top:10px;'>
     {% include "run/detmap.html" %}
 </div>
-<div class="grid_7 prefix_2 suffix_1">
-    <h3 id="pqm_detector" style="text-align:center; padding: 5px; width:auto; color:white; background:#666;">
-    Detector (Loading ...)
-    </h3>
+<div class="grid_7 prefix_2 suffix_1 draggable notepad" style='margin-top:10px;'>
+    <h3 id="pqm_detector">Detector (Loading ...)</h3>
 </div>
 <div class="clear"></div>
 

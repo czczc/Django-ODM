@@ -11,5 +11,7 @@ urlpatterns = patterns('odm.runinfo.views',
     
     (r'^latest/days/(?P<days>\d+)/page/(?P<page>\d+)/records/(?P<records>\d+)', 'latest'),
     (r'^latest/days/(?P<days>\d+)', 'latest'),
-    (r'^latest/days/', 'latest')
+    (r'^latest/days/', 'latest'),
+    
+    (r'^daq/(\d+)/', 'daqinfo'),
 )

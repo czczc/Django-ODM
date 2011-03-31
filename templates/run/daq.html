@@ -1,0 +1,59 @@
+<div class="grid_24" style='margin-top:20px;'>
+     <h2>
+         DAQ Settings &nbsp;|&nbsp; 
+         Run {{ run.runno }} &nbsp;|&nbsp; 
+         {{ run.runtype }} &nbsp;&nbsp;
+         <img id="daq_loading" class="loading" src="{{ MEDIA_URL }}img/loading.gif" alt="loading" />
+    </h2>
+</div>
+<div class="clear"></div>
+
+{# site/detector map #}
+<div id="daq_site_det" class="grid_14" style='margin-top:10px;'>
+    {% include "run/detmap.html" %}
+</div>
+<div class="grid_7 prefix_2 suffix_1 draggable notepad" style='margin-top:10px;'>
+    <h3 id="daq_detector">Detector (Loading ...)</h3>
+    <ul>
+        <li><button id="btn_more_daq">Show More DAQ Settings ...</button></li>
+    </ul>
+</div>
+<div class="clear"></div>
+
+{# daq table #}
+<div id="daq_section" style='margin-top: 20px;'>
+
+    <div class="grid_11">
+        <table>
+        <thead><tr>
+           <th colspan="2" style='text-align: center;'>Trigger Settings</th>
+        </tr></thead>
+        <tbody>
+            <tr><td class='descr'>Trigger Type</td><td class='value'   id='LTB_triggerType'></td></tr>
+            <tr><td class='descr'>Trigger Code</td><td class='value'   id='LTB_triggerSource'></td></tr>
+            <tr><td class='descr'>NHit Threshold</td><td class='value' id='HSUM_trigger_threshold'></td></tr>
+            <tr><td class='descr'>ESum Threshold</td><td class='value' id='DAC_total_value'></td></tr>
+            <tr><td class='descr'>LTB Name</td><td class='value' id='LTBName'></td></tr>
+            <tr><td class='descr'>Firmware Ver.</td><td class='value'  id='LTBfirmwareVersion'></td></tr>
+        </tbody>
+        </table>
+    </div>
+
+    <div class="grid_13">
+        <table>
+        <thead><tr>
+           <th colspan="2" style='text-align: center;'>FEE Settings</th>
+        </tr></thead>
+        <tbody>
+            <tr><td class='descr'>Uniform DAC Threshold</td><td class='value' id='DACUniformVal'></td></tr>
+            <tr><td class='descr'>FEE Boards</td><td class='value'     id='FEEBoards'></td></tr>
+            <tr><td class='descr'>FEE Prefix</td><td class='value' id='FEEPrefix'></td></tr>
+            <tr><td class='descr'>Board Ver.</td><td class='value' id='FEEBoardVersion'></td></tr>
+            <tr><td class='descr'>CPLD Ver.</td><td class='value'  id='FEECPLDVersion'></td></tr>
+            <tr class='hidden'><td class='descr'>Waveform</td><td class='value'   id='FEEWaveform_enable'></td></tr>
+            <tr class='hidden'><td class='descr'>Baseline</td><td class='value'   id='FEEBaseline_enable'></td></tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="clear"></div>   
+</div>

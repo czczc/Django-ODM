@@ -63,3 +63,8 @@ a:hover { color: #ff8f28; text-decoration: none; background-color: transparent; 
 #content .det_table a.det { background: #ddd;}
 #content .det_table a.no_det { color: #ccc; }
 #content .det_table a.live_det { background: #5F0;}
+
+#content .notepad table { background-color: #fff; padding-top:20px;}
+#content .notepad h3 { color: white; background: #666; text-align: center; padding: 5px; width:auto; margin: 0;}
+#content .notepad ul { list-style: none; width:100%;}
+#content .notepad button { width:100%;}

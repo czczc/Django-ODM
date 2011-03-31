@@ -1,7 +1,8 @@
-<div class="grid_24">
+<div class="grid_24" style='margin-top:20px;'>
      <h2>
-         <a name="diagnostics"></a>
-         Diagnostic Plots Run {{ run.runno }} 
+         Diagnostic Plots &nbsp;|&nbsp; 
+         Run {{ run.runno }} &nbsp;|&nbsp; 
+         {{ run.runtype }} &nbsp;&nbsp;
          <img id="diagnostics_loading" class="loading" src="{{ MEDIA_URL }}img/loading.gif" alt="loading" />
     </h2>
 </div>
@@ -11,16 +12,12 @@
 <div id="diagnostics_site_det" class="grid_14" style='margin-top:10px;'>
     {% include "run/detmap.html" %}
 </div>
-<div class="grid_7 prefix_2 suffix_1">
-    <h3 id="diagnostics_detector" style="text-align:center; padding: 5px; width:auto; color:white; background:#666;">
-    Detector (Loading ...)
-    </h3>
-    <table class='nostyle'>
-        <tr>
-            <td><button id="diagnostics_rootfile_dir">Root Files</button></td>
-            <td><button id="show_pmtmap">FEE / PMT Map</button><br/></td>
-        </tr>
-    </table>
+<div class="grid_7 prefix_2 suffix_1 draggable notepad" style='margin-top:10px;'>
+    <h3 id="diagnostics_detector">Detector (Loading ...)</h3>
+    <ul>
+        <li><button id="diagnostics_rootfile_dir">Go to ROOT File Dir ...</button></li>
+        <li><button id="show_pmtmap">Show FEE / PMT Map ...</button></li>
+    </ul>
 </div>
 <div class="clear"></div>
 
