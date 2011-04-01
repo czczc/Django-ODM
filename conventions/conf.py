@@ -5,7 +5,7 @@ class DaqTriggerType(object):
     trigger_definition = {
          'Unknown'   : 0,
          'Manual'    : 1,
-         'External'  : 2,
+         'Cross'  : 2,
          'Periodic'  : 4,
          'Pedestal'  : 8,
          'Calib'     : 16,

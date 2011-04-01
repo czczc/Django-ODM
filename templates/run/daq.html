@@ -30,11 +30,22 @@
         </tr></thead>
         <tbody>
             <tr><td class='descr'>Trigger Type</td><td class='value'   id='LTB_triggerType'></td></tr>
-            <tr><td class='descr'>Trigger Code</td><td class='value'   id='LTB_triggerSource'></td></tr>
             <tr><td class='descr'>NHit Threshold</td><td class='value' id='HSUM_trigger_threshold'></td></tr>
             <tr><td class='descr'>ESum Threshold</td><td class='value' id='DAC_total_value'></td></tr>
             <tr><td class='descr'>LTB Name</td><td class='value' id='LTBName'></td></tr>
-            <tr><td class='descr'>Firmware Ver.</td><td class='value'  id='LTBfirmwareVersion'></td></tr>
+            <tr><td class='descr'>LTB Firmware Ver.</td><td class='value'  id='LTBfirmwareVersion'></td></tr>
+            <tr class='hidden'><td class='descr'>Trigger Bits</td><td class='value'   id='LTB_triggerBits'></td></tr>
+            <tr class='hidden'><td class='descr'>Readout Type</td><td class='value'   id='readout_type'></td></tr>
+            <tr class='hidden'><td class='descr'>Random Trigger Bits</td><td class='value'   id='random_num_set_reg'></td></tr>
+            <tr class='hidden'><td class='descr'>Prescale Trigger</td><td class='value'   id='PreScale_Trigger_enable'></td></tr>
+            <tr class='hidden'><td class='descr'>Periodic Trig. Setting</td><td class='value'   id='periodic_trig_setting'></td></tr>
+            <tr class='hidden'><td class='descr'>Local Trig. Neg. Width</td><td class='value'   id='local_trigger_negative_width_reg'></td></tr>
+            <tr class='hidden'><td class='descr'>Local Trig. Pos. Width</td><td class='value'   id='local_trigger_positive_width'></td></tr>
+            <tr class='hidden'><td class='descr'>NHit Trig. Latency</td><td class='value'   id='Multiplicity_trigger_latency'></td></tr>
+            <tr class='hidden'><td class='descr'>ESum Trig. Latency</td><td class='value'   id='ESUM_COMP_trigger_latency'></td></tr>
+            <tr class='hidden'><td class='descr'>Cross Trig. Latency</td><td class='value'   id='cross_trigger_latency'></td></tr>
+            <tr class='hidden'><td class='descr'>Cross Trig. Neg. Width</td><td class='value'   id='cross_trigger_negative_width_reg'></td></tr>
+            <tr class='hidden'><td class='descr'>Cross Trig. Pos. Width</td><td class='value'   id='cross_trigger_positive_width'></td></tr>
         </tbody>
         </table>
     </div>
@@ -48,10 +59,17 @@
             <tr><td class='descr'>Uniform DAC Threshold</td><td class='value' id='DACUniformVal'></td></tr>
             <tr><td class='descr'>FEE Boards</td><td class='value'     id='FEEBoards'></td></tr>
             <tr><td class='descr'>FEE Prefix</td><td class='value' id='FEEPrefix'></td></tr>
-            <tr><td class='descr'>Board Ver.</td><td class='value' id='FEEBoardVersion'></td></tr>
-            <tr><td class='descr'>CPLD Ver.</td><td class='value'  id='FEECPLDVersion'></td></tr>
-            <tr class='hidden'><td class='descr'>Waveform</td><td class='value'   id='FEEWaveform_enable'></td></tr>
-            <tr class='hidden'><td class='descr'>Baseline</td><td class='value'   id='FEEBaseline_enable'></td></tr>
+            <tr><td class='descr'>FEE Board Ver.</td><td class='value' id='FEEBoardVersion'></td></tr>
+            <tr><td class='descr'>FEE CPLD Ver.</td><td class='value'  id='FEECPLDVersion'></td></tr>
+            <tr class='hidden'><td class='descr'>FEE Waveform</td><td class='value'   id='FEEWaveform_enable'></td></tr>
+            <tr class='hidden'><td class='descr'>FEE Baseline</td><td class='value'   id='FEEBaseline_enable'></td></tr>
+            <tr class='hidden'><th colspan="2" style='text-align: center;'>More Detector Settings</th>
+            <tr class='hidden'><td class='descr'>Logical ID</td><td class='value'   id='LogicalId'></td></tr>
+            <tr class='hidden'><td class='descr'>FADC Name</td><td class='value'   id='FADCName'></td></tr>
+            <tr class='hidden'><td class='descr'>RPC ROM</td><td class='value'   id='RPCROM'></td></tr>
+            <tr class='hidden'><td class='descr'>RPC RTM</td><td class='value'   id='RPCRTM'></td></tr>
+            <tr class='hidden'><td class='descr'>FEEDiag Times/DAC</td><td class='value'   id='FEEDiagRunTimesPerDAC'></td></tr>
+            <tr class='hidden'><td class='descr'>Pedestal Times</td><td class='value'   id='PedestalRunTimes'></td></tr>
         </tbody>
         </table>
     </div>

@@ -44,6 +44,7 @@ class RunconfigManager(models.Manager):
                 LTBName = self.info['detectors'][detector].get('LTBName', '')
                 if LTBName:
                     self.fetch_LTB_settings(version, detector, LTBName)
+                    self.fetchmore_LTB_settings(version, detector, LTBName)
                 FEEPrefix = self.info['detectors'][detector].get('FEEPrefix', '')
                 if FEEPrefix:
                     self.fetch_FEE_settings(version, detector, FEEPrefix)
@@ -86,6 +87,7 @@ class RunconfigManager(models.Manager):
             ON DaqRunInfo.schemaVersion=DaqRunConfig.schemaVersion 
             AND DaqRunInfo.%sVersion=DaqRunConfig.dataVersion
             AND DaqRunConfig.objectID='%s'
+            AND DaqRunConfig.className='Crate'
             AND DaqRunInfo.runNo='%s'
         ''' % (version, detector, self.runno)
         rawQuerySet = list(self.raw(queryString))
@@ -93,8 +95,17 @@ class RunconfigManager(models.Manager):
         for daq in rawQuerySet:
             detinfo = self.info['detectors'][detector]
 
+            LogicalId = daq.intFromName('LogicalId') 
+            if (LogicalId): detinfo['LogicalId'] = LogicalId
+
             FADCName = daq.stringFromName('childObjectId_FADC') 
             if (FADCName): detinfo['FADCName'] = FADCName
+
+            RPCROM = daq.stringFromName('childObjectId_RPCROM') 
+            if (RPCROM): detinfo['RPCROM'] = RPCROM
+
+            RPCRTM = daq.stringFromName('childObjectId_RPCRTM') 
+            if (RPCRTM): detinfo['RPCRTM'] = RPCRTM
             
             LTBName = daq.stringFromName('childObjectId_LTB')
             if (LTBName): detinfo['LTBName'] = LTBName
@@ -113,16 +124,22 @@ class RunconfigManager(models.Manager):
             
             FEEWaveform_enable = daq.stringFromName('FEEWaveform_enable') 
             if (FEEWaveform_enable): detinfo['FEEWaveform_enable'] = FEEWaveform_enable
-            
+                        
             FEE = daq.stringFromName('childObjectId_Modules')
             if (FEE): 
                 detinfo.setdefault('FEEBoards', []).append(FEE)
                 if not detinfo.get('FEEPrefix', ''):
                     detinfo['FEEPrefix'] = re.search(r'FEE_(.+)_', FEE).group(1)
 
+            FEEDiagRunTimesPerDAC = daq.intFromName('FEEDiagRunTimesPerDAC') 
+            if (FEEDiagRunTimesPerDAC): detinfo['FEEDiagRunTimesPerDAC'] = FEEDiagRunTimesPerDAC
+
+            PedestalRunTimes = daq.intFromName('PedestalRunTimes') 
+            if (PedestalRunTimes): detinfo['PedestalRunTimes'] = PedestalRunTimes
+
 
     def fetch_LTB_settings(self, version, detector, LTBName):
-        '''fetch LTB settings'''
+        '''fetch LTB settings, details see LTB manual doc-3443'''
         
         # to comply to a strange setting for SAB-AD1
         if (LTBName == 'LTB_0'): LTBName = ''
@@ -153,9 +170,78 @@ class RunconfigManager(models.Manager):
             LTB_triggerSource = daq.intFromName('LTB_triggerSource') 
             if (LTB_triggerSource):
                 detinfo['LTB_triggerSource'] = LTB_triggerSource
+                detinfo['LTB_triggerBits'] = bin(int(LTB_triggerSource))
                 detinfo['LTB_triggerType'] = str(DaqTriggerType(LTB_triggerSource))
 
+            # Readout type
+            readout_type = daq.intFromName('readout_type') 
+            if (readout_type):
+                detinfo['readout_type'] = readout_type
 
+            # Random trigger
+            random_num_set_reg = daq.intFromName('random_num_set_reg') 
+            if (random_num_set_reg and int(random_num_set_reg)):
+                detinfo['random_num_set_reg'] = hex(int(random_num_set_reg))
+
+            # PreScale Trigger 
+            PreScale_Trigger_enable = daq.intFromName('PreScale_Trigger_enable') 
+            if (PreScale_Trigger_enable and int(PreScale_Trigger_enable)):
+                detinfo['PreScale_Trigger_enable'] = 'enable'
+            else:
+                detinfo['PreScale_Trigger_enable'] = 'disable'
+            PreScale_Trigger_Keep_Window = daq.intFromName('PreScale_Trigger_Keep_Window') 
+            if (PreScale_Trigger_Keep_Window):
+                detinfo['PreScale_Trigger_Keep_Window'] = PreScale_Trigger_Keep_Window            
+            PreScale_Trigger_Throw_Window = daq.intFromName('PreScale_Trigger_Throw_Window') 
+            if (PreScale_Trigger_Throw_Window):
+                detinfo['PreScale_Trigger_Throw_Window'] = PreScale_Trigger_Throw_Window
+
+
+    def fetchmore_LTB_settings(self, version, detector, LTBName):
+        '''fetch more LTB settings, details see LTB manual doc-3443'''
+                
+        queryString = '''
+            SELECT *
+            FROM DaqRunConfig JOIN DaqRunInfo 
+            ON DaqRunInfo.schemaVersion=DaqRunConfig.schemaVersion 
+            AND DaqRunInfo.%sVersion=DaqRunConfig.dataVersion
+            AND DaqRunConfig.objectID='%s'
+            AND DaqRunInfo.runNo='%s'
+        ''' % (version, LTBName, self.runno)
+        rawQuerySet = list(self.raw(queryString))
+
+        for daq in rawQuerySet:
+            detinfo = self.info['detectors'][detector]
+
+            # Periodic Trigger
+            periodic_trig_setting = daq.intFromName('periodic_trig_setting') 
+            if (periodic_trig_setting): detinfo['periodic_trig_setting'] = periodic_trig_setting
+
+            # Cross Trigger
+            cross_trigger_negative_width_reg = daq.intFromName('cross_trigger_negative_width_reg') 
+            if (cross_trigger_negative_width_reg): detinfo['cross_trigger_negative_width_reg'] = cross_trigger_negative_width_reg
+            cross_trigger_positive_width = daq.intFromName('cross_trigger_positive_width') 
+            if (cross_trigger_positive_width): detinfo['cross_trigger_positive_width'] = cross_trigger_positive_width
+
+            # Local Trigger
+            local_trigger_negative_width_reg = daq.intFromName('local_trigger_negative_width_reg') 
+            if (local_trigger_negative_width_reg): detinfo['local_trigger_negative_width_reg'] = local_trigger_negative_width_reg
+            local_trigger_positive_width = daq.intFromName('local_trigger_positive_width') 
+            if (local_trigger_positive_width): detinfo['local_trigger_positive_width'] = local_trigger_positive_width
+
+            # Trigger Latency
+            cross_trigger_latency = daq.intFromName('cross_trigger_latency') 
+            if (cross_trigger_latency): detinfo['cross_trigger_latency'] = cross_trigger_latency
+            ESUM_ADC_trigger_latency = daq.intFromName('ESUM_ADC_trigger_latency') 
+            if (ESUM_ADC_trigger_latency): detinfo['ESUM_ADC_trigger_latency'] = ESUM_ADC_trigger_latency
+            ESUM_COMP_trigger_latency = daq.intFromName('ESUM_COMP_trigger_latency') 
+            if (ESUM_COMP_trigger_latency): detinfo['ESUM_COMP_trigger_latency'] = ESUM_COMP_trigger_latency
+            Multiplicity_trigger_latency = daq.intFromName('Multiplicity_trigger_latency') 
+            if (Multiplicity_trigger_latency): detinfo['Multiplicity_trigger_latency'] = Multiplicity_trigger_latency
+            
+
+
+                       
     def fetch_FEE_settings(self, version, detector, FEEPrefix):
         '''fetch LTB settings'''
         

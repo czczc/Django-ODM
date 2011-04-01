@@ -93,7 +93,7 @@ function build_daq_tables(name, detname, data) {
         if (attr == 'FEEBoards') {
             for (i in daq[attr]){
                 FEEnumber = daq[attr][i].replace('FEE_'+daq.FEEPrefix+'_', '');
-                html += '<a href="">' + FEEnumber + '</a>&nbsp;&nbsp;';
+                html += '<a href="#">' + FEEnumber + '</a>&nbsp;&nbsp;&nbsp;';
             }
             $('#FEEBoards').html(html);
         }
