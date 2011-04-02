@@ -15,7 +15,7 @@
 <div class="grid_7 prefix_2 suffix_1 draggable notepad" style='margin-top:10px;'>
     <h3 id="daq_detector">Detector (Loading ...)</h3>
     <ul>
-        <li><button id="btn_more_daq">Show More DAQ Settings ...</button></li>
+        <li><button id="btn_more_daq">Toggle DAQ Setting Details ...</button></li>
     </ul>
 </div>
 <div class="clear"></div>
@@ -56,13 +56,13 @@
            <th colspan="2" style='text-align: center;'>FEE Settings</th>
         </tr></thead>
         <tbody>
-            <tr><td class='descr'>Uni. DAC Threshold</td><td class='value' id='DACUniformVal'></td></tr>
-            <tr><td class='descr'>FEE Boards</td><td class='value'     id='FEEBoards'></td></tr>
-            <tr><td class='descr'>FEE Prefix</td><td class='value' id='FEEPrefix'></td></tr>
-            <tr><td class='descr'>FEE Board Ver.</td><td class='value' id='FEEBoardVersion'></td></tr>
-            <tr><td class='descr'>FEE CPLD Ver.</td><td class='value'  id='FEECPLDVersion'></td></tr>
-            <tr class='hidden'><td class='descr'>FEE Waveform</td><td class='value'   id='FEEWaveform_enable'></td></tr>
-            <tr class='hidden'><td class='descr'>FEE Baseline</td><td class='value'   id='FEEBaseline_enable'></td></tr>
+            <tr class='FEESetting'><td class='descr'>Uni. DAC Threshold</td><td class='value' id='DACUniformVal'></td></tr>
+            <tr class='FEESetting'><td class='descr'>FEE Boards</td><td class='value'     id='FEEBoards'></td></tr>
+            <tr class='FEESetting'><td class='descr'>FEE Prefix</td><td class='value' id='FEEPrefix'></td></tr>
+            <tr class='FEESetting'><td class='descr'>FEE Board Ver.</td><td class='value' id='FEEBoardVersion'></td></tr>
+            <tr class='FEESetting'><td class='descr'>FEE CPLD Ver.</td><td class='value'  id='FEECPLDVersion'></td></tr>
+            <tr class='hidden FEESetting'><td class='descr'>FEE Waveform</td><td class='value'   id='FEEWaveform_enable'></td></tr>
+            <tr class='hidden FEESetting'><td class='descr'>FEE Baseline</td><td class='value'   id='FEEBaseline_enable'></td></tr>
             <tr class='hidden'><th colspan="2" style='text-align: center;'>More Detector Settings</th>
             <tr class='hidden'><td class='descr'>Logical ID</td><td class='value'   id='LogicalId'></td></tr>
             <tr class='hidden'><td class='descr'>FADC Name</td><td class='value'   id='FADCName'></td></tr>

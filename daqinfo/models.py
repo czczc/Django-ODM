@@ -13,6 +13,7 @@ class RunconfigManager(models.Manager):
     info = {
         'runno' : '',
         'runtype' : '',
+        'ROSconfig' : {}, 
         'detectors' : {
             # 'SAB-AD2' : {
             #     'FADCName' : '',
@@ -31,10 +32,16 @@ class RunconfigManager(models.Manager):
         },
     }
     
-    
+    def reset(self):
+        self.info = info = {
+            'runno' : self.runno,
+            'runtype' : '',
+            'ROSconfig' : {}, 
+            'detectors' : {},
+        }
+        
     def fetch_all(self):
-        self.info['runno'] = self.runno
-        # self.info[self.runno] = 'there'
+        self.reset()
         for version in ['base', 'data']:
             self.fetch_active_detectors(version)
         
@@ -67,15 +74,22 @@ class RunconfigManager(models.Manager):
         ''' % (version, self.runno)
         rawQuerySet = list(self.raw(queryString))
         
-        if version == 'base':
-            self.info['detectors'] = {}    # clear detector data for any base version
-        elif len(rawQuerySet):    
-            self.info['detectors'] = {}    # clear detector data if data version exists
-            
         for daq in rawQuerySet:
-            self.info['detectors'][daq.stringvalue] = {}
+            self.info['ROSconfig'][daq.objectid] = daq.stringvalue
+        
+        # initialize detectors only after dataVersion query
+        if version == 'data':
+            for ros, detector in self.info['ROSconfig'].items():
+                self.info['detectors'][detector] = {}
+        else:
             self.info['runtype'] = daq.runType
-            # self.info[version] = daq.stringvalue
+        
+        # if version == 'base':
+        #     self.info['detectors'] = {}    # clear detector data for any base version
+        #     
+        # for daq in rawQuerySet:
+        #     self.info['detectors'][daq.stringvalue] = {}
+        #     self.info['runtype'] = daq.runType
 
 
     def fetch_detector_settings(self, version, detector):
@@ -111,13 +125,13 @@ class RunconfigManager(models.Manager):
             if (LTBName): detinfo['LTBName'] = LTBName
             
             LTBfirmwareVersion = daq.intFromName('LTBfirmwareVersion') 
-            if (LTBfirmwareVersion): detinfo['LTBfirmwareVersion'] = LTBfirmwareVersion
+            if (LTBfirmwareVersion): detinfo['LTBfirmwareVersion'] = hex(int(LTBfirmwareVersion))
 
             FEEBoardVersion = daq.intFromName('FEEBoardVersion') 
-            if (FEEBoardVersion): detinfo['FEEBoardVersion'] = FEEBoardVersion
+            if (FEEBoardVersion): detinfo['FEEBoardVersion'] = hex(int(FEEBoardVersion))
             
             FEECPLDVersion = daq.intFromName('FEECPLDVersion') 
-            if (FEECPLDVersion): detinfo['FEECPLDVersion'] = FEECPLDVersion
+            if (FEECPLDVersion): detinfo['FEECPLDVersion'] = hex(int(FEECPLDVersion))
             
             FEEBaseline_enable = daq.stringFromName('FEEBaseline_enable') 
             if (FEEBaseline_enable): detinfo['FEEBaseline_enable'] = FEEBaseline_enable
@@ -170,7 +184,7 @@ class RunconfigManager(models.Manager):
             LTB_triggerSource = daq.intFromName('LTB_triggerSource') 
             if (LTB_triggerSource):
                 detinfo['LTB_triggerSource'] = LTB_triggerSource
-                detinfo['LTB_triggerBits'] = bin(int(LTB_triggerSource))
+                detinfo['LTB_triggerBits'] = hex(int(LTB_triggerSource))
                 detinfo['LTB_triggerType'] = str(DaqTriggerType(LTB_triggerSource))
 
             # Readout type

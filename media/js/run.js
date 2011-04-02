@@ -62,7 +62,7 @@ function load_daq(name) {
         }
         
         $('#btn_more_daq').click( function(){
-           $('#daq_section .hidden').toggle(); 
+           $('#daq_section .hidden').toggle();
         });
         // enable live detectors click
         $("#"+name+"_site_det a.live_det").click( function(){
@@ -84,6 +84,8 @@ function load_daq(name) {
 
 function build_daq_tables(name, detname, data) {
     $("#"+name+"_detector").html(detname);
+    $("#daq_section td.value").html('');
+    
     var daq = data.detectors[detname];
     var attr, i;
     var FEEnumber = FEEprefix = '';
@@ -102,6 +104,11 @@ function build_daq_tables(name, detname, data) {
         }
     }
     $('#FEEPrefix').html('FEE_' + daq.FEEPrefix);
+    
+    if(detname.indexOf('RPC')>0) {
+        $('.FEESetting td.value').html('');
+    }
+
 }
 
 function load_production(name) {
