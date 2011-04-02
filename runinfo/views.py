@@ -6,7 +6,7 @@ from django.views.generic.list_detail import object_list, object_detail
 from django.core.paginator import Paginator
 from django.conf import settings
 
-from odm.runinfo.models import Daqruninfo
+from odm.runinfo.models import Daqruninfo, Daqcalibruninfo
 from odm.daqinfo.models import Daqrunconfig
 
 import json
@@ -29,8 +29,16 @@ def run(request, runno):
     '''query a single run'''
     
     run = get_object_or_404(Daqruninfo, runno=runno)
-    return render_to_response('run/detail.html',
-        { 'run' : run, },
+    calibrun = None
+    if (run.runtype == 'ADCalib'):
+        try:
+            calibrun = Daqcalibruninfo.objects.get(runno=runno)
+            calibrun.humanize()
+        except:
+            calibrun = None
+    return render_to_response('run/detail.html', { 
+        'run' : run, 
+        'calibrun' : calibrun },
         context_instance=RequestContext(request))
 
 @login_required

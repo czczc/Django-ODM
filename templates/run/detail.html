@@ -45,6 +45,10 @@
     </div>
     <div class="clear"></div>
     
+    {% if calibrun %}
+        {% include "run/calib.html" %}
+    {% endif %}
+    
     {% include "run/daq.html" %}
     
     {% include "run/diagnostics.html" %}

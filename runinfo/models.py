@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 
+from odm.conventions.conf import Calibration
+
 from datetime import datetime, timedelta
 
 class RuninfoManager(models.Manager):
@@ -99,6 +101,12 @@ class Daqcalibruninfo(models.Model):
     homeb = models.IntegerField(null=True, db_column='HomeB', blank=True) # Field name made lowercase.
     homec = models.IntegerField(null=True, db_column='HomeC', blank=True) # Field name made lowercase.
     
+    # a/b/c refers to either ACU A/B/C or MO LED A/B/C
+    has_a = has_b = has_c = False
+    is_led_run = False
+    source_type_a = source_type_b = source_type_c = ''
+    location_a = location_b = location_c = ''
+    
     class Meta:
         db_table = u'DaqCalibRunInfo'
         ordering = ['-runno']
@@ -106,3 +114,52 @@ class Daqcalibruninfo(models.Model):
     def __unicode__(self):
         return u'calib run %d' % (self.runno, )
     
+    def humanize(self):
+        self._humanize_led()
+        self._humanize_a()
+        self._humanize_b()
+        self._humanize_c()
+
+    def _humanize_led(self):
+        if self.lednumber1 or self.lednumber2:
+            # It's an LED run
+            self.is_led_run = True
+            
+            if self.lednumber1:
+                self.has_a = True
+                self.source_type_a = Calibration.led_type[self.lednumber1]
+                self.location_a = Calibration.location[self.lednumber1]
+            
+            if self.lednumber2:
+                self.has_b = True
+                self.source_type_b = Calibration.led_type[self.lednumber2]
+                self.location_b = Calibration.location[self.lednumber2]
+            
+    def _humanize_a(self):
+        if self.is_led_run: return
+        if self.sourceida:
+            source_type = Calibration.source_type.get(self.sourceida, '')
+            if not source_type == 'LED':
+                self.has_a = True
+                self.source_type_a = source_type
+                self.location_a = Calibration.location[1]
+
+    def _humanize_b(self):
+        if self.is_led_run: return
+        if self.sourceidb:
+            source_type = Calibration.source_type.get(self.sourceidb, '')
+            if not source_type == 'LED':
+                self.has_b = True
+                self.source_type_b = source_type
+                self.location_b = Calibration.location[2]
+
+    def _humanize_c(self):
+        if self.is_led_run: return
+        if self.sourceidc:
+            source_type = Calibration.source_type.get(self.sourceidc, '')
+            if not source_type == 'LED':
+                self.has_c = True
+                self.source_type_c = source_type
+                self.location_c = Calibration.location[3]
+    
+            
