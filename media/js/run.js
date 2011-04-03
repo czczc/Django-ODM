@@ -105,7 +105,9 @@ function build_daq_tables(name, detname, data) {
                 FEEnumber = daq[attr][i].replace('FEE_'+daq.FEEPrefix+'_', '');
                 html += '<a href="#">' + FEEnumber + '</a>&nbsp;&nbsp;&nbsp;';
             }
-            $('#FEEBoards').html(html);
+            $('#FEEBoards').html(html).click(function(){
+                return false;
+            });
         }
         else {
             $('#'+attr).html(daq[attr]);
@@ -164,7 +166,9 @@ function load_production(name) {
             // build table of plots
             build_plots(name, detector_list[0], data);
             // build fee/pmt map 
-            build_pmtmap(name, detector_list[0]);
+            build_pmtmap(name, detector_list[0], data);
+            // load channel info
+            load_channels(name, detector_list[0], data);
         }
         else {
             $("#"+name+"_detector").html('Plots Unavailable');
@@ -178,7 +182,8 @@ function load_production(name) {
             var site = tr.attr("class");
             var detector = td.attr("class");
             build_plots(name, site+detector, data);
-            build_pmtmap(name, site+detector);
+            build_pmtmap(name, site+detector, data);
+            load_channels(name, site+detector, data);
             return false;
         });
 
@@ -218,7 +223,7 @@ function build_plots(name, detname, data) {
     modal_by_dbclick('#table_'+name+'_plots .img_db');
 }
 
-function build_pmtmap(name, detname) {
+function build_pmtmap(name, detname, data) {
     if (name == 'pqm') { return; }
     var site_detector, site, detector;
     var i, html, board, connector, str_board, str_connector, link;
@@ -234,17 +239,18 @@ function build_pmtmap(name, detname) {
         html += "<td>" + sprintf("%02d", i) + "</td>";
     }
     html += "</tr>";    
-    for (board=5; board<=17; board++) {
+    for (board=5; board<=18; board++) {
         str_board = sprintf("%02d", board);
         html += "<tr board="
               + '"' + str_board + '"'
               + "><td>board " + str_board + "</td>";
         for (connector=1; connector<=16; connector++) {
             str_connector = sprintf("%02d", connector);
-            html += '<td connector="' + str_connector + '">';
-            link = '<a href="">O</a>';
+            html += '<td connector="' + str_connector + '"><a href="';
+            link = Run.diagnostics_base_url+dirname(data.detectors[detname][0].figpath);
+            link += '/channel_board' + str_board + '_connector' + str_connector;
             html += link;
-            html += '</td>';
+            html += '">O</a></td>';
         }
         html += "</tr>";
     }
@@ -272,6 +278,7 @@ function build_pmtmap(name, detname) {
             html += "</tr>";
         }
         pmtmap_table.append(html);
+                
     }
     else if (detector.indexOf('WS') != -1) {
         html = "<tr><td>spot</td>";
@@ -294,9 +301,21 @@ function build_pmtmap(name, detname) {
         $("#td_ring").prev().html('<h6>Wall</h6>');
         $("#td_column").prev().html('<h6>Spot</h6>');
     }
-    
+        
+}
+
+function load_channels(name, detname, data) {
+    if (name == 'pqm') { return; }
     // $('#th_pmtinfo').html('Loading ...');
-    // load_channels(runNo, detname);
+    channel_info = (data.channels)[detname];
+    $('#feemap_table td').each(function(){
+        var connector = $(this).attr("connector");
+        var board = $(this).parent().attr("board");
+        var channelname = board + '_' + connector;
+        if (board && connector && !channel_info[channelname]) {
+            $(this).empty();
+        }
+    });
 }
 
 // parse detname 'DayaBayAD1' into ['DayaBay', 'AD1']
@@ -344,3 +363,12 @@ function modal_by_dbclick(selector) {
         return false;
     });
 }
+
+function basename(path) {
+    return path.replace(/\\/g,'/').replace( /.*\//, '' );
+}
+ 
+function dirname(path) {
+    return path.replace(/\\/g,'/').replace(/\/[^\/]*$/, '');
+}
+

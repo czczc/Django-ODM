@@ -36,6 +36,13 @@ class Diagnostics(object):
                 # ],
                 # 'SABAD1' : [],
             },
+            'channels' : {
+                # 'SABAD2' : {
+                #     'board06_connector01' : '1',
+                #     'board06_connector01' : '1',
+                # },
+                # 'SABAD1' : {},
+            }
         }
     
     def fetch_all(self):
@@ -67,6 +74,7 @@ class Diagnostics(object):
         self.info['run_xml'] = self.run_index[self.runno]
         self.info['rootfile_dir'] = os.path.dirname(self.info['run_xml']) + '/root'
         self.info['detectors'] = {}
+        self.info['channels'] = {}
         
         try:
             fh = urllib2.urlopen(self.xml_base_url + self.info['run_xml'])
@@ -76,9 +84,15 @@ class Diagnostics(object):
         for detectorNode in tree.findall('run/detector'):
             detname = detectorNode.find('detname').text
             self.info['detectors'][detname] = []
+            self.info['channels'][detname] = {}
             for figureNode in detectorNode.findall('figure'):
                 figure_info = {}
                 figure_info['figname'] = figureNode.find('figname').text
                 figure_info['figpath'] = figureNode.find('path').text
                 self.info['detectors'][detname].append(figure_info)
-         
+            for channelNode in detectorNode.findall('channel'):
+                channelname = channelNode.find('channelname').text
+                channelname = channelname.replace('board', '')
+                channelname = channelname.replace('connector', '')
+                self.info['channels'][detname][channelname] = '1'
+                
