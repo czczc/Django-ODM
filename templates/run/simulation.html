@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/modal.css")?>
+{% endblock %} 
+
+{% block title %}ODM | Simulation | Run {{ runno }}{% endblock %}
+
+{% block content %}
+    <div class = "grid_24">
+         <h2>
+             Simulation &nbsp;|&nbsp; 
+             Run {{ runno }}
+        </h2>
+    </div>    
+    <div class="clear"></div>    
+    
+    {% include "run/diagnostics.html" %}
+    
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal.1.4.1.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/sprintf.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/run.js"></script>
+{% endblock %}

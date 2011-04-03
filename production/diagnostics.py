@@ -21,7 +21,6 @@ class Diagnostics(object):
  	    
         self.run_index = {}    # {runno: xml}
         self.run_list  = {}    # {runno: 1} 
-        self._load_index()
         
         # info dictionary intended for json serializer
         self.info = {
@@ -38,6 +37,9 @@ class Diagnostics(object):
                 # 'SABAD1' : [],
             },
         }
+    
+    def fetch_all(self):
+        self._load_index()
         if (self.runno):
             self._load_info()
         

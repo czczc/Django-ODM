@@ -11,6 +11,8 @@ var remainder_url = this_url.substring(index_of_run+4);
 
 var Run = new Object;
 Run.runno = remainder_url.substring(0, remainder_url.indexOf('/'));
+if (remainder_url.indexOf('/sim/')>0) { Run.is_sim = true; }
+else { Run.is_sim = false; }
 Run.has_diagnostics = false;
 Run.has_pqm = false;
 Run.translation = new Object; Run.rtranslation = new Object;
@@ -20,19 +22,25 @@ Run.translation.EH3 = 'Far'; Run.rtranslation.Far = 'EH3';
 Run.translation.WPI = 'IWS'; Run.rtranslation.IWS = 'WPI';
 Run.translation.WPO = 'OWS'; Run.rtranslation.OWS = 'WPO';
 
-//  load DAQ settings
+// DAQ settings
 Run.daq_detector_list = [];
-load_daq('daq');
 
-// load Diagnostic plots
+// Diagnostic plots
 Run.diagnostics_base_url = '';
 Run.diagnostics_detector_list = [];
 Run.diagnostics_rootfile_dir = '#';
+
+// PQM plots
+Run.pqm_detector_list = [];
+
+// load everything
+if (!Run.is_sim) {
+    load_daq('daq');
+    load_production('pqm');
+}
 load_production('diagnostics');
 
-// load PQM plots
-Run.pqm_detector_list = [];
-load_production('pqm');
+// ==================================================================
 
 function load_daq(name) {
     // name: 'diagnostics' or 'pqm'
@@ -113,7 +121,9 @@ function build_daq_tables(name, detname, data) {
 
 function load_production(name) {
     // name: 'diagnostics' or 'pqm'
-    var url = base_url + 'production/' + name + '/run/' + Run.runno + '/';
+    var url = '';
+    if (Run.is_sim) { url = base_url + 'production/simulation/run/' + Run.runno + '/';}
+    else { url = base_url + 'production/' + name + '/run/' + Run.runno + '/'; }
     $.getJSON( url, function(data) {
         var i, detname, site_detector, site, detector, det_cell;
         var detector_list, figure_list;

@@ -9,25 +9,46 @@ from django.conf import settings
 from odm.runinfo.models import Daqruninfo, Daqcalibruninfo
 from odm.daqinfo.models import Daqrunconfig
 
-import json
+import json, re
 
 @login_required
 def quick_search(request):
     '''quick search box'''
+    
+    runno = ''
+    postfix = ''
+    
     if request.method == 'POST':
-        search_term = request.POST.get('search_term', '')
+        search_term = request.POST.get('search_term', '').lower()
+        if search_term.startswith('sim'): 
+            postfix = '/sim/'
+            search_term = search_term.replace('sim', '', 1)
         try:
-            runno = str(int(search_term))
-        except ValueError:
+            runno = re.search(r'(\d+)', search_term).group(1)            
+        except:
             return HttpResponse('sorry, invalid search')
-        return HttpResponseRedirect(settings.SITE_ROOT + '/run/' + runno)
+            
+        if postfix:
+            return HttpResponseRedirect(settings.SITE_ROOT + '/run/' + runno + postfix)            
+        else:
+            return HttpResponseRedirect(settings.SITE_ROOT + '/run/' + runno)
+    
     else:
         return HttpResponseRedirect(settings.SITE_ROOT + '/run/')
-                
+
+
 @login_required
-def run(request, runno):
+def simrun(request, runno):
+    '''query a simulation run'''
+    return render_to_response('run/simulation.html', { 
+        'runno' : runno, },
+        context_instance=RequestContext(request))
+        
+            
+@login_required
+def run(request, runno, is_sim=''):
     '''query a single run'''
-    
+        
     run = get_object_or_404(Daqruninfo, runno=runno)
     calibrun = None
     if (run.runtype == 'ADCalib'):
@@ -40,6 +61,7 @@ def run(request, runno):
         'run' : run, 
         'calibrun' : calibrun },
         context_instance=RequestContext(request))
+
 
 @login_required
 def latest(request, days='7', page=1, records=500):
@@ -58,6 +80,7 @@ def latest(request, days='7', page=1, records=500):
             'base_url'     : settings.SITE_ROOT + '/run/latest/days/' + days,
         })
 
+
 @login_required
 def runtype(request, runtype='All', page=1, records=500):
     '''query by run type'''
@@ -74,6 +97,7 @@ def runtype(request, runtype='All', page=1, records=500):
             'count'        : run_list.count(),  # total count, not per page
             'base_url'     : settings.SITE_ROOT + '/run/type/' + runtype,
         })
+
 
 @login_required
 def daqinfo(request, runno):
