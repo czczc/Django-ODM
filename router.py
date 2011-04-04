@@ -1,5 +1,5 @@
 # Router for multiple database
-offline_db_applist = ['runinfo', 'daqinfo']
+offline_db_applist = ['runinfo', 'daqinfo', 'pmtinfo']
 
 class DayaBayOfflineRouter(object):
     """DayaBay Offline DB"""
