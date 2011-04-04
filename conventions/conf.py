@@ -1,5 +1,38 @@
-# conventions
+# some DYB conventions
 
+# ==============================================
+class Site(object):
+    '''Site convention'''
+    
+    site_id = {
+        'Unknown'      : 0, 
+        'DayaBay'      : 1,
+        'LingAo'       : 2,
+        'Far'          : 4,
+        'Mid'          : 8,
+        'Aberdeen'     : 16,
+        'SAB'          : 32,
+        'PMTBenchTest' : 64,
+    }
+    
+
+# ==============================================
+class Detector(object):
+    '''Detetor convention'''
+    
+    detector_id = {
+        'All' : 0,
+        'AD1' : 1,
+        'AD2' : 2,
+        'AD3' : 3,
+        'AD4' : 4,
+        'IWS' : 5,
+        'OWS' : 6,
+        'RPC' : 7,
+    }
+
+
+# ==============================================
 class DaqTriggerType(object):
     '''Trigger definition in LTB manual doc-3443'''
     trigger_type = {

@@ -48,8 +48,8 @@ class Daqruninfovld(models.Model):
 
 #=====================================
 class Daqruninfo(models.Model):
-    vld = models.ForeignKey(Daqruninfovld, primary_key=True, db_column='SEQNO') # Field name made lowercase.
-    # row_counter = models.IntegerField(db_column='ROW_COUNTER') # not useful.
+    vld = models.ForeignKey(Daqruninfovld, db_column='SEQNO') # Field name made lowercase.
+    row_counter = models.IntegerField(primary_key=True, db_column='ROW_COUNTER') # Fake pk
     runno = models.IntegerField(db_column='runNo') # Field name made lowercase.
     # triggertype = models.BigIntegerField(null=True, db_column='triggerType', blank=True) # not useful.
     runtype = models.CharField(max_length=96, db_column='runType', blank=True) # Field name made lowercase.

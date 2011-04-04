@@ -1,4 +1,43 @@
 from django.db import models
+from odm.conventions.util import DBI_get
+from odm.conventions.conf import Site, Detector
+
+# =====================================
+class FeeCableMapManager(models.Manager):
+    
+    def cablemapSet(self, year, month, day, site, detector):
+        '''Returns a QuerySet of DBI Feecablemap'''
+        
+        vld = DBI_get(self.select_related(), {
+            'year' : int(year),
+            'month' : int(month),
+            'day' : int(day),
+            'site' : Site.site_id[site],
+            'detector' : Detector.detector_id[detector],
+        })
+        if vld:
+            return vld.feecablemap_set
+        else:
+            return None
+
+# =====================================
+class CalibPMTSpecManager(models.Manager):
+    
+    def pmtspecSet(self, year, month, day, site, detector):
+        '''Returns a QuerySet of DBI Calibpmtspec'''
+        
+        vld = DBI_get(self.select_related(), {
+            'year' : int(year),
+            'month' : int(month),
+            'day' : int(day),
+            'site' : site,
+            'detector' : detector,
+        })
+        if vld:
+            return vld.calibpmtspec_set
+        else:
+            return None
+            
 
 # =====================================
 class Feecablemapvld(models.Model):
@@ -12,6 +51,8 @@ class Feecablemapvld(models.Model):
     aggregateno = models.IntegerField(null=True, db_column='AGGREGATENO', blank=True) # Field name made lowercase.
     versiondate = models.DateTimeField(db_column='VERSIONDATE') # Field name made lowercase.
     insertdate = models.DateTimeField(db_column='INSERTDATE') # Field name made lowercase.
+    
+    objects = FeeCableMapManager()
     
     class Meta:
         db_table = u'FeeCableMapVld'
@@ -54,6 +95,8 @@ class Calibpmtspecvld(models.Model):
     aggregateno = models.IntegerField(null=True, db_column='AGGREGATENO', blank=True) # Field name made lowercase.
     versiondate = models.DateTimeField(db_column='VERSIONDATE') # Field name made lowercase.
     insertdate = models.DateTimeField(db_column='INSERTDATE') # Field name made lowercase.
+    
+    objects = CalibPMTSpecManager()
     
     class Meta:
         db_table = u'CalibPmtSpecVld'
