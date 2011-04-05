@@ -30,6 +30,12 @@ class Detector(object):
         'OWS' : 6,
         'RPC' : 7,
     }
+    
+    hall_detectors = {
+        'EH1' : ['AD1', 'AD2', 'WPI', 'WPO', 'RPC'],
+        'EH2' : ['AD1', 'AD2', 'WPI', 'WPO', 'RPC'],
+        'EH3' : ['AD1', 'AD2', 'AD3', 'AD4', 'WPI', 'WPO', 'RPC'],
+    }
 
 
 # ==============================================

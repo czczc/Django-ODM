@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-from odm.conventions.conf import Calibration
+from odm.conventions.conf import Calibration, Detector
 
 from datetime import datetime, timedelta
 
@@ -71,11 +71,22 @@ class Daqruninfo(models.Model):
     def get_absolute_url(self):
         return "%s/run/%i/" % (settings.SITE_ROOT, self.runno)
 
-    def site(self):
+    def partition(self):
         '''return site string'''
         # temporary: return site-detector until multiple-detector scheme is set
         return ''.join(self.partitionname.split('_')[1:]).upper();     
-
+    
+    def site(self):
+        return self.partition().split('-')[0]
+        
+    def detectors(self):
+        site_det = self.partition().split('-')
+        site = site_det[0]
+        try:
+            return [ site_det[1] ]
+        except IndexError:
+            return Detector.hall_detectors.get(site, [])
+        
 # =====================================
 class Daqcalibruninfo(models.Model):
     seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.

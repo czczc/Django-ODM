@@ -2,6 +2,7 @@ from django.db import models
 from odm.runinfo.models import Daqruninfo
 from odm.conventions.conf import DaqTriggerType
 
+from sets import Set
 import re
 
 class RunconfigManager(models.Manager):
@@ -10,38 +11,35 @@ class RunconfigManager(models.Manager):
     Use raw query. -CZ
     '''
     runno = ''
-    info = {
-        'runno' : '',
-        'runtype' : '',
-        'ROSconfig' : {}, 
-        'detectors' : {
-            # 'SAB-AD2' : {
-            #     'FADCName' : '',
-            #     'LTBName' : '',
-            #     'FEEName' : '',
-            #     'FEEBoards' : [],
-            #     'LTBfirmwareVersion' : '',
-            #     'FEEBoardVersion' : '',
-            #     'FEECPLDVersion' : '',
-            #     'FEEBaseline_enable' : '',
-            #     'FEEWaveform_enable' : '',
-            #     'FEEPrefix' : '',
-            #     'DACSelect_UniformVal' : ''
-            # },
-            # 'SABAD1' : {},
-        },
-    }
+    info = {}
     
     def reset(self):
-        self.info = info = {
+        self.info = {
             'runno' : self.runno,
             'runtype' : '',
+            'site' : '',
+            'schemaversion' : '',
+            'dataversion' : '',
+            'baseversion' : '',
             'ROSconfig' : {}, 
-            'detectors' : {},
+            'detectors' : {
+                # 'SAB-AD2' : {
+                #     'LTBName' : '',
+                #     'FEEName' : '',
+                #     'FEEBoards' : [],
+                #     'LTBfirmwareVersion' : '',
+                #     'Many others ...' : '',
+                # },
+                # 'SAB-AD1' : {},
+            },        
         }
         
     def fetch_all(self):
+        '''fetch EVERYTHING'''
+        
         self.reset()
+        self.fetch_runinfo()
+        
         for version in ['base', 'data']:
             self.fetch_active_detectors(version)
         
@@ -58,55 +56,54 @@ class RunconfigManager(models.Manager):
         self.finalize()
     
     
+    def fetch_runinfo(self):
+        '''fetch run info from Daqruninfo table'''
+        
+        run = Daqruninfo.objects.get(runno=self.runno)
+        self.info['runtype'] = run.runtype
+        self.info['site'] = run.site()
+        self.info['runinfo_detectors'] = [
+            self.info['site']+'-'+detector for detector in run.detectors()
+        ]
+        self.info['schemaversion'] = run.schemaversion
+        self.info['baseversion'] = run.baseversion
+        self.info['dataversion'] = run.dataversion
+
+        
     def fetch_active_detectors(self, version):
         '''fetch active detectors'''
         
-        # I intended to not use the .raw(queryString, param) syntax
-        # to avoid the escape of variable name
-        queryString = '''
-            SELECT *
-            FROM DaqRunConfig JOIN DaqRunInfo 
-            ON DaqRunInfo.schemaVersion=DaqRunConfig.schemaVersion 
-            AND DaqRunInfo.%sVersion=DaqRunConfig.dataVersion
-            AND DaqRunConfig.className='ROSConfiguration'
-            AND DaqRunConfig.name='childObjectId_Detectors'
-            AND DaqRunInfo.runNo='%s'
-        ''' % (version, self.runno)
-        rawQuerySet = list(self.raw(queryString))
+        object_list = self.filter(
+            schemaversion=self.info['schemaversion'],
+            dataversion=self.info[version+'version'],
+            classname='ROSConfiguration',
+            name='childObjectId_Detectors',
+        )
         
-        for daq in rawQuerySet:
+        for daq in object_list:
             self.info['ROSconfig'][daq.objectid] = daq.stringvalue
         
         # initialize detectors only after dataVersion query
         if version == 'data':
-            for ros, detector in self.info['ROSconfig'].items():
+            detectors = list(
+                  Set(self.info['ROSconfig'].values()) 
+                & Set(self.info['runinfo_detectors'])
+            )
+            for detector in detectors:
                 self.info['detectors'][detector] = {}
-        else:
-            self.info['runtype'] = daq.runType
-        
-        # if version == 'base':
-        #     self.info['detectors'] = {}    # clear detector data for any base version
-        #     
-        # for daq in rawQuerySet:
-        #     self.info['detectors'][daq.stringvalue] = {}
-        #     self.info['runtype'] = daq.runType
-
+                        
 
     def fetch_detector_settings(self, version, detector):
         '''fetch detector settings'''
 
-        queryString = '''
-            SELECT *
-            FROM DaqRunConfig JOIN DaqRunInfo 
-            ON DaqRunInfo.schemaVersion=DaqRunConfig.schemaVersion 
-            AND DaqRunInfo.%sVersion=DaqRunConfig.dataVersion
-            AND DaqRunConfig.objectID='%s'
-            AND DaqRunConfig.className='Crate'
-            AND DaqRunInfo.runNo='%s'
-        ''' % (version, detector, self.runno)
-        rawQuerySet = list(self.raw(queryString))
+        object_list = self.filter(
+            schemaversion=self.info['schemaversion'],
+            dataversion=self.info[version+'version'],
+            classname='Crate',
+            objectid=detector,
+        )
         
-        for daq in rawQuerySet:
+        for daq in object_list:
             detinfo = self.info['detectors'][detector]
 
             LogicalId = daq.intFromName('LogicalId') 
@@ -159,17 +156,13 @@ class RunconfigManager(models.Manager):
         if (LTBName == 'LTB_0'): LTBName = ''
         else: LTBName = LTBName + '_'
         
-        queryString = '''
-            SELECT *
-            FROM DaqRunConfig JOIN DaqRunInfo 
-            ON DaqRunInfo.schemaVersion=DaqRunConfig.schemaVersion 
-            AND DaqRunInfo.%sVersion=DaqRunConfig.dataVersion
-            AND DaqRunConfig.objectID='%s'
-            AND DaqRunInfo.runNo='%s'
-        ''' % (version, LTBName+self.info['runtype']+'Mode', self.runno)
-        rawQuerySet = list(self.raw(queryString))
-
-        for daq in rawQuerySet:
+        object_list = self.filter(
+            schemaversion=self.info['schemaversion'],
+            dataversion=self.info[version+'version'],
+            objectid=LTBName+self.info['runtype']+'Mode',
+        )
+        
+        for daq in object_list:
             detinfo = self.info['detectors'][detector]
 
             # ESum
@@ -213,18 +206,14 @@ class RunconfigManager(models.Manager):
 
     def fetchmore_LTB_settings(self, version, detector, LTBName):
         '''fetch more LTB settings, details see LTB manual doc-3443'''
-                
-        queryString = '''
-            SELECT *
-            FROM DaqRunConfig JOIN DaqRunInfo 
-            ON DaqRunInfo.schemaVersion=DaqRunConfig.schemaVersion 
-            AND DaqRunInfo.%sVersion=DaqRunConfig.dataVersion
-            AND DaqRunConfig.objectID='%s'
-            AND DaqRunInfo.runNo='%s'
-        ''' % (version, LTBName, self.runno)
-        rawQuerySet = list(self.raw(queryString))
+        
+        object_list = self.filter(
+            schemaversion=self.info['schemaversion'],
+            dataversion=self.info[version+'version'],
+            objectid=LTBName,
+        )
 
-        for daq in rawQuerySet:
+        for daq in object_list:
             detinfo = self.info['detectors'][detector]
 
             # Periodic Trigger
@@ -253,25 +242,19 @@ class RunconfigManager(models.Manager):
             Multiplicity_trigger_latency = daq.intFromName('Multiplicity_trigger_latency') 
             if (Multiplicity_trigger_latency): detinfo['Multiplicity_trigger_latency'] = Multiplicity_trigger_latency
             
-
-
                        
     def fetch_FEE_settings(self, version, detector, FEEPrefix):
         '''fetch LTB settings'''
         
-        queryString = '''
-            SELECT *
-            FROM DaqRunConfig JOIN DaqRunInfo 
-            ON DaqRunInfo.schemaVersion=DaqRunConfig.schemaVersion 
-            AND DaqRunInfo.%sVersion=DaqRunConfig.dataVersion
-            AND DaqRunConfig.name='DACSelect'
-            AND DaqRunConfig.objectID LIKE '%s%%%%'
-            AND DaqRunConfig.stringValue='UniformVal'
-            AND DaqRunInfo.runNo='%s'
-        ''' % (version, self.info['runtype']+'Threshold_'+FEEPrefix, self.runno)
-        rawQuerySet = list(self.raw(queryString))
-
-        for daq in rawQuerySet:
+        object_list = self.filter(
+            schemaversion=self.info['schemaversion'],
+            dataversion=self.info[version+'version'],
+            name='DACSelect',
+            objectid__startswith=self.info['runtype']+'Threshold_'+FEEPrefix,
+            stringvalue='UniformVal',
+        )
+        
+        for daq in object_list:
             detinfo = self.info['detectors'][detector]
             
             #DACSelect UniformVal suedo FEE Channel
@@ -280,17 +263,14 @@ class RunconfigManager(models.Manager):
         
         DACSelect_UniformVal = self.info['detectors'][detector].get('DACSelect_UniformVal','')
         if DACSelect_UniformVal:
-            queryString = '''
-                SELECT *
-                FROM DaqRunConfig JOIN DaqRunInfo 
-                ON DaqRunInfo.schemaVersion=DaqRunConfig.schemaVersion 
-                AND DaqRunInfo.%sVersion=DaqRunConfig.dataVersion
-                AND DaqRunConfig.name='DACUniformVal'
-                AND DaqRunConfig.objectID='%s'
-                AND DaqRunInfo.runNo='%s'
-            ''' % (version, DACSelect_UniformVal, self.runno)
-            rawQuerySet = list(self.raw(queryString))
-            for daq in rawQuerySet:
+            object_list = self.filter(
+                schemaversion=self.info['schemaversion'],
+                dataversion=self.info[version+'version'],
+                name='DACUniformVal',
+                objectid=DACSelect_UniformVal,
+            )
+
+            for daq in object_list:
                 detinfo = self.info['detectors'][detector]
     
                 #DACSelect UniformVal suedo FEE Channel
