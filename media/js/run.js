@@ -3,6 +3,9 @@ $(".draggable").draggable({ cursor: 'move', opacity: 0.35 });
 $('#jumper button').click(function() {
     window.location = $(this).attr('href');
 });
+$('button.to_top').click(function() {
+    window.location = '#top';
+});
 
 $('#reload_pmtfigures').click(function() {
     detname = $('#pmtinfo_detector').html();
@@ -78,7 +81,8 @@ function load_daq() {
             build_daq_tables(detector_list[0], data);
             
             // load pmt info
-            load_pmt(detector_list[0]);
+            site_detector = parse_detname(detector_list[0]);
+            load_pmt(site_detector[0]+site_detector[1]);
         }
         else {
             $("#daq_detector").html('NO Detector!');
@@ -158,30 +162,37 @@ function load_pmt(detname) {
 function load_pmtfigures(detname) {
     var site_detector = parse_detname(detname);
     detname = site_detector[0] + site_detector[1];
+   
+    data = Run.diagnostics_data;
+    if (!data) {
+        return;
+    }
+    else {
+        var feemap_tds = $('#feemap_table td');
+        feemap_tds.each(function() {
+            var html = '';
+            var connector = $(this).attr("connector");
+            var board = $(this).parent().attr("board");
+            if (board && connector) {
+                $(this).html('');
+                figures = data.detectors[detname];
+                channels = data.channels[detname];
+                if (figures) {
+                    if(channels[board+'_'+connector]) {
+                        html += '<a href="';
+                        link = Run.diagnostics_base_url+dirname(figures[0].figpath);
+                        link += '/channel_board' + board + '_connector' + connector;
+                        html += link +  '">O</a>';
+                        $(this).html(html);
+                    }
+                } // if (figures) done
 
-    var feemap_tds = $('#feemap_table td');
-    feemap_tds.each(function() {
-        data = Run.diagnostics_data;
-        var html = '';
-        var connector = $(this).attr("connector");
-        var board = $(this).parent().attr("board");
-        if (board && connector) {
-            $(this).html('');
-            figures = data.detectors[detname];
-            channels = data.channels[detname];
-            if (figures) {
-                if(channels[board+'_'+connector]) {
-                    html += '<a href="';
-                    link = Run.diagnostics_base_url+dirname(figures[0].figpath);
-                    link += '/channel_board' + board + '_connector' + connector;
-                    html += link +  '">O</a>';
-                    $(this).html(html);
-                }
-            } // if (figures) done
+            } // if (board && connector) done
 
-        } // if (board && connector) done
-        
-    }); // tds.each() done.
+        }); // tds.each() done.
+        $('#reload_pmtfigures').hide('blind');
+    } // else done
+
 }
 
 function enable_pmt_mouse_actions(detname, data) {

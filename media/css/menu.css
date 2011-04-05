@@ -1,6 +1,6 @@
 /* quick search box */
 #quick_search { position: relative; margin-top: 18px; }
-#quick_search_field { border: 2px solid #92b8cc; background: #eef6fb; height: 26px; width: 100px; font-size: 12px; padding-left: 5px;}
+#quick_search_field { border: 2px solid #92b8cc; background: #eef6fb; height: 26px; width: 100px; font-size: 12px; padding: 3px 0 2px 5px;}
 #search-button { position: absolute; right: -7px; top: -2px; width: 32px; border: none; }
 
 /* menu */
