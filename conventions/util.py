@@ -17,7 +17,7 @@ def DBI_get(objects, context):
         return objects.filter(
                 timestart__lte=date, 
                 timeend__gte=date,
-                subsite__in=[ 0, context['detector'] ],
+                subsite=context['detector'],
             ).extra(
                  where=[ 'sitemask & %s <> 0', ],
                 params=[ context['site'], ],

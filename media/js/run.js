@@ -1,7 +1,12 @@
 $("button").button();
 $(".draggable").draggable({ cursor: 'move', opacity: 0.35 });
-$('#show_pmtmap').click(function() {
-    $("#pmt_section").slideToggle('fast');
+$('#jumper button').click(function() {
+    window.location = $(this).attr('href');
+});
+
+$('#reload_pmtfigures').click(function() {
+    detname = $('#pmtinfo_detector').html();
+    load_pmtfigures(detname);
 });
 
 var this_url = window.location.href;
@@ -11,6 +16,7 @@ var remainder_url = this_url.substring(index_of_run+4);
 
 var Run = new Object;
 Run.runno = remainder_url.substring(0, remainder_url.indexOf('/'));
+
 if (remainder_url.indexOf('/sim/')>0) { Run.is_sim = true; }
 else { Run.is_sim = false; }
 Run.has_diagnostics = false;
@@ -29,21 +35,32 @@ Run.daq_detector_list = [];
 Run.diagnostics_base_url = '';
 Run.diagnostics_detector_list = [];
 Run.diagnostics_rootfile_dir = '#';
+Run.diagnostics_data = null;
 
 // PQM plots
 Run.pqm_detector_list = [];
 
 // load everything
 if (!Run.is_sim) {
-    load_daq('daq');
+    load_run_datetime();
+    load_daq();
     load_production('pqm');
 }
 load_production('diagnostics');
 
 // ==================================================================
 
-function load_daq(name) {
-    // name: 'diagnostics' or 'pqm'
+function load_run_datetime() {
+    var datetime_splitted = $('#run_start_utc').html().split(' ');
+    var date = datetime_splitted[0]; 
+    var time = datetime_splitted[1];
+    var date_splitted = date.split('-');
+    Run.year = date_splitted[0];
+    Run.month = date_splitted[1];
+    Run.day = date_splitted[2];
+}
+
+function load_daq() {
     var url = base_url + 'run/daq/' + Run.runno + '/';
     $.getJSON( url, function(data) {
         var detector_list = Run.daq_detector_list;
@@ -54,44 +71,188 @@ function load_daq(name) {
         detector_list.sort();
         if (detector_list.length>0) {
             // enable live detectors
-            for (i=0; i<detector_list.length; i++) {                
-                site_detector = parse_detname(detector_list[i]);
-                site = site_detector[0];
-                detector = site_detector[1];    
-                det_cell = $("#"+ name + "_site_det tr." + site + " td." + detector + " a" );
-                det_cell.removeClass("det").addClass("live_det").attr("href", "#");
-            }
+            enable_live_detectors('daq', detector_list);
+            enable_live_detectors('pmtinfo', detector_list);
+            
             // build daq tables
-            build_daq_tables(name, detector_list[0], data);
+            build_daq_tables(detector_list[0], data);
+            
+            // load pmt info
+            load_pmt(detector_list[0]);
         }
         else {
-            $("#"+name+"_detector").html('Plots Unavailable');
-            $("#"+name+"_section").empty();  
+            $("#daq_detector").html('NO Detector!');
+            $("#daq_section").empty();  
         }
         
         $('#btn_more_daq').click( function(){
            $('#daq_section .hidden').toggle();
         });
-        // enable live detectors click
-        $("#"+name+"_site_det a.live_det").click( function(){
+        
+        // enable daq live detectors click
+        $("#daq_site_det a.live_det").click( function(){
             var td = $(this).parent();
             var tr = td.parent();
             var site = tr.attr("class");
             var detector = td.attr("class");
             if (Run.rtranslation[site]) { site = Run.rtranslation[site]; }
             if (Run.rtranslation[detector]) { detector = Run.rtranslation[detector]; }
-            build_daq_tables(name, site+'-'+detector, data);
-            $("#"+name+"_section table").show('slide');
+            build_daq_tables(site+'-'+detector, data);
+            $("#daq_section table").show('slide');
+            return false;
+        });
+        
+        // enable pmt live detectors click
+        $("#pmtinfo_site_det a.live_det").click( function(){
+            var td = $(this).parent();
+            var tr = td.parent();
+            var site = tr.attr("class");
+            var detector = td.attr("class");
+            if (detector == 'RPC') {
+                $("#pmtinfo_detector").html(site+detector);
+                $('#pmt_section').hide('blind');
+                return false;
+            }
+            $('#pmt_info td.value').html('');
+            $('#pmt_section').show('slide');
+            load_pmt(site+detector);
             return false;
         });
         
         // remove the loading animation
-        $("#"+name+"_loading").remove();
+        $("#daq_loading").remove();
     }); // .getJSON done
 }
 
-function build_daq_tables(name, detname, data) {
-    $("#"+name+"_detector").html(detname);
+function enable_live_detectors(name, detector_list) {
+    for (i=0; i<detector_list.length; i++) {                
+        site_detector = parse_detname(detector_list[i]);
+        site = site_detector[0];
+        detector = site_detector[1];    
+        det_cell = $("#"+ name + "_site_det tr." + site + " td." + detector + " a" );
+        det_cell.removeClass("det").addClass("live_det").attr("href", "#");
+    }
+}
+
+function load_pmt(detname) {
+    $("#pmtinfo_detector").html(detname);
+
+    var site_detector = parse_detname(detname);
+    var site = site_detector[0];
+    var detector = site_detector[1];
+
+    var url = base_url + 'pmt/' + site + '/' + detector + '/'
+            + Run.year + '/' + Run.month + '/' + Run.day + '/';
+    $.getJSON( url, function(data) {
+        $('#cablemap_vld_seqno').html(data.cablemap_vld_seqno);
+        $('#cablemap_vld_from').html(data.cablemap_vld_from);
+        $('#cablemap_vld_to').html(data.cablemap_vld_to);
+        $('#pmtspec_vld_seqno').html(data.pmtspec_vld_seqno);
+        $('#pmtspec_vld_from').html(data.pmtspec_vld_from);
+        $('#pmtspec_vld_to').html(data.pmtspec_vld_to);
+        enable_pmt_mouse_actions(site+detector, data);
+        load_pmtfigures(site+detector);
+    }); // .getJSON done
+}
+
+function load_pmtfigures(detname) {
+    var site_detector = parse_detname(detname);
+    detname = site_detector[0] + site_detector[1];
+
+    var feemap_tds = $('#feemap_table td');
+    feemap_tds.each(function() {
+        data = Run.diagnostics_data;
+        var html = '';
+        var connector = $(this).attr("connector");
+        var board = $(this).parent().attr("board");
+        if (board && connector) {
+            $(this).html('');
+            figures = data.detectors[detname];
+            channels = data.channels[detname];
+            if (figures) {
+                if(channels[board+'_'+connector]) {
+                    html += '<a href="';
+                    link = Run.diagnostics_base_url+dirname(figures[0].figpath);
+                    link += '/channel_board' + board + '_connector' + connector;
+                    html += link +  '">O</a>';
+                    $(this).html(html);
+                }
+            } // if (figures) done
+
+        } // if (board && connector) done
+        
+    }); // tds.each() done.
+}
+
+function enable_pmt_mouse_actions(detname, data) {
+    var pmt_ring = $("#pmt_ring");
+    var pmt_column = $("#pmt_column");
+    var pmt_board = $("#pmt_board");
+    var pmt_connector = $("#pmt_connector");
+    var pmt_wall = $("#pmt_wall");
+    var pmt_spot = $("#pmt_spot");
+    var pmt_spehigh = $("#pmt_spehigh");
+    var pmt_spelow = $("#pmt_spelow");
+    var pmt_toffset = $("#pmt_toffset");
+    
+    var feemap_tds = $('#feemap_table td');
+    // console.log(data);
+    feemap_tds.unbind();
+    feemap_tds.each(function() {
+        var connector = $(this).attr("connector");
+        var board = $(this).parent().attr("board");
+
+        if (board && connector) {
+            
+            var pmtid = data.feename_to_id[detname + '-board' + board + '-connector' + connector];
+            var pmt = data.pmts[pmtid];
+
+            
+            $(this).bind('click', function(){
+                console.log(pmt);
+            });
+            
+            // setup fee table cell mouse over
+            $(this).bind('mouseover', function(){
+                var ring = column = wall = spot = in_out 
+                         = spehigh = spelow = toffset
+                         = '';
+                if (pmt) {
+                    ring = pmt.ring;
+                    column = pmt.column;
+                    wall = pmt.wall;
+                    spot = pmt.spot;
+                    in_out = pmt.in_out;
+                    spehigh = pmt.spehigh;
+                    spelow = pmt.spelow;
+                    toffset = pmt.toffset;
+                }
+                
+                pmt_board.html(board);
+                pmt_connector.html(connector);
+                pmt_ring.html(ring);
+                pmt_column.html(column);
+                pmt_wall.html(wall);
+                pmt_spot.html(spot + ' ' + in_out);
+                pmt_spehigh.html(spehigh);
+                pmt_spelow.html(spelow);
+                pmt_toffset.html(toffset);
+            
+                $(this).css('background-color', '#ff8a00'); 
+            
+            }); // bind mouseover done
+            
+            $(this).bind('mouseout', function(){
+                $(this).css('background-color', 'white');
+            }); // bind mouseout done
+        }
+
+        // 
+    }); // tds.each() done
+}
+
+function build_daq_tables(detname, data) {
+    $("#daq_detector").html(detname);
     $("#daq_section td.value").html('');
     
     var daq = data.detectors[detname];
@@ -130,7 +291,8 @@ function load_production(name) {
         var i, detname, site_detector, site, detector, det_cell;
         var detector_list, figure_list;
         
-        if (name == 'diagnostics') { 
+        if (name == 'diagnostics') {
+            Run.diagnostics_data = data;
             Run.has_diagnostics = true; 
             Run.diagnostics_base_url = data.base_url;
             
@@ -156,19 +318,10 @@ function load_production(name) {
         detector_list.sort();
         if (detector_list.length>0) {
             // enable live detectors
-            for (i=0; i<detector_list.length; i++) {
-                site_detector = parse_detname(detector_list[i]);
-                site = site_detector[0];
-                detector = site_detector[1];    
-                det_cell = $("#"+ name + "_site_det tr." + site + " td." + detector + " a" );
-                det_cell.removeClass("det").addClass("live_det").attr("href", "#");
-            }
+            enable_live_detectors(name, detector_list);
+
             // build table of plots
             build_plots(name, detector_list[0], data);
-            // build fee/pmt map 
-            build_pmtmap(name, detector_list[0], data);
-            // load channel info
-            load_channels(name, detector_list[0], data);
         }
         else {
             $("#"+name+"_detector").html('Plots Unavailable');
@@ -182,8 +335,8 @@ function load_production(name) {
             var site = tr.attr("class");
             var detector = td.attr("class");
             build_plots(name, site+detector, data);
-            build_pmtmap(name, site+detector, data);
-            load_channels(name, site+detector, data);
+            $('#table_'+name+'_plots').show('slide');
+
             return false;
         });
 
@@ -218,112 +371,18 @@ function build_plots(name, detname, data) {
         if (column_index == 3) {html += "</tr>\n"; column_index=0;}
     }
     table_plots.append(html);
-    table_plots.show('slide');
+
     // enable image double click to origninal size
     modal_by_dbclick('#table_'+name+'_plots .img_db');
 }
 
-function build_pmtmap(name, detname, data) {
-    if (name == 'pqm') { return; }
-    var site_detector, site, detector;
-    var i, html, board, connector, str_board, str_connector, link;
-    
-    site_detector = parse_detname(detname);
-    site = site_detector[0];
-    detector = site_detector[1];
-    
-    var feemap_table = $("#feemap_table");
-    feemap_table.empty();
-    html = "<tr><td>connector</td>";
-    for (i=1; i<=16; i++) {
-        html += "<td>" + sprintf("%02d", i) + "</td>";
-    }
-    html += "</tr>";    
-    for (board=5; board<=18; board++) {
-        str_board = sprintf("%02d", board);
-        html += "<tr board="
-              + '"' + str_board + '"'
-              + "><td>board " + str_board + "</td>";
-        for (connector=1; connector<=16; connector++) {
-            str_connector = sprintf("%02d", connector);
-            html += '<td connector="' + str_connector + '"><a href="';
-            link = Run.diagnostics_base_url+dirname(data.detectors[detname][0].figpath);
-            link += '/channel_board' + str_board + '_connector' + str_connector;
-            html += link;
-            html += '">O</a></td>';
-        }
-        html += "</tr>";
-    }
-    feemap_table.append(html);
-    
-    var pmtmap_table = $("#pmtmap_table");
-    pmtmap_table.empty();
-    var ring, column, str_ring, str_column;
-    if (detector.indexOf('AD') != -1) {
-        html = "<tr><td>column</td>";
-        for (i=1; i<=24; i++) {
-            html += "<td>" + sprintf("%02d", i) + "</td>";
-        }
-        html += "</tr>";    
-        for (ring=8; ring>=0; ring--) {
-            str_ring = sprintf("%02d", ring);
-            html += "<tr ring="
-                  + '"' + str_ring + '"'
-                  + "><td>ring " + str_ring + "</td>";
-            for (column=1; column<=24; column++) {
-                str_column = sprintf("%02d", column);
-                html += '<td column="' + str_column + '">';
-                html += "</td>";
-            }
-            html += "</tr>";
-        }
-        pmtmap_table.append(html);
-                
-    }
-    else if (detector.indexOf('WS') != -1) {
-        html = "<tr><td>spot</td>";
-        for (i=1; i<=29; i++) {
-            html += "<td>" + sprintf("%02d", i) + "</td>";
-        }
-        for (ring=1; ring<=9; ring++) {
-            str_ring = sprintf("%02d", ring);
-            html += "<tr ring="
-                  + '"' + str_ring + '"'
-                  + "><td>" + str_ring + "</td>";
-            for (column=1; column<=29; column++) {
-                str_column = sprintf("%02d", column);
-                html += '<td column="' + str_column + '">';
-                html += "</td>";
-            }
-            html += "</tr>";
-        }
-        pmtmap_table.append(html);
-        $("#td_ring").prev().html('<h6>Wall</h6>');
-        $("#td_column").prev().html('<h6>Spot</h6>');
-    }
-        
-}
-
-function load_channels(name, detname, data) {
-    if (name == 'pqm') { return; }
-    // $('#th_pmtinfo').html('Loading ...');
-    channel_info = (data.channels)[detname];
-    $('#feemap_table td').each(function(){
-        var connector = $(this).attr("connector");
-        var board = $(this).parent().attr("board");
-        var channelname = board + '_' + connector;
-        if (board && connector && !channel_info[channelname]) {
-            $(this).empty();
-        }
-    });
-}
-
 // parse detname 'DayaBayAD1' into ['DayaBay', 'AD1']
+// or 'EH1-AD1' into ['DayaBay', 'AD1']
 function parse_detname(detname) {
     var index = detname.indexOf('-');
     var site, detector;
     
-    // DAQ convention
+    // DAQ convention EH1-AD1
     if (index>0) {
         site = detname.substring(0, index);
         detector = detname.substring(index+1);
@@ -332,7 +391,7 @@ function parse_detname(detname) {
         return [site, detector];
     }
     
-    // Analysis convention
+    // Analysis convention DayaBayAD1
     var sites = ['DayaBay', "LingAo", "Far", "SAB"];
     var i=0;
     for (i=0; i<sites.length; i++) {

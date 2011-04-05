@@ -1,0 +1,79 @@
+{% load range %}
+
+<div class="grid_24" style='margin-top:20px;'>
+    <a name="pmtinfo"></a>
+    <h2>
+         PMT Information &nbsp;|&nbsp; 
+         Run {{ run.runno }} &nbsp;|&nbsp; 
+         {{ run.runtype }} &nbsp;&nbsp;
+         {# <img id="pmt_loading" class="loading" src="{{ MEDIA_URL }}img/loading.gif" alt="loading" /> #}
+    </h2>
+</div>
+<div class="clear"></div>
+
+{# site/detector map #}
+<div id="pmtinfo_site_det" class="grid_14" style='margin-top:10px;'>
+    {% include "run/detmap.html" %}
+</div>
+<div class="grid_7 prefix_2 suffix_1 draggable notepad" style='margin-top:10px;'>
+    <h3 id="pmtinfo_detector">Detector (Loading ...)</h3>
+    <ul>
+        <li><button id="reload_pmtfigures">Refresh PMT Figures ...</button></li>
+    </ul>
+</div>
+<div class="clear"></div>
+
+{# FEE/PMT map #}
+<div id='pmt_section' style='margin-top: 20px;'>
+    <div id="pmt_info" class="grid_7 prefix_2 suffix_1 push_14">
+        <table>
+            <thead><tr>
+            <th id="th_pmtinfo" colspan="2" style="text-align:center;">PMT Cable Map</th>
+            </tr></thead>
+            <tr><td class='descr'>Board</td><td id="pmt_board" class="value"></td></tr>
+            <tr><td class='descr'>Connector</td><td id="pmt_connector" class="value"></td></tr>
+            <tr><td class='descr'>Ring</h6></td><td id="pmt_ring" class="value"></td></tr>
+            <tr><td class='descr'>Column</h6></td><td id="pmt_column" class="value"></td></tr>
+            <tr><td class='descr'>Wall</h6></td><td id="pmt_wall" class="value"></td></tr>
+            <tr><td class='descr'>Spot</h6></td><td id="pmt_spot" class="value"></td></tr>
+            <tr><td class='descr'>Validation Seqno</h6></td><td id="cablemap_vld_seqno" class="value"></td></tr>
+            <tr><td class='descr'>Valid From</h6></td><td id="cablemap_vld_from" class="value"></td></tr>
+            <tr><td class='descr'>Valid To</h6></td><td id="cablemap_vld_to" class="value"></td></tr>
+            <tr><th colspan="2" style="text-align:center;">PMT Specs</th></th></tr>
+            <tr><td class='descr'>SPE &nbsp;[H.G. ADC]</td><td id="pmt_spehigh" class="value"></td></tr>
+            <tr><td class='descr'>SPE &nbsp;[L.G. ADC]</td><td id="pmt_spelow" class="value"></td></tr>
+            <tr><td class='descr'>T Offset &nbsp;[TDC]</td><td id="pmt_toffset" class="value"></td></tr>
+            <tr><td class='descr'>Validation Seqno</h6></td><td id="pmtspec_vld_seqno" class="value"></td></tr>
+            <tr><td class='descr'>Valid From</h6></td><td id="pmtspec_vld_from" class="value"></td></tr>
+            <tr><td class='descr'>Valid To</h6></td><td id="pmtspec_vld_to" class="value"></td></tr>
+        </table>
+    </div>
+    
+    {% mkrange 1 17 1 as connector_range %}
+    {% mkrange 5 19 1 as board_range %}
+    
+    <div class="grid_14 pull_10">
+        <table id="feemap_table" class="det_table">
+            <tr><td>connector</td>
+            {% for connector in connector_range %}
+            <td>{{ connector|stringformat:"02d" }}</td>
+            {% endfor %}
+            </tr>
+
+            {% for board in board_range %}
+            <tr board='{{ board|stringformat:"02d" }}'>
+                <td>board {{ board|stringformat:"02d" }}</td>
+                {% for connector in connector_range %}
+                <td connector='{{ connector|stringformat:"02d" }}'></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        
+        </table>
+    </div>
+    <div class="grid_18" style='margin-top: 10px;'>
+        <table id="pmtmap_table" class="det_table">
+        </table>
+    </div>
+    <div class="clear"></div>
+</div>

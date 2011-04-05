@@ -17,12 +17,12 @@
     <h3 id="diagnostics_detector">Detector (Loading ...)</h3>
     <ul>
         <li><button id="diagnostics_rootfile_dir">Go to ROOT File Dir ...</button></li>
-        <li><button id="show_pmtmap">Toggle FEE / PMT Map ...</button></li>
     </ul>
 </div>
 <div class="clear"></div>
 
 {# FEE/PMT map #}
+{% comment %}
 <div id='pmt_section' class='hidden' style='margin-top: 20px;'>
     <div id="pmt_info" class="grid_7 prefix_2 suffix_1 push_14">
         <table>
@@ -61,6 +61,7 @@
     </div>
     <div class="clear"></div>
 </div>
+{% endcomment %}
 
 {# diagnostic plots #}
 <div class="grid_24" id="diagnostics_section" style='margin-top: 20px;'>

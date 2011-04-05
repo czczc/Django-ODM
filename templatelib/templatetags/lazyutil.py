@@ -8,3 +8,4 @@ def to_bool(value):
         return None
     else:
         return bool(value)
+

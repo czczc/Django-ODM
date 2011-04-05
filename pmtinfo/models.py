@@ -5,15 +5,21 @@ from odm.conventions.conf import Site, Detector
 # =====================================
 class FeeCableMapManager(models.Manager):
     
-    def cablemapSet(self, year, month, day, site, detector):
+    def cablemapSet(self, site, detector, year, month, day):
         '''Returns a QuerySet of DBI Feecablemap'''
+        
+        try:
+            site = Site.site_id[site]
+            detector = Detector.detector_id[detector]
+        except KeyError:
+            return None
         
         vld = DBI_get(self.select_related(), {
             'year' : int(year),
             'month' : int(month),
             'day' : int(day),
-            'site' : Site.site_id[site],
-            'detector' : Detector.detector_id[detector],
+            'site' : site,
+            'detector' : detector,
         })
         if vld:
             return vld.feecablemap_set
@@ -23,9 +29,15 @@ class FeeCableMapManager(models.Manager):
 # =====================================
 class CalibPMTSpecManager(models.Manager):
     
-    def pmtspecSet(self, year, month, day, site, detector):
+    def pmtspecSet(self, site, detector, year, month, day):
         '''Returns a QuerySet of DBI Calibpmtspec'''
         
+        try:
+            site = Site.site_id[site]
+            detector = Detector.detector_id[detector]
+        except KeyError:
+            return None
+            
         vld = DBI_get(self.select_related(), {
             'year' : int(year),
             'month' : int(month),
@@ -81,7 +93,38 @@ class Feecablemap(models.Model):
 
     def __unicode__(self):
         return self.feechanneldesc
-
+    
+    def unpack(self):
+        sitedet, board, connector = self.feechanneldesc.split('-')
+        board = board.replace('board', '')
+        connector = connector.replace('connector', '')
+        
+        try:
+            sitedet, ring, column, in_out = self.sensordesc.split('-')
+        except ValueError:
+            sitedet, ring, column = self.sensordesc.split('-')
+            in_out = ''
+        
+        ring = ring.replace('ring', '')
+        column = column.replace('column', '')
+        wall = spot = ''
+        
+        try:
+            int(ring)
+        except ValueError:
+            wall = ring.replace('wall', '')
+            spot = column.replace('spot', '')
+            ring = column = ''
+             
+        return {
+            'board' : board,
+            'connector' : connector,
+            'ring' : ring,
+            'column' : column,
+            'wall' : wall,
+            'spot' : spot,
+            'in_out' : in_out,
+        }
 
 # =====================================
 class Calibpmtspecvld(models.Model):

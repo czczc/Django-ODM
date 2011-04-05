@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     
     (r'^run/', include('odm.runinfo.urls')), 
     (r'^production/', include('odm.production.urls')),   
+    (r'^pmt/', include('odm.pmtinfo.urls')),   
 )
 
 from django.conf import settings

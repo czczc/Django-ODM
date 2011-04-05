@@ -1,0 +1,36 @@
+<div class = "grid_24">
+     <h2>
+         General Information &nbsp;|&nbsp; 
+         Run {{ run.runno }}
+    </h2>
+</div>    
+<div class="clear"></div>    
+
+{# site/detector map #}
+<div class="grid_14" style='margin-top:10px;'>
+    <table>
+    <thead><tr>
+       <th colspan="2" style='text-align: center;'>General Run infomation</th>
+    </tr></thead>
+    <tbody>
+        <tr><td class='descr'>Run Number</td><td class='value'>{{ run.runno }}</td></tr>
+        <tr><td class='descr'>Run Type</td><td class='value'>{{ run.runtype }}</td></tr>
+        <tr><td class='descr'>Start Time [Beijing]</td><td class='value'>{{ run.vld.timestart_beijing }}</td></tr>
+        <tr><td class='descr'>Stop Time [Beijing]</td><td class='value'>{{ run.vld.timeend_beijing }}</td></tr>
+        <tr><td class='descr'>Partition Name</td><td class='value'>{{ run.partitionname }}</td></tr>
+        <tr><td class='descr'>Schema-Base-Data Ver.</td><td class='value'>{{ run.schemaversion }}-{{ run.baseversion }}-{{ run.dataversion }}</td></tr>    
+        <tr><td class='descr'>Start Time [UTC]</td><td class='value' id='run_start_utc'>{{ run.vld.timestart }}</td></tr>   
+        <tr><td class='descr'>Stop Time [UTC]</td><td class='value'>{{ run.vld.timeend }}</td></tr>
+    </tbody>
+    </table>
+</div>
+<div id='jumper' class="grid_7 prefix_2 suffix_1 draggable notepad" style='margin-top:10px;'>
+    <h3 id="general_detector">Jump to Section ...</h3>
+    <ul>
+        <li><button href="#daqinfo">DAQ Settings</button></li>
+        <li><button href="#diagnostics">Diagnostic Plots</button></li>
+        <li><button href="#pqm">PQM Plots</button></li>
+        <li><button href="#pmtinfo">PMT Information</button></li>
+    </ul>
+</div>
+<div class="clear"></div>

@@ -7,43 +7,7 @@
 {% block title %}ODM | Run {{ run.runno }}{% endblock %}
 
 {% block content %}
-    <div class = "grid_24">
-         <h2>
-             General Information &nbsp;|&nbsp; 
-             Run {{ run.runno }}
-        </h2>
-    </div>    
-    <div class="clear"></div>    
-    
-    <div class = "grid_24">
-        <div style="border: 1px solid #999;">          
-        <table>
-           <tbody>
-              <tr>
-                  <td class='descr'>Run Number</td><td class='value'>{{ run.runno }}</td>
-                  <td class='descr'>Start Time [Beijing]</td><td class='value'>{{ run.vld.timestart_beijing }}</td>
-                  <td class='descr'>Start Time [UTC]</td><td class='value' id='run_start_time'>{{ run.vld.timestart }}</td>
-              </tr>   
-              <tr>    
-                  <td class='descr'></h6></td><td class='value'></td>
-                  <td class='descr'>Stop Time [Beijing]</td><td class='value'>{{ run.vld.timeend_beijing }}</td>
-                  <td class='descr'>Stop Time [UTC]</td><td class='value'>{{ run.vld.timeend }}</td>
-              </tr>        
-              <tr>    
-                  <td class='descr'>Run Type</td><td class='value'>{{ run.runtype }}</td>
-                  <td class='descr'>Partition Name</td><td class='value'>{{ run.partitionname }}</td>
-                  <td class='descr'>Schema-Base-Data Ver.</td><td class='value'>{{ run.schemaversion }}-{{ run.baseversion }}-{{ run.dataversion }}</td>
-              </tr>   
-              <tr>    
-                  <td class='descr'>PQM Plots</td><td class='value'><a href='#pqm'>PQM</a></td>                  
-                  <td class='descr'>Diagnostic Plots</td><td class='value'><a href='#diagnostics'>Diagnostics</a></td>
-                  <td class='descr'>File Information</td><td class='value'>N/A</td>
-              </tr>                                    
-           </tbody>
-        </table>
-        </div>
-    </div>
-    <div class="clear"></div>
+    {% include "run/general.html" %}
     
     {% if calibrun %}
         {% include "run/calib.html" %}
@@ -54,6 +18,8 @@
     {% include "run/diagnostics.html" %}
     
     {% include "run/pqm.html" %}
+    
+    {% include "run/pmt.html" %}
     
 {% endblock %}
 
