@@ -148,12 +148,15 @@ function load_pmt(detname) {
     var url = base_url + 'pmt/' + site + '/' + detector + '/'
             + Run.year + '/' + Run.month + '/' + Run.day + '/';
     $.getJSON( url, function(data) {
-        $('#cablemap_vld_seqno').html(data.cablemap_vld_seqno);
+        if (data.cablemap_vld_seqno) { $('#cablemap_vld_seqno').html(data.cablemap_vld_seqno); }
+        else { $('#cablemap_vld_seqno').html('NO DBI RECORD !!').css('color','red'); }
         $('#cablemap_vld_from').html(data.cablemap_vld_from);
         $('#cablemap_vld_to').html(data.cablemap_vld_to);
-        $('#pmtspec_vld_seqno').html(data.pmtspec_vld_seqno);
+        if (data.pmtspec_vld_seqno) { $('#pmtspec_vld_seqno').html(data.pmtspec_vld_seqno); }
+        else { $('#pmtspec_vld_seqno').html('NO DBI RECORD !!').css('color','red'); }
         $('#pmtspec_vld_from').html(data.pmtspec_vld_from);
         $('#pmtspec_vld_to').html(data.pmtspec_vld_to);
+        
         enable_pmt_mouse_actions(site+detector, data);
         load_pmtfigures(site+detector);
     }); // .getJSON done
