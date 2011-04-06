@@ -6,7 +6,8 @@
 /* defaults */
 body { font-family: Lucida Grande, Verdana, Geneva, Sans-serif; font-size: 13px; color: #333; background: #fff; }
 p { margin-bottom: 20px; }
-#footer { margin-top: 20px;}
+#footer { background: #9c9; height: 29px; margin-top: 50px; margin-bottom: 30px; }
+#footer p {color: #47663a; text-align: center; margin-top: 6px;}
 
 /* text selection */
 ::selection { background: #ffcc89; } /* Safari */ 
