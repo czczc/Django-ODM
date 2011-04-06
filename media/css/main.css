@@ -33,7 +33,7 @@ a:hover { color: #ff8f28; text-decoration: none; background-color: transparent; 
 #content th { border: 1px solid #fff; font-weight: bold; text-align: left; font-size: 12px; background-color: #666; color: #fff; padding: 4px; margin: 10px;}
 #content td { border: 1px solid #fff; font-weight: normal; font-size: 12px; padding: 6px; background-color: #f3f3f3; }
 #content td.descr { font-weight: bold; background-color: #deedf7; text-align: right; padding-right: 15px; }
-#content td.value { background-color: #e3f9e2; padding-left: 10px;}
+#content td.value { font-weight: bold; background-color: #e3f9e2; padding-left: 10px;}
 #content table.nostyle td { border: none; background-color: transparent; text-align: center;}
 #pmtinfo_table td.descr {}
 #pmtinfo_table td.value { width: 50px; }
@@ -65,9 +65,9 @@ a:hover { color: #ff8f28; text-decoration: none; background-color: transparent; 
 #content .det_table td { text-align: center; background: transparent; border-width: 1px 1px 0 0; border-style: solid; border-color: #ccc; padding: 4px; }
 #content .det_table a.det { background: #ddd;}
 #content .det_table a.no_det { color: #ccc; }
-#content .det_table a.live_det { background: #5F0;}
+#content .det_table a.live_det { background: #7F0; /* 5F0 */}
 
-#content .notepad table { background-color: #fff; padding-top:20px;}
-#content .notepad h3 { color: white; background: #396694; text-align: center; padding: 5px; width:auto; margin: 0;}
+#content .notepad table { background-color: #fff; padding-top:20px;} /*396694*/
+#content .notepad h3 { color: white; background: #31809F; text-align: center; padding: 5px; width:auto; margin: 0;}
 #content .notepad ul { list-style: none; width:100%;}
 #content .notepad button { width:100%;}

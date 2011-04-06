@@ -249,7 +249,7 @@ function enable_pmt_mouse_actions(detname, data) {
                 pmt_spelow.html(spelow);
                 pmt_toffset.html(toffset);
             
-                $(this).css('background-color', '#ff8a00'); 
+                $(this).css('background-color', '#4682B4'); 
             
             }); // bind mouseover done
             

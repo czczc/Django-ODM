@@ -10,4 +10,7 @@ urlpatterns = patterns('odm.production.views',
     (r'^pqm/run/(\d+)/', 'pqm_run'),
     
     (r'^simulation/run/(\d+)/', 'simulation_run'),
+    
+    # normal urls
+    (r'^(\w+)/view/$', 'view'),
 )

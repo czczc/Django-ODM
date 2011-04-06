@@ -3,12 +3,12 @@
 #quick_search_field { border: 2px solid #92b8cc; background: #eef6fb; height: 26px; width: 100px; font-size: 12px; padding: 3px 0 2px 5px;}
 #search-button { position: absolute; right: -7px; top: -2px; width: 32px; border: none; }
 
-/* menu */
-#zone-bar { background: #deedf7; height: 34px; padding-top: 7px; margin-top: 10px;/* border-top: 1px solid #aaa;*/}
+/* menu deedf7 */ 
+#zone-bar { background: #9c9; height: 29px; padding-top: 3px; margin-top: 10px;/* border-top: 1px solid #aaa;*/}
 #zone-bar ul { list-style: none inside; display: block; float: left; }
 #zone-bar ul li { height: 18px; padding-top: 5px; margin-left: 20px; position: relative; float: left; }
 #zone-bar ul li:hover { background: url(../img/zonebar-navleft.png) center left no-repeat; }
-#zone-bar ul li a {
+#zone-bar ul li a { 
     display: block; float: left;
     height: 23px; position: relative; top: -5px; right: -5px; padding-right: 3px;
     color: #383838; font-weight: bold; font-size: 13px; text-decoration: none;

@@ -4,24 +4,15 @@
     <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/modal.css")?>
 {% endblock %} 
 
-{% block title %}ODM | Simulation | Run {{ runno }}{% endblock %}
+{% block title %}ODM | {{ title }}{% endblock %}
 
 {% block content %}
-    <div class = "grid_24">
-        <a name="simulation"></a>
-         <h2>
-             Simulation &nbsp;|&nbsp; 
-             Run {{ runno }}
-        </h2>
-    </div>    
-    <div class="clear"></div>    
-    
-    {% include "run/diagnostics.html" %}
-    
+    {% include "production/list.html" %}
+        
 {% endblock %}
 
 {% block extra_js %}
     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal.1.4.1.min.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/sprintf.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/run.js"></script>
 {% endblock %}
+
