@@ -1,4 +1,4 @@
-$("button").button();
+$('button').button();
 $(".draggable").draggable({ cursor: 'move', opacity: 0.35 });
 $('#jumper button').click(function() {
     window.location = $(this).attr('href');

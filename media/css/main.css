@@ -54,9 +54,10 @@ a:hover { color: #ff8f28; text-decoration: none; background-color: transparent; 
 #nav_inner a:hover { color: #ccc; }
 
 /* content form */
-#content form th { font-weight: bold; text-align: right; vertical-align: middle; font-size: 12px; color: #333; padding: 4px; background-color: transparent; }
-#content form td { font-weight: normal; font-size: 12px; padding: 6px; background-color: transparent; }
-
+#content form th { border: none; font-weight: bold; text-align: right; vertical-align: middle; font-size: 12px; color: #333; padding-right: 10px; background-color: transparent; }
+#content form td { border: none; font-weight: normal; font-size: 12px; padding: 6px; background-color: transparent; }
+#content form ul { list-style: none; }
+#content form li { display: inline; margin-right: 8px;}
 /* production plots */
 #content table.production td { color: #444; font-size: 12px; font-weight: bold; text-align: center; }
 #content table.production .figname { display: block; margin: 8px 0 6px 0; }

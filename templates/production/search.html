@@ -1,0 +1,23 @@
+<form action="" method="post" class='ui-widget'>{% csrf_token %}
+    <fieldset class='ui-widget-content'>
+      <legend class='ui-widget-header ui-corner-all' align='center' style='padding: 5px 10px 5px 10px;'>
+          {{ title }} Search Form
+      </legend>
+    <table style='margin-top: 10px;'>
+        {% for field in form %}
+        <tr>
+            <th>{{ field.label }}</th>
+            <td>
+                {{ field.errors }}
+                {{ field }}
+            </td>
+        </tr>
+        {% endfor %}            
+        <tr>
+            <th colspan='2' style='text-align:center; padding-top:15px;'>
+                <input type="submit" value="Search ! (coming soon ...)" />
+            </th>
+        </tr>
+    </table>
+    </fieldset>
+</form>

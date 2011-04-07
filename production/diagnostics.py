@@ -95,4 +95,22 @@ class Diagnostics(object):
                 channelname = channelname.replace('board', '')
                 channelname = channelname.replace('connector', '')
                 self.info['channels'][detname][channelname] = '1'
+    
+     
+    def figure_choices(self):
+        '''return a Field.Choices of available figures'''
+        import os
+        dirname = os.path.realpath(os.path.dirname(__file__))
+        filename = os.path.join(dirname, 'ref', 'diagnostics_figs.ref')
+        try:
+            fh = open(filename)
+        except IOError:
+            return None
+                    
+        choices = ( ('Available Figures', []), )
+        for line in fh:
+            figname = line.strip()
+            choices[0][1].append((figname, figname))
                 
+        return choices
+                   

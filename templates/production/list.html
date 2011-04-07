@@ -1,24 +1,12 @@
-<div class = "grid_24">
-     <h2>
-         All {{ title }}
-    </h2>
-</div>    
-<div class="clear"></div>
-
-<div class="grid_13" style='margin-top:10px;'>
-    <table class="det_table">
-        {% for run_thousands in paged_runlist %}
-        <tr><th colspan="10" style='text-align: center;'>{{ run_thousands.title }}</th></tr>
-            {% for run_tens in run_thousands.run_tens %}
-            <tr>
-                {% for runno in run_tens %}
-                <td><a href="{{ SITE_ROOT }}/run/{{ runno }}/{{ jump_to }}">{{ runno }}</a></td>
-                {% endfor %}
-            </tr>
+<table class="det_table">
+    {% for run_thousands in paged_runlist %}
+    <tr><th colspan="10" style='text-align: center;'>{{ run_thousands.title }}</th></tr>
+        {% for run_tens in run_thousands.run_tens %}
+        <tr>
+            {% for runno in run_tens %}
+            <td><a href="{{ SITE_ROOT }}/run/{{ runno }}/{{ jump_to }}">{{ runno }}</a></td>
             {% endfor %}
+        </tr>
         {% endfor %}
-    </table>
-</div>
-<div class="grid_11" style='margin-top:10px;'>
-</div>
-<div class="clear"></div>
+    {% endfor %}
+</table>

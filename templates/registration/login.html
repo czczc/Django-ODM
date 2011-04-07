@@ -7,9 +7,11 @@
     <form method="post" action="."> {% csrf_token %}
       <table>
           {{ form.as_table }}
-          <tr><th></th><td style='text-align:left;'>
-              <input type="submit" value="{% trans 'Log in' %}"/>
-          </td></tr>
+          <tr>
+              <th colspan='2' style='text-align:center; padding-top:15px;'>
+                  <input type="submit" value="{% trans 'Log in' %}" />
+              </th>
+          </tr>
       </table>
       <input type="hidden" name="next" value="{{ next }}" />
     </form>

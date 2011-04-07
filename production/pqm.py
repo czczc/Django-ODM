@@ -67,3 +67,20 @@ class Pqm(object):
             figure_info['figpath'] = figpath
             self.info['detectors'].setdefault(detname, []).append(figure_info)
 
+
+    def figure_choices(self):
+        '''return a Field.Choices of available figures'''
+        import os
+        dirname = os.path.realpath(os.path.dirname(__file__))
+        filename = os.path.join(dirname, 'ref', 'pqm_figs.ref')
+        try:
+            fh = open(filename)
+        except IOError:
+            return None
+                    
+        choices = ( ('Available Figures', []), )
+        for line in fh:
+            figname = line.strip()
+            choices[0][1].append((figname, figname))
+                
+        return choices
