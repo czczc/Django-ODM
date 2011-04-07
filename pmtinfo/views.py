@@ -51,9 +51,9 @@ def pmt(request, site, detector, year, month, day):
         info['pmtspec_vld_seqno'] = str(pmtspec_0.vld.seqno)  
         for pmtspec in pmtspecs.all():
             pmt = info['pmts'].setdefault(pmtspec.pmtid, {})
-            pmt['spehigh'] = "%.3f" % pmtspec.pmtspehigh
-            pmt['spelow'] = "%.3f" % pmtspec.pmtspelow
-            pmt['toffset'] = "%.3f" % pmtspec.pmttoffset
+            pmt['spehigh'] = "%.2f" % pmtspec.pmtspehigh
+            pmt['spelow'] = "%.2f" % pmtspec.pmtspelow
+            pmt['toffset'] = "%.2f" % pmtspec.pmttoffset
 
     # for debug
     # return HttpResponse('<pre>'+json.dumps(info, indent=4) + '</pre>')

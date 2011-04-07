@@ -49,9 +49,10 @@ def mkrange(parser, token):
 
         if token == "as":
             break
-
-        if not token.isdigit():
-            error()
+            
+        # 2011-04-06: remove this check to allow negative range list - Chao
+        # if not token.isdigit():
+        #     error()
         range_args.append(int(token))
     
     if len(tokens) != 1:

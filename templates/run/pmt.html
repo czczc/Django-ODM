@@ -27,31 +27,7 @@
 {# FEE/PMT map #}
 <div id='pmt_section' style='margin-top: 10px;'>
     
-    <div id="pmtinfo_table" class="grid_24">
-        <table>
-            <thead><tr>
-            <th colspan="10" style="text-align:center;">PMT Specs</th></th></tr>
-            </tr></thead>
-            <tr>
-                <td class='descr'>Board</td><td id="pmt_board" class="value"></td>
-                <td class='descr'>Ring</h6></td><td id="pmt_ring" class="value"></td>
-                <td class='descr'>Wall</h6></td><td id="pmt_wall" class="value"></td>
-                <td class='descr'>H.G. SPE [ADC]</td><td id="pmt_spehigh" class="value">
-                <td class='descr'>T Offset [TDC]</td><td id="pmt_toffset" class="value"></td>
-            </tr>
-            <tr>
-                <td class='descr'>Connector</td><td id="pmt_connector" class="value"></td>
-                <td class='descr'>Column</h6></td><td id="pmt_column" class="value"></td>
-                <td class='descr'>Spot</h6></td><td id="pmt_spot" class="value"></td>
-                <td class='descr'>L.G. SPE [ADC]</td><td id="pmt_spelow" class="value"></td>
-                <td class='descr'></td><td class="value"></td>
-            </tr>
-        </table>
-    </div>
-    <div class="clear"></div>
-
-
-    <div id="pmt_validation_table" class="grid_8 prefix_1 suffix_1 push_14" style='margin-top: 50px;'>
+    <div id="pmt_validation_table" class="grid_9 prefix_1 push_14" style='margin-top: 10px;'>
         <table>
             <thead><tr>
             <th id="th_pmtinfo" colspan="2" style="text-align:center;">Cable Map Validation</th>
@@ -68,6 +44,10 @@
     
     {% mkrange 1 17 1 as connector_range %}
     {% mkrange 5 19 1 as board_range %}
+    {% mkrange 8 -1 -1 as ring_range %}
+    {% mkrange 1 25 1 as column_range %}
+    {% mkrange 1 10 1 as wall_range %}
+    {% mkrange 1 30 1 as spot_range %}
     
     <div class="grid_14 pull_10" style='margin-top: 10px;'>
         <table id="feemap_table" class="det_table">
@@ -85,13 +65,70 @@
                 {% endfor %}
             </tr>
             {% endfor %}
-        
         </table>
     </div>
+    <div class="clear"></div>
+    
+    <div id="pmtinfo_table" class="grid_24" style='margin-top: 10px;'>
+        <div style="border: 1px solid #999;">
+        <table>
+            <tr>
+                <td class='descr'>Board</td><td id="pmt_board" class="value"></td>
+                <td class='descr'>Ring</h6></td><td id="pmt_ring" class="value"></td>
+                <td class='descr'>Wall</h6></td><td id="pmt_wall" class="value"></td>
+                <td class='descr'>H.G. SPE [ADC]</td><td id="pmt_spehigh" class="value">
+                <td class='descr'>T Offset [TDC]</td><td id="pmt_toffset" class="value"></td>
+            </tr>
+            <tr>
+                <td class='descr'>Connector</td><td id="pmt_connector" class="value"></td>
+                <td class='descr'>Column</h6></td><td id="pmt_column" class="value"></td>
+                <td class='descr'>Spot</h6></td><td id="pmt_spot" class="value"></td>
+                <td class='descr'>L.G. SPE [ADC]</td><td id="pmt_spelow" class="value"></td>
+                <td class='descr'></td><td class="value"></td>
+            </tr>
+        </table>
+        </div>
+    </div>
+    <div class="clear"></div>
+    
     <div class="grid_18" style='margin-top: 10px;'>
-        <table id="pmtmap_table" class="det_table">
+        <table id="adpmtmap_table" class="det_table hidden">
+            <tr><td>column</td>
+            {% for column in column_range %}
+            <td>{{ column|stringformat:"02d" }}</td>
+            {% endfor %}
+            </tr>
+
+            {% for ring in ring_range %}
+            <tr ring='{{ ring|stringformat:"02d" }}'>
+                <td>ring {{ ring|stringformat:"02d" }}</td>
+                {% for column in column_range %}
+                <td column='{{ column|stringformat:"02d" }}'></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
         </table>
     </div>
     <div class="clear"></div>
 
+    <div class="grid_23" style='margin-top: 10px;'>
+        <table id="muonpmtmap_table" class="det_table  hidden">
+            <tr><td>spot</td>
+            {% for spot in spot_range %}
+            <td>{{ spot|stringformat:"02d" }}</td>
+            {% endfor %}
+            </tr>
+
+            {% for wall in wall_range %}
+            <tr wall='{{ wall|stringformat:"02d" }}'>
+                <td>wall {{ wall|stringformat:"02d" }}</td>
+                {% for spot in spot_range %}
+                <td column='{{ spot|stringformat:"02d" }}'></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="clear"></div>
+    
 </div>

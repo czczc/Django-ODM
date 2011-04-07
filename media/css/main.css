@@ -37,7 +37,7 @@ a:hover { color: #ff8f28; text-decoration: none; background-color: transparent; 
 #content td.value { font-weight: bold; background-color: #e3f9e2; padding-left: 10px;}
 #content table.nostyle td { border: none; background-color: transparent; text-align: center;}
 #pmtinfo_table td.descr {}
-#pmtinfo_table td.value { width: 50px; }
+#pmtinfo_table td.value { width: 60px; }
 
 /* bookmarks */
 #nav { background-color: #494949; margin: 0; padding: 0; }
