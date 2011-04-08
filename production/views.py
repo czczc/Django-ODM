@@ -84,27 +84,55 @@ def view(request, production):
     '''general view of production plots'''
     from odm.production.forms import SearchPlotsForm, PQMSearchPlotsForm
     
+    is_diagnostics = is_simulation = is_pqm = False
+    
     if production == 'diagnostics':
+        is_diagnostics = True
+        SearchForm = SearchPlotsForm
+    elif production == 'simulation':
+        is_simulation = True
+        SearchForm = SearchPlotsForm
+    elif production == 'pqm':
+        is_pqm = True
+        SearchForm = PQMSearchPlotsForm
+    else:
+        raise Http404
+    
+    # Validate the form if send though Ajax, otherwise initialize the form
+    if request.method == 'POST':
+        if request.is_ajax():
+            form = SearchForm(request.POST)
+            if form.is_valid():
+                return HttpResponse(json.dumps(form.cleaned_data))
+            else:
+                return HttpResponse(json.dumps( {
+                    'errors': form.errors,
+                }))
+        else:
+            return HttpResponse('You seem to have disabled JavaScript in your Browser.')
+    else:
+        form = SearchForm() # An unbound form
+    
+    # fetch production run list    
+    if is_diagnostics:
         diagnostics = Diagnostics()
         diagnostics.fetch_all()
         run_list = diagnostics.run_list.keys()
         title = 'Diagnostic Plots'
         jump_to = '#diagnostics'
-        SearchForm = SearchPlotsForm
-    elif production == 'simulation':
+    elif is_simulation:
         simulation = Simulation()
         simulation.fetch_all()
         run_list = simulation.run_list.keys()
         title = 'Simulation Plots'
         jump_to = 'sim'
         SearchForm = SearchPlotsForm
-    elif production == 'pqm':
+    elif is_pqm:
         run_list = Pqm().run_list.keys()
         title = 'PQM Plots'
         jump_to = '#pqm'
-        SearchForm = PQMSearchPlotsForm
     else:
-        raise Http404
+        return HttpResponse("Strange, you shouldn't reach here")
 
     if not run_list:
         return HttpResponse('<h1>No ' + title + ' Found</h1>')
@@ -113,13 +141,6 @@ def view(request, production):
     paged_runlist = reversepage_runlist(run_list)
     # return HttpResponse('<pre>'+json.dumps(paged_runlist, indent=4) + '</pre>')
 
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
-        if form.is_valid():
-            return HttpResponse('Search function is coming soon. Thanks for trying.') # Redirect after POST
-    else:
-        form = SearchForm() # An unbound form
-    
     return direct_to_template(request, 
         template = 'production/view.html',
         extra_context = {
@@ -129,5 +150,8 @@ def view(request, production):
             'form' : form,
         })    
     
+@login_required
+def search(request, production):
+    '''production plots searching result'''
     
     

@@ -27,7 +27,7 @@ class SearchPlotsForm(forms.Form):
         ),
     )
     
-    figname = forms.MultipleChoiceField(
+    plot_list = forms.MultipleChoiceField(
         label=r'Plot(s)',
         choices=Diagnostics().figure_choices(),
         widget=forms.SelectMultiple(attrs={'size':'10'})
@@ -68,8 +68,8 @@ class SearchPlotsForm(forms.Form):
 # ==================================
 class PQMSearchPlotsForm(SearchPlotsForm):
     
-    figname = forms.MultipleChoiceField(
-        label='Plot Name',
+    plot_list = forms.MultipleChoiceField(
+        label='Plot(s)',
         choices=Pqm().figure_choices(),
         widget=forms.SelectMultiple(attrs={'size':'10'})
     )

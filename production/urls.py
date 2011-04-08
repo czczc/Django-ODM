@@ -11,6 +11,8 @@ urlpatterns = patterns('odm.production.views',
     
     (r'^simulation/run/(\d+)/', 'simulation_run'),
     
+    (r'^(\w+)/search/$', 'search'),
+    
     # normal urls
     (r'^(\w+)/view/$', 'view'),
 )

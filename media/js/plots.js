@@ -1,5 +1,8 @@
 $("#pb_bar").progressbar({ value: 33 }); //start loading run list
 $('#pb_bar .pb_label').text('Loading Run Info ...');
+$('#submit').removeAttr('disabled');
+
+enable_ajax_csrf();
 
 var this_url = window.location.href;
 var first_seg = this_url.indexOf('production');
@@ -10,13 +13,17 @@ var production_name = remainder_url.substring(0, second_seg);
 
 var Runinfo = null;
 
+
 if ( production_name == 'simulation' ) {
     $("#pb_bar").progressbar({ value: 100 });
     $('#pb_bar .pb_label').text('Ready for Searching');
+    enable_submit();
 }
 else {
     load_runinfo();
+    enable_submit();
 }
+
 
 function load_runinfo() {
     var url = base_url + 'run/json/list/';
@@ -34,3 +41,29 @@ function load_runinfo() {
         $('#pb_bar .pb_label').text('Ready for Searching');
     }); // .getJSON done
 }
+
+function enable_submit() {
+    $("#submit").click( function() {
+        var form_data = null;
+        $(this).attr('disabled', 'disabled');
+        // console.log(form_data);
+        var jqxhr = $.post("", $("#form_searchplots").serialize(),
+            function(data) {
+                form_data = data;
+            }, "json");
+
+        jqxhr.error(function() { 
+            console.log("error"); 
+            $('#submit').removeAttr('disabled');
+        });
+        
+        jqxhr.complete(function() { 
+            console.log("complete"); 
+            $('#submit').removeAttr('disabled');
+        });
+        
+        return false; 
+    });
+}
+
+
