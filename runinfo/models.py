@@ -16,6 +16,21 @@ class RuninfoManager(models.Manager):
         '''list latest runs'''
         latest = datetime.utcnow() - timedelta(days=int(days))
         return self.select_related().filter(vld__timestart__gte=latest)
+    
+    def json_listall(self):
+        '''format json type runinfo'''
+        info = {
+            # '<runno>' : {
+            #     'runtype' : 'Physics',
+            #     'partition' : 'EH1-SAB',
+            # }
+        }
+        for run in self.all():
+            runinfo = info.setdefault(run.runno, {})
+            runinfo['runtype'] = run.runtype
+        
+        return info
+        
         
 #=====================================
 class Daqruninfovld(models.Model):

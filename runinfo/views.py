@@ -101,7 +101,8 @@ def runtype(request, runtype='All', page=1, records=500):
 
 @login_required
 def daqinfo(request, runno):
-
+    '''json daqinfo info'''
+    
     Daqrunconfig.objects.runno = runno
     Daqrunconfig.objects.fetch_all()
     
@@ -112,3 +113,16 @@ def daqinfo(request, runno):
         return HttpResponse(json.dumps(Daqrunconfig.objects.info))
     else:
         raise Http404
+        
+@login_required
+def jsonlist(request):
+    '''json list run info'''
+        
+    # for debug
+    # return HttpResponse('<pre>'+ json.dumps(Daqruninfo.objects.json_listall(), indent=4) + '</pre>')
+    
+    if request.is_ajax():
+        return HttpResponse(json.dumps( Daqruninfo.objects.json_listall() ))
+    else:
+        raise Http404
+        

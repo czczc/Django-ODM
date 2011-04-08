@@ -7,6 +7,7 @@
 {% block title %}ODM | {{ title }}{% endblock %}
 
 {% block content %}
+    
     <div class = "grid_24">
          <h2>
              All {{ title }}
@@ -14,13 +15,26 @@
     </div>    
     <div class="clear"></div>
     
+    
+    <div id='pb_bar' class = "grid_24">    
+        <span class="pb_label"></span>
+    </div>
+    <div class="clear"></div>
+    
+    
+    <div id="showcase" class = "grid_24" style="margin: 10px 0 10px 0">
+    </div>
+    <div class="clear"></div>
+    
+      
     <div class="grid_13" style='margin-top:10px;'>
         {% include "production/list.html" %}
     </div>
-    <div class="grid_10 prefix_1" style='margin-top:10px;'>
+    <div class="grid_10 prefix_1" style='margin-top:30px;'>
         {% include "production/search.html" %}
     </div>
     <div class="clear"></div>
+    
 {% endblock %}
 
 {% block extra_js %}

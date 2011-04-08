@@ -1,4 +1,10 @@
-<table class="det_table">
+<div class='legend'>
+    <a class='Physics'>&ensp;&ensp;&ensp;</a>&ensp;Physics&ensp;&ensp;
+    <a class='ADCalib'>&ensp;&ensp;&ensp;</a>&ensp;ADCalib&ensp;&ensp;
+    <a class='Pedestal'>&ensp;&ensp;&ensp;</a>&ensp;Pedestal&ensp;&ensp;
+    <a class='FEEDiag'>&ensp;&ensp;&ensp;</a>&ensp;FEEDiag&ensp;&ensp;
+</div>
+<table id='table_runlist' class="det_table">
     {% for run_thousands in paged_runlist %}
     <tr><th colspan="10" style='text-align: center;'>{{ run_thousands.title }}</th></tr>
         {% for run_tens in run_thousands.run_tens %}

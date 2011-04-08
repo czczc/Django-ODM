@@ -119,7 +119,7 @@ def view(request, production):
             return HttpResponse('Search function is coming soon. Thanks for trying.') # Redirect after POST
     else:
         form = SearchForm() # An unbound form
-        
+    
     return direct_to_template(request, 
         template = 'production/view.html',
         extra_context = {

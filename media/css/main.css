@@ -58,20 +58,37 @@ a:hover { color: #ff8f28; text-decoration: none; background-color: transparent; 
 #content form td { border: none; font-weight: normal; font-size: 12px; padding: 6px; background-color: transparent; }
 #content form ul { list-style: none; }
 #content form li { display: inline; margin-right: 8px;}
+
 /* production plots */
 #content table.production td { color: #444; font-size: 12px; font-weight: bold; text-align: center; }
 #content table.production .figname { display: block; margin: 8px 0 6px 0; }
 #content img.loading { display:inline; padding-left: 10px; }
 
+/* site-detector map */
 #content .det_table { border-color: #ccc; border-style: solid; border-width: 0 0 1px 1px; }
 #content .det_table td { text-align: center; background: transparent; border-width: 1px 1px 0 0; border-style: solid; border-color: #ccc; padding: 4px; }
 #content .det_table a.det { background: #ddd;}
 #content .det_table a.no_det { color: #ccc; }
 #content .det_table a.live_det { background: #7F0; /* 5F0 */}
 
-#content .notepad table { background-color: #fff; padding-top:20px;} /*396694*/
+/* sidebar */
+#content .notepad table { background-color: #fff; padding-top:20px; }
 #content .notepad h3 { 
     border-left: 2px solid #aed0ea; border-right: 2px solid #aed0ea; border-top: 2px solid #aed0ea; border-bottom: 1px solid #aed0ea; 
     color: #d52a33; background: #fefdfa; text-align: center; padding: 5px; width:auto; margin: 0;}
 #content .notepad ul { list-style: none; width:100%;}
 #content .notepad button { width:100%;}
+
+/* lengend */
+.legend { padding: 5px 5px 8px 30px; }
+.legend a { border: 1px solid #333; }
+a.ADCalib { background: #cfeaa5; }
+a.Physics { background: white; }
+a.Pedestal { background: #f2c1ba; }
+a.FEEDiag { background: #ddd3f3; }
+
+/* progress bar label */
+.pb_label { 
+    position: absolute; width: 100%; text-align: center; line-height: 2em; 
+    color: #444; font-weight: bold; }
+    
