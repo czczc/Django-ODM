@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from odm.production.diagnostics import Diagnostics
 from odm.production.pqm import Pqm
 from odm.production.simulation import Simulation
+from odm.production.forms import SearchPlotsForm, PQMSearchPlotsForm
+
 
 import json
 
@@ -82,7 +84,6 @@ def pqm_run(request, runno):
 @login_required
 def view(request, production):
     '''general view of production plots'''
-    from odm.production.forms import SearchPlotsForm, PQMSearchPlotsForm
     
     is_diagnostics = is_simulation = is_pqm = False
     
@@ -151,7 +152,85 @@ def view(request, production):
         })    
     
 @login_required
-def search(request, production):
+def search(request, production, runno):
     '''production plots searching result'''
     
+    is_diagnostics = is_simulation = is_pqm = False
+    
+    if production == 'diagnostics':
+        is_diagnostics = True
+        SearchForm = SearchPlotsForm
+    elif production == 'simulation':
+        is_simulation = True
+        SearchForm = SearchPlotsForm
+    elif production == 'pqm':
+        is_pqm = True
+        SearchForm = PQMSearchPlotsForm
+    else:
+        raise Http404
+
+    
+    if request.is_ajax():
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            plot_list = data['plot_list']
+            detname = data['site'] + data['detector']
+            
+            if is_diagnostics:
+                run = Diagnostics(runno)
+                run.fetch_all()
+            elif is_simulation:
+                run = Simulation(runno)
+                run.fetch_all()
+            elif is_pqm:
+                run = Pqm(runno)
+            else:
+                return HttpResponse('This is odd.')
+
+            info = {
+                'runno' : runno,
+                'figures' : {},
+            }            
+            if not detname in run.info['detectors']: 
+                return HttpResponse(json.dumps(info))
+
+            info['figures'] = dict(
+                [ (figure['figname'], run.info['base_url']+figure['figpath']) 
+                    for figure in run.info['detectors'][detname] 
+                    if figure['figname'] in plot_list ]
+            )
+            return HttpResponse(json.dumps(info))
+            
+        else:
+            return HttpResponse(json.dumps( {
+                'errors': form.errors,
+            }))
+    else:
+        raise Http404
+    
+    # # Validate the form if send though Ajax, otherwise initialize the form
+    # if request.method == 'POST':
+    #     if request.is_ajax():
+    #         form = SearchForm(request.POST)
+    #         if form.is_valid():
+    #             return HttpResponse(json.dumps(form.cleaned_data))
+    #         else:
+    #             return HttpResponse(json.dumps( {
+    #                 'errors': form.errors,
+    #             }))
+    #     else:
+    #         return HttpResponse('You seem to have disabled JavaScript in your Browser.')
+    # else:
+    #     form = SearchForm() # An unbound form
+        
+
+    
+    # for debug
+    # return HttpResponse('<pre>'+json.dumps(run.info, indent=4) + '</pre>')
+    
+    if request.is_ajax():
+        return HttpResponse(json.dumps(run.info))
+    else:
+        raise Http404
     

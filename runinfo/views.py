@@ -46,7 +46,7 @@ def simrun(request, runno):
         
             
 @login_required
-def run(request, runno, is_sim=''):
+def run(request, runno):
     '''query a single run'''
         
     run = get_object_or_404(Daqruninfo, runno=runno)

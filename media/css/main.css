@@ -89,6 +89,8 @@ a.FEEDiag { background: #ddd3f3; }
 
 /* progress bar label */
 .pb_label { 
-    position: absolute; width: 100%; text-align: center; line-height: 2em; 
+    position: absolute; width: 100%; display:inline; 
+    text-align: center; line-height: 2em; 
     color: #444; font-weight: bold; }
-    
+
+#showcase td { text-align: center; vertical-align: center;}    

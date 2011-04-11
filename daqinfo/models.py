@@ -2,7 +2,6 @@ from django.db import models
 from odm.runinfo.models import Daqruninfo
 from odm.conventions.conf import DaqTriggerType
 
-from sets import Set
 import re
 
 class RunconfigManager(models.Manager):
@@ -86,8 +85,8 @@ class RunconfigManager(models.Manager):
         # initialize detectors only after dataVersion query
         if version == 'data':
             detectors = list(
-                  Set(self.info['ROSconfig'].values()) 
-                & Set(self.info['runinfo_detectors'])
+                  set(self.info['ROSconfig'].values()) 
+                & set(self.info['runinfo_detectors'])
             )
             for detector in detectors:
                 self.info['detectors'][detector] = {}
