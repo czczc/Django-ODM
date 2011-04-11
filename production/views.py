@@ -209,28 +209,4 @@ def search(request, production, runno):
     else:
         raise Http404
     
-    # # Validate the form if send though Ajax, otherwise initialize the form
-    # if request.method == 'POST':
-    #     if request.is_ajax():
-    #         form = SearchForm(request.POST)
-    #         if form.is_valid():
-    #             return HttpResponse(json.dumps(form.cleaned_data))
-    #         else:
-    #             return HttpResponse(json.dumps( {
-    #                 'errors': form.errors,
-    #             }))
-    #     else:
-    #         return HttpResponse('You seem to have disabled JavaScript in your Browser.')
-    # else:
-    #     form = SearchForm() # An unbound form
-        
-
-    
-    # for debug
-    # return HttpResponse('<pre>'+json.dumps(run.info, indent=4) + '</pre>')
-    
-    if request.is_ajax():
-        return HttpResponse(json.dumps(run.info))
-    else:
-        raise Http404
     

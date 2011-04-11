@@ -60,12 +60,21 @@ function enable_submit() {
     $("#submit").click( function() {
         var form_data = null;
         $(this).attr('disabled', 'disabled');
+        $('.errorlist').html('');
         // console.log(form_data);
         var jqxhr = $.post("", $("#form_searchplots").serialize(),
             function(data) {
+                var i;
                 if (data.errors) { 
                     // server form validation failed
                     console.log('server form validation failed');
+                    for (attr in data.errors) {
+                        str_error = '';
+                        for (i in data.errors[attr]) { 
+                            str_error += '<li>' + data.errors[attr][i] + '</li>'; 
+                        }
+                        $('#'+attr+'_error').html(str_error);
+                    }
                     $('#submit').removeAttr('disabled');
                 }
                 else {
@@ -141,8 +150,9 @@ function create_table(runlist, form_data) {
     
     var plot_list = form_data.plot_list;
     var nPlots = plot_list.length;
-    var num_col = form_data.num_col;
-    
+    var num_col = 3;
+    if (form_data.num_col) { num_col = form_data.num_col; }
+
     var str, i, j, id, runno;
     if (nPlots > 1) { // num_col will not be used, one run perl table row
         str = "\n<thead>\n<tr><th>Run No.</th>";
@@ -231,7 +241,8 @@ function submit_runlist(runlist, form_data) {
     
     var plot_list = form_data.plot_list;
     var nPlots = plot_list.length;
-    var num_col = form_data.num_col;
+    var num_col = 3;
+    if (form_data.num_col) { num_col = form_data.num_col; }
     if (nPlots>1) { num_col = nPlots; }
     
     var i, runno, url;
@@ -314,5 +325,13 @@ $("#pb_bar").dblclick(function() {
     $("#pb_bar").progressbar({ value: 100 });
 });
 
-
+$("#id_plot_list option").click(function() {
+   nSelected = $('#id_plot_list option:selected').length;
+   if (nSelected>1) {
+       $("#id_num_col").attr('disabled', 'disabled');
+   }
+   else {
+       $("#id_num_col").removeAttr('disabled');
+   }
+});
 

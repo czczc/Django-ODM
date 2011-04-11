@@ -14,6 +14,7 @@ p { margin-bottom: 20px; }
 ::-moz-selection { background: #ffcc89; } /* Firefox */
 
 .hidden { display: none; }
+.errorlist { color: red; }
 
 /* link */
 a { color: #125ca2; background-color: transparent; text-decoration: none; font-weight: normal; outline-style: none; }
@@ -57,7 +58,6 @@ a:hover { color: #ff8f28; text-decoration: none; background-color: transparent; 
 #content form th { border: none; font-weight: bold; text-align: right; vertical-align: middle; font-size: 12px; color: #333; padding-right: 10px; background-color: transparent; }
 #content form td { border: none; font-weight: normal; font-size: 12px; padding: 6px; background-color: transparent; }
 #content form ul { list-style: none; }
-#content form li { display: inline; margin-right: 8px;}
 
 /* production plots */
 #content table.production td { color: #444; font-size: 12px; font-weight: bold; text-align: center; }
@@ -89,8 +89,10 @@ a.FEEDiag { background: #ddd3f3; }
 
 /* progress bar label */
 .pb_label { 
-    position: absolute; width: 100%; display:inline; 
+    position: absolute; width: 950px; display:inline; 
     text-align: center; line-height: 2em; 
     color: #444; font-weight: bold; }
 
-#showcase td { text-align: center; vertical-align: center;}    
+#showcase td { text-align: center; vertical-align: center; }
+#showcase td a { display: block; padding-top: 1em;}
+ 

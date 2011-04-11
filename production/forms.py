@@ -52,7 +52,7 @@ class SearchPlotsForm(forms.Form):
     )
         
     num_col = forms.CharField(
-        label='Num. Columns', initial='3', max_length=2,
+        label='Num. Columns', initial='3', max_length=2, required=False,
         widget=forms.TextInput(attrs={'size':'2'})
     )
     
