@@ -108,4 +108,4 @@ LOGIN_URL = SITE_ROOT + '/accounts/login'
 LOGIN_REDIRECT_URL = SITE_ROOT + '/run/'
 LOGOUT_URL = SITE_ROOT + '/accounts/logout'
 
-VERSION = '0.8'
+VERSION = '0.9'

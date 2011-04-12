@@ -14,7 +14,10 @@ p { margin-bottom: 20px; }
 ::-moz-selection { background: #ffcc89; } /* Firefox */
 
 .hidden { display: none; }
-.errorlist { color: red; }
+/*.errorlist { color: red; }
+.errorlist ul { display: inline;}*/
+ul.errorlist { margin: 0; padding: 0; list-style: none;}
+.errorlist li { color: red; margin: 0 0 5px; padding: 4px 10px; }
 
 /* link */
 a { color: #125ca2; background-color: transparent; text-decoration: none; font-weight: normal; outline-style: none; }

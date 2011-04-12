@@ -5,6 +5,16 @@
 {% block title %}ODM | {{ description }} Runs{% endblock %}
 
 {% block content %}
+    
+    {% if form %}
+    <div class="grid_24" style='margin-top: 10px;'>
+        {% include "run/search.html" %}
+    </div>
+    <div class="clear"></div>
+    <div class='grid_10'>{{ form.errors }}</div>
+    <div class='clear'></div>
+    {% endif %}
+    
     <div class = "grid_24">
          <h2>
              {{ description }} Runs ({{ count }})
@@ -12,7 +22,7 @@
         </h2>
     </div>    
     <div class="clear"></div> 
-       
+    
     <div class = "grid_24">          
         <table>
            <thead><tr>

@@ -9,6 +9,7 @@ from django.conf import settings
 
 from odm.runinfo.models import Daqruninfo, Daqcalibruninfo
 from odm.daqinfo.models import Daqrunconfig
+from odm.runinfo.forms import SearchRunListForm
 
 import json, re
 
@@ -72,6 +73,65 @@ def run(request, runno):
         'run' : run, 
         'calibrun' : calibrun },
         context_instance=RequestContext(request))
+
+
+@login_required
+def runlist(request, page=1, records=500):
+    '''query run list from request.GET'''
+    
+    run_list = Daqruninfo.objects.select_related().all()
+    
+    if request.GET:
+        form = SearchRunListForm(request.GET) # bound form
+        if form.is_valid():
+            # partition
+            if form.cleaned_data['site'] == 'All':              
+                if not form.cleaned_data['detector'] == 'All':
+                    detector = form.cleaned_data['detector']
+                    partitionlist = []
+                    for site in ['EH1', 'EH2', 'EH3', 'SAB']:
+                        partitionlist.append('part_' + site + '-' + detector)
+                    run_list = run_list.filter(partitionname__in=partitionlist)             
+            else:
+                partitionname = 'part_' + form.cleaned_data['site']
+                if not form.cleaned_data['detector'] == 'All':
+                    partitionname += '-' + form.cleaned_data['detector']
+                run_list = run_list.filter(partitionname=partitionname)
+
+            
+            if not form.cleaned_data['runtype'] == 'All':
+                run_list = run_list.filter(runtype=form.cleaned_data['runtype'])
+            if form.cleaned_data['run_from']:
+                run_list = run_list.filter(runno__gte=form.cleaned_data['run_from'])
+            if form.cleaned_data['run_to']:
+                run_list = run_list.filter(runno__lte=form.cleaned_data['run_to'])
+            if form.cleaned_data['date_from']:
+                run_list = run_list.filter(vld__timestart__gte=form.cleaned_data['date_from'])
+            if form.cleaned_data['date_to']:
+                run_list = run_list.filter(vld__timestart__lte=form.cleaned_data['date_to'])
+            if form.cleaned_data['sort_run'] == 'ASC':
+                run_list = run_list.order_by('runno')
+
+        else:
+            run_list = run_list.filter(runno=0) # hack, no match
+    else:
+        # return HttpResponse(json.dumps(request.GET, indent=4))
+        form = SearchRunListForm() # unbound form
+    
+   
+    return object_list(request, 
+        template_name = 'run/list.html',
+        queryset = run_list, 
+        template_object_name = 'run',
+        paginate_by = int(records),
+        page = int(page),
+        extra_context = {
+            'form'         : form,
+            'description'  : 'Search List',
+            'count'        : run_list.count(),  # total count, not per page
+            'base_url'     : settings.SITE_ROOT + '/run/list',
+            'query_string' : '?' + request.META.get('QUERY_STRING', '')
+        })
 
 
 @login_required

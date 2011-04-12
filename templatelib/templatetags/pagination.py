@@ -30,6 +30,7 @@ def paginator(context):
             pages_outside_trailing_range = [n + 1 for n in range(0, NUM_PAGES_OUTSIDE_RANGE)]
         return {
             "base_url": context["base_url"],
+            "query_string": context.get("query_string", ""),
             "is_paginated": context["is_paginated"],
             "previous": context["previous"],
             "has_previous": context["has_previous"],

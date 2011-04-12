@@ -1,0 +1,29 @@
+<form action="{{SITE_ROOT}}/run/list/" method="get" id='form_searchrunlist' class='ui-widget'>    
+    <fieldset class='ui-widget-content'>        
+    <table>
+        {# {% for field in form %} #}
+        {# <tr> #}
+        {#     <th>{{ field.label }}</th> #}
+        {#     <td> #}
+        {#         <ul id="{{ field.html_name }}_error" class='errorlist'></ul> #}
+        {#         {{ field }} #}
+        {#     </td> #}
+        {# </tr> #}
+        {# {% endfor %}             #}
+        {# <tr> #}
+        {#     <th colspan='2' style='text-align:center; padding:15px 0 10px 0;'> #}
+        {#         <input id='submit' type="submit" value="Search !" /> #}
+        {#     </th> #}
+        {# </tr> #}
+        <tr >
+            <td>{{form.site}}</td>
+            <td>{{form.detector}}</td>
+            <td>{{form.runtype}}</td>
+            <td><h6>Run</h6>&nbsp;&nbsp;{{form.run_from}} - {{form.run_to}}</td>
+            <td><h6>Date<h6>&nbsp;&nbsp;{{form.date_from}} - {{form.date_to}}</td>
+            <td>{{form.sort_run}}</td>
+            <td><input id='submit' type="submit" value="Search !" /></td>
+        </tr>
+    </table>
+    </fieldset>
+</form>

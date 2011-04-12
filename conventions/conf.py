@@ -15,6 +15,12 @@ class Site(object):
         'PMTBenchTest' : 64,
     }
     
+    site_alias = {
+        'DayaBay' : 'EH1',
+        'LingAo'  : 'EH2',
+        'Far'     : 'EH3',
+        'SAB'     : 'SAB',
+    }
 
 # ==============================================
 class Detector(object):
@@ -29,6 +35,16 @@ class Detector(object):
         'IWS' : 5,
         'OWS' : 6,
         'RPC' : 7,
+    }
+    
+    detector_alias = {
+        'AD1' : 'AD1',
+        'AD2' : 'AD2',
+        'AD3' : 'AD3',
+        'AD4' : 'AD4',
+        'IWS' : 'WPI',
+        'OWS' : 'WPO',
+        'RPC' : 'RPC',
     }
     
     hall_detectors = {

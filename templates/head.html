@@ -5,12 +5,6 @@
         </a>
     </div>
     <div class="grid_3 omega">
-        {#id="top-bar"   #}
-        {#id="right-side"  #}
-        {# <a href='/runtype/All/' class='first'>Home&ensp;</a> #}
-        {# <a href='/currentrun/'>Current Run&ensp;</a> #}
-        {# <a href='/logout/'>Logout&ensp;</a> #}
-
         <form action='{{ SITE_ROOT }}/quick-search/' id='quick_search' method="post"> {% csrf_token %} 
         <input type="text" tabindex="1" name="search_term" id="quick_search_field"/>
         <input type="image" alt="Find" value="Find" src="{{ MEDIA_URL }}img/search.png" id="search-button"/>  
@@ -27,7 +21,8 @@
                 </span></a>
                 <ul class="sub_menu">
                     {# <li><a href='{{ SITE_ROOT }}/run/current/'>Current</a></li> #}
-                    <li><a href='{{ SITE_ROOT }}/run/type/All/'>All</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/list/'>Search</a></li>
+                    <li class="menu_separator"></li>
                     <li><a href='{{ SITE_ROOT }}/run/latest/days/7/'>Last Week</a></li>
                     <li><a href='{{ SITE_ROOT }}/run/latest/days/30/'>Last Month</a></li>
                     <li class="menu_separator"></li>

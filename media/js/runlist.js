@@ -1,8 +1,17 @@
 var this_url = window.location.href;
 var base_url = this_url.substring(0,this_url.indexOf('run'));
 
+init_searchform();
+
+
 load_pqm_list();
 load_diagnostics_list();
+
+function init_searchform() {
+    $("#id_date_from").datepicker({ defaultDate: +0 });
+    $("#id_date_to").datepicker({ defaultDate: +0 });
+    $('option[value="All"]').css('color', 'red');
+}
 
 function load_pqm_list() {
     var url = base_url + 'production/pqm/run/list/';
