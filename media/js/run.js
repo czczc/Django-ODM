@@ -57,13 +57,21 @@ load_production('diagnostics');
 // ==================================================================
 
 function load_run_datetime() {
-    var datetime_splitted = $('#run_start_utc').html().split(' ');
-    var date = datetime_splitted[0]; 
-    var time = datetime_splitted[1];
-    var date_splitted = date.split('-');
-    Run.year = date_splitted[0];
-    Run.month = date_splitted[1];
-    Run.day = date_splitted[2];
+    if ($('#run_start_utc').html()) {
+        var datetime_splitted = $('#run_start_utc').html().split(' ');
+        var date = datetime_splitted[0]; 
+        var time = datetime_splitted[1];
+        var date_splitted = date.split('-');
+        Run.year = date_splitted[0];
+        Run.month = date_splitted[1];
+        Run.day = date_splitted[2];
+    }
+    else { // set to be far in the future
+        Run.year = 2020;
+        Run.month = 1;
+        Run.day = 1;
+    }
+
 }
 
 function load_daq() {

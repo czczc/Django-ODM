@@ -13,7 +13,9 @@
         {% include "run/calib.html" %}
     {% endif %}
     
-    {% include "run/daq.html" %}
+    {% if not not_in_offline_db %}
+        {% include "run/daq.html" %}
+    {% endif %}
     
     {% include "run/diagnostics.html" %}
     

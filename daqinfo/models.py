@@ -5,10 +5,7 @@ from odm.conventions.conf import DaqTriggerType
 import re
 
 class RunconfigManager(models.Manager):
-    '''
-    The legacy Runconfig table doesn't fit to django model well.
-    Use raw query. -CZ
-    '''
+    '''Manager for DaqRunConfig Table'''
     runno = ''
     info = {}
     
@@ -37,7 +34,7 @@ class RunconfigManager(models.Manager):
         '''fetch EVERYTHING'''
         
         self.reset()
-        self.fetch_runinfo()
+        if not self.fetch_runinfo(): return
         
         for version in ['base', 'data']:
             self.fetch_active_detectors(version)
@@ -58,7 +55,11 @@ class RunconfigManager(models.Manager):
     def fetch_runinfo(self):
         '''fetch run info from Daqruninfo table'''
         
-        run = Daqruninfo.objects.get(runno=self.runno)
+        try:
+            run = Daqruninfo.objects.get(runno=self.runno)
+        except:
+            return False
+        
         self.info['runtype'] = run.runtype
         self.info['site'] = run.site()
         self.info['runinfo_detectors'] = [
@@ -67,6 +68,7 @@ class RunconfigManager(models.Manager):
         self.info['schemaversion'] = run.schemaversion
         self.info['baseversion'] = run.baseversion
         self.info['dataversion'] = run.dataversion
+        return True
 
         
     def fetch_active_detectors(self, version):

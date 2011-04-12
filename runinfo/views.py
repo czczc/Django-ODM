@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.views.generic.simple import direct_to_template
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list_detail import object_list, object_detail
 from django.core.paginator import Paginator
@@ -49,7 +50,17 @@ def simrun(request, runno):
 def run(request, runno):
     '''query a single run'''
         
-    run = get_object_or_404(Daqruninfo, runno=runno)
+    # run = get_object_or_404(Daqruninfo, runno=runno)
+    try:
+        run = Daqruninfo.objects.get(runno=runno)
+    except:
+        return direct_to_template(request, 
+            template = 'run/detail.html',
+            extra_context = {
+                'not_in_offline_db' : True,
+                'run' : {'runno' : runno},
+            })
+    
     calibrun = None
     if (run.runtype == 'ADCalib'):
         try:
