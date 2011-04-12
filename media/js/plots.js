@@ -61,13 +61,11 @@ function enable_submit() {
         var form_data = null;
         $(this).attr('disabled', 'disabled');
         $('.errorlist').html('');
-        // console.log(form_data);
-        var jqxhr = $.post("", $("#form_searchplots").serialize(),
+        var jqxhr = $.post(this_url, $("#form_searchplots").serialize(),
             function(data) {
                 var i;
                 if (data.errors) { 
                     // server form validation failed
-                    console.log('server form validation failed');
                     for (attr in data.errors) {
                         str_error = '';
                         for (i in data.errors[attr]) { 
@@ -94,7 +92,6 @@ function enable_submit() {
             }, "json");
         
         jqxhr.error(function() { 
-            // console.log("error"); 
             $('#submit').removeAttr('disabled');
         });
         
