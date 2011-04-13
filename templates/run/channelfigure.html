@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/modal.css")?>
+{% endblock %}
+
+{% block title %}ODM | Run {{ runno }}{% endblock %}
+
+{% block content %}
+
+<div class="grid_24" style='margin-top:20px;'>
+    <a name="diagnostics"></a>
+    <h2>
+         Diagnostic Plots &nbsp;|&nbsp; 
+         Run {{ runno }} &nbsp;|&nbsp; 
+         {{ site }}{{ detector }} &nbsp;|&nbsp; 
+         Board {{ board }} Connector {{ connector }}
+    </h2>
+</div>
+<div class="clear"></div>
+
+<div class="grid_24" id="diagnostics_section" style='margin-top: 20px;'>
+{# <table class='production'> #}
+    {% for figpath in figlist %}
+    <img src="{{ figpath }}" /><br />
+    {% endfor %}
+{# </table> #}
+</div>
+{% endblock %}
+
+
+{% block extra_js %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal.1.4.1.min.js"></script>
+{% endblock %}

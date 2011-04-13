@@ -205,8 +205,9 @@ function load_pmtfigures(detname, data) {
                 if (figures) {
                     if(channels[board+'_'+connector]) {
                         html += '<a href="';
-                        link = Run.diagnostics_base_url+dirname(figures[0].figpath);
-                        link += '/channel_board' + board + '_connector' + connector;
+                        link = base_url + 'production/diagnostics/run/' + Run.runno + '/';
+                        link += site_detector[0] + '/' + site_detector[1];
+                        link += '/board/' + board + '/connector/' + connector + '/';
                         html += link +  '">O</a>';
                         $(this).html(html);
                         

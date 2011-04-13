@@ -6,6 +6,7 @@ import os
 class Diagnostics(object):
     '''class to manage diagnositcs info '''
     
+    local_base_dir = '/project/projectdirs/dayabay/www/dybprod'
     xml_base_url = 'http://portal.nersc.gov/project/dayabay/dybprod/'
     runs_xml = 'http://portal.nersc.gov/project/dayabay/dybprod/runs.xml'
     
@@ -38,8 +39,8 @@ class Diagnostics(object):
             },
             'channels' : {
                 # 'SABAD2' : {
-                #     'board06_connector01' : '1',
-                #     'board06_connector01' : '1',
+                #     '06_01' : '1',
+                #     '06_01' : '1',
                 # },
                 # 'SABAD1' : {},
             }

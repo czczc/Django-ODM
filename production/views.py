@@ -1,14 +1,14 @@
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.generic.simple import direct_to_template
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 from odm.production.diagnostics import Diagnostics
 from odm.production.pqm import Pqm
 from odm.production.simulation import Simulation
 from odm.production.forms import SearchPlotsForm, PQMSearchPlotsForm
 
-
-import json
+import json, os
 
 # ======= Diagnostics =======
 
@@ -39,6 +39,79 @@ def diagnostics_run(request, runno):
     else:
         raise Http404
 
+@login_required      
+def diagnostics_channel(request, runno, site, detector, board, connector):
+    '''extract channel plots from tar file'''
+        
+    run = Diagnostics(runno)
+    run.fetch_all()
+
+    import tarfile, glob
+    if settings.SITE_NERSC:
+        TMPDIR = os.path.join(run.local_base_dir, 'tmp')
+    elif settings.SITE_LOCAL:
+        TMPDIR = os.path.join(settings.PROJECT_PATH, '../tmp')
+            
+    if run.info['detectors'].get(site+detector, []):
+        figpath = os.path.join(run.local_base_dir, 
+            run.info['detectors'][site+detector][0]['figpath'])
+        figdir = os.path.dirname(figpath)
+        channel_tarfile = os.path.join(figdir, 'channels.tar')
+        
+        try:
+            tar = tarfile.open(channel_tarfile)
+            extract_dir = "%s/run_%07d/detector_%s%s" % (
+                TMPDIR, int(runno), site, detector)
+            if not os.path.exists(extract_dir):
+                os.makedirs(extract_dir)
+                tar.extractall(extract_dir)
+            channel_dir = "%s/channel_board%02d_connector%02d" % ( 
+                extract_dir, int(board), int(connector))
+            channel_figlist = glob.glob(channel_dir + '/*.png')
+            channel_figlist = [ figpath.replace(TMPDIR, run.xml_base_url+'tmp') 
+                for figpath in channel_figlist ]
+                
+        except IOError:
+            # tar file not created yet
+            channel_dir = "%s/channel_board%02d_connector%02d" % (
+                figdir, int(board), int(connector))
+            channel_figlist = glob.glob(channel_dir + '/*.png')
+            channel_figlist = [ 
+                figpath.replace(run.local_base_dir+'/', run.xml_base_url) 
+                for figpath in channel_figlist ]
+
+        return direct_to_template(request, 
+            template = 'run/channelfigure.html',
+            extra_context = {
+                'figlist' : channel_figlist,
+                'runno' : runno,
+                'site' : site, 'detector' : detector,
+                'board' : board, 'connector' : connector,
+            })
+        
+    else:
+        return HttpResponse('Detector does not exist.')
+
+@login_required      
+def diagnostics_cleantmp(request):
+    '''clean up tmp directory'''
+    run = Diagnostics()
+    if settings.SITE_NERSC:
+        TMPDIR = os.path.join(run.local_base_dir, 'tmp')
+    elif settings.SITE_LOCAL:
+        TMPDIR = os.path.join(settings.PROJECT_PATH, '../tmp')
+    
+    import shutil, glob
+    dir_list = glob.glob(TMPDIR + '/run*')
+    log = ''
+    for run_dir in dir_list:
+        # this is safe, web users only allowed to delete under 'apache' permissions
+        shutil.rmtree(run_dir)
+        log += run_dir + " removed.\n"
+        
+    return HttpResponse('<pre>' + log + '</pre>')
+    
+        
 # ======= Simulation =======
 
 @login_required      
