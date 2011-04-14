@@ -15,7 +15,7 @@ class Diagnostics(object):
         
         # base_url can be different from xml_base_url so that they can 
         # be served on diffrent servers
-        if self.runno < '7000':
+        if self.runno < '5000':
             self.base_url = 'http://blinkin.krl.caltech.edu/~chao/dybprod/'
         else:
             self.base_url = 'http://portal.nersc.gov/project/dayabay/dybprod/'

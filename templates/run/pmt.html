@@ -32,13 +32,23 @@
             <thead><tr>
             <th id="th_pmtinfo" colspan="2" style="text-align:center;">Cable Map Validation</th>
             </tr></thead>
-            <tr><td class='descr'>DBI Record Seqno</h6></td><td id="cablemap_vld_seqno" class="value"></td></tr>
-            <tr><td class='descr'>Valid From</h6></td><td id="cablemap_vld_from" class="value"></td></tr>
-            <tr><td class='descr'>Valid To</h6></td><td id="cablemap_vld_to" class="value"></td></tr>
+            <tr><td class='descr'>DBI Record Seqno</td><td id="cablemap_vld_seqno" class="value"></td></tr>
+            <tr><td class='descr'>Insert Date</td><td id="cablemap_vld_insert" class="value"></td></tr>
+            <tr><td class='descr'>Valid From</td><td id="cablemap_vld_from" class="value"></td></tr>
+            <tr><td class='descr'>Valid To</td><td id="cablemap_vld_to" class="value"></td></tr>
             <tr><th colspan="2" style="text-align:center;">Calibration Specs Validation</th></th></tr>
-            <tr><td class='descr'>DBI Record Seqno</h6></td><td id="pmtspec_vld_seqno" class="value"></td></tr>
-            <tr><td class='descr'>Valid From</h6></td><td id="pmtspec_vld_from" class="value"></td></tr>
-            <tr><td class='descr'>Valid To</h6></td><td id="pmtspec_vld_to" class="value"></td></tr>
+            <tr><td class='descr'>DBI Record Seqno</td><td id="pmtspec_vld_seqno" class="value"></td></tr>
+            <tr><td class='descr'>Insert Date</td><td id="pmtspec_vld_insert" class="value"></td></tr>
+            <tr><td class='descr'>Valid From</td><td id="pmtspec_vld_from" class="value"></td></tr>
+            <tr><td class='descr'>Valid To</td><td id="pmtspec_vld_to" class="value"></td></tr>
+            <tr>
+                <td class='descr'>Rollback To</td>
+                <td class="value">
+                    <input id="id_pmtspec_rollback" type="text" name="pmtspec_rollback" size="8" />
+                    &nbsp;&nbsp;
+                    <input id='sumit_pmtspec_rollback' type="submit" value="Rollback !" />
+                </td>
+            </tr>
         </table>
     </div>
     
@@ -74,15 +84,15 @@
         <table>
             <tr>
                 <td class='descr'>Board</td><td id="pmt_board" class="value"></td>
-                <td class='descr'>Ring</h6></td><td id="pmt_ring" class="value"></td>
-                <td class='descr'>Wall</h6></td><td id="pmt_wall" class="value"></td>
+                <td class='descr'>Ring</td><td id="pmt_ring" class="value"></td>
+                <td class='descr'>Wall</td><td id="pmt_wall" class="value"></td>
                 <td class='descr'>H.G. SPE [ADC]</td><td id="pmt_spehigh" class="value">
                 <td class='descr'>T Offset [TDC]</td><td id="pmt_toffset" class="value"></td>
             </tr>
             <tr>
                 <td class='descr'>Connector</td><td id="pmt_connector" class="value"></td>
-                <td class='descr'>Column</h6></td><td id="pmt_column" class="value"></td>
-                <td class='descr'>Spot</h6></td><td id="pmt_spot" class="value"></td>
+                <td class='descr'>Column</td><td id="pmt_column" class="value"></td>
+                <td class='descr'>Spot</td><td id="pmt_spot" class="value"></td>
                 <td class='descr'>L.G. SPE [ADC]</td><td id="pmt_spelow" class="value"></td>
                 <td class='descr'></td><td class="value"></td>
             </tr>

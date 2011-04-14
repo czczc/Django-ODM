@@ -6,11 +6,8 @@ $('#jumper button').click(function() {
 $('button.to_top').click(function() {
     window.location = '#top';
 });
+$("#id_pmtspec_rollback").datepicker({ defaultDate: +0 });
 
-$('#reload_pmtfigures').click(function() {
-    detname = $('#pmtinfo_detector').html();
-    load_pmtfigures(detname, Run.pmtinfo_data);
-});
 
 var this_url = window.location.href;
 var index_of_run = this_url.indexOf('run');
@@ -30,6 +27,22 @@ Run.translation.EH2 = 'LingAo'; Run.rtranslation.LingAo = 'EH2';
 Run.translation.EH3 = 'Far'; Run.rtranslation.Far = 'EH3';
 Run.translation.WPI = 'IWS'; Run.rtranslation.IWS = 'WPI';
 Run.translation.WPO = 'OWS'; Run.rtranslation.OWS = 'WPO';
+
+$('#sumit_pmtspec_rollback').click(function() {
+    date = $('#id_pmtspec_rollback').val().split('/');
+    if (date.length == 3) {
+        Run.rollback = true;
+        Run.rollback_month = date[0];
+        Run.rollback_day = date[1];
+        Run.rollback_year = date[2];
+    }
+    detname = $('#pmtinfo_detector').html();
+    load_pmt(detname);
+});
+$('#reload_pmtfigures').click(function() {
+    detname = $('#pmtinfo_detector').html();
+    load_pmtfigures(detname, Run.pmtinfo_data);
+});
 
 // DAQ settings
 Run.daq_detector_list = [];
@@ -167,6 +180,14 @@ function load_pmt(detname) {
     
     var url = base_url + 'pmt/' + site + '/' + detector + '/'
             + Run.year + '/' + Run.month + '/' + Run.day + '/';
+    if (Run.rollback) {
+        url += 'rollback/' + Run.rollback_year + '/' + Run.rollback_month + '/' + Run.rollback_day + '/';
+        $('#pmtspec_vld_seqno').html('loading ...');
+        $('#pmtspec_vld_insert').html('');
+        $('#pmtspec_vld_from').html('');
+        $('#pmtspec_vld_to').html('');
+        $('#sumit_pmtspec_rollback').attr('disabled', 'disabled');
+    }
     $.getJSON( url, function(data) {
         Run.pmtinfo_data = data;
         
@@ -174,11 +195,13 @@ function load_pmt(detname) {
         else { $('#cablemap_vld_seqno').html('NO DBI RECORD !!').css('color','red'); }
         $('#cablemap_vld_from').html(data.cablemap_vld_from);
         $('#cablemap_vld_to').html(data.cablemap_vld_to);
+        $('#cablemap_vld_insert').html(data.cablemap_vld_insert);
         if (data.pmtspec_vld_seqno) { $('#pmtspec_vld_seqno').html(data.pmtspec_vld_seqno).css('color', '#333'); }
         else { $('#pmtspec_vld_seqno').html('NO DBI RECORD !!').css('color','red'); }
         $('#pmtspec_vld_from').html(data.pmtspec_vld_from);
         $('#pmtspec_vld_to').html(data.pmtspec_vld_to);
-        
+        $('#pmtspec_vld_insert').html(data.pmtspec_vld_insert);
+        $('#sumit_pmtspec_rollback').removeAttr('disabled');
         enable_pmt_mouse_actions(site+detector, data);
         load_pmtfigures(site+detector, data);
     }); // .getJSON done

@@ -12,6 +12,12 @@ def DBI_get(objects, context):
     Return: the first Query object or None
     '''
     date = datetime.datetime(context['year'], context['month'], context['day'])
+    if context.get('rollback', ''):
+        rollback_date = datetime.datetime(
+            context['rollback']['year'], 
+            context['rollback']['month'], 
+            context['rollback']['day'])
+        objects = objects.filter(insertdate__lte=rollback_date)
     
     try:
         return objects.filter(

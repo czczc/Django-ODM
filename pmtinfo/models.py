@@ -5,7 +5,8 @@ from odm.conventions.conf import Site, Detector
 # =====================================
 class FeeCableMapManager(models.Manager):
     
-    def cablemapSet(self, site, detector, year, month, day):
+    def cablemapSet(self, site, detector, year, month, day,
+        rollback=False, rollback_year='', rollback_month='', rollback_day=''):
         '''Returns a QuerySet of DBI Feecablemap'''
         
         try:
@@ -14,13 +15,21 @@ class FeeCableMapManager(models.Manager):
         except KeyError:
             return None
         
-        vld = DBI_get(self.select_related(), {
+        context = {
             'year' : int(year),
             'month' : int(month),
             'day' : int(day),
             'site' : site,
             'detector' : detector,
-        })
+        }
+        if rollback:
+            context['rollback'] = {
+                'year' : int(rollback_year),
+                'month' : int(rollback_month),
+                'day' : int(rollback_day),
+            }
+        
+        vld = DBI_get(self.select_related(), context)
         if vld:
             return vld.feecablemap_set
         else:
@@ -29,7 +38,8 @@ class FeeCableMapManager(models.Manager):
 # =====================================
 class CalibPMTSpecManager(models.Manager):
     
-    def pmtspecSet(self, site, detector, year, month, day):
+    def pmtspecSet(self, site, detector, year, month, day,
+        rollback=False, rollback_year='', rollback_month='', rollback_day=''):
         '''Returns a QuerySet of DBI Calibpmtspec'''
         
         try:
@@ -37,14 +47,22 @@ class CalibPMTSpecManager(models.Manager):
             detector = Detector.detector_id[detector]
         except KeyError:
             return None
-            
-        vld = DBI_get(self.select_related(), {
+
+        context = {
             'year' : int(year),
             'month' : int(month),
             'day' : int(day),
             'site' : site,
             'detector' : detector,
-        })
+        }
+        if rollback:
+            context['rollback'] = {
+                'year' : int(rollback_year),
+                'month' : int(rollback_month),
+                'day' : int(rollback_day),
+            }
+                    
+        vld = DBI_get(self.select_related(), context)
         if vld:
             return vld.calibpmtspec_set
         else:
