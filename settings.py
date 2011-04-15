@@ -8,25 +8,6 @@ HOST_NAME = socket.gethostname()
 from ConfigParser import SafeConfigParser
 conf = SafeConfigParser()
 conf.read(os.path.join(PROJECT_PATH, 'odm.conf'))
-
-SITE_LOCAL = SITE_NERSC = False
-if HOST_NAME.startswith('sgn'):
-    SITE_NERSC = True
-else:
-    SITE_LOCAL = True
-
-if SITE_NERSC:
-    DEBUG = TEMPLATE_DEBUG = False
-    SITE_ROOT = '/dayabay/odm'
-    MEDIA_URL = 'http://portal.nersc.gov/project/dayabay/odm_media/'
-    ADMIN_MEDIA_PREFIX = 'http://portal.nersc.gov/project/dayabay/odm_media/admin/'
-    # LOGIN_URL = SITE_ROOT + '/accounts/login'
-
-elif SITE_LOCAL:
-    DEBUG = TEMPLATE_DEBUG = True
-    SITE_ROOT = ''
-    MEDIA_URL = '/media/'
-    ADMIN_MEDIA_PREFIX = '/media/admin/'
     
 DATABASES = {
     'default': {
@@ -99,11 +80,60 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'registration',
     'odm.templatelib',
-    # 'odm.runinfo',
 )
 
 SESSION_COOKIE_AGE = 86400 * 3
 ACCOUNT_ACTIVATION_DAYS = 7
+
+# site specific settings
+SITE_LOCAL = SITE_NERSC = False
+if HOST_NAME.startswith('sgn'):
+    SITE_NERSC = True
+else:
+    SITE_LOCAL = True
+
+if SITE_NERSC:
+    DEBUG = TEMPLATE_DEBUG = False
+    SITE_ROOT = '/dayabay/odm'
+    MEDIA_URL = 'http://portal.nersc.gov/project/dayabay/odm_media/'
+    ADMIN_MEDIA_PREFIX = 'http://portal.nersc.gov/project/dayabay/odm_media/admin/'
+
+elif SITE_LOCAL:
+    DEBUG = TEMPLATE_DEBUG = True
+    SITE_ROOT = ''
+    MEDIA_URL = '/media/'
+    ADMIN_MEDIA_PREFIX = '/media/admin/'
+    # DjDT settings
+    MIDDLEWARE_CLASSES = (
+        'django.middleware.common.CommonMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    )
+    INTERNAL_IPS = ('127.0.0.1',)
+    DEBUG_TOOLBAR_PANELS = (
+        'debug_toolbar.panels.version.VersionDebugPanel',
+        'debug_toolbar.panels.timer.TimerDebugPanel',
+        'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+        'debug_toolbar.panels.headers.HeaderDebugPanel',
+        'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+        'debug_toolbar.panels.template.TemplateDebugPanel',
+        'debug_toolbar.panels.sql.SQLDebugPanel',
+    )
+    INSTALLED_APPS = (
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.admin',
+        'registration',
+        'odm.templatelib',
+        'debug_toolbar',
+    )
+
+# SITE_ROOT dependent settings
 LOGIN_URL = SITE_ROOT + '/accounts/login'
 LOGIN_REDIRECT_URL = SITE_ROOT + '/run/'
 LOGOUT_URL = SITE_ROOT + '/accounts/logout'
