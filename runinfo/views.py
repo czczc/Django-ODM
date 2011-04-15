@@ -9,6 +9,7 @@ from django.conf import settings
 
 from odm.runinfo.models import Daqruninfo, Daqcalibruninfo
 from odm.daqinfo.models import Daqrunconfig
+from odm.fileinfo.models import Daqrawdatafileinfo
 from odm.runinfo.forms import SearchRunListForm
 
 import json, re
@@ -25,6 +26,10 @@ def quick_search(request):
         if search_term.startswith('sim'): 
             postfix = '/sim/'
             search_term = search_term.replace('sim', '', 1)
+        elif search_term.startswith('files'):
+            postfix = '/files/'
+            search_term = search_term.replace('files', '', 1)
+        
         try:
             runno = re.search(r'(\d+)', search_term).group(1)            
         except:
@@ -61,7 +66,7 @@ def run(request, runno):
                 'not_in_offline_db' : True,
                 'run' : {'runno' : runno},
             })
-    
+    nFiles = Daqrawdatafileinfo.objects.all().filter(runno=runno).count()
     calibrun = None
     if (run.runtype == 'ADCalib'):
         try:
@@ -70,8 +75,10 @@ def run(request, runno):
         except:
             calibrun = None
     return render_to_response('run/detail.html', { 
-        'run' : run, 
-        'calibrun' : calibrun },
+        'run' : run,
+        'calibrun' : calibrun,
+        'nFiles' : nFiles, 
+        },
         context_instance=RequestContext(request))
 
 
@@ -169,6 +176,18 @@ def runtype(request, runtype='All', page=1, records=500):
             'base_url'     : settings.SITE_ROOT + '/run/type/' + runtype,
         })
 
+@login_required
+def fileinfo(request, runno):
+    '''file info'''
+    
+    file_list = Daqrawdatafileinfo.objects.all().filter(runno=runno)
+    return object_list(request, 
+        template_name = 'run/file.html',
+        queryset = file_list, 
+        template_object_name = 'file',
+        extra_context = {
+            'runno'  : runno,
+        })
 
 @login_required
 def daqinfo(request, runno):

@@ -4,6 +4,7 @@ urlpatterns = patterns('odm.runinfo.views',
     # single run
     (r'^(\d+)/$', 'run'),
     (r'^(\d+)/sim/$', 'simrun'),
+    (r'^(\d+)/files/$', 'fileinfo'),
     
     # query run list
     (r'^list/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'runlist'),

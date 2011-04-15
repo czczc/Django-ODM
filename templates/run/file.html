@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}ODM | File Info | Run {{ runno }} {% endblock %}
+
+{% block content %}
+        
+    <div class = "grid_24">
+         <h2>
+             Run {{ runno }} | Raw Files: {{ file_list|length }}
+        </h2>
+    </div>    
+    <div class="clear"></div> 
+    
+    <div class = "grid_24">          
+        <table>
+           <thead><tr>
+              <th>File No</th>
+              <th>File Name</th>
+              <th>File Size</th>
+              <th>Checksum</th>
+              <th>File State</th>
+              <th>Transfer State</th>
+           </tr></thead>
+           <tbody>
+               {% for file in file_list %}
+               <tr>
+                   <td>{{ file.fileno }}</td>
+                   <td>{{ file.filename }}</td>
+                   <td>{{ file.filesize|filesizeformat }}</td>
+                   <td>{{ file.checksum }}</td>
+                   <td>{{ file.filestate }}</td>
+                   <td>{{ file.transferstate }}</td>
+               </tr>    
+               {% endfor %}
+           </tbody>
+        </table>
+    </div>
+    <div class="clear"></div>
+{% endblock %}

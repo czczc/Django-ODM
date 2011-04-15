@@ -122,6 +122,10 @@ elif SITE_LOCAL:
         'debug_toolbar.panels.template.TemplateDebugPanel',
         'debug_toolbar.panels.sql.SQLDebugPanel',
     )
+    DEBUG_TOOLBAR_CONFIG = {
+        'INTERCEPT_REDIRECTS': False,
+        'SHOW_TEMPLATE_CONTEXT': False,
+    }
     INSTALLED_APPS = (
         'django.contrib.auth',
         'django.contrib.contenttypes',
