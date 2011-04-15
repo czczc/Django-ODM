@@ -8,7 +8,7 @@ class Diagnostics(object):
     
     local_base_dir = '/project/projectdirs/dayabay/www/dybprod'
     xml_base_url = 'http://portal.nersc.gov/project/dayabay/dybprod/'
-    runs_xml = 'http://portal.nersc.gov/project/dayabay/dybprod/runs.xml'
+    runs_xml = 'runs.xml'
     
     def __init__(self, runno=''):
         self.runno = runno
@@ -45,6 +45,8 @@ class Diagnostics(object):
         }
     
     def fetch_all(self):
+        # move this function out of __init__() to allow customized
+        # child class behavior, e.g. the Simulation class 
         self._load_index()
         if (self.runno):
             self._load_info()
@@ -52,9 +54,13 @@ class Diagnostics(object):
     def _load_index(self):
         '''load diagnostics run list'''
         try:
-            fh = urllib2.urlopen(self.runs_xml)
-        except urllib2.HTTPError:
-            return False
+            fh = open(os.path.join(self.local_base_dir, self.runs_xml))
+        except IOError:
+            try:
+                fh = urllib2.urlopen(self.xml_base_url + self.runs_xml)
+            except urllib2.HTTPError:
+                return False
+        
         tree = ElementTree.parse(fh)
         runs = tree.findall('run/runnumber')
         run_xmls = tree.findall('run/runindex')
@@ -76,9 +82,15 @@ class Diagnostics(object):
         self.info['channels'] = {}
         
         try:
-            fh = urllib2.urlopen(self.xml_base_url + self.info['run_xml'])
-        except urllib2.HTTPError:
-            return False
+            fh = open(os.path.join(self.local_base_dir, self.info['run_xml']))
+            self.info['load_from'] = 'local'
+        except IOError:
+            try:
+                fh = urllib2.urlopen(self.xml_base_url + self.info['run_xml'])
+                self.info['load_from'] = 'remote'
+            except urllib2.HTTPError:
+                return False
+                
         tree = ElementTree.parse(fh)
         for detectorNode in tree.findall('run/detector'):
             detname = detectorNode.find('detname').text

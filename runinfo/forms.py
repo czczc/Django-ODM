@@ -17,6 +17,7 @@ class SearchRunListForm(forms.Form):
         label='Detector',
         choices=(
             ('All', 'DETECTOR'),
+            ('AD' , 'AD' ),
             ('AD1', 'AD1'),
             ('AD2', 'AD2'),
             ('AD3', 'AD3'),
