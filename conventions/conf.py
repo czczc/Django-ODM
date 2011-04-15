@@ -52,6 +52,11 @@ class Detector(object):
         'EH2' : ['AD1', 'AD2', 'WPI', 'WPO', 'RPC'],
         'EH3' : ['AD1', 'AD2', 'AD3', 'AD4', 'WPI', 'WPO', 'RPC'],
     }
+    
+    detector_groups = {
+        'AD' : ['AD1', 'AD2', 'AD3', 'AD4'],
+        'WP' : ['WPI', 'WPO'],
+    }
 
 
 # ==============================================

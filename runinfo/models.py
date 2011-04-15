@@ -98,7 +98,11 @@ class Daqruninfo(models.Model):
         site_det = self.partition().split('-')
         site = site_det[0]
         try:
-            return [ site_det[1] ]
+            detector = site_det[1]
+            if detector in Detector.detector_groups:
+                return Detector.detector_groups[detector]
+            else:
+                return [ detector ]  # single detector
         except IndexError:
             return Detector.hall_detectors.get(site, [])
         
