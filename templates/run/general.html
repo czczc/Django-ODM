@@ -27,7 +27,7 @@
         <tr><td class='descr'>Stop Time [Beijing]</td><td class='value'>{{ run.vld.timeend_beijing }}</td></tr>
         <tr><td class='descr'>Partition Name</td><td class='value'>{{ run.partitionname }}</td></tr>
         <tr><td class='descr'>Schema-Base-Data Ver.</td><td class='value'>{{ run.schemaversion }}-{{ run.baseversion }}-{{ run.dataversion }}</td></tr>    
-        <tr><td class='descr'># Raw Files</td><td class='value'>{{ nFiles }} &nbsp;&nbsp;<a href="{{SITE_ROOT}}/run/{{run.runno}}/files/">[ details ]</a></td></tr>
+        <tr><td class='descr'># Raw Files</td><td class='value'>{{ num_files }} &nbsp;&nbsp;<a href="{{SITE_ROOT}}/run/{{run.runno}}/files/">[ details ]</a></td></tr>
         <tr><td class='descr'>Start Time [UTC]</td><td class='value' id='run_start_utc'>{{ run.vld.timestart }}</td></tr>   
         <tr><td class='descr'>Stop Time [UTC]</td><td class='value'>{{ run.vld.timeend }}</td></tr>
     </tbody>

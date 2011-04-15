@@ -22,5 +22,6 @@ urlpatterns = patterns('odm.runinfo.views',
     # ajax urls
     (r'^daq/(\d+)/', 'daqinfo'),
     (r'^json/list/$', 'jsonlist'),
+    (r'^file/list/$', 'filelist'),
     
 )

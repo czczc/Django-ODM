@@ -66,7 +66,7 @@ def run(request, runno):
                 'not_in_offline_db' : True,
                 'run' : {'runno' : runno},
             })
-    nFiles = Daqrawdatafileinfo.objects.all().filter(runno=runno).count()
+    num_files = Daqrawdatafileinfo.objects.filter(runno=runno).count()
     calibrun = None
     if (run.runtype == 'ADCalib'):
         try:
@@ -77,7 +77,7 @@ def run(request, runno):
     return render_to_response('run/detail.html', { 
         'run' : run,
         'calibrun' : calibrun,
-        'nFiles' : nFiles, 
+        'num_files' : num_files, 
         },
         context_instance=RequestContext(request))
 
@@ -179,8 +179,8 @@ def runtype(request, runtype='All', page=1, records=500):
 @login_required
 def fileinfo(request, runno):
     '''file info'''
-    
-    file_list = Daqrawdatafileinfo.objects.all().filter(runno=runno)
+        
+    file_list = Daqrawdatafileinfo.objects.filter(runno=runno)
     return object_list(request, 
         template_name = 'run/file.html',
         queryset = file_list, 
@@ -215,4 +215,20 @@ def jsonlist(request):
         return HttpResponse(json.dumps( Daqruninfo.objects.json_listall() ))
     else:
         raise Http404
+
+@login_required
+def filelist(request):
+    '''json list file info'''
+    from django.db.models import Count
+    file_list = Daqrawdatafileinfo.objects.values(
+        'runno').annotate(num_files=Count('runno'))
+    info = dict( (afile['runno'], afile['num_files']) for afile in file_list )
         
+    # for debug
+    # return HttpResponse('<pre>'+ json.dumps(info, indent=4) + '</pre>')
+
+    if request.is_ajax():
+        return HttpResponse(json.dumps(info))
+    else:
+        raise Http404
+          
