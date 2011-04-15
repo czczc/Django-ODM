@@ -13,12 +13,10 @@ class Diagnostics(object):
     def __init__(self, runno=''):
         self.runno = runno
         
-        # base_url can be different from xml_base_url so that they can 
-        # be served on diffrent servers
-        if self.runno < '5000':
-            self.base_url = 'http://blinkin.krl.caltech.edu/~chao/dybprod/'
-        else:
-            self.base_url = 'http://portal.nersc.gov/project/dayabay/dybprod/'
+        # base_url can be different from xml_base_url on a run-by-run basis
+        # so that they can be served on diffrent servers.
+        # after fixing inodes issue, all can be served on NERCS now
+        self.base_url = 'http://portal.nersc.gov/project/dayabay/dybprod/'
  	    
         self.run_index = {}    # {runno: xml}
         self.run_list  = {}    # {runno: 1} 
