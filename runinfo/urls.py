@@ -4,7 +4,6 @@ urlpatterns = patterns('odm.runinfo.views',
     # single run
     (r'^(\d+)/$', 'run'),
     (r'^(\d+)/sim/$', 'simrun'),
-    (r'^(\d+)/files/$', 'fileinfo'),
     
     # query run list
     (r'^list/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'runlist'),
@@ -22,6 +21,14 @@ urlpatterns = patterns('odm.runinfo.views',
     # ajax urls
     (r'^daq/(\d+)/', 'daqinfo'),
     (r'^json/list/$', 'jsonlist'),
-    (r'^file/list/$', 'filelist'),
     
+)
+
+urlpatterns += patterns('odm.fileinfo.views',
+    (r'^(\d+)/files/$', 'fileinfo'),
+
+    # ajax urls
+    (r'^file/list/$', 'rawfilelist'),
+    (r'^(\d+)/files/catalog/$', 'catalog'),
+   
 )

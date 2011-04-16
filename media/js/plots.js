@@ -280,7 +280,7 @@ function submit_runlist(runlist, form_data) {
                 $('#pb_bar .pb_label').text('All Plots Loaded. Double Click to Clear.');
                 is_ajax_finished = true;
                 is_ajax_aborted = false;
-                modal_by_dbclick('.img_db');
+                modal_by_click('.img_db');
                 $('#submit').removeAttr('disabled');
             }
         });
@@ -288,8 +288,16 @@ function submit_runlist(runlist, form_data) {
     }
 }
 
-function modal_by_dbclick(selector) {
-    $(selector).dblclick(function() {
+// display image modal window by single click
+function modal_by_click(selector) {
+    // change cursor shape
+    $(selector).hover(function() {
+        $(this).css('cursor','pointer');
+    }, function() {
+        $(this).css('cursor','auto');
+    });
+    // single click
+    $(selector).click(function() {
         $.modal('<div><img src="' 
             + $(this).attr("src")
             + '" /></div>',

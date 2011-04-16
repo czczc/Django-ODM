@@ -501,7 +501,7 @@ function build_plots(name, detname, data) {
     table_plots.append(html);
 
     // enable image double click to origninal size
-    modal_by_dbclick('#table_'+name+'_plots .img_db');
+    modal_by_click('#table_'+name+'_plots .img_db');
 }
 
 // parse detname 'DayaBayAD1' into ['DayaBay', 'AD1']
@@ -537,9 +537,16 @@ function url_force_reload(url) {
     return url + '?v=' + date_now.getTime();  
 }
 
-// display image modal window by double click
-function modal_by_dbclick(selector) {
-    $(selector).dblclick(function() {
+// display image modal window by single click
+function modal_by_click(selector) {
+    // change cursor shape
+    $(selector).hover(function() {
+        $(this).css('cursor','pointer');
+    }, function() {
+        $(this).css('cursor','auto');
+    });
+    // single click
+    $(selector).click(function() {
         $.modal('<div><img src="' 
             + $(this).attr("src")
             + '" /></div>',

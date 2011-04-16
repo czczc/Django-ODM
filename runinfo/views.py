@@ -176,18 +176,6 @@ def runtype(request, runtype='All', page=1, records=500):
             'base_url'     : settings.SITE_ROOT + '/run/type/' + runtype,
         })
 
-@login_required
-def fileinfo(request, runno):
-    '''file info'''
-        
-    file_list = Daqrawdatafileinfo.objects.filter(runno=runno)
-    return object_list(request, 
-        template_name = 'run/file.html',
-        queryset = file_list, 
-        template_object_name = 'file',
-        extra_context = {
-            'runno'  : runno,
-        })
 
 @login_required
 def daqinfo(request, runno):
@@ -216,19 +204,4 @@ def jsonlist(request):
     else:
         raise Http404
 
-@login_required
-def filelist(request):
-    '''json list file info'''
-    from django.db.models import Count
-    file_list = Daqrawdatafileinfo.objects.values(
-        'runno').annotate(num_files=Count('runno'))
-    info = dict( (afile['runno'], afile['num_files']) for afile in file_list )
-        
-    # for debug
-    # return HttpResponse('<pre>'+ json.dumps(info, indent=4) + '</pre>')
-
-    if request.is_ajax():
-        return HttpResponse(json.dumps(info))
-    else:
-        raise Http404
-          
+    

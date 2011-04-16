@@ -1,5 +1,5 @@
 # Django settings for odm project.
-import os
+import os, sys
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
 import socket
@@ -103,6 +103,8 @@ elif SITE_LOCAL:
     SITE_ROOT = ''
     MEDIA_URL = '/media/'
     ADMIN_MEDIA_PREFIX = '/media/admin/'
+    # local packages
+    sys.path.insert(0, PROJECT_PATH + '/../lib/python2.6/site-packages')
     # DjDT settings
     MIDDLEWARE_CLASSES = (
         'django.middleware.common.CommonMiddleware',
