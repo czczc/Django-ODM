@@ -36,6 +36,37 @@ def catalog(request, runno):
     else:
         return HttpResponse('<pre>'+ json.dumps(info, indent=4) + '</pre>')
 
+
+@login_required
+def diagnostics(request, runno):
+    '''Diagnostics file info per run'''
+
+    from odm.production.diagnostics import Diagnostics
+    run = Diagnostics(runno)
+    run.fetch_all()
+    
+    import glob, re
+    info = {}
+    rootfiel_dir = run.info.get('rootfile_dir', '')
+    if rootfiel_dir:
+        info['diagnostics_base_dir'] = os.path.join(run.local_base_dir, rootfiel_dir)
+        info['files'] = {}
+        file_list = glob.glob(info['diagnostics_base_dir'] + '/*.root')
+        file_regex = re.compile(r'(.*)_run.*seq(\d+).root')
+        for afile in file_list:
+            filename = os.path.basename(afile)
+            try:
+                jobname, seq = file_regex.search(filename).group(1, 2)        
+                info['files'].setdefault(seq, []).append(jobname)
+            except:
+                info['files'].setdefault('parsing_failed', []).append(filename)
+    
+    if request.is_ajax():
+        return HttpResponse(json.dumps(info))
+    else:
+        return HttpResponse('<pre>'+ json.dumps(info, indent=4) + '</pre>')
+
+        
 @login_required
 def rawfilelist(request):
     '''json raw file list (all runs)'''

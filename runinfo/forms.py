@@ -51,12 +51,12 @@ class SearchRunListForm(forms.Form):
     
     date_from = forms.DateField(
         label='Date From', required=False,
-        widget=forms.TextInput(attrs={'size':'8'})
+        widget=forms.TextInput(attrs={'size':'10'})
     )
     
     date_to = forms.DateField(
         label='Date To', required=False,
-        widget=forms.TextInput(attrs={'size':'8'})
+        widget=forms.TextInput(attrs={'size':'10'})
     )
     
     records = forms.IntegerField(

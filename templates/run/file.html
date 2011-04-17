@@ -23,21 +23,18 @@
             <td class='value'><a href="{{ SITE_ROOT }}/run/{{ runno }}/">{{ runno }}</a></td>
         </tr>
         <tr>
-            <td class='descr'>Raw Data File Name Format</td>
+            <td class='descr'>DAQ File Name</td>
             <td class='value'>
-                daq
-                .&lt;<span class='token'>tag name</span>&gt;
-                .&lt;<span class='token'>run number</span>&gt;
-                .&lt;<span class='token'>stream type</span>&gt;
-                .&lt;<span class='token'>stream name</span>&gt;
-                .&lt;<span class='token'>application name</span>&gt;
-                ._&lt;<span class='token'>file number</span>&gt;
-                .data
+                daq.&lt;<span class='token'>tag name</span>&gt;.&lt;<span class='token'>run no.</span>&gt;.&lt;<span class='token'>stream type</span>&gt;.&lt;<span class='token'>stream name</span>&gt;.&lt;<span class='token'>application name</span>&gt;._&lt;<span class='token'>file no.</span>&gt;.data
             </td>
         </tr>
         <tr>
-            <td class='descr'>Catalog Directory</td>
+            <td class='descr'>Catalog Dir.</td>
             <td class='value' id='catalog_base_dir'></td>
+        </tr>
+        <tr>
+            <td class='descr'>Diagnostics Dir.</td>
+            <td class='value' id='diagnostics_base_dir'></td>
         </tr>
     </tbody>
     </table>
@@ -50,6 +47,7 @@
           <th>File State</th>
           <th>Transfer State</th>
           <th>Catalog?</th>          
+          <th>Diagnostics?</th>          
        </tr></thead>
        <tbody>
            {% for file in file_list %}
@@ -60,6 +58,7 @@
                <td>{{ file.filestate }}</td>
                <td>{{ file.transferstate }}</td>
                <td class='catalog'></td>
+               <td class='diagnostics'></td>
            </tr>    
            {% endfor %}
        </tbody>

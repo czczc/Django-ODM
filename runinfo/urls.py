@@ -30,5 +30,6 @@ urlpatterns += patterns('odm.fileinfo.views',
     # ajax urls
     (r'^file/list/$', 'rawfilelist'),
     (r'^(\d+)/files/catalog/$', 'catalog'),
+    (r'^(\d+)/files/diagnostics/$', 'diagnostics'),
    
 )

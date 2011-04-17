@@ -134,7 +134,7 @@ def runlist(request, page=1, records=500):
         page = int(page),
         extra_context = {
             'form'         : form,
-            'description'  : 'Search List',
+            'description'  : 'Search',
             'count'        : run_list.count(),  # total count, not per page
             'base_url'     : settings.SITE_ROOT + '/run/list',
             'query_string' : '?' + request.META.get('QUERY_STRING', '')
