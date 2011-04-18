@@ -18,6 +18,7 @@ class SearchRunListForm(forms.Form):
         choices=(
             ('All', 'DETECTOR'),
             ('AD' , 'AD' ),
+            ('WP' , 'WP' ),
             ('AD1', 'AD1'),
             ('AD2', 'AD2'),
             ('AD3', 'AD3'),

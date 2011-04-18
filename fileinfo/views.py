@@ -19,6 +19,7 @@ def fileinfo(request, runno):
             'runno'  : runno,
         })
 
+
 @login_required
 def catalog(request, runno):
     '''catalog file info per run'''
