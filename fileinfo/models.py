@@ -15,7 +15,7 @@ class Daqrawdatafileinfo(models.Model):
     
     class Meta:
         db_table = u'DaqRawDataFileInfo'
-        ordering = ['-runno', 'seqno']
+        ordering = ['-runno', 'fileno', 'filename']
     
     def __unicode__(self):
         return u'run %d' % (self.runno, )

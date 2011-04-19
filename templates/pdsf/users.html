@@ -3,7 +3,49 @@
 {% block title %}ODM | PDSF Users{% endblock %}
 
 {% block content %}
-    Test
+
+    <div class = "grid_24">
+         <h2>
+             Daya Bay PDSF Users
+             {# <img id="users_loading" class="loading" src="{{ MEDIA_URL }}img/loading.gif" alt="loading" /> #}
+        </h2>
+    </div>    
+    <div class="clear"></div>
+   
+    <div class = "grid_14">          
+        <table id = 'table_pdsf_users'>
+            <thead><tr>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>Full Name</th>
+                <th>Jobs</th>
+            </tr></thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class = "grid_7 prefix_2 suffix_1 draggable notepad">    
+        <h3>Actions</h3>
+        <ul>
+            <li><button id='btn_all_users'>View All Users ...</button></li>
+            <li><button>View All Jobs ...</button></li>
+            <li><button id='btn_pdsf_logout'>Log out PDSF ...</button></li>
+        </ul>
+              
+        <table id='table_pdsf_group_dayabay' style='margin-top:30px;'>
+            <thead><tr>
+               <th colspan="2" style='text-align: center;'>PDSF Group</th>
+            </tr></thead>
+            <tbody>
+                <tr><td class='descr'>Group Name</td><td class='value' id='gname'>dayabay</td></tr>
+                <tr><td class='descr'>Group ID</td><td class='value' id='gid'>41120</td></tr>
+                <tr><td class='descr'>Fiscal Year</td><td class='value' id='fiscal_year'>2011</td></tr>
+            </tbody>
+        </table>
+        
+    </div>
+    <div class="clear"></div>
+    
 {% endblock %}
 
 {% block extra_js %}

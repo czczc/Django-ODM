@@ -3,8 +3,8 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('odm.production.views',
 
     # normal urls
-    (r'^(\w+)/view/$', 'view'),
-    (r'^diagnostics/run/(?P<runno>\d+)/(?P<site>\w+)/(?P<detector>\w+)/board/(?P<board>\d+)/connector/(?P<connector>\d+)', 'diagnostics_channel'),
+    (r'^(?P<production>\w+)/view/$', 'view'),
+    (r'^(?P<production>\w+)/run/(?P<runno>\d+)/(?P<site>\w+)/(?P<detector>\w+)/board/(?P<board>\d+)/connector/(?P<connector>\d+)', 'diagnostics_channel'),
     (r'^diagnostics/clean/tmp/$', 'diagnostics_cleantmp'),
     
     # ajax only urls

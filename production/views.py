@@ -39,13 +39,19 @@ def diagnostics_run(request, runno):
     else:
         raise Http404
 
-@login_required      
-def diagnostics_channel(request, runno, site, detector, board, connector):
-    '''extract channel plots from tar file'''
-        
-    run = Diagnostics(runno)
-    run.fetch_all()
 
+@login_required      
+def diagnostics_channel(request, production, runno, site, detector, board, connector):
+    '''extract channel plots from tar file'''
+    
+    if production == 'diagnostics':
+        run = Diagnostics(runno)
+    elif production == 'simulation':
+        run = Simulation(runno)
+    else:
+        return HttpResponse('invalid production name.')
+    
+    run.fetch_all()
     import tarfile, glob
     if settings.SITE_NERSC:
         TMPDIR = os.path.join(run.local_base_dir, 'tmp')
@@ -92,6 +98,7 @@ def diagnostics_channel(request, runno, site, detector, board, connector):
     else:
         return HttpResponse('Detector does not exist.')
 
+
 @login_required      
 def diagnostics_cleantmp(request):
     '''clean up tmp directory'''
@@ -128,7 +135,8 @@ def simulation_run(request, runno):
         return HttpResponse(json.dumps(run.info))
     else:
         raise Http404
-        
+
+            
 # =========== PQM ===========
 
 @login_required

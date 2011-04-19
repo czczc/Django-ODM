@@ -1,20 +1,27 @@
-triggerRate
-dtTrigger
-logDtTrigger
-nChannels
-nChannelsVsTime
-channelHits
-channelDadcFine
-channelDadcCoarse
-tdcVsBoard
-adCharge
-logAdCharge
-pmtCharge
-adChargeVsTime
-adChargeVsDtTrigger
-maxPmtChargeVsAdCharge
-nChannelsVsAdCharge
-adEnergy_AdSimple
-adZVsRho_AdSimple
-adYVsX_AdSimple
-adZVsXcal_AdSimple
+Basic   triggerRate
+Basic   dtTrigger
+Basic   logDtTrigger
+Basic   nChannels
+Basic   nChannelsVsTime
+Basic   channelHits
+Basic   channelDadcFine
+Basic   channelDadcCoarse
+Basic   tdcVsBoard
+AD      adCharge
+AD      logAdCharge
+AD      pmtCharge
+AD      adChargeVsTime
+AD      adChargeVsDtTrigger
+AD      maxPmtChargeVsAdCharge
+AD      nChannelsVsAdCharge
+AD      adEnergy_AdSimple
+AD      adZVsRho_AdSimple
+AD      adYVsX_AdSimple
+AD      adZVsXcal_AdSimple
+Muon    MuonCharge
+Muon    logMuonCharge
+Muon    muonPmtCharge
+Muon    muonChargeVsTime
+Muon    muonChargeVsDtTrigger
+Muon    maxPmtChargeVsMuonCharge
+Muon    nChannelsVsMuonCharge

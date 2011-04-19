@@ -117,11 +117,19 @@ class Diagnostics(object):
             fh = open(filename)
         except IOError:
             return None
-                    
-        choices = ( ('Available Figures', []), )
+        figtypes = {
+            'Basic' : 0,
+            'AD' : 1,
+            'Muon' : 2,
+        }
+        choices = ( 
+            ('Basic', []), 
+            ('AD', []), 
+            ('Muon', []), 
+        )
         for line in fh:
-            figname = line.strip()
-            choices[0][1].append((figname, figname))
+            figtype, figname = line.strip().split()
+            choices[figtypes[figtype]][1].append((figname, figname))
                 
         return choices
                    

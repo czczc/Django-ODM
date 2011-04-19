@@ -39,10 +39,10 @@ $('#sumit_pmtspec_rollback').click(function() {
     detname = $('#pmtinfo_detector').html();
     load_pmt(detname);
 });
-$('#reload_pmtfigures').click(function() {
-    detname = $('#pmtinfo_detector').html();
-    load_pmtfigures(detname, Run.pmtinfo_data);
-});
+// $('#reload_pmtfigures').click(function() {
+//     detname = $('#pmtinfo_detector').html();
+//     load_pmtfigures(detname, Run.pmtinfo_data);
+// });
 
 // DAQ settings
 Run.daq_detector_list = [];
@@ -99,14 +99,14 @@ function load_daq() {
         if (detector_list.length>0) {
             // enable live detectors
             enable_live_detectors('daq', detector_list);
-            enable_live_detectors('pmtinfo', detector_list);
+            // enable_live_detectors('pmtinfo', detector_list);
             
             // build daq tables
             build_daq_tables(detector_list[0], data);
             
             // load pmt info
-            site_detector = parse_detname(detector_list[0]);
-            load_pmt(site_detector[0]+site_detector[1]);
+            // site_detector = parse_detname(detector_list[0]);
+            // load_pmt(site_detector[0]+site_detector[1]);
         }
         else {
             $("#daq_detector").html('NO Detector!');
@@ -131,21 +131,21 @@ function load_daq() {
         });
         
         // enable pmt live detectors click
-        $("#pmtinfo_site_det a.live_det").click( function(){
-            var td = $(this).parent();
-            var tr = td.parent();
-            var site = tr.attr("class");
-            var detector = td.attr("class");
-            if (detector == 'RPC') {
-                $("#pmtinfo_detector").html(site+detector);
-                $('#pmt_section').hide('blind');
-                return false;
-            }
-            $('#pmt_info td.value').html('');
-            $('#pmt_section').show('slide');
-            load_pmt(site+detector);
-            return false;
-        });
+        // $("#pmtinfo_site_det a.live_det").click( function(){
+        //     var td = $(this).parent();
+        //     var tr = td.parent();
+        //     var site = tr.attr("class");
+        //     var detector = td.attr("class");
+        //     if (detector == 'RPC') {
+        //         $("#pmtinfo_detector").html(site+detector);
+        //         $('#pmt_section').hide('blind');
+        //         return false;
+        //     }
+        //     $('#pmt_info td.value').html('');
+        //     $('#pmt_section').show('slide');
+        //     load_pmt(site+detector);
+        //     return false;
+        // });
         
         // remove the loading animation
         $("#daq_loading").remove();
@@ -178,6 +178,11 @@ function load_pmt(detname) {
         $('#muonpmtmap_table').hide();
     }
     
+    if (!Run.year) { 
+        load_pmtfigures(site+detector);
+        return; 
+    }
+
     var url = base_url + 'pmt/' + site + '/' + detector + '/'
             + Run.year + '/' + Run.month + '/' + Run.day + '/';
     if (Run.rollback) {
@@ -210,7 +215,9 @@ function load_pmt(detname) {
 function load_pmtfigures(detname, data) {
     var site_detector = parse_detname(detname);
     detname = site_detector[0] + site_detector[1];
-   
+    if (Run.is_sim) { production = 'simulation'; }
+    else { production = 'diagnostics'; }
+    
     diagnostics_data = Run.diagnostics_data;
     if (!diagnostics_data) {
         return;
@@ -228,7 +235,7 @@ function load_pmtfigures(detname, data) {
                 if (figures) {
                     if(channels[board+'_'+connector]) {
                         html += '<a href="';
-                        link = base_url + 'production/diagnostics/run/' + Run.runno + '/';
+                        link = base_url + 'production/' + production + '/run/' + Run.runno + '/';
                         link += site_detector[0] + '/' + site_detector[1];
                         link += '/board/' + board + '/connector/' + connector + '/';
                         html += link +  '">O</a>';
@@ -250,7 +257,7 @@ function load_pmtfigures(detname, data) {
             } // if (board && connector) done
         }); // feemap_tds.each() done.
          
-        $('#reload_pmtfigures').hide('blind');
+        // $('#reload_pmtfigures').hide('blind');
     } // else done
 
 }
@@ -294,7 +301,7 @@ function enable_pmt_mouse_actions(detname, data) {
             }
             
             $(this).bind('click', function(){
-                console.log(pmt);
+                // console.log(pmt);
             });
             
             // setup fee table cell mouse over
@@ -450,6 +457,7 @@ function load_production(name) {
 
             // build table of plots
             build_plots(name, detector_list[0], data);
+            
         }
         else {
             $("#"+name+"_detector").html('Plots Unavailable');
@@ -467,9 +475,31 @@ function load_production(name) {
 
             return false;
         });
-
         // remove the loading animation
         $("#"+name+"_loading").remove();
+        
+        if (name == 'diagnostics') {
+            // load pmt info
+            enable_live_detectors('pmtinfo', detector_list);
+            site_detector = parse_detname(detector_list[0]);
+            load_pmt(site_detector[0]+site_detector[1]);
+            // enable pmt live detectors click
+            $("#pmtinfo_site_det a.live_det").click( function(){
+                var td = $(this).parent();
+                var tr = td.parent();
+                var site = tr.attr("class");
+                var detector = td.attr("class");
+                if (detector == 'RPC') {
+                    $("#pmtinfo_detector").html(site+detector);
+                    $('#pmt_section').hide('blind');
+                    return false;
+                }
+                $('#pmt_info td.value').html('');
+                $('#pmt_section').show('slide');
+                load_pmt(site+detector);
+                return false;
+            });
+        }
     }); // .getJSON done
 }
 

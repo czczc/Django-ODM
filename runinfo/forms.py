@@ -42,22 +42,22 @@ class SearchRunListForm(forms.Form):
     
     run_from = forms.IntegerField(
         label='Run From', required=False, min_value=0,
-        widget=forms.TextInput(attrs={'size':'5'})
+        widget=forms.TextInput(attrs={'size':'6'})
     )
     
     run_to = forms.IntegerField(
         label='Run To', required=False, min_value=0,
-        widget=forms.TextInput(attrs={'size':'5'})
+        widget=forms.TextInput(attrs={'size':'6'})
     )
     
     date_from = forms.DateField(
         label='Date From', required=False,
-        widget=forms.TextInput(attrs={'size':'10'})
+        widget=forms.TextInput(attrs={'size':'12'})
     )
     
     date_to = forms.DateField(
         label='Date To', required=False,
-        widget=forms.TextInput(attrs={'size':'10'})
+        widget=forms.TextInput(attrs={'size':'12'})
     )
     
     records = forms.IntegerField(
