@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/tablesorter.css")?>
+{% endblock %}
+
+{% block title %}ODM | PDSF User | {{ uname }}{% endblock %}
+
+{% block content %}
+
+    <div class = "grid_24">
+         <h2>
+             PDSF User | {{ uname }}
+        </h2>
+    </div>    
+    <div class="clear"></div>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.tablesorter.min.js"></script>
+    <script src="http://newt.nersc.gov/js/newt.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/pdsf_user.js"></script>
+    
+{% endblock %}
+

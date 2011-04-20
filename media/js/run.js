@@ -471,7 +471,7 @@ function load_production(name) {
             var site = tr.attr("class");
             var detector = td.attr("class");
             build_plots(name, site+detector, data);
-            $('#table_'+name+'_plots').show('slide');
+            $('#table_'+name+'_plots').show('drop');
 
             return false;
         });
@@ -480,25 +480,32 @@ function load_production(name) {
         
         if (name == 'diagnostics') {
             // load pmt info
-            enable_live_detectors('pmtinfo', detector_list);
-            site_detector = parse_detname(detector_list[0]);
-            load_pmt(site_detector[0]+site_detector[1]);
-            // enable pmt live detectors click
-            $("#pmtinfo_site_det a.live_det").click( function(){
-                var td = $(this).parent();
-                var tr = td.parent();
-                var site = tr.attr("class");
-                var detector = td.attr("class");
-                if (detector == 'RPC') {
-                    $("#pmtinfo_detector").html(site+detector);
-                    $('#pmt_section').hide('blind');
+            if (detector_list.length>0) {
+                enable_live_detectors('pmtinfo', detector_list);
+                site_detector = parse_detname(detector_list[0]);
+                load_pmt(site_detector[0]+site_detector[1]);
+                // enable pmt live detectors click
+                $("#pmtinfo_site_det a.live_det").click( function(){
+                    var td = $(this).parent();
+                    var tr = td.parent();
+                    var site = tr.attr("class");
+                    var detector = td.attr("class");
+                    if (detector == 'RPC') {
+                        $("#pmtinfo_detector").html(site+detector);
+                        $('#pmt_section').hide('blind');
+                        return false;
+                    }
+                    $('#pmt_info td.value').html('');
+                    $('#pmt_section').show('slide');
+                    load_pmt(site+detector);
                     return false;
-                }
-                $('#pmt_info td.value').html('');
-                $('#pmt_section').show('slide');
-                load_pmt(site+detector);
-                return false;
-            });
+                });
+            }
+            else {
+                $("#pmtinfo_detector").html('Detector Unavailable');
+                $('#pmt_section').empty();
+            }
+
         }
     }); // .getJSON done
 }

@@ -1,0 +1,20 @@
+/* sorted table */
+#content table.tablesorter thead tr th {
+	background-color: #deedf7;
+	color: black; font-weight: bold; font-size: 8pt;
+}
+#content table.tablesorter thead tr .header {
+	background-image: url(../img/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+
+#content table.tablesorter thead tr .headerSortUp {
+    background-image: url(../img/asc.gif);
+    background-color: #8dbdd8;
+}
+#content table.tablesorter thead tr .headerSortDown {
+	background-image: url(../img/desc.gif);
+	background-color: #8dbdd8;
+}

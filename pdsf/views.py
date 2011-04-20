@@ -10,3 +10,13 @@ def users(request):
         extra_context = {
             'host' : 'PDSF',
         })
+
+@login_required
+def user(request, uname):
+    '''user details'''
+        
+    return direct_to_template(request, 
+        template = 'pdsf/user.html',
+        extra_context = {
+            'uname' : uname,
+        })
