@@ -1,11 +1,34 @@
 var this_url = window.location.href;
 var index_of_run = this_url.indexOf('pdsf');
 var base_url = this_url.substring(0,index_of_run);
+var cmd_prefix = '/project/projectdirs/dayabay/webcommands';
 
 var Users = new Object;
 
 $('button').button();
 $('#table_pdsf_users').tablesorter();
+$('#table_pdsf_jobs').tablesorter();
+
+$('button.show_div').click(function(){
+   var div_class = $(this).attr('id'); 
+   $('div .' + div_class).toggle("slide", { direction: "up" }, "normal");
+});
+
+$('button.command').click(function(){
+    var cmd = cmd_prefix + $(this).attr('command'); 
+    var desc = $(this).html(); 
+    run_command(cmd);
+    $.noticeAdd({
+       text : "Loading " + desc + "... ",
+       stay : true
+    });
+});
+
+$('#hide_jobs_table').click(function(){
+    $('#table_pdsf_jobs').hide("slide", { direction: "up" }, "normal");
+    $(this).hide();
+    return false;
+});
 
 $('#btn_pdsf_logout').click(function(){
     $.newt_ajax({
@@ -15,7 +38,6 @@ $('#btn_pdsf_logout').click(function(){
             window.location = base_url;
         }
     });
-    return false; 
 });
 
 $('#btn_all_users').click(function(){
@@ -60,12 +82,13 @@ function load_users(group) {
                 User.gecos = _user.gecos;
                 User.jobs = new Object;
                 User.jobs.total = User.jobs.r = User.jobs.qw = 0;
+                User.jobs.items = [];
                 html += '<tr>';
                 html += '<td>' + _user.user_id + '</td>';
                 url = base_url + 'pdsf/user/' + _user.uname + '/';
                 html += '<td class="uname"><a href="' + url + '">' + _user.uname + '</a></td>';
                 html += '<td>' + _user.gecos + '</td>';
-                html += '<td class="jobs_total"></td>';
+                html += '<td class="jobs_total"><a href="#"></a></td>';
                 html += '<td class="jobs_r"></td>';
                 html += '<td class="jobs_qw"></td>';
                 html += "</tr>\n";
@@ -101,23 +124,22 @@ function load_queue() {
                     status = job.status;
                     Users[uname].jobs[status] += 1;
                     Users[uname].jobs.total += 1;
+                    Users[uname].jobs.items.push(job);
                 }
             }
-            
+            // console.log(Users.cjslin);
             $('#table_pdsf_users .uname').each(function(){
-               var uname = $(this).find('a').html();
+               var uname = $(this).children('a').html();
                var User = Users[uname];
-               $(this).siblings('.jobs_total').html(User.jobs.total); 
+               $(this).siblings('.jobs_total').children('a').html(User.jobs.total); 
                $(this).siblings('.jobs_r').html(User.jobs.r); 
                $(this).siblings('.jobs_qw').html(User.jobs.qw); 
             });
             $.noticeRemove($('.notice-item-wrapper'), 400);
             
-            $('#table_pdsf_users .jobs_total').each(function(){
-               var total = $(this).html();
-               if (parseInt(total,10) > 0) {
-                    $(this).css('color', 'red');
-               }
+            $('#table_pdsf_users .jobs_total a').click(function(){
+                build_jobs_table($(this).parent().siblings('.uname').children('a').html());
+                return false;
             });
             $('#table_pdsf_users .jobs_r').each(function(){
                var total = $(this).html();
@@ -128,7 +150,7 @@ function load_queue() {
             $('#table_pdsf_users .jobs_qw').each(function(){
                var total = $(this).html();
                if (parseInt(total,10) > 0) {
-                    $(this).css('color', 'blue');
+                    $(this).css('color', 'red');
                }
             });
             $('#table_pdsf_users').trigger('update');
@@ -136,19 +158,59 @@ function load_queue() {
     });
 }
 
-// cmd  = "#!/bin/bash\n";
-// cmd += "export SGE_ROOT=/usr/common/nsg/sge/sge6_2u2_1\n";
-// cmd += "/usr/common/nsg/sge/sge6_2u2_1/bin/lx24-x86/qstat -u chaoz\n";
-// run_command(cmd);
+function build_jobs_table(uname) {
+    var job;
+    var html= '';
+    for (i=0; i<Users[uname].jobs.items.length; i++) {
+        job = Users[uname].jobs.items[i];
+        html += '<tr>';
+        html += '<td class="jobid"><a href="#">' + job.jobid + '</a></td>';
+        html += '<td>' + job.priority + '</td>';
+        html += '<td>' + job.name + '</td>';
+        html += '<td>' + job.user + '</td>';
+        html += '<td>' + job.status + '</td>';
+        html += '<td>' + job.starttime + ' ' + job.queue + '</td>';
+        html += '<td>' + job.slots + '</td>';
+        html += "</tr>\n";
+    }
+    $('#table_pdsf_jobs tbody').empty().html(html);
+    $('#table_pdsf_jobs thead th').removeClass('headerSortDown headerSortUp');
+    $('#table_pdsf_jobs')
+    .show("slide", { direction: "up" }, "normal")
+    .trigger('update');
+    $('#hide_jobs_table').show();
+    enable_qstat_jobid();
+}
 
-function run_command() {
+function enable_qstat_jobid() {
+    $('#table_pdsf_jobs td.jobid a').click(function(){
+       var jobid = $(this).html();
+       var cmd = cmd_prefix + '/sge/qstat -j ' + jobid; 
+       run_command(cmd);
+       $.noticeAdd({
+          text : 'Loading job ' + jobid + ' info ...',
+          stay : true
+       });
+       return false;
+       // console.log(cmd);
+    });
+}
+
+
+function run_command(cmd) {
     $.newt_ajax({
-        url: '/queue/pdsf',    
+        url: '/command/pdsf',    
         type: 'POST',
-        // data: {"executable": cmd}, 
-        data: {"jobscript": cmd}, 
+        data: {"executable": cmd}, 
         success: function(data) {
-            console.log(data);
+            $.noticeRemove($('.notice-item-wrapper'), 400);
+            $.modal('<div><pre>' + data.output + '</pre></div>',
+                {
+                    'overlayClose' : true,
+                    'maxWidth' : 900,
+                    'maxHeight' : 600
+                }
+            );
         }
     });
 }

@@ -1,26 +1,95 @@
 {% extends "base.html" %}
 
 {% block extra_head %}
-    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/tablesorter.css")?>
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/modal.css")?>
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/tablesorter.css")?>
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/notice.css")?>
 {% endblock %}
 
 {% block title %}ODM | PDSF User | {{ uname }}{% endblock %}
 
 {% block content %}
+<div class="grid_24">
+     <h2>
+         PDSF User | {{ uname }}
+    </h2>
+</div>
+<div class="clear"></div>
+<div class="grid_10" style='margin-top:10px;'>
+    <table id='table_user_info'>
+    <thead><tr>
+       <th colspan="2" style='text-align: center;'>User infomation</th>
+    </tr></thead>
+    <tbody>
+        <tr><td class='descr'>User Name</td><td class='value' id='uname'>{{uname}}</td></tr>
+        <tr><td class='descr'>Full Name</td><td class='value' id='fullname'></td></tr>
+        <tr><td class='descr'>User ID</td><td class='value' id='user_id'></td></tr>
+        <tr><td class='descr'>Email</td><td class='value' id='email'></td></tr>
+    </tbody>
+    </table>
+</div>
+<div class="clear"></div>
 
-    <div class = "grid_24">
-         <h2>
-             PDSF User | {{ uname }}
-        </h2>
-    </div>    
-    <div class="clear"></div>
+
+<div class="grid_24">
+     <h2 id='nJobs_rqw'>
+         Running and Queued Jobs
+    </h2>
+</div>
+<div class="clear"></div>
+<div class="grid_24">
+    <table id='table_pdsf_jobs' class='tablesorter' command='/sge/qstat -u {{uname}} -xml' desc='current jobs'>
+        <thead><tr>
+            <th>Job ID</th>
+            <th>Job Name</th>
+            <th>State&nbsp;&nbsp;</th>
+            <th>Priority</th>
+            <th>Started at [PST]</th>
+            <th>Queue</th>
+            <th>Output Log</th>
+            <th>Error Log</th>
+        </tr></thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<div class="clear"></div>
+
+
+<div class="grid_24">
+     <h2 id='nJobs_recent'>
+         Recently Finished Jobs
+    </h2>
+</div>    
+<div class="clear"></div>
+
+<div class="grid_24">
+    <table id='table_pdsf_recent_jobs' class='tablesorter' command='/sge/qacct -o {{uname}} -j' desc='recent jobs'>
+        <thead><tr>
+            <th>Job ID</th>
+            <th>Job Name</th>
+            <th>Fail State&nbsp;&nbsp;</th>
+            <th>Started at [PST]</th>
+            <th>Finished at [PST]</th>
+            <th>CPU</th>
+            <th>Memory</th>
+            <th>IO</th>
+            <th>Max VMEM</th>
+            <th>Host</th>
+        </tr></thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<div class="clear"></div>
 
 {% endblock %}
 
 {% block extra_js %}
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.tablesorter.min.js"></script>
-    <script src="http://newt.nersc.gov/js/newt.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/pdsf_user.js"></script>
-    
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal.1.4.1.min.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.notice.js"></script>
+<script src="http://newt.nersc.gov/js/newt.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/pdsf_user.js"></script>    
 {% endblock %}
 

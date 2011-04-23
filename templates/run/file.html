@@ -44,7 +44,7 @@
           <th>Raw Data File Name</th>
           <th>File Size</th>
           <th>Checksum</th>
-          <th>File State</th>
+          <th>Time Transfer [PST]</th>
           <th>Transfer State</th>
           <th>Catalog?</th>          
           <th>Diagnostics?</th>          
@@ -55,7 +55,7 @@
                <td class='filename'>{{ file.filename }}</td>
                <td>{{ file.filesize|filesizeformat }}</td>
                <td>{{ file.checksum }}</td>
-               <td>{{ file.filestate }}</td>
+               <td>{{ file.vld.timeend_pst }}</td>
                <td>{{ file.transferstate }}</td>
                <td class='catalog'></td>
                <td class='diagnostics'></td>

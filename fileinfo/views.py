@@ -10,7 +10,7 @@ import json, os
 def fileinfo(request, runno):
     '''file info per run'''
         
-    file_list = Daqrawdatafileinfo.objects.filter(runno=runno)
+    file_list = Daqrawdatafileinfo.objects.select_related().filter(runno=runno)
     return object_list(request, 
         template_name = 'run/file.html',
         queryset = file_list, 

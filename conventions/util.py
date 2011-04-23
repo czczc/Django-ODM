@@ -27,7 +27,7 @@ def DBI_get(objects, context):
             ).extra(
                  where=[ 'sitemask & %s <> 0', ],
                 params=[ context['site'], ],
-            ).order_by('-timestart', '-seqno')[0]
+            ).order_by('-seqno')[0]
     except IndexError:
         return None
         
