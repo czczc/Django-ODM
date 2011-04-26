@@ -8,6 +8,9 @@ var cmd_prefix = '/project/projectdirs/dayabay/webcommands';
 var Jobs = new Object;
 
 $('button').button();
+$('#jumper button').click(function() {
+    window.location = $(this).attr('href');
+});
 $('#table_pdsf_jobs').tablesorter({
     headers : {
         6 : { sorter : false },  // output log
@@ -242,15 +245,6 @@ function parse_job_details(details) {
     ];
 }
 
-function show_modal_pre(output) {
-    $.modal('<div><pre>' + output + '</pre></div>',
-        {
-            'overlayClose' : true,
-            'maxWidth' : 900,
-            'maxHeight' : 600
-        }
-    );
-}
 
 function show_log(file_path_list) {
     var cmd = cmd_prefix + '/common/headtail -n 20 ' + file_path_list.join(':');
@@ -262,22 +256,4 @@ function show_full(file_path_list) {
     var cmd = cmd_prefix + '/common/cat ' + file_path_list.join(':');
     run_command(cmd);
     $.noticeAdd({ text : 'Loading file ...', stay : true });
-}
-
-function run_command(cmd) {
-    $.newt_ajax({
-        url: '/command/pdsf',    
-        type: 'POST',
-        data: {"executable": cmd}, 
-        success: function(data) {
-            $.noticeRemove($('.notice-item-wrapper'), 400);
-            $.modal('<div><pre>' + data.output + '</pre></div>',
-                {
-                    'overlayClose' : true,
-                    'maxWidth' : 900,
-                    'maxHeight' : 600
-                }
-            );
-        }
-    });
 }

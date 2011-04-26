@@ -30,15 +30,6 @@ $('#hide_jobs_table').click(function(){
     return false;
 });
 
-$('#btn_pdsf_logout').click(function(){
-    $.newt_ajax({
-        url: '/logout',       
-        type: 'GET',
-        success: function(data) {
-            window.location = base_url;
-        }
-    });
-});
 
 $('#btn_all_users').click(function(){
     load_users('dayabay');
@@ -193,24 +184,5 @@ function enable_qstat_jobid() {
        });
        return false;
        // console.log(cmd);
-    });
-}
-
-
-function run_command(cmd) {
-    $.newt_ajax({
-        url: '/command/pdsf',    
-        type: 'POST',
-        data: {"executable": cmd}, 
-        success: function(data) {
-            $.noticeRemove($('.notice-item-wrapper'), 400);
-            $.modal('<div><pre>' + data.output + '</pre></div>',
-                {
-                    'overlayClose' : true,
-                    'maxWidth' : 900,
-                    'maxHeight' : 600
-                }
-            );
-        }
     });
 }

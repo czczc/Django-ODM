@@ -51,11 +51,11 @@ class SearchPlotsForm(forms.Form):
         })
     )
         
-    num_col = forms.CharField(
-        label='Num. Columns', initial='3', max_length=2, required=False,
+    num_col = forms.IntegerField(
+        label='Num. Columns', initial='3', max_value=10, required=False,
         widget=forms.TextInput(attrs={'size':'2'})
     )
-    
+
     sort_run = forms.ChoiceField(
         label='Sort Run',
         choices=(
@@ -73,6 +73,46 @@ class PQMSearchPlotsForm(SearchPlotsForm):
         choices=Pqm().figure_choices(),
         widget=forms.SelectMultiple(attrs={'size':'10'})
     )
-    
 
+
+# ==================================
+class RunProcessForm(forms.Form):
+    
+    cluster = forms.ChoiceField(
+        choices=(
+            ('pdsf', 'pdsf'),
+            ('pdsfSim', 'pdsfSim'),
+            ('local', 'local'),
+        ),
+    )
+    
+    job_name = forms.CharField(
+        widget=forms.TextInput(attrs={'size':'10'})
+    )
+    
+    run_no = forms.IntegerField(
+        label='Run No.', min_value=1,
+        widget=forms.TextInput(attrs={'size':'6'})
+    )
+    
+    seq_no = forms.IntegerField(
+        label='Seq No.', min_value=1,
+        widget=forms.TextInput(attrs={'size':'6'})
+    )
+    
+# ==================================
+class ViewRunProcessForm(RunProcessForm):
+    
+    print_state = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(check_test=lambda x: True),
+    )
+
+# ==================================
+class BatchRunProcessForm(RunProcessForm):
+        
+    data_file = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={'size':'50'})
+    )
 

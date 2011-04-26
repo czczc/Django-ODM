@@ -21,6 +21,8 @@
 	margin-bottom: 8px;
 }
 
+.notice-wrap .error { background-color: #F2583E; }
+.notice-wrap .success { background-color: green; }
 .notice-item p { margin-bottom: 0; }
 
 .notice-item-close {

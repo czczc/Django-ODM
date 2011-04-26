@@ -19,4 +19,6 @@ urlpatterns = patterns('odm.production.views',
     
     (r'^(\w+)/search/run/(\d+)/', 'search'),
     
+    (r'^(?P<production>\w+)/jobs/', 'diagnostic_jobs'),
+    
 )

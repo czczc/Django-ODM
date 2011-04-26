@@ -294,4 +294,24 @@ def search(request, production, runno):
     else:
         raise Http404
     
+
+# =========== Jobs =========== 
+
+@login_required
+def diagnostic_jobs(request, production):
+    '''diagnostic jobs'''
+    from odm.production.forms import ViewRunProcessForm
+    
+    if request.is_ajax():
+        view_form = ViewRunProcessForm(request.POST)
+    else:
+        view_form = ViewRunProcessForm() # An unbound form
+        
+    return direct_to_template(request, 
+        template = 'production/jobs.html',
+        extra_context = {
+            'production' : production,
+            'view_form' : view_form,
+        })
+    
     

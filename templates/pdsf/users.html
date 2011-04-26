@@ -54,7 +54,7 @@
     <ul>
         <li><button id='btn_all_users'>Refresh User Job Info ...</button></li>
         <li><button class='show_div' id='commands_batch_queue'>Toggle Batch Queue Details ...</button></li>
-        <li><button id='btn_pdsf_logout'>Log out PDSF ...</button></li>
+        <li><button id='pdsf_logout'>Log out PDSF ...</button></li>
     </ul>
     
     <div class='hidden commands_batch_queue'>
@@ -87,6 +87,7 @@
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.notice.js"></script>
 <script src="http://newt.nersc.gov/js/newt.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/pdsf.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/pdsf/pdsf_basic.js"></script>    
+<script type="text/javascript" src="{{ MEDIA_URL }}js/pdsf/pdsf.js"></script>
 {% endblock %}
 
