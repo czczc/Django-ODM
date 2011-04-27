@@ -15,13 +15,14 @@ function run_command(cmd) {
         data: {"executable": cmd}, 
         success: function(data) {
             $.noticeRemove($('.notice-item-wrapper'), 400);
-            $.modal('<div><pre>' + data.output + '</pre></div>',
+            $.modal('<div><pre class="prettyprint">' + data.output + '</pre></div>',
                 {
                     'overlayClose' : true,
                     'maxWidth' : 900,
                     'maxHeight' : 600
                 }
             );
+            prettyPrint();
         },
         error: function() {
             show_error('ERROR: operation failed.');
@@ -30,13 +31,14 @@ function run_command(cmd) {
 }
 
 function show_modal_pre(output) {
-    $.modal('<div><pre>' + output + '</pre></div>',
+    $.modal('<div><pre class="prettyprint">' + output + '</pre></div>',
         {
             'overlayClose' : true,
             'maxWidth' : 900,
             'maxHeight' : 600
         }
     );
+    prettyPrint();
 }
 
 function show_notice(text) {

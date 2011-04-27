@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% load lazyutil %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/prettify.css")?>
+{% endblock %}
+
+{% block title %}ODM | Script Generator | runProcess.py{% endblock %}
+
+{% block content %}
+    
+    <div class = "grid_24">
+         <h2>
+             Script Generator &nbsp;|&nbsp; runProcess.py &nbsp;|&nbsp; {{ production|title }}
+             <input type='submit' id='hide_scripts_viewer' value='Hide Scripts' class='hidden'
+                style='float: right; font-size: 12px; margin-right: 10px;' />
+        </h2>
+    </div>    
+    <div class="clear"></div>
+    
+    <div class = "grid_24">          
+        <pre id='scripts_viewer' class='hidden prettyprint lang-bsh'>
+        </pre>
+    </div>
+    <div class="clear"></div>
+
+    {# process run form  #}
+    <div class = "grid_10" style='margin-top:10px;'>
+    <form action="" method="post" id='form_process' class='ui-widget'>{% csrf_token %}
+        <fieldset class='ui-widget-content'>
+          <legend class='ui-widget-header ui-corner-all' align='center' style='padding: 5px 10px 5px 10px;'>
+              {{ title }} Process Run
+          </legend>
+        <table style='margin-top: 10px;'>
+            {% for field in form_process %}
+            <tr>
+                {% if field|field_type:'checkboxinput' %}
+                <th>
+                    <ul id="form_process_{{ field.html_name }}_error" class='errorlist'></ul>
+                    {{ field }}
+                </th>
+                <td style='font-weight:bold;'>{{ field.label }}</td>
+                {% else %}
+                <th>{{ field.label }}</th>
+                <td>
+                    <ul id="form_process_{{ field.html_name }}_error" class='errorlist'></ul>
+                    {{ field }}
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}            
+            <tr>
+                <th colspan='2' style='text-align:center; padding:15px 0 10px 0;'>
+                    <input id='submit_form_process' type="submit" value="Generate" />
+                </th>
+            </tr>
+        </table>
+        <input type='hidden' name="form_name" value='form_process'>
+        </fieldset>
+    </form>
+    </div>
+        
+    {# view run status form  #}
+    <div class = "grid_7" style='margin-top:10px;'>
+    <form action="" method="post" id='form_view' class='ui-widget'>{% csrf_token %}
+        <fieldset class='ui-widget-content'>
+          <legend class='ui-widget-header ui-corner-all' align='center' style='padding: 5px 10px 5px 10px;'>
+              {{ title }} View Run Status
+          </legend>
+        <table style='margin-top: 10px;'>
+            {% for field in form_view %}
+            <tr>
+                {% if field|field_type:'checkboxinput' %}
+                <th>
+                    <ul id="form_view_{{ field.html_name }}_error" class='errorlist'></ul>
+                    {{ field }}
+                </th>
+                <td style='font-weight:bold;'>{{ field.label }}</td>
+                {% else %}
+                <th>{{ field.label }}</th>
+                <td>
+                    <ul id="form_view_{{ field.html_name }}_error" class='errorlist'></ul>
+                    {{ field }}
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}            
+            <tr>
+                <th colspan='2' style='text-align:center; padding:15px 0 10px 0;'>
+                    <input id='submit_form_view' type="submit" value="Generate" />
+                </th>
+            </tr>
+        </table>
+        <input type='hidden' name="form_name" value='form_view'>
+        </fieldset>
+    </form>
+    </div>    
+    
+    {# clear run status form  #}
+    <div class = "grid_7" style='margin-top:10px;'>
+    <form action="" method="post" id='form_clear' class='ui-widget'>{% csrf_token %}
+        <fieldset class='ui-widget-content'>
+          <legend class='ui-widget-header ui-corner-all' align='center' style='padding: 5px 10px 5px 10px;'>
+              {{ title }} Clear Run Status
+          </legend>
+        <table style='margin-top: 10px;'>
+            {% for field in form_clear %}
+            <tr>
+                {% if field|field_type:'checkboxinput' %}
+                <th>
+                    <ul id="form_clear_{{ field.html_name }}_error" class='errorlist'></ul>
+                    {{ field }}
+                </th>
+                <td style='font-weight:bold;'>{{ field.label }}</td>
+                {% else %}
+                <th>{{ field.label }}</th>
+                <td>
+                    <ul id="form_clear_{{ field.html_name }}_error" class='errorlist'></ul>
+                    {{ field }}
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}            
+            <tr>
+                <th colspan='2' style='text-align:center; padding:15px 0 10px 0;'>
+                    <input id='submit_form_clear' type="submit" value="Generate" />
+                </th>
+            </tr>
+        </table>
+        <input type='hidden' name="form_name" value='form_clear'>
+        </fieldset>
+    </form>
+    </div>
+    <div class="clear"></div>
+    
+    <div class = "grid_24" style='margin-top:20px;'>
+         <h4 align='center' style='background-color:#f2f5f7; padding:5px;'>
+             <a href='https://wiki.bnl.gov/dayabay/index.php?title=Manual:Run_Processing'>Manual</a>
+             &nbsp;&nbsp;|&nbsp;&nbsp;
+             <a href='http://dayabay.ihep.ac.cn/tracs/dybsvn/browser/dybgaudi/trunk/Validation'>Source</a>
+        </h4>
+    </div>
+    <div class="clear"></div>{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/ajax_csrf.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/prettify/prettify.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/production/scripts.js"></script>
+{% endblock %}
+

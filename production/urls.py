@@ -5,6 +5,7 @@ urlpatterns = patterns('odm.production.views',
     # normal urls
     (r'^(?P<production>\w+)/view/$', 'view'),
     (r'^(?P<production>\w+)/run/(?P<runno>\d+)/(?P<site>\w+)/(?P<detector>\w+)/board/(?P<board>\d+)/connector/(?P<connector>\d+)', 'diagnostics_channel'),
+    (r'^(?P<production>\w+)/scripts/$', 'diagnostics_scripts'),
     (r'^diagnostics/clean/tmp/$', 'diagnostics_cleantmp'),
     
     # ajax only urls
@@ -18,7 +19,5 @@ urlpatterns = patterns('odm.production.views',
     (r'^simulation/run/(\d+)/', 'simulation_run'),
     
     (r'^(\w+)/search/run/(\d+)/', 'search'),
-    
-    (r'^(?P<production>\w+)/jobs/', 'diagnostic_jobs'),
-    
+        
 )

@@ -298,20 +298,99 @@ def search(request, production, runno):
 # =========== Jobs =========== 
 
 @login_required
-def diagnostic_jobs(request, production):
-    '''diagnostic jobs'''
-    from odm.production.forms import ViewRunProcessForm
+def diagnostics_scripts(request, production):
+    '''diagnostic scripts generator'''
+    from odm.production.forms import ViewRunProcessForm, ClearRunProcessForm, ProcessRunProcessForm
+    from odm.production.forms import SimulationViewRunProcessForm, SimulationClearRunProcessForm, SimulationProcessRunProcessForm
+    
+    if not production in ['diagnostics', 'simulation']:
+        raise Http404
+        
+    form_dict = {
+        'diagnostics' : {
+            'form_view' : ViewRunProcessForm,
+            'form_clear' : ClearRunProcessForm,
+            'form_process' : ProcessRunProcessForm,
+        },
+        'simulation' : {
+            'form_view' : SimulationViewRunProcessForm,
+            'form_clear' : SimulationClearRunProcessForm,
+            'form_process' : SimulationProcessRunProcessForm,
+        },
+    }
     
     if request.is_ajax():
-        view_form = ViewRunProcessForm(request.POST)
+        form_name = request.POST.get('form_name', '')
+        try:
+            form = form_dict[production][form_name](request.POST)
+        except:
+            return HttpResponse('not valid form name')
+        # if form_name == 'form_view':
+        #     form = ViewRunProcessForm(request.POST)
+        # elif form_name == 'form_clear':
+        #     form = ClearRunProcessForm(request.POST)
+        # elif form_name == 'form_process':
+        #     form = ProcessRunProcessForm(request.POST)
+        # else:
+            
+        
+        if form.is_valid():
+            data = form.cleaned_data
+            info = {
+                'data' : data,
+                'script' : _script_generator(data)
+            }            
+            return HttpResponse(json.dumps(info))
+        else:
+            return HttpResponse(json.dumps( {
+                'errors': form.errors,
+            })) 
     else:
-        view_form = ViewRunProcessForm() # An unbound form
+        form_view = form_dict[production]['form_view']() # An unbound form
+        form_clear = form_dict[production]['form_clear']()
+        form_process = form_dict[production]['form_process']()
         
     return direct_to_template(request, 
-        template = 'production/jobs.html',
+        template = 'production/scripts.html',
         extra_context = {
             'production' : production,
-            'view_form' : view_form,
+            'form_view' : form_view,
+            'form_clear' : form_clear,
+            'form_process' : form_process,
         })
+
+
+def _script_generator(data):
+    script = 'runProcess.py '
+    if data.get('print_state', False):
+        script += '--print-state '
+    if data.get('clear_sequence', False):
+        script += '--clear-sequence '
+    if data.get('clear_stats', False):
+        script += '--clear-sequence-stats '
+    if data.get('clear_summary', False):
+        script += '--clear-summary '
+    if data.get('batch', False):
+        script += '--batch '
+    if data.get('run_nuwa', False):
+        script += '--run-nuwa '
+    if data.get('add_stats', False):
+        script += '--add-stats '
+    if data.get('summarize_run', False):
+        script += '--summarize-run '
+    script += '--cluster=%s ' % data.get('cluster', 'local')
+    script += '-j %s ' % data.get('job_name', 'odm_v3')
+    if data.get('data_file', ''):
+        script += '-f %s ' % data['data_file']
+    else:
+        if data.get('run_no', ''):
+            script += '-r %d ' % data.get('run_no', 0)
+        if data.get('seq_no', ''):
+            script += '-s %d ' % data['seq_no']
+        elif data.get('all_sequences', False):
+            script += '--all-sequences '
+
+    return script
+    
     
     

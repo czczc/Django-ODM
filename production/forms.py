@@ -81,13 +81,16 @@ class RunProcessForm(forms.Form):
     cluster = forms.ChoiceField(
         choices=(
             ('pdsf', 'pdsf'),
-            ('pdsfSim', 'pdsfSim'),
             ('local', 'local'),
         ),
     )
     
-    job_name = forms.CharField(
-        widget=forms.TextInput(attrs={'size':'10'})
+    job_name = forms.ChoiceField(
+        choices=(
+            ('odm_v3', 'odm_v3'),
+            ('odm_v2', 'odm_v2'),
+            ('adBasicFigs', 'adBasicFigs'),
+        ),
     )
     
     run_no = forms.IntegerField(
@@ -96,10 +99,10 @@ class RunProcessForm(forms.Form):
     )
     
     seq_no = forms.IntegerField(
-        label='Seq No.', min_value=1,
+        label='Seq No.', min_value=1, required=False,
         widget=forms.TextInput(attrs={'size':'6'})
     )
-    
+     
 # ==================================
 class ViewRunProcessForm(RunProcessForm):
     
@@ -109,10 +112,162 @@ class ViewRunProcessForm(RunProcessForm):
     )
 
 # ==================================
-class BatchRunProcessForm(RunProcessForm):
-        
-    data_file = forms.CharField(
+class ClearRunProcessForm(RunProcessForm):
+    
+    all_sequences = forms.BooleanField(required=False)
+      
+    clear_sequence = forms.BooleanField(required=False)
+    
+    clear_stats = forms.BooleanField(required=False)
+    
+    clear_summary = forms.BooleanField(required=False)
+
+# ==================================
+class ProcessRunProcessForm(RunProcessForm):
+    
+    run_no = forms.IntegerField(
+        label='Run No.', min_value=1, required=False,
+        widget=forms.TextInput(attrs={'size':'6'})
+    )
+    
+    all_sequences = forms.BooleanField(required=False)
+    
+    batch = forms.BooleanField(
         required=False,
-        widget=forms.TextInput(attrs={'size':'50'})
+        widget=forms.CheckboxInput(check_test=lambda x: True),
+    )
+    
+    run_nuwa = forms.BooleanField(
+        label='Run NuWa', required=False,
+        widget=forms.CheckboxInput(check_test=lambda x: True),
+    )       
+    
+    add_stats = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(check_test=lambda x: True),
+    )
+    
+    summarize_run = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(check_test=lambda x: True),
+    )
+    
+    data_file = forms.CharField(required=False)
+    
+    
+    def clean(self):
+        '''custom validation'''
+        import os
+        cleaned_data = self.cleaned_data
+        
+        data_file = cleaned_data.get('data_file')
+        if data_file:
+            # skip file exist check because 'apache' does not have permission for most directories
+            basename = os.path.basename(data_file)
+            tokens = basename.split('.')
+            if len(tokens) != 8 or tokens[-1] not in ['root', 'data']:
+                msg = 'Invalid file name format.'
+                self._errors['data_file'] = self.error_class([msg])
+                del cleaned_data['data_file']
+        
+        return cleaned_data
+
+
+# ==================================
+class SimulationRunProcessForm(forms.Form):
+    
+    cluster = forms.ChoiceField(
+        choices=(
+            ('pdsfSim', 'pdsfSim'),
+            ('local', 'local'),
+        ),
+    )
+    
+    job_name = forms.ChoiceField(
+        choices=(
+            ('odmSim_v4', 'odmSim_v4'),
+            ('odmSim_v2', 'odmSim_v2'),
+        ),
     )
 
+# ==================================
+class SimulationViewRunProcessForm(SimulationRunProcessForm):
+    
+    run_no = forms.IntegerField(
+        label='Run No.', min_value=1,
+        widget=forms.TextInput(attrs={'size':'6'})
+    )
+    
+    seq_no = forms.IntegerField(
+        label='Seq No.', min_value=1, required=False,
+        widget=forms.TextInput(attrs={'size':'6'})
+    )
+    
+    print_state = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(check_test=lambda x: True),
+    )
+
+# ==================================
+class SimulationClearRunProcessForm(SimulationRunProcessForm):
+    
+    run_no = forms.IntegerField(
+        label='Run No.', min_value=1,
+        widget=forms.TextInput(attrs={'size':'6'})
+    )
+    
+    seq_no = forms.IntegerField(
+        label='Seq No.', min_value=1, required=False,
+        widget=forms.TextInput(attrs={'size':'6'})
+    )
+    
+    all_sequences = forms.BooleanField(required=False)
+      
+    clear_sequence = forms.BooleanField(required=False)
+    
+    clear_stats = forms.BooleanField(required=False)
+    
+    clear_summary = forms.BooleanField(required=False)
+    
+# ==================================
+class SimulationProcessRunProcessForm(SimulationRunProcessForm):
+        
+    batch = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(check_test=lambda x: True),
+    )
+    
+    run_nuwa = forms.BooleanField(
+        label='Run NuWa', required=False,
+        widget=forms.CheckboxInput(check_test=lambda x: True),
+    )       
+    
+    add_stats = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(check_test=lambda x: True),
+    )
+    
+    summarize_run = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(check_test=lambda x: True),
+    )
+    
+    data_file = forms.CharField()
+    
+    
+    def clean(self):
+        '''custom validation'''
+        import os
+        cleaned_data = self.cleaned_data
+        
+        data_file = cleaned_data.get('data_file')
+        if data_file:
+            # skip file exist check because 'apache' does not have permission for most directories
+            basename = os.path.basename(data_file)
+            tokens = basename.split('.')
+            if len(tokens) != 8 or tokens[-1] not in ['root', 'data']:
+                msg = 'Invalid file name format.'
+                self._errors['data_file'] = self.error_class([msg])
+                del cleaned_data['data_file']
+        
+        return cleaned_data
