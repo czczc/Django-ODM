@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Daqruninfo, Daqruninfovld, Daqcalibruninfo
+from odm.runinfo.models import Daqruninfo, Daqruninfovld, Daqcalibruninfo
 
 class DaqruninfoAdmin(admin.ModelAdmin):
     list_display = ('runno', 'runtype', 'vld')
