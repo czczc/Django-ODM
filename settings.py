@@ -79,8 +79,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'registration',
-    'odm.templatelib',
     'django_extensions',
+    'south',
+    'odm.templatelib',
 )
 
 SESSION_COOKIE_AGE = 86400 * 3
@@ -132,15 +133,12 @@ elif SITE_LOCAL:
         'INTERCEPT_REDIRECTS': False,
         'SHOW_TEMPLATE_CONTEXT': False,
     }
-    INSTALLED_APPS = (
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
-        'django.contrib.messages',
-        'django.contrib.admin',
-        'registration',
-        'odm.templatelib',
+    INSTALLED_APPS += (
         'debug_toolbar',
+        'odm.runinfo',
+        'odm.daqinfo',
+        'odm.fileinfo',
+        'odm.pmtinfo',
     )
 
 # SITE_ROOT dependent settings
