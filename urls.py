@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^accounts/profile/$', direct_to_template, {'template': 'registration/profile.html'}),
     (r'^accounts/', include('registration.backends.default.urls')),
+    (r'^comments/', include('django.contrib.comments.urls')),
     
     (r'^$', direct_to_template, { 'template': 'index.html', }),
     (r'^quick-search/$', 'odm.runinfo.views.quick_search'),
