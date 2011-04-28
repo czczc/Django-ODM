@@ -90,6 +90,7 @@ class RunProcessForm(forms.Form):
             ('odm_v3', 'odm_v3'),
             ('odm_v2', 'odm_v2'),
             ('adBasicFigs', 'adBasicFigs'),
+            ('nuwaConvert_v1', 'nuwaConvert_v1'),
         ),
     )
     
@@ -121,6 +122,8 @@ class ClearRunProcessForm(RunProcessForm):
     clear_stats = forms.BooleanField(required=False)
     
     clear_summary = forms.BooleanField(required=False)
+    
+    dry_run = forms.BooleanField(required=False)
 
 # ==================================
 class ProcessRunProcessForm(RunProcessForm):
@@ -151,9 +154,10 @@ class ProcessRunProcessForm(RunProcessForm):
         required=False,
         widget=forms.CheckboxInput(check_test=lambda x: True),
     )
+        
+    dry_run = forms.BooleanField(required=False)
     
     data_file = forms.CharField(required=False)
-    
     
     def clean(self):
         '''custom validation'''
@@ -229,6 +233,8 @@ class SimulationClearRunProcessForm(SimulationRunProcessForm):
     
     clear_summary = forms.BooleanField(required=False)
     
+    dry_run = forms.BooleanField(required=False)
+    
 # ==================================
 class SimulationProcessRunProcessForm(SimulationRunProcessForm):
         
@@ -251,9 +257,10 @@ class SimulationProcessRunProcessForm(SimulationRunProcessForm):
         required=False,
         widget=forms.CheckboxInput(check_test=lambda x: True),
     )
+        
+    dry_run = forms.BooleanField(required=False)
     
     data_file = forms.CharField()
-    
     
     def clean(self):
         '''custom validation'''

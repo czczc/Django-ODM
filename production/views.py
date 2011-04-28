@@ -325,15 +325,7 @@ def diagnostics_scripts(request, production):
             form = form_dict[production][form_name](request.POST)
         except:
             return HttpResponse('not valid form name')
-        # if form_name == 'form_view':
-        #     form = ViewRunProcessForm(request.POST)
-        # elif form_name == 'form_clear':
-        #     form = ClearRunProcessForm(request.POST)
-        # elif form_name == 'form_process':
-        #     form = ProcessRunProcessForm(request.POST)
-        # else:
             
-        
         if form.is_valid():
             data = form.cleaned_data
             info = {
@@ -389,7 +381,9 @@ def _script_generator(data):
             script += '-s %d ' % data['seq_no']
         elif data.get('all_sequences', False):
             script += '--all-sequences '
-
+    if data.get('dry_run', False):
+        script += '--dry-run '
+        
     return script
     
     

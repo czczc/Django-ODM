@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'registration',
     'odm.templatelib',
+    'django_extensions',
 )
 
 SESSION_COOKIE_AGE = 86400 * 3
