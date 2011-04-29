@@ -1,12 +1,12 @@
 {% for comment in comment_list reversed %}
 
 <div id="c{{ comment.id }}" class='comment_header'>
+    <span class='comment_date'>[ {{ comment.submit_date|date:"l, F d, Y" }} ]</span>
     <span class='comment_username'>{{ comment.user.get_full_name }}</span> says:
 </div>
 
 <div class='comment_content'>
-    {{ comment.comment }}
-    <p class='comment_date'>- {{ comment.submit_date|date:"l, F d, Y" }}</p>
+    {{ comment.comment|safe }}
 </div>
 
 {% endfor %}

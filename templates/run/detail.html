@@ -27,8 +27,20 @@
     
 {% endblock %}
 
+{% block extra_content %}
+{% if odmrun %}
+{% load comments %}
+<div class = "grid_22 prefix_1 suffix_1">
+    {% render_comment_form for odmrun %}
+</div>
+<div class="clear"></div>
+{% endif %}
+{% endblock%}
+
 {% block extra_js %}
     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal.1.4.1.min.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/sprintf.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/run.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/tiny_mce/tiny_mce.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/init_tiny_mce.js"></script>
 {% endblock %}
