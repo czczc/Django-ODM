@@ -3,7 +3,7 @@ from django.conf import settings
 
 #=====================================
 class Run(models.Model):
-    runno = models.IntegerField(db_column='runNo')
+    runno = models.IntegerField(unique=True)
     runtype = models.CharField(max_length=96)
     timestart = models.DateTimeField()
     timeend = models.DateTimeField()
