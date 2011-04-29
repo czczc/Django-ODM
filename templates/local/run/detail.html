@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/modal.css")?>
+{% endblock %} 
+
+{% block title %}ODM | Run {{ run.runno }}{% endblock %}
+
+
+{% block content %}
+
+    {% load comments %}
+    {% get_comment_count for run as comment_count %}
+
+    <div class = "grid_24">
+        <ul>
+            <li>{{ run.runno }}</li>
+            <li>{{ run.runtype }}</li>
+            <li>{{ run.timestart }}</li>
+            <li>{{ run.timeend }}</li>
+            <li>{{ comment_count }}</li>
+        </ul>
+    </div>
+    
+    {% render_comment_list for run %}
+    
+    {% render_comment_form for run %}
+    
+    {# {% get_comment_list for run as comment_list %} #}
+    {# {% for comment in comment_list %} #}
+    {#     <p>comment.comment</p> #}
+    {# {% endfor %} #}
+    
+    <div class="clear"></div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal.1.4.1.min.js"></script>
+{% endblock %}
