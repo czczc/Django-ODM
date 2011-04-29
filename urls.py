@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     (r'^production/', include('odm.production.urls')),   
     (r'^pmt/', include('odm.pmtinfo.urls')),
     (r'^pdsf/', include('odm.pdsf.urls')), 
+    (r'^local/', include('odm.odmrun.urls')),
 )
 
 from django.conf import settings
