@@ -8,8 +8,8 @@ from django.core.paginator import Paginator
 from django.conf import settings
 
 from odm.runinfo.models import Daqruninfo, Daqcalibruninfo
-from odm.daqinfo.models import Daqrunconfig
 from odm.fileinfo.models import Daqrawdatafileinfo
+from odm.odmrun.models import Run
 from odm.runinfo.forms import SearchRunListForm
 
 import json, re
@@ -54,9 +54,8 @@ def simrun(request, runno):
             
 @login_required
 def run(request, runno):
-    '''query a single run'''
+    '''single run detailed view'''
         
-    # run = get_object_or_404(Daqruninfo, runno=runno)
     try:
         run = Daqruninfo.objects.get(runno=runno)
     except:
@@ -67,6 +66,7 @@ def run(request, runno):
                 'run' : {'runno' : runno},
             })
     num_files = Daqrawdatafileinfo.objects.filter(runno=runno).count()
+    
     calibrun = None
     if (run.runtype == 'ADCalib'):
         try:
@@ -74,12 +74,22 @@ def run(request, runno):
             calibrun.humanize()
         except:
             calibrun = None
-    return render_to_response('run/detail.html', { 
-        'run' : run,
-        'calibrun' : calibrun,
-        'num_files' : num_files, 
-        },
-        context_instance=RequestContext(request))
+    
+    odmrun = None
+    try:
+        odmrun = Run.objects.get(runno=runno)
+    except:
+        odmrun = None
+    
+    return direct_to_template(request,
+        template = 'run/detail.html', 
+        extra_context = { 
+            'run' : run,
+            'num_files' : num_files, 
+            'calibrun' : calibrun,
+            'odmrun' : odmrun,
+            'next' : run.get_absolute_url(),
+        })
 
 
 @login_required
@@ -180,6 +190,8 @@ def runtype(request, runtype='All', page=1, records=500):
 @login_required
 def daqinfo(request, runno):
     '''json daqinfo info'''
+    
+    from odm.daqinfo.models import Daqrunconfig
     
     Daqrunconfig.objects.runno = runno
     Daqrunconfig.objects.fetch_all()

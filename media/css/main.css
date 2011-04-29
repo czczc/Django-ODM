@@ -106,4 +106,9 @@ a.FEEDiag { background: #ddd3f3; }
 
 #showcase td { text-align: center; vertical-align: center; }
 #showcase td a { display: block; padding-top: 1em;}
- 
+
+/* comments */
+.comment_date { font-style: italic; margin: 10px 0 0 50px;}
+.comment_username { /*font-size: 14px;*/ color: #930; margin-left: 5px;}
+.comment_content { border: 1px solid #bbb; margin: 15px 40px 25px 40px; padding: 10px;}
+

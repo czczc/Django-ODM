@@ -1,10 +1,11 @@
-{% extends "comments/base.html" %}
-{% load i18n %}
+{% extends "base.html" %}
+{% load comments i18n %}
+
 
 {% block title %}{% trans "Preview your comment" %}{% endblock %}
 
 {% block content %}
-  {% load comments %}
+<div class = "grid_24">
   <form action="{% comment_form_target %}" method="post">{% csrf_token %}
     {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
     {% if form.errors %}
@@ -24,7 +25,9 @@
         <p
           {% if field.errors %} class="error"{% endif %}
           {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+          {% ifequal field.name "comment" %} 
           {{ field.label_tag }} {{ field }}
+          {% endifequal %}
         </p>
       {% endif %}
     {% endfor %}
@@ -33,4 +36,5 @@
     <input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />
     </p>
   </form>
+</div>
 {% endblock %}

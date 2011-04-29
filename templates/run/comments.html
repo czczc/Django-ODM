@@ -1,0 +1,29 @@
+{% if odmrun %}
+
+{% load comments %}
+<div class = "grid_24" style='margin-top:20px;'>
+    <a name="comments"></a>
+     <h2>
+         Comments &nbsp;|&nbsp; 
+         {{run.runtype}} Run {{ run.runno }}
+    </h2>
+</div>
+<div class="clear"></div>
+
+
+<div class = "grid_24">
+    {% render_comment_list for odmrun %}
+</div>
+<div class="clear"></div>
+
+<div class = "grid_24">
+    Add a comment:
+</div>
+<div class="clear"></div>
+
+<div class = "grid_22 prefix_1 suffix_1">
+    {% render_comment_form for odmrun %}
+</div>
+<div class="clear"></div>
+
+{% endif %}
