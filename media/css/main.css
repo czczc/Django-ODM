@@ -25,6 +25,7 @@ ul.errorlist { margin: 0; padding: 0; list-style: none;}
 .token { color: #F2583E; }
 .warning { color: #F2583E; }
 .great { color: green; }
+.sep { display: inline; border-right: 1px solid #bbb; margin:0 14px 0 10px;}
 
 /* link #125ca2 */
 a { color: #125ca2; background-color: transparent; text-decoration: none; font-weight: normal; outline-style: none; }

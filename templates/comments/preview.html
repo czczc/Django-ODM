@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% if user.username != 'dayabay' %}
+
 {% load comments i18n %}
 
 {% block title %}{% trans "Preview your comment" %}{% endblock %}
@@ -9,17 +11,16 @@
     <h1>{% blocktrans count form.errors|length as counter %}Please correct the error below{% plural %}Please correct the errors below{% endblocktrans %}</h1>
     {% else %}
     <h1>{% trans "Preview your comment" %}</h1>
-      <blockquote class='comment_content'>{{ comment|safe }}</blockquote>
-      <p>
-      {% trans "and" %} <input type="submit" name="submit" class="submit-post" value="{% trans "Post your comment" %}" id="submit" /> {% trans "or make changes" %}:
-      </p>
+    <div class='comment_content'>
+        {{ comment|safe }}
+    </div>
     {% endif %}
     </div>
     <div class="clear"></div>
 {% endblock %}
 
 {% block extra_content %}
-<div class = "grid_22 prefix_1 suffix_1">
+<div class = "grid_24">
   <form action="{% comment_form_target %}" method="post">{% csrf_token %}
     {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
 
@@ -38,7 +39,7 @@
       {% endif %}
     {% endfor %}
     <p class="submit">
-    <input type="submit" name="submit" class="submit-post" value="{% trans "Post" %}" />
+    <input type="submit" name="submit" class="submit-post" value="{% trans "Add Comment" %}" />
     <input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />
     </p>
   </form>
@@ -50,3 +51,5 @@
     <script type="text/javascript" src="{{ MEDIA_URL }}js/tiny_mce/tiny_mce.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/init_tiny_mce.js"></script>
 {% endblock %}
+
+{% endif %}
