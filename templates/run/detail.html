@@ -28,13 +28,13 @@
 {% endblock %}
 
 {% block extra_content %}
-{% if odmrun %}
-{% load comments %}
-<div class = "grid_22 prefix_1 suffix_1">
-    {% render_comment_form for odmrun %}
-</div>
-<div class="clear"></div>
-{% endif %}
+    {% if odmrun %}
+        {% load comments %}
+        <div class = "grid_22 prefix_1 suffix_1">
+            {% render_comment_form for odmrun %}
+        </div>
+        <div class="clear"></div>
+    {% endif %}
 {% endblock%}
 
 {% block extra_js %}

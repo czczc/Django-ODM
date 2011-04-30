@@ -356,12 +356,15 @@ def _script_generator(data):
     script = 'runProcess.py '
     if data.get('print_state', False):
         script += '--print-state '
-    if data.get('clear_sequence', False):
-        script += '--clear-sequence '
-    if data.get('clear_stats', False):
-        script += '--clear-sequence-stats '
-    if data.get('clear_summary', False):
-        script += '--clear-summary '
+
+    if data.get('clear_all', False):
+        script += '--clear-all '
+    else:
+        if data.get('clear_sequence', False):
+            script += '--clear-sequence '
+        if data.get('clear_run_total', False):
+            script += '--clear-run-total '
+
     if data.get('batch', False):
         script += '--batch '
     if data.get('run_nuwa', False):
@@ -371,6 +374,8 @@ def _script_generator(data):
     if data.get('summarize_run', False):
         script += '--summarize-run '
     script += '--cluster=%s ' % data.get('cluster', 'local')
+    if data.get('catalog', ''):
+        script += '--catalog=%s ' % data['catalog']
     script += '-j %s ' % data.get('job_name', 'odm_v3')
     if data.get('data_file', ''):
         script += '-f %s ' % data['data_file']

@@ -108,7 +108,8 @@ a.FEEDiag { background: #ddd3f3; }
 #showcase td a { display: block; padding-top: 1em;}
 
 /* comments */
-.comment_date { /*font-style: italic;*/ margin: 10px 5px 0 0; color: #999; }
+.comment_header { margin: 15px 0 0 5px; }
+.comment_date { /*font-style: italic;*/  color: #999; }
 .comment_username { /*font-size: 14px;*/ color: #930; margin-left: 5px;}
 .comment_content { border-top: 1px solid #ddd; margin: 15px 40px 40px 40px; padding: 10px;}
 .comment_content ul { margin-left: 20px;}
