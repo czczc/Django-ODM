@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     (r'^pmt/', include('odm.pmtinfo.urls')),
     (r'^pdsf/', include('odm.pdsf.urls')), 
     (r'^local/', include('odm.odmrun.urls')),
+    (r'^feeds/', include('odm.feeds.urls')),
 )
 
 from django.conf import settings

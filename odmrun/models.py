@@ -19,4 +19,4 @@ class Run(models.Model):
         return u'run %d' % (self.runno, )
     
     def get_absolute_url(self):
-        return "%s/local/run/%i/" % (settings.SITE_ROOT, self.runno)
+        return "%s/run/%i/" % (settings.SITE_ROOT, self.runno)

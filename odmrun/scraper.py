@@ -1,7 +1,7 @@
 from odm.runinfo.models import Daqruninfo
 from odm.odmrun.models import Run
 from django.contrib.comments.models import Comment
-
+from datetime import datetime, timedelta
 
 # ====================================================
 class RunScraper(object):
@@ -127,7 +127,7 @@ class CommentScraper(object):
             user_name = user.username,
             user_email = user.email,
             user_url = '',
-            submit_date = run.timeend,
+            submit_date = run.timeend, # UTC
         )
         if dryrun:
             import pprint
