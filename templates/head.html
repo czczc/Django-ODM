@@ -12,9 +12,10 @@
     </div>
     <div class="clear"></div>
     
-    <div id="zone-bar" class="grid_24">
+    <div id="zone-bar" class="grid_24 ui-state-default">
         <ul>            
             <li>
+                <span class="ui-icon ui-icon-folder-open" style='float:left;'></span>
                 <a href="#" class="top_menu"><span>
                     Runs&ensp;
                     <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />
@@ -36,6 +37,7 @@
         </ul>
         <ul>            
             <li>
+                <span class="ui-icon ui-icon-pencil" style='float:left;'></span>
                 <a href="#" class="top_menu"><span>
                     Plots&ensp;
                     <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />
@@ -72,6 +74,7 @@
         {# </ul> #}
         <ul>            
             <li>
+                <span class="ui-icon ui-icon-person" style='float:left;'></span>
                 <a href="#" class="top_menu"><span>
                     Accounts&ensp;
                     <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />
@@ -80,6 +83,19 @@
                     <li><a href='{{ SITE_ROOT }}/accounts/profile/'>Profile</a></li>
                     <li class="menu_separator"></li>
                     <li><a href='{{ SITE_ROOT }}/accounts/logout/'>Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul>            
+            <li>
+                <span class="ui-icon ui-icon-signal-diag" style='float:left;'></span>
+                <a href="#" class="top_menu"><span>
+                    Feeds&ensp;
+                    <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />
+                </span></a>
+                <ul class="sub_menu">
+                    <li><a href='{{ SITE_ROOT }}/feeds/run/latest/'>Latest Runs</a></li>
+                    <li><a href='{{ SITE_ROOT }}/feeds/run/notes/latest/'>Latest Notes</a></li>
                 </ul>
             </li>
         </ul>

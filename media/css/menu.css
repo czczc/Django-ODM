@@ -4,16 +4,16 @@
 #search-button { position: absolute; right: -7px; top: -2px; width: 32px; border: none; }
 
 /* menu deedf7 */ 
-#zone-bar { background: #9c9; height: 29px; padding-top: 3px; margin-top: 10px;/* border-top: 1px solid #aaa;*/}
+#zone-bar { /*background: #9c9;*/ height: 29px; padding-top: 3px; margin-top: 10px;/* border-top: 1px solid #aaa;*/}
 #zone-bar ul { list-style: none inside; display: block; float: left; }
 #zone-bar ul li { height: 18px; padding-top: 5px; margin-left: 20px; position: relative; float: left; }
-#zone-bar ul li:hover { background: url(../img/zonebar-navleft.png) center left no-repeat; }
+#zone-bar ul li:hover { background: #67bde9; /*url(../img/zonebar-navleft.png) center left no-repeat*/}
 #zone-bar ul li a { 
     display: block; float: left;
     height: 23px; position: relative; top: -5px; right: -5px; padding-right: 3px;
     color: #383838; font-weight: bold; font-size: 13px; text-decoration: none;
 }
-#zone-bar ul li a:hover { background: url(../img/zonebar-navright.png) center right no-repeat; }
+#zone-bar ul li a:hover {color: white; background: url(../img/zonebar-navright.png) center right no-repeat; }
 #zone-bar ul li a span { position: relative; top: 6px; }
 #zone-bar ul li.menu_separator { display: block; height: 3px; border-top: 1px solid #d4d4d4; margin-bottom: 5px; }
 #zone-bar ul li ul {
@@ -23,4 +23,4 @@
 #zone-bar ul li ul li { float: none; padding: 0; margin: 0; height: 100%; }
 #zone-bar ul li ul li:hover { background: none; }
 #zone-bar ul li ul li a { display: block; float: none; margin-left: -5px; padding: 5px 0 0 10px; width: 140px; }
-#zone-bar ul li ul li a:hover { background: #d9f0b7; }
+#zone-bar ul li ul li a:hover { /*background: #d9f0b7;*/ background: #67bde9; }
