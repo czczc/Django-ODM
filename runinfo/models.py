@@ -105,6 +105,19 @@ class Daqruninfo(models.Model):
                 return [ detector ]  # single detector
         except IndexError:
             return Detector.hall_detectors.get(site, [])
+
+    def summary(self):
+        html  = '<div class="grid_14" style="margin-top:10px;"><table>\n'
+        html += '<thead><tr><th colspan="2" style="text-align: center;">General Run infomation</th></tr></thead><tbody>\n'
+        html += "<tr><td class='descr'>Run Number</td><td class='value'>%d</td></tr>\n" % self.runno
+        html += "<tr><td class='descr'>Run Type</td><td class='value'>%s</td></tr>\n" % self.runtype
+        html += "<tr><td class='descr'>Start Time [Beijing]</td><td class='value'>%s</td></tr>\n" % self.vld.timestart_beijing()
+        html += "<tr><td class='descr'>Stop Time [Beijing]</td><td class='value'>%s</td></tr>\n" % self.vld.timeend_beijing()
+        html += "<tr><td class='descr'>Partition</td><td class='value'>%s</td></tr>\n" % self.partition()
+        html += "<tr><td class='descr'>Schema-Base-Data Ver.</td><td class='value'>%d-%d-%d</td></tr>\n" % (self.schemaversion, self.baseversion, self.dataversion)
+        html += "</tbody></table></div>"
+        return html
+        
         
 # =====================================
 class Daqcalibruninfo(models.Model):
