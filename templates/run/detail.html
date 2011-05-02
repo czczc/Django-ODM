@@ -23,7 +23,7 @@
     
     {% include "run/pmt.html" %}
     
-    {% include "run/comments.html" %}
+    {% include "run/notes.html" %}
     
 {% endblock %}
 
@@ -31,7 +31,7 @@
     {% if user.username != 'dayabay' %}
         {% if odmrun %}
             {% load comments %}
-            <div class = "grid_24">
+            <div class = "grid_22 prefix_1 suffix_1" style='margin-top:30px;'>
                 {% render_comment_form for odmrun %}
             </div>
             <div class="clear"></div>

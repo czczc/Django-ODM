@@ -10,8 +10,10 @@ class DayaBayOfflineRouter(object):
         return None
 
     def db_for_write(self, model, **hints):
-        if model._meta.app_label in offline_db_applist:
-            return 'lbl'
+        # if model._meta.app_label in offline_db_applist:
+        #     return 'lbl'
+        # only allow write to local db
+        # also to prevent a bug in django 1.2.4 (the NERSC version)
         return None
 
     def allow_relation(self, obj1, obj2, **hints):

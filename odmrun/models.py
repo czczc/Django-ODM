@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.contenttypes import generic
+from django.contrib.comments.models import Comment
 
 #=====================================
 class Run(models.Model):
@@ -7,6 +9,8 @@ class Run(models.Model):
     runtype = models.CharField(max_length=96)
     timestart = models.DateTimeField()
     timeend = models.DateTimeField()
+    
+    comments = generic.GenericRelation(Comment, object_id_field='object_pk')
     
     class Meta:
         ordering = ['-runno']
