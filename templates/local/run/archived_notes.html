@@ -3,10 +3,18 @@
 {% block title %}ODM | Run Notes{% endblock %}
 
 {% load lazyutil %}
+{% load pagination %}
+
 {% block content %}
 <div class = "grid_24">
      <h2>
-         Notes <span class='sep'>|</span> {{ description }}
+         Notes ({{ count }}) <span class='sep'>|</span>
+         {% if description %}
+            {{ description }}
+         {% else %}
+            {{ comment_list.1.submit_date|date:'F, Y' }}
+         {% endif %}
+         {% paginator %}
     </h2>
 </div>    
 <div class="clear"></div>
@@ -39,7 +47,7 @@
        <tbody>        
         {% for date in month_list %}
         <tr><td class='descr' style='text-align:center;'>
-            <a href="{{ SITE_ROOT }}/run/notes/{{ date|date:'Y' }}/{{ date|date:'M' }}/">{{ date|date:'M Y' }}</a>
+            <a href="{{ SITE_ROOT }}/run/notes/{{ date|date:'Y' }}/{{ date|date:'n' }}/">{{ date|date:'M Y' }}</a>
         </td></tr>
         {% endfor %}
        </tbody>

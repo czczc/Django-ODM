@@ -15,7 +15,7 @@ urlpatterns = patterns('odm.runinfo.views',
     (r'^$', 'runtype'),
     
     (r'^latest/days/(?P<days>\d+)/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'latest'),
-    (r'^latest/days/(?P<days>\d+)', 'latest'),
+    (r'^latest/days/(?P<days>\d+)/', 'latest'),
     (r'^latest/days/', 'latest'),
     
     # ajax urls
@@ -34,8 +34,8 @@ urlpatterns += patterns('odm.fileinfo.views',
 )
 
 urlpatterns += patterns('odm.odmrun.views',
-    (r'^notes/(?P<year>\d+)/(?P<month>\w+)/', 'notes_archive'),
-    (r'^notes/latest/', 'notes_archive'),
-      
+    (r'^notes/(?P<year>\d+)/(?P<month>\d+)/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'notes'),
+    (r'^notes/(?P<year>\d+)/(?P<month>\d+)/', 'notes'),
+    (r'^notes/latest/', 'notes'),
 )
 
