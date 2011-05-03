@@ -74,15 +74,13 @@
         {# </ul> #}
         <ul>            
             <li>
-                <span class="ui-icon ui-icon-person" style='float:left;'></span>
+                <span class="ui-icon ui-icon-document" style='float:left;'></span>
                 <a href="#" class="top_menu"><span>
-                    Accounts&ensp;
+                    Notes&ensp;
                     <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />
                 </span></a>
                 <ul class="sub_menu">
-                    <li><a href='{{ SITE_ROOT }}/accounts/profile/'>Profile</a></li>
-                    <li class="menu_separator"></li>
-                    <li><a href='{{ SITE_ROOT }}/accounts/logout/'>Logout</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/notes/latest/'>Latest</a></li>
                 </ul>
             </li>
         </ul>
@@ -96,6 +94,20 @@
                 <ul class="sub_menu">
                     <li><a href='{{ SITE_ROOT }}/feeds/run/latest/'>Latest Runs</a></li>
                     <li><a href='{{ SITE_ROOT }}/feeds/run/notes/latest/'>Latest Notes</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul style='float:right; margin-right:10px;'>            
+            <li>
+                <span class="ui-icon ui-icon-person" style='float:left;'></span>
+                <a href="#" class="top_menu"><span>
+                    Accounts&ensp;
+                    <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />
+                </span></a>
+                <ul class="sub_menu">
+                    <li><a href='{{ SITE_ROOT }}/accounts/profile/'>Profile</a></li>
+                    <li class="menu_separator"></li>
+                    <li><a href='{{ SITE_ROOT }}/accounts/logout/'>Logout</a></li>
                 </ul>
             </li>
         </ul>

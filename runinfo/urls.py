@@ -31,5 +31,11 @@ urlpatterns += patterns('odm.fileinfo.views',
     (r'^file/list/$', 'rawfilelist'),
     (r'^(\d+)/files/catalog/$', 'catalog'),
     (r'^(\d+)/files/diagnostics/$', 'diagnostics'),
-   
 )
+
+urlpatterns += patterns('odm.odmrun.views',
+    (r'^notes/(?P<year>\d+)/(?P<month>\w+)/', 'notes_archive'),
+    (r'^notes/latest/', 'notes_archive'),
+      
+)
+

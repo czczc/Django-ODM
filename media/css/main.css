@@ -12,6 +12,8 @@ pre { font-family: Monaco, Consolas, Verdana, Sans-serif;
     background-color: #f9f9f9; border: 1px solid #D0D0D0; display: block;
     font-size: 12px; overflow: auto; color: #002166; padding: 12px 10px 12px 10px;
 }
+.sidebar ul { list-style-image: url(../img/arrow.gif);}
+.sidebar li { padding: 0; margin: 6px 0 0 0; }
 
 /* text selection */
 ::selection { background: #ffcc89; } /* Safari */ 
