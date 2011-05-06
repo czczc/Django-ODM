@@ -61,17 +61,6 @@
         {#         </ul> #}
         {#     </li> #}
         {# </ul> #}
-        {# <ul>             #}
-        {#     <li> #}
-        {#         <a href="#" class="top_menu"><span> #}
-        {#             Jobs&ensp; #}
-        {#             <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" /> #}
-        {#         </span></a> #}
-        {#         <ul class="sub_menu"> #}
-        {#             <li><a href='{{ SITE_ROOT }}/pdsf/users/'>PDSF</a></li> #}
-        {#         </ul> #}
-        {#     </li> #}
-        {# </ul> #}
         <ul>            
             <li>
                 <span class="ui-icon ui-icon-document" style='float:left;'></span>
@@ -81,6 +70,18 @@
                 </span></a>
                 <ul class="sub_menu">
                     <li><a href='{{ SITE_ROOT }}/run/notes/latest/'>Latest</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <span class="ui-icon ui-icon-wrench" style='float:left;'></span>
+                <a href="#" class="top_menu"><span>
+                    Tools
+                    <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />&nbsp;
+                </span></a>
+                <ul class="sub_menu">
+                    <li><a href='{{ SITE_ROOT }}/pdsf/users/'>PDSF Jobs</a></li>
                 </ul>
             </li>
         </ul>

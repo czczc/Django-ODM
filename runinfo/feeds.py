@@ -15,7 +15,7 @@ class LatestRunFeed(Feed):
         return item.vld.timeend
 
     def item_title(self, item):
-        return '%s Run %d Finished' % (item.runtype, item.runno)
+        return '%s %s Run %d Finished' % (item.partition(), item.runtype, item.runno)
 
     def item_description(self, item):
         return item.summary()
