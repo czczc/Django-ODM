@@ -17,6 +17,23 @@
     <div class="clear"></div>    
     
     {% include "run/diagnostics.html" %}
+    
+    <div class="grid_24" style='margin-top:20px;'>
+        <a name="diagnostics"></a>
+        <h2>
+             Truth Info Plots <span class='sep'>|</span>
+             {{ run.runtype }} Run {{ runno }}
+        </h2>
+    </div>
+    <div class="clear"></div>
+    <div class="grid_24" style='margin-top: 20px;'>
+        <div style="border: 1px solid #999;">          
+        <table id="table_truth_plots" class='production'>
+        </table>
+        </div>
+    </div>
+    <div class="clear"></div>
+    
     {% include "run/pmt.html" %}
     
 {% endblock %}

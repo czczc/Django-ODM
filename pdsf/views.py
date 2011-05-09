@@ -31,7 +31,7 @@ def user(request, uname):
 
 # ======================================================
 def isIE(request):
-    user_agent = request.META.get('HTTP_USER_AGENT')
+    user_agent = request.META.get('HTTP_USER_AGENT', '')
     try:
         user_agent.index('MSIE')
         return True

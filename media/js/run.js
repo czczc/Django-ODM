@@ -457,7 +457,9 @@ function load_production(name) {
 
             // build table of plots
             build_plots(name, detector_list[0], data);
-            
+            if (Run.is_sim) {
+                build_mc_plots(data);
+            }
         }
         else {
             $("#"+name+"_detector").html('Plots Unavailable');
@@ -539,6 +541,33 @@ function build_plots(name, detname, data) {
 
     // enable image double click to origninal size
     modal_by_click('#table_'+name+'_plots .img_db');
+}
+
+function build_mc_plots(data) {
+    var production_url = Run.diagnostics_base_url;
+    var table_plots = $('#table_truth_plots');
+    var source_list = ['Muon', 'U238', 'Th232', 'K40', 'Co60', 'IBD'];
+    var figure_list;
+    var column_index, html, i;
+    for (j=0; j<source_list.length; j++) {
+        source = source_list[j];
+        figure_list = data.Sources[source];
+        column_index = 0;
+        html = '<tr><th colspan="3" style="text-align:center;">Source ' 
+            + source + ' Truth Info</th></tr>';
+        for (i=0; i<figure_list.length; i++) {
+            if (column_index == 0) {html += '<tr>';}
+            html += '<td><image class="img_db" src="'
+                 + url_force_reload(production_url + figure_list[i].figpath)
+                 + '" width=300 height=225 />'
+                 + '<span class="figname">' + figure_list[i].figname + '</span></td>';
+            column_index++;
+            if (column_index == 3) {html += "</tr>\n"; column_index=0;}
+        }
+        table_plots.append(html);
+    }
+    // enable image double click to origninal size
+    modal_by_click('#table_truth_plots .img_db');
 }
 
 // parse detname 'DayaBayAD1' into ['DayaBay', 'AD1']
