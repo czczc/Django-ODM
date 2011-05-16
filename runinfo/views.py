@@ -186,7 +186,7 @@ def runtype(request, runtype='All', page=1, records=500):
 
 @login_required
 def archive(request, year=None, month=None, page=1, records=500):
-    '''notes monthly archived view'''
+    '''monthly archived view'''
     
     month_list = Daqruninfovld.objects.dates('timestart', 'month')[::-1]
     
