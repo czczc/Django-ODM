@@ -188,7 +188,7 @@ class SimulationRunProcessForm(RunProcessForm):
     
     job_name = forms.ChoiceField(
         choices=(
-            ('odmSim_v4', 'odmSim_v4'),
+            ('odmSim_v5', 'odmSim_v5'),
             ('odmSim_v2', 'odmSim_v2'),
         ),
     )

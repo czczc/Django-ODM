@@ -17,6 +17,11 @@ urlpatterns = patterns('odm.runinfo.views',
     (r'^latest/days/(?P<days>\d+)/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'latest'),
     (r'^latest/days/(?P<days>\d+)/', 'latest'),
     (r'^latest/days/', 'latest'),
+
+    # archives
+    (r'^archive/(?P<year>\d+)/(?P<month>\d+)/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'archive'),
+    (r'^archive/(?P<year>\d+)/(?P<month>\d+)/', 'archive'),
+    (r'^archive/', 'archive'),
     
     # ajax urls
     (r'^daq/(\d+)/', 'daqinfo'),

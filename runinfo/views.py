@@ -7,7 +7,7 @@ from django.views.generic.list_detail import object_list, object_detail
 from django.core.paginator import Paginator
 from django.conf import settings
 
-from odm.runinfo.models import Daqruninfo, Daqcalibruninfo
+from odm.runinfo.models import Daqruninfo, Daqcalibruninfo, Daqruninfovld
 from odm.fileinfo.models import Daqrawdatafileinfo
 from odm.odmrun.models import Run
 from odm.runinfo.forms import SearchRunListForm
@@ -154,7 +154,6 @@ def runlist(request, page=1, records=500):
 @login_required
 def latest(request, days='7', page=1, records=500):
     '''query by latest days'''
-    
     run_list = Daqruninfo.objects.list_latest(days)
     return object_list(request, 
         template_name = 'run/list.html',
@@ -172,7 +171,6 @@ def latest(request, days='7', page=1, records=500):
 @login_required
 def runtype(request, runtype='All', page=1, records=500):
     '''query by run type'''
-    
     run_list = Daqruninfo.objects.list_runtype(runtype)
     return object_list(request, 
         template_name = 'run/list.html',
@@ -186,6 +184,37 @@ def runtype(request, runtype='All', page=1, records=500):
             'base_url'     : settings.SITE_ROOT + '/run/type/' + runtype,
         })
 
+@login_required
+def archive(request, year=None, month=None, page=1, records=500):
+    '''notes monthly archived view'''
+    
+    month_list = Daqruninfovld.objects.dates('timestart', 'month')[::-1]
+    
+    if (not year) or (not month):
+        run_list = Daqruninfo.objects.select_related().all()[:100]
+        description = 'Latest'
+        base_url = settings.SITE_ROOT + '/run/archives/latest'
+    
+    else:
+        run_list = Daqruninfo.objects.select_related().all(
+            ).filter(vld__timestart__year=int(year), vld__timestart__month=int(month)
+            )
+        description = ''
+        base_url = settings.SITE_ROOT + '/run/archives/' + year + '/' + month
+        
+    return object_list(request, 
+        template_name = 'run/archive.html',
+        queryset = run_list, 
+        template_object_name = 'run',
+        paginate_by = int(records),
+        page = int(page),
+        extra_context = {
+            'description' : description,
+            'month_list' : month_list,
+            'count'        : run_list.count(),  # total count, not per page
+            'base_url'     : base_url,
+        })
+            
 
 @login_required
 def daqinfo(request, runno):
