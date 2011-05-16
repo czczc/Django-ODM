@@ -104,7 +104,7 @@ if SITE_NERSC:
     ADMIN_MEDIA_PREFIX = 'http://portal.nersc.gov/project/dayabay/odm_media/admin/'
 
 elif SITE_LOCAL:
-    DEBUG = TEMPLATE_DEBUG = True
+    DEBUG = TEMPLATE_DEBUG = False
     SITE_ROOT = ''
     MEDIA_URL = '/media/'
     ADMIN_MEDIA_PREFIX = '/media/admin/'
