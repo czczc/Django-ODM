@@ -28,15 +28,14 @@ def run(request, runno):
 
 @login_required
 def notes(request, year=None, month=None, page=1, records=40):
-    '''notes monthly archived view'''
+    '''monthly archived view'''
     from django.contrib.comments.models import Comment
-    from django.views.generic.date_based import archive_index, archive_month
     
     month_list = Comment.objects.dates('submit_date', 'month')[::-1]
     
     if (not year) or (not month):
         comment_list = Comment.objects.all().order_by('-submit_date')[:40]
-        description = 'latest'
+        description = 'Latest'
         base_url = settings.SITE_ROOT + '/run/notest/latest'
     
     else:

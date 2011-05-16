@@ -46,7 +46,6 @@ def extract_notes(comment):
     if not notes:
         from django.utils.html import strip_tags
         notes = strip_tags(comment)
-    else:
-        notes += ' ...'
+
     return notes
     

@@ -33,7 +33,7 @@
            <tr>
                <td><a href="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.runno }}</td>
                <td>{{ comment.content_object.runtype }}</td>
-               <td>{{ comment.comment|extract_notes|truncatewords:15 }}</td>
+               <td>{{ comment.comment|extract_notes }}</td>
                <td style='width:100px;'>{{ comment.user.get_full_name }}</td>
                <td style='width:160px;'>{{ comment.submit_date|add_hours:8}}</td>
            </tr>    
