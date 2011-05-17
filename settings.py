@@ -83,6 +83,7 @@ INSTALLED_APPS = (
     'registration',
     'django_extensions',
     'south',
+    'taggit',
     'odm.templatelib',
     'odm.odmrun',
 )
@@ -104,7 +105,7 @@ if SITE_NERSC:
     ADMIN_MEDIA_PREFIX = 'http://portal.nersc.gov/project/dayabay/odm_media/admin/'
 
 elif SITE_LOCAL:
-    DEBUG = TEMPLATE_DEBUG = False
+    DEBUG = TEMPLATE_DEBUG = True
     SITE_ROOT = ''
     MEDIA_URL = '/media/'
     ADMIN_MEDIA_PREFIX = '/media/admin/'
