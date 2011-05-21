@@ -59,7 +59,7 @@ class CommentScraper(object):
         csv_list = glob.glob(settings.PROJECT_PATH + '/data/runlist/*.csv')
         runno_list = set(run.runno for run in Run.objects.filter(
             runno__gte=self.runmin, runno__lte=self.runmax))
-        content_type = ContentType.objects.get(app_label='odmrun')
+        content_type = ContentType.objects.get(name='run')
         user = User.objects.get(username='daq')
         site = Site.objects.all()[0]
         
