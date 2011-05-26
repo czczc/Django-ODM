@@ -27,7 +27,33 @@ def scrape(site='local', target='odmrun', dryrun='dryrun'):
         print 'site not found %s' % site
         return
 
-
+# =============================
+@hosts('chaoz@pdsf3.nersc.gov')
+def deploy(dryrun=False):
+    '''deploy to production site'''
+    from fabric.contrib.project import rsync_project
+    
+    if dryrun: 
+        dry_run = ' --dry-run'
+    else: 
+        dry_run = ''
+    
+    # media server
+    rsync_project(
+        remote_dir='/project/projectdirs/dayabay/www/odm_media/',
+        # remote_dir='~/tmp/odm_media/',
+        local_dir='./media/',
+        exclude='.svn/',
+        extra_opts='--update' + dry_run,
+    )
+    # wsgi server
+    rsync_project(
+        remote_dir='/project/projectdirs/dayabay/django-sites/',
+        # remote_dir='~/tmp/django-sites/',
+        exclude=('.svn/', '.htaccess', '*.pyc', 'db/'),
+        extra_opts='--update' + dry_run,
+    )
+    
 # =============================
 def test_remote():
     run('cd dayabay')

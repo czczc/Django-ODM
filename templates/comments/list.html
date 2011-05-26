@@ -2,7 +2,7 @@
 
 <div id="c{{ comment.id }}" class='comment_header'>
     <span class='comment_date'>[ {{ comment.submit_date|date:"F d, Y" }} ]</span>
-    <span class='comment_username'>{{ comment.user.get_full_name }}</span> says:
+    <span class='comment_username'>{{ comment.user.username }}</span> says:
 </div>
 
 <div class='comment_content'>
