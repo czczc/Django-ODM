@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}ODM | Run Stats{% endblock %}
+
+{% block content %}
+<div class = "grid_24">
+     <h2>
+         Graphical Statistics of Daq Runs
+    </h2>
+</div>    
+<div class="clear"></div>
+
+<div class = "grid_24" id="chart_runstats", style="height: 400px; margin-top:10px; z-index:-100;">
+</div>    
+<div class="clear"></div>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/themes/gray.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/runstats.js"></script>
+{% endblock %}

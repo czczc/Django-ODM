@@ -214,7 +214,16 @@ def archive(request, year=None, month=None, page=1, records=500):
             'count'        : run_list.count(),  # total count, not per page
             'base_url'     : base_url,
         })
-            
+
+@login_required
+def stats(request):
+    '''graphical stats'''            
+    return direct_to_template(request, 
+        template = 'run/stats.html',
+        extra_context = {
+        
+        })
+
 
 @login_required
 def daqinfo(request, runno):
