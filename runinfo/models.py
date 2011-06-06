@@ -118,11 +118,35 @@ class Daqruninfo(models.Model):
         html += "</tbody></table></div>"
         return html
         
-        
+
+# =====================================
+class Daqcalibruninfovld(models.Model):
+    seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
+    timestart = models.DateTimeField(db_column='TIMESTART') # Field name made lowercase.
+    timeend = models.DateTimeField(db_column='TIMEEND') # Field name made lowercase.
+    sitemask = models.IntegerField(db_column='SITEMASK') # Field name made lowercase.
+    simmask = models.IntegerField(db_column='SIMMASK') # Field name made lowercase.
+    subsite = models.IntegerField(db_column='SUBSITE') # Field name made lowercase.
+    task = models.IntegerField(db_column='TASK') # Field name made lowercase.
+    aggregateno = models.IntegerField(null=True, db_column='AGGREGATENO', blank=True) # Field name made lowercase.
+    versiondate = models.DateTimeField(null=True, db_column='VERSIONDATE', blank=True) # Field name made lowercase.
+    insertdate = models.DateTimeField(null=True, db_column='INSERTDATE', blank=True) # Field name made lowercase.
+
+    class Meta:
+        db_table = u'DaqCalibRunInfoVld'
+        ordering = ['-seqno']
+
+    def __unicode__(self):
+        return u'seq %d' % (self.seqno, )
+
+    def timestart_beijing(self):
+        return self.timestart + timedelta(seconds=8*3600)   
+
 # =====================================
 class Daqcalibruninfo(models.Model):
-    seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
-    # row_counter = models.IntegerField(db_column='ROW_COUNTER') # not useful.
+    vld = models.ForeignKey(Daqcalibruninfovld, db_column='SEQNO') # Field name made lowercase.
+    # seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
+    row_counter = models.IntegerField(primary_key=True, db_column='ROW_COUNTER') # # Fake pk
     runno = models.IntegerField(db_column='runNo') # Field name made lowercase.
     adno = models.IntegerField(null=True, db_column='AdNo', blank=True) # Field name made lowercase.
     detectorid = models.IntegerField(null=True, db_column='detectorId', blank=True) # Field name made lowercase.
