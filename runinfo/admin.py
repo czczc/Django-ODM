@@ -11,7 +11,9 @@ class DaqruninfovldAdmin(admin.ModelAdmin):
     date_hierarchy = 'timestart'
 
 class DaqcalibruninfoAdmin(admin.ModelAdmin):
-    list_display = ('runno', 'adno', 'zpositiona', 'zpositionb', 'zpositionc', 'lednumber1', 'lednumber2')
+    list_display = ('runno', 'adno', 'zpositiona', 'zpositionb', 'zpositionc', 
+        'sourceida', 'sourceidb', 'sourceidc', 'homea', 'homeb', 'homec',
+        'lednumber1', 'lednumber2',)
     search_fields = ('runno', )
 
 class DaqcalibruninfovldAdmin(admin.ModelAdmin):

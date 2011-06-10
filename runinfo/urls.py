@@ -14,6 +14,10 @@ urlpatterns = patterns('odm.runinfo.views',
     (r'^type/(\w+)/', 'runtype'),
     (r'^$', 'runtype'),
     
+    # list by calibration source type
+    (r'^calibration/(?P<sourcetype>\w+)/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'calibration'),
+    (r'^calibration/(\w+)/', 'calibration'),
+    
     (r'^latest/days/(?P<days>\d+)/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'latest'),
     (r'^latest/days/(?P<days>\d+)/', 'latest'),
     (r'^latest/days/', 'latest'),

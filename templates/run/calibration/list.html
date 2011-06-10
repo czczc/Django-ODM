@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load pagination %}
+
+{% block title %}ODM | {{ description }} Runs{% endblock %}
+
+{% block content %}
+    
+    {# {% if form %} #}
+    {# <div class="grid_24" style='margin-top: 10px;'> #}
+    {#     {% include "run/search.html" %} #}
+    {# </div> #}
+    {# <div class="clear"></div> #}
+    {# <div class='grid_10'>{{ form.errors }}</div> #}
+    {# <div class='clear'></div> #}
+    {# {% endif %} #}
+    
+    <div class = "grid_24">
+         <h2>
+             {{ description }} Runs ({{ count }})
+             {% paginator %}
+        </h2>
+    </div>    
+    <div class="clear"></div> 
+    
+    <div class = "grid_24">          
+        <table>
+           <thead><tr>
+              <th>Run No</th>
+           </tr></thead>
+           <tbody>
+               {% for run in run_list %}
+                   <tr>
+                       <td><a href="{{ run.get_absolute_url }}">{{ run.runno }}</td>
+                   </tr>    
+               {% endfor %}
+           </tbody>
+        </table>
+    </div>
+    <div class="clear"></div>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

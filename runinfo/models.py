@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.conf import settings
 
 from odm.conventions.conf import Calibration, Detector
@@ -30,8 +31,32 @@ class RuninfoManager(models.Manager):
             runinfo['runtype'] = run.runtype
         
         return info
-        
-        
+
+
+class CalibruninfoManager(models.Manager):
+    def list_sourcetype(self, sourcetype):
+        '''list by source type'''
+        if sourcetype == 'Ge68':
+            return self.select_related().filter(
+                  Q(sourceida=2, homea=0, lednumber1=0, lednumber2=0)
+                | Q(sourceidb=2, homeb=0, lednumber1=0, lednumber2=0)
+                | Q(sourceidc=2, homec=0, lednumber1=0, lednumber2=0))
+        elif sourcetype == 'AmC_Co60':
+            return self.select_related().filter(
+                  Q(sourceida=3, homea=0, lednumber1=0, lednumber2=0)
+                | Q(sourceidb=3, homeb=0, lednumber1=0, lednumber2=0)
+                | Q(sourceidc=3, homec=0, lednumber1=0, lednumber2=0))
+        elif sourcetype == 'MO_LED':
+            return self.select_related().filter(
+                  Q(lednumber1__gt=3))
+        elif sourcetype == 'ACU_LED':
+            return self.select_related().filter(
+                  Q(homea=0, lednumber1=1)
+                | Q(homeb=0, lednumber1=2)
+                | Q(homec=0, lednumber1=3)) 
+        else:
+           return self.none()
+                    
 #=====================================
 class Daqruninfovld(models.Model):
     seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
@@ -139,6 +164,9 @@ class Daqcalibruninfovld(models.Model):
     def __unicode__(self):
         return u'seq %d' % (self.seqno, )
 
+    def runlength(self):
+        return self.timeend - self.timestart
+
     def timestart_beijing(self):
         return self.timestart + timedelta(seconds=8*3600)   
 
@@ -174,13 +202,18 @@ class Daqcalibruninfo(models.Model):
     source_type_a = source_type_b = source_type_c = ''
     location_a = location_b = location_c = ''
     
+    objects = CalibruninfoManager()
+    
     class Meta:
         db_table = u'DaqCalibRunInfo'
         ordering = ['-runno']
     
     def __unicode__(self):
         return u'calib run %d' % (self.runno, )
-    
+
+    def get_absolute_url(self):
+        return "%s/run/%i/" % (settings.SITE_ROOT, self.runno)
+        
     def humanize(self):
         self._humanize_led()
         self._humanize_a()

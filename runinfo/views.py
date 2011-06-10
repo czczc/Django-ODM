@@ -184,6 +184,23 @@ def runtype(request, runtype='All', page=1, records=500):
             'base_url'     : settings.SITE_ROOT + '/run/type/' + runtype,
         })
 
+
+@login_required
+def calibration(request, sourcetype, page=1, records=500):
+    '''query by calibration source type'''
+    run_list = Daqcalibruninfo.objects.list_sourcetype(sourcetype)
+    return object_list(request, 
+        template_name = 'run/calibration/list.html',
+        queryset = run_list, 
+        template_object_name = 'run',
+        paginate_by = int(records),
+        page = int(page),
+        extra_context = {
+            'description'  : sourcetype,
+            'count'        : run_list.count(),  # total count, not per page
+            'base_url'     : settings.SITE_ROOT + '/run/calibration/' + sourcetype,
+        })
+
 @login_required
 def archive(request, year=None, month=None, page=1, records=500):
     '''monthly archived view'''

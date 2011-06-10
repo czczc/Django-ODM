@@ -105,7 +105,7 @@ class Calibration(object):
         # for ACU only
         0 : 'Unknown',
         1 : 'LED',
-        2 : 'Ge60',
+        2 : 'Ge68',
         3 : 'AmC_Co60',
     }
     
