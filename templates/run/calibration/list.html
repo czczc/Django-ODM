@@ -2,7 +2,7 @@
 
 {% load pagination %}
 
-{% block title %}ODM | {{ description }} Runs{% endblock %}
+{% block title %}ODM | {{ sourcetype }} Runs{% endblock %}
 
 {% block content %}
     
@@ -17,25 +17,25 @@
     
     <div class = "grid_24">
          <h2>
-             {{ description }} Runs ({{ count }})
+             {{ description|safe }} Runs ({{ count }})
              {% paginator %}
         </h2>
     </div>    
     <div class="clear"></div> 
     
-    <div class = "grid_24">          
-        <table>
-           <thead><tr>
-              <th>Run No</th>
-           </tr></thead>
-           <tbody>
-               {% for run in run_list %}
-                   <tr>
-                       <td><a href="{{ run.get_absolute_url }}">{{ run.runno }}</td>
-                   </tr>    
-               {% endfor %}
-           </tbody>
-        </table>
+    <div class = "grid_24">
+        {% if sourcetype == "Ge68" or sourcetype == "AmC_Co60" %}
+            {% include "run/calibration/source.html" %}
+        {% endif %}
+        
+        {% if sourcetype == "MO_LED" %}
+            {% include "run/calibration/mo_led.html" %}
+        {% endif %}
+        
+        {% if sourcetype == "ACU_LED" %}
+            {% include "run/calibration/acu_led.html" %}
+        {% endif %}
+        
     </div>
     <div class="clear"></div>
 {% endblock %}

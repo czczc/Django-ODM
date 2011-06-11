@@ -186,9 +186,15 @@ def runtype(request, runtype='All', page=1, records=500):
 
 
 @login_required
-def calibration(request, sourcetype, page=1, records=500):
+def calibration(request, sourcetype, page=1, records=100):
     '''query by calibration source type'''
     run_list = Daqcalibruninfo.objects.list_sourcetype(sourcetype)
+    description = {
+        'Ge68' : '<sup>68</sup>Ge',
+        'AmC_Co60' : '<sup>241</sup>Am<sup>13</sup>C + <sup>60</sup>Co',
+        'MO_LED' : 'MO LED',
+        'ACU_LED' : 'ACU LED',
+    } 
     return object_list(request, 
         template_name = 'run/calibration/list.html',
         queryset = run_list, 
@@ -196,7 +202,8 @@ def calibration(request, sourcetype, page=1, records=500):
         paginate_by = int(records),
         page = int(page),
         extra_context = {
-            'description'  : sourcetype,
+            'sourcetype'   : sourcetype,
+            'description'  : description.get(sourcetype, 'Unknown'),
             'count'        : run_list.count(),  # total count, not per page
             'base_url'     : settings.SITE_ROOT + '/run/calibration/' + sourcetype,
         })
