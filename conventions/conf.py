@@ -22,6 +22,10 @@ class Site(object):
         'SAB'     : 'SAB',
     }
 
+    daq_id = {
+        97 : 'SAB-AD1',
+        98 : 'SAB-AD2',
+    }
 # ==============================================
 class Detector(object):
     '''Detetor convention'''
@@ -129,3 +133,10 @@ class Calibration(object):
         5 : 'AD_Wall_Center',
         6 : 'AD_Wall_Lower',
     }
+    
+    mo_led_location = {
+        4 : 'Upper',
+        5 : 'Center',
+        6 : 'Lower',
+    }
+    

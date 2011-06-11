@@ -40,7 +40,7 @@
            <tbody>
                {% for run in run_list %}
                    <tr>
-                       <td><a href="{{ run.get_absolute_url }}">{{ run.runno }}</td>
+                       <td><a href="{{ run.get_absolute_url }}">{{ run.runno }}</a></td>
                        <td class='RunType'>{{ run.runtype }}</td>
                        <td class='Site'>{{ run.partition }}</td>
                        <td class='StartTime hidden'>{{ run.vld.timestart }}</td>

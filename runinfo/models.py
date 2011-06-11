@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models import Q
 from django.conf import settings
 
-from odm.conventions.conf import Calibration, Detector
+from odm.conventions.conf import Calibration, Detector, Site
 
 from datetime import datetime, timedelta
 
@@ -213,7 +213,63 @@ class Daqcalibruninfo(models.Model):
 
     def get_absolute_url(self):
         return "%s/run/%i/" % (settings.SITE_ROOT, self.runno)
+    
+    def detector(self):
+        return Site.daq_id.get(self.detectorid, 'Unknown')    
+    
+    def acu_for_source(self):
+        acu_list = []
+        if (self.homea==0 and self.sourceida in [2,3] 
+            and self.lednumber1==0 and self.lednumber2==0):
+            acu_list.append('A')
+        if (self.homeb==0 and self.sourceidb in [2,3] 
+            and self.lednumber1==0 and self.lednumber2==0):
+            acu_list.append('B')
+        if (self.homec==0 and self.sourceidc in [2,3] 
+            and self.lednumber1==0 and self.lednumber2==0):
+            acu_list.append('C')
+        return ', '.join(acu_list)
+
+                
+    def z_for_source(self):
+        z_list = []
+        if (self.homea==0 and self.sourceida in [2,3] 
+            and self.lednumber1==0 and self.lednumber2==0):
+            z_list.append(str(self.zpositiona))
+        if (self.homeb==0 and self.sourceidb in [2,3] 
+            and self.lednumber1==0 and self.lednumber2==0):
+            z_list.append(str(self.zpositionb))
+        if (self.homec==0 and self.sourceidc in [2,3] 
+            and self.lednumber1==0 and self.lednumber2==0):
+            z_list.append(str(self.zpositionc))
+        return ', '.join(z_list)        
+
+                
+    def mo_led(self):
+        if self.lednumber1 in [4,5,6]:
+            return Calibration.mo_led_location[self.lednumber1]
+        else:
+            return ''
+
+
+    def acu_for_led(self):
+        if (self.homea==0 and self.lednumber1==1):
+            return 'A'
+        if (self.homeb==0 and self.lednumber1==2):
+            return 'B'
+        if (self.homec==0 and self.lednumber1==3):
+            return 'C'
+        return ''
         
+    def z_for_led(self):
+        if (self.homea==0 and self.lednumber1==1):
+            return self.zpositiona
+        if (self.homeb==0 and self.lednumber1==2):
+            return self.zpositionb
+        if (self.homec==0 and self.lednumber1==3):
+            return self.zpositionc
+        return ''    
+            
     def humanize(self):
         self._humanize_led()
         self._humanize_a()

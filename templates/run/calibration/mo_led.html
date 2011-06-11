@@ -1,18 +1,25 @@
 <table>
    <thead><tr>
       <th>Run No</th>
-      <th>AD No</th>
+      <th>Detector</th>
       <th>Start Time [Beijing]</th>
       <th>Run Length</th>
-      
+      <th>MO LED</th>
+      <th>Voltage [mV]</th>
+      <th>Frequency [Hz]</th>
+      <th>Duration [s]</th>
    </tr></thead>
    <tbody>
        {% for run in run_list %}
            <tr>
-               <td><a href="{{ run.get_absolute_url }}">{{ run.runno }}</td>
-               <td>{{ run.adno }}</td>
+               <td><a href="{{ run.get_absolute_url }}">{{ run.runno }}</a></td>                   
+               <td>{{ run.detector }}</td>
                <td>{{ run.vld.timestart_beijing }}</td>
                <td>{{ run.vld.runlength }}</td>
+               <td>{{ run.mo_led }}</td>
+               <td>{{ run.ledvoltage1 }}</td>
+               <td>{{ run.ledfreq }}</td>
+               <td>{{ run.duration }}</td>
            </tr>    
        {% endfor %}
    </tbody>
