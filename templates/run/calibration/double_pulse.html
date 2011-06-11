@@ -3,11 +3,15 @@
       <th>Run No</th>
       <th>Detector</th>
       <th>Start Time [Beijing]</th>
-      <th>Run Length</th>
-      <th>ACU</th>
-      <th>Z [mm]</th>
-      <th>Voltage [mV]</th>
-      <th>Frequency [Hz]</th>
+      {# <th>Run Length</th> #}
+      <th>ACU 1</th>
+      <th>Z 1 [mm]</th>
+      <th>Voltage 1 [mV]</th>
+      <th>ACU 2</th>
+      <th>Z 2 [mm]</th>
+      <th>Voltage 2 [mV]</th>
+      <th>Pulse Sep. [ns]</th>
+      <th>Freq. [Hz]</th>
       <th>Duration [s]</th>
    </tr></thead>
    <tbody>
@@ -16,10 +20,14 @@
                <td><a href="{{ run.get_absolute_url }}">{{ run.runno }}</a></td>
                <td>{{ run.detector }}</td>
                <td>{{ run.vld.timestart_beijing }}</td>
-               <td>{{ run.vld.runlength }}</td>
+               {# <td>{{ run.vld.runlength }}</td> #}
                <td>{{ run.acu_for_led }}</td>
                <td>{{ run.z_for_led }}</td>
                <td>{{ run.ledvoltage1 }}</td>
+               <td>{{ run.acu2_for_led }}</td>
+               <td>{{ run.z2_for_led }}</td>
+               <td>{{ run.ledvoltage2 }}</td>
+               <td>{{ run.ledpulsesep }}</td>
                <td>{{ run.ledfreq }}</td>
                <td>{{ run.duration }}</td>
            </tr>    

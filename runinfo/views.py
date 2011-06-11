@@ -194,6 +194,7 @@ def calibration(request, sourcetype, page=1, records=100):
         'AmC_Co60' : '<sup>241</sup>Am<sup>13</sup>C + <sup>60</sup>Co',
         'MO_LED' : 'MO LED',
         'ACU_LED' : 'ACU LED',
+        'Double_Pulse' : 'Double Pulse',
     } 
     return object_list(request, 
         template_name = 'run/calibration/list.html',

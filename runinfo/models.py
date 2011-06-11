@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, F
 from django.conf import settings
 
 from odm.conventions.conf import Calibration, Detector, Site
@@ -54,6 +54,16 @@ class CalibruninfoManager(models.Manager):
                   Q(homea=0, lednumber1=1)
                 | Q(homeb=0, lednumber1=2)
                 | Q(homec=0, lednumber1=3)) 
+        elif sourcetype == 'Double_Pulse':
+            return self.select_related().filter(
+                ( Q(homea=0, lednumber1=1)
+                | Q(homeb=0, lednumber1=2)
+                | Q(homec=0, lednumber1=3) ) &
+                ( Q(homea=0, lednumber2=1)
+                | Q(homeb=0, lednumber2=2)
+                | Q(homec=0, lednumber2=3) ) &
+                ( ~Q(lednumber1=F('lednumber2')))
+            ) 
         else:
            return self.none()
                     
@@ -269,7 +279,25 @@ class Daqcalibruninfo(models.Model):
         if (self.homec==0 and self.lednumber1==3):
             return self.zpositionc
         return ''    
-            
+
+    def acu2_for_led(self):
+        if (self.homea==0 and self.lednumber2==1 and not self.lednumber1==self.lednumber2):
+            return 'A'
+        if (self.homeb==0 and self.lednumber2==2 and not self.lednumber1==self.lednumber2):
+            return 'B'
+        if (self.homec==0 and self.lednumber2==3 and not self.lednumber1==self.lednumber2):
+            return 'C'
+        return ''
+
+    def z2_for_led(self):
+        if (self.homea==0 and self.lednumber2==1 and not self.lednumber1==self.lednumber2):
+            return self.zpositiona
+        if (self.homeb==0 and self.lednumber2==2 and not self.lednumber1==self.lednumber2):
+            return self.zpositionb
+        if (self.homec==0 and self.lednumber2==3 and not self.lednumber1==self.lednumber2):
+            return self.zpositionc
+        return ''
+                            
     def humanize(self):
         self._humanize_led()
         self._humanize_a()

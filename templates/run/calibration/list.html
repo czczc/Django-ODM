@@ -36,6 +36,9 @@
             {% include "run/calibration/acu_led.html" %}
         {% endif %}
         
+        {% if sourcetype == "Double_Pulse" %}
+            {% include "run/calibration/double_pulse.html" %}
+        {% endif %}
     </div>
     <div class="clear"></div>
 {% endblock %}
