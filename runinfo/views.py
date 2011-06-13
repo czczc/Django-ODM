@@ -99,6 +99,7 @@ def runlist(request, page=1, records=500):
     run_list = Daqruninfo.objects.select_related().all()
     
     if request.GET:
+        description = 'Search'
         form = SearchRunListForm(request.GET) # bound form
         if form.is_valid():
             # partition
@@ -133,6 +134,7 @@ def runlist(request, page=1, records=500):
             run_list = run_list.filter(runno=0) # hack, no match
     else:
         # return HttpResponse(json.dumps(request.GET, indent=4))
+        description = 'All'
         form = SearchRunListForm() # unbound form
     
    
@@ -144,7 +146,7 @@ def runlist(request, page=1, records=500):
         page = int(page),
         extra_context = {
             'form'         : form,
-            'description'  : 'Search',
+            'description'  : description,
             'count'        : run_list.count(),  # total count, not per page
             'base_url'     : settings.SITE_ROOT + '/run/list',
             'query_string' : '?' + request.META.get('QUERY_STRING', '')

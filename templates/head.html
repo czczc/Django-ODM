@@ -22,7 +22,8 @@
                 </span></a>
                 <ul class="sub_menu">
                     {# <li><a href='{{ SITE_ROOT }}/run/current/'>Current</a></li> #}
-                    <li><a href='{{ SITE_ROOT }}/run/list/'>Search</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/list/'>All</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/notes/latest/'>Notes</a></li>
                     <li class="menu_separator"></li>
                     <li><a href='{{ SITE_ROOT }}/run/latest/days/7/'>Last Week</a></li>
                     <li><a href='{{ SITE_ROOT }}/run/latest/days/30/'>Last Month</a></li>
@@ -32,7 +33,25 @@
                     <li><a href='{{ SITE_ROOT }}/run/type/ADCalib/'>ADCalib</a></li>
                     <li><a href='{{ SITE_ROOT }}/run/type/Pedestal/'>Pedestal</a></li>
                     <li><a href='{{ SITE_ROOT }}/run/type/FEEDiag/'>FEEDiag</a></li>
-                    <li><a href='{{ SITE_ROOT }}/run/type/WPCalib/'>WPCalib</a></li>
+                    <li class="menu_separator"></li>
+                    <li><a href='{{ SITE_ROOT }}/run/list/'>Search</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul>            
+            <li>
+                <span class="ui-icon ui-icon-pin-s" style='float:left;'></span>
+                <a href="#" class="top_menu"><span>
+                    Calibrations
+                    <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />&nbsp;
+                </span></a>
+                <ul class="sub_menu">
+                    <li><a href='{{ SITE_ROOT }}/run/calibration/AmC_Co60/'><sup>241</sup>Am<sup>13</sup>C + <sup>60</sup>Co</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/calibration/Ge68/'><sup>68</sup>Ge</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/calibration/ACU_LED/'>ACU LED</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/calibration/MO_LED/'>MO LED</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/calibration/Double_Pulse/'>Double Pulse</a></li>
+
                 </ul>
             </li>
         </ul>
@@ -62,18 +81,6 @@
         {#         </ul> #}
         {#     </li> #}
         {# </ul> #}
-        <ul>            
-            <li>
-                <span class="ui-icon ui-icon-document" style='float:left;'></span>
-                <a href="#" class="top_menu"><span>
-                    Notes
-                    <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />&nbsp;
-                </span></a>
-                <ul class="sub_menu">
-                    <li><a href='{{ SITE_ROOT }}/run/notes/latest/'>Monthly Archive</a></li>
-                </ul>
-            </li>
-        </ul>
         <ul>
             <li>
                 <span class="ui-icon ui-icon-wrench" style='float:left;'></span>
