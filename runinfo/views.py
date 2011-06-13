@@ -210,6 +210,22 @@ def calibration(request, sourcetype, page=1, records=100):
         })
 
 @login_required
+def calibrun(request, runno):
+    '''details of calibration raw parameters'''
+    from django.utils.datastructures import SortedDict
+    info = {}
+    try:
+        run = Daqcalibruninfo.objects.get(runno=runno)
+    except:
+        return HttpResponse(json.dumps(info))
+    
+    info = SortedDict((x.name, x.value_to_string(run)) for x in run._meta.fields)
+    if request.is_ajax():
+        return HttpResponse(json.dumps(info))
+    else:
+        return HttpResponse('<pre>'+ json.dumps(info, indent=4) + '</pre>')
+    
+@login_required
 def archive(request, year=None, month=None, page=1, records=500):
     '''monthly archived view'''
     

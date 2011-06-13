@@ -9,6 +9,7 @@
       <th>Voltage [mV]</th>
       <th>Frequency [Hz]</th>
       <th>Duration [s]</th>
+      <th>More</th>
    </tr></thead>
    <tbody>
        {% for run in run_list %}
@@ -22,6 +23,7 @@
                <td>{{ run.ledvoltage1 }}</td>
                <td>{{ run.ledfreq }}</td>
                <td>{{ run.duration }}</td>
+               <td><a href="{{ SITE_ROOT }}/run/calibration/{{ run.runno }}/">raw</a></td>
            </tr>    
        {% endfor %}
    </tbody>

@@ -4,15 +4,16 @@
       <th>Detector</th>
       <th>Start Time [Beijing]</th>
       {# <th>Run Length</th> #}
-      <th>ACU 1</th>
-      <th>Z 1 [mm]</th>
-      <th>Voltage 1 [mV]</th>
-      <th>ACU 2</th>
-      <th>Z 2 [mm]</th>
-      <th>Voltage 2 [mV]</th>
+      <th>ACU1</th>
+      <th>Z1 [mm]</th>
+      <th>Volt.1 [mV]</th>
+      <th>ACU2</th>
+      <th>Z2 [mm]</th>
+      <th>Volt.2 [mV]</th>
       <th>Pulse Sep. [ns]</th>
       <th>Freq. [Hz]</th>
-      <th>Duration [s]</th>
+      <th>Dur. [s]</th>
+      <th>More</th>
    </tr></thead>
    <tbody>
        {% for run in run_list %}
@@ -30,6 +31,7 @@
                <td>{{ run.ledpulsesep }}</td>
                <td>{{ run.ledfreq }}</td>
                <td>{{ run.duration }}</td>
+               <td><a href="{{ SITE_ROOT }}/run/calibration/{{ run.runno }}/">raw</a></td>
            </tr>    
        {% endfor %}
    </tbody>

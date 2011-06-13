@@ -6,6 +6,7 @@
       <th>Run Length</th>
       <th>ACU</th>
       <th>Z [mm]</th>
+      <th>More</th>
    </tr></thead>
    <tbody>
        {% for run in run_list %}
@@ -16,6 +17,7 @@
                <td>{{ run.vld.runlength }}</td>
                <td>{{ run.acu_for_source }}</td>
                <td>{{ run.z_for_source }}</td>
+               <td><a href="{{ SITE_ROOT }}/run/calibration/{{ run.runno }}/">raw</a></td>
            </tr>    
        {% endfor %}
    </tbody>

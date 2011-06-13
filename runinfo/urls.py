@@ -14,7 +14,8 @@ urlpatterns = patterns('odm.runinfo.views',
     (r'^type/(\w+)/', 'runtype'),
     (r'^$', 'runtype'),
     
-    # list by calibration source type
+    # calibration runs
+    (r'^calibration/(\d+)/$', 'calibrun'),
     (r'^calibration/(?P<sourcetype>\w+)/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'calibration'),
     (r'^calibration/(\w+)/', 'calibration'),
     
