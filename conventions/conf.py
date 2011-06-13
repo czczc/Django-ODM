@@ -109,8 +109,8 @@ class Calibration(object):
         # for ACU only
         0 : 'Unknown',
         1 : 'LED',
-        2 : 'Ge68',
-        3 : 'AmC_Co60',
+        2 : 'AmC_Co60',
+        3 : 'Ge68',
     }
     
     led_type = {

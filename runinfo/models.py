@@ -38,14 +38,14 @@ class CalibruninfoManager(models.Manager):
         '''list by source type'''
         if sourcetype == 'Ge68':
             return self.select_related().filter(
-                  Q(sourceida=2, homea=0, lednumber1=0, lednumber2=0)
-                | Q(sourceidb=2, homeb=0, lednumber1=0, lednumber2=0)
-                | Q(sourceidc=2, homec=0, lednumber1=0, lednumber2=0))
-        elif sourcetype == 'AmC_Co60':
-            return self.select_related().filter(
                   Q(sourceida=3, homea=0, lednumber1=0, lednumber2=0)
                 | Q(sourceidb=3, homeb=0, lednumber1=0, lednumber2=0)
                 | Q(sourceidc=3, homec=0, lednumber1=0, lednumber2=0))
+        elif sourcetype == 'AmC_Co60':
+            return self.select_related().filter(
+                  Q(sourceida=2, homea=0, lednumber1=0, lednumber2=0)
+                | Q(sourceidb=2, homeb=0, lednumber1=0, lednumber2=0)
+                | Q(sourceidc=2, homec=0, lednumber1=0, lednumber2=0))
         elif sourcetype == 'MO_LED':
             return self.select_related().filter(
                   Q(lednumber1__gt=3))
