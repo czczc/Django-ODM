@@ -26,6 +26,8 @@ class Site(object):
     daq_id = {
         'SAB-AD1' : 97,
         'SAB-AD2' : 98,
+        'EH1-AD1' : 17,
+        'EH1-AD2' : 18,
     }
     
     daq_detectors=dict([(v,k) for (k,v) in daq_id.items()])
