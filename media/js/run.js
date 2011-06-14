@@ -632,3 +632,28 @@ function dirname(path) {
     return path.replace(/\\/g,'/').replace(/\/[^\/]*$/, '');
 }
 
+// print raw calib info
+printrawinfo();
+function printrawinfo() {
+    $('.raw a').click(function(){
+        var url = base_url + 'run/calibration/' + Run.runno + '/';
+        $.getJSON( url, function(data) {
+            var html = '<div id="content"><table>';
+            var descr = '';
+            for (attr in data) {
+                if (attr == 'vld') { descr = 'vld seqno'; }
+                else { descr = attr; } 
+                html += '<tr><td class="descr">' + descr 
+                      + '</td><td class="value">' + data[attr] + '</td></tr>';
+            }
+            html += '</table></div>';
+            // console.log(str);
+            $.modal(html,
+                {
+                    'overlayClose' : true
+                }
+            );
+        }); // .getJSON done
+        return false;
+    });
+}

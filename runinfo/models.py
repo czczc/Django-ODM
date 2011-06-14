@@ -212,6 +212,8 @@ class Daqcalibruninfo(models.Model):
     source_type_a = source_type_b = source_type_c = ''
     location_a = location_b = location_c = ''
     
+    sourcetype = ''
+    
     objects = CalibruninfoManager()
     
     class Meta:
@@ -299,51 +301,35 @@ class Daqcalibruninfo(models.Model):
         return ''
                             
     def humanize(self):
-        self._humanize_led()
-        self._humanize_a()
-        self._humanize_b()
-        self._humanize_c()
+        self._humanize_source()
 
-    def _humanize_led(self):
-        if self.lednumber1 or self.lednumber2:
-            # It's an LED run
-            self.is_led_run = True
-            
-            if self.lednumber1:
-                self.has_a = True
-                self.source_type_a = Calibration.led_type[self.lednumber1]
-                self.location_a = Calibration.location[self.lednumber1]
-            
-            if self.lednumber2:
-                self.has_b = True
-                self.source_type_b = Calibration.led_type[self.lednumber2]
-                self.location_b = Calibration.location[self.lednumber2]
-            
-    def _humanize_a(self):
-        if self.is_led_run: return
-        if self.sourceida:
-            source_type = Calibration.source_type.get(self.sourceida, '')
-            if not source_type == 'LED':
-                self.has_a = True
-                self.source_type_a = source_type
-                self.location_a = Calibration.location[1]
 
-    def _humanize_b(self):
-        if self.is_led_run: return
-        if self.sourceidb:
-            source_type = Calibration.source_type.get(self.sourceidb, '')
-            if not source_type == 'LED':
-                self.has_b = True
-                self.source_type_b = source_type
-                self.location_b = Calibration.location[2]
+    def _humanize_source(self):
+        if (self.lednumber1==0 and self.lednumber2==0
+            ) and ( (self.sourceida==3 and self.homea==0)
+                 or (self.sourceidb==3 and self.homeb==0)
+                 or (self.sourceidc==3 and self.homec==0) ):
+            self.sourcetype = 'Ge68'
+        elif (self.lednumber1==0 and self.lednumber2==0
+            ) and ( (self.sourceida==2 and self.homea==0)
+                 or (self.sourceidb==2 and self.homeb==0)
+                 or (self.sourceidc==2 and self.homec==0) ):
+            self.sourcetype = 'AmC_Co60'
+        elif (self.homea==0 and self.lednumber1==1
+            ) or (self.homeb==0 and self.lednumber1==2
+            ) or (self.homec==0 and self.lednumber1==3):
+            self.sourcetype = 'ACU_LED'
+        elif self.lednumber1>3:
+            self.sourcetype = 'MO_LED'
+        else:
+            self.sourcetype = 'Unknown'
+        
+        if self.sourcetype == 'ACU_LED' and (
+               (self.homea==0 and self.lednumber2==1) 
+            or (self.homeb==0 and self.lednumber2==2)
+            or (self.homec==0 and self.lednumber2==3)
+            ) and (self.lednumber1 != self.lednumber2):
+            self.sourcetype = 'Double_Pulse'
 
-    def _humanize_c(self):
-        if self.is_led_run: return
-        if self.sourceidc:
-            source_type = Calibration.source_type.get(self.sourceidc, '')
-            if not source_type == 'LED':
-                self.has_c = True
-                self.source_type_c = source_type
-                self.location_c = Calibration.location[3]
     
             

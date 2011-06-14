@@ -11,64 +11,43 @@
 {# daq table #}
 <div id="calib_section" style='margin-top: 10px;'>
 
-    <div class="grid_8">
+    <div class="grid_14">
         <table>
         <thead><tr>
-           <th colspan="2" style='text-align: center;'>Source A</th>
+           <th colspan="2" style='text-align: center;'>Calibration Information</th>
         </tr></thead>
         <tbody>
-            {% if calibrun.has_a %}
-            <tr><td class='descr'>Source Type</td><td class='value'>{{ calibrun.source_type_a }}</td></tr>
-            <tr><td class='descr'>Location</td><td class='value'>{{ calibrun.location_a }}</td></tr>
-            <tr><td class='descr'>Z position [mm]</td><td class='value'>{{ calibrun.zpositiona }}</td></tr>
-            <tr><td class='descr'>At Home?</td><td class='value'>{{ calibrun.homea|to_bool|yesno:"Yes,No,Undefined" }}</td></tr>
-                {% if calibrun.is_led_run %}
-                <tr><td class='descr'>LED Voltage [mV]</td><td class='value'>{{ calibrun.ledvoltage1 }}</td></tr>
-                <tr><td class='descr'>LED Freq. [Hz]</td><td class='value'>{{ calibrun.ledfreq }}</td></tr>
-                    {% if calibrun.has_b %}
-                        <tr><td class='descr'>Pulse Sep. [ns]</td><td class='value'>{{ calibrun.ledpulsesep }}</td></tr>
-                    {% endif %}
-                    <tr><td class='descr'>LTB Mode</td><td class='value'>{{ calibrun.ltbmode|to_bool|yesno:"Forced,Not Forced"}}</td></tr>
-                    <tr><td class='descr'>Duration [s]</td><td class='value'>{{ calibrun.duration }}</td></tr>
-                {% endif %}            
+            <tr><td class='descr'>Source Type</td><td class='value'>{{ calibrun.sourcetype }}</td></tr>
+            {% if calibrun.sourcetype == "Ge68" or calibrun.sourcetype == "AmC_Co60" %}
+            <tr><td class='descr'>ACU</td><td class='value'>{{ calibrun.acu_for_source }}</td></tr>
+            <tr><td class='descr'>Z Position [mm]</td><td class='value'>{{ calibrun.z_for_source }}</td></tr>
             {% endif %}
-        </tbody>
-        </table>
-    </div>
-    
-    <div class="grid_8">
-        <table>
-        <thead><tr>
-           <th colspan="2" style='text-align: center;'>Source B</th>
-        </tr></thead>
-        <tbody>
-            {% if calibrun.has_b %}
-            <tr><td class='descr'>Source Type</td><td class='value'>{{ calibrun.source_type_b }}</td></tr>
-            <tr><td class='descr'>Location</td><td class='value'>{{ calibrun.location_b }}</td></tr>
-            <tr><td class='descr'>Z position [mm]</td><td class='value'>{{ calibrun.zpositionb }}</td></tr>
-            <tr><td class='descr'>At Home?</td><td class='value'>{{ calibrun.homeb|to_bool|yesno:"Yes,No,Undefined" }}</td></tr>
-                {% if calibrun.is_led_run %}
-                <tr><td class='descr'>LED Voltage [mV]</td><td class='value'>{{ calibrun.ledvoltage2 }}</td></tr>
-                <tr><td class='descr'>LED Freq. [Hz]</td><td class='value'>{{ calibrun.ledfreq }}</td></tr>
-                {% endif %}
+            {% if calibrun.sourcetype == "MO_LED" %}
+            <tr><td class='descr'>MO LED Position</td><td class='value'>{{ calibrun.mo_led }}</td></tr>
+            <tr><td class='descr'>Voltage [mV]</td><td class='value'>{{ calibrun.ledvoltage1 }}</td></tr>
+            <tr><td class='descr'>Frequency [Hz]</td><td class='value'>{{ calibrun.ledfreq }}</td></tr>
+            <tr><td class='descr'>Duration [s]</td><td class='value'>{{ calibrun.duration }}</td></tr>
             {% endif %}
-        </tbody>
-        </table>
-    </div>
-    
-    <div class="grid_8">
-        <table>
-        <thead><tr>
-           <th colspan="2" style='text-align: center;'>Source C</th>
-        </tr></thead>
-        <tbody>
-            {% if calibrun.has_c %}
-            <tr><td class='descr'>Source Type</td><td class='value'>{{ calibrun.source_type_c }}</td></tr>
-            <tr><td class='descr'>Location</td><td class='value'>{{ calibrun.location_c }}</td></tr>
-            <tr><td class='descr'>Z position [mm]</td><td class='value'>{{ calibrun.zpositionc }}</td></tr>
-            <tr><td class='descr'>At Home?</td><td class='value'>{{ calibrun.homec|yesno:"Yes,No,Undefined" }}</td></tr>
+            {% if calibrun.sourcetype == "ACU_LED" %}
+            <tr><td class='descr'>ACU</td><td class='value'>{{ calibrun.acu_for_led }}</td></tr>
+            <tr><td class='descr'>Z Position [mm]</td><td class='value'>{{ calibrun.z_for_led }}</td></tr>
+            <tr><td class='descr'>Voltage [mV]</td><td class='value'>{{ calibrun.ledvoltage1 }}</td></tr>
+            <tr><td class='descr'>Frequency [Hz]</td><td class='value'>{{ calibrun.ledfreq }}</td></tr>
+            <tr><td class='descr'>Duration [s]</td><td class='value'>{{ calibrun.duration }}</td></tr>
             {% endif %}
-        </tbody>
+            {% if calibrun.sourcetype == "Double_Pulse" %}
+            <tr><td class='descr'>ACU</td><td class='value'>{{ calibrun.acu_for_led }}, {{ calibrun.acu2_for_led }}</td></tr>
+            <tr><td class='descr'>Z Position [mm]</td><td class='value'>{{ calibrun.z_for_led }}, {{ calibrun.z2_for_led }}</td></tr>
+            <tr><td class='descr'>Voltage [mV]</td><td class='value'>{{ calibrun.ledvoltage1 }}, {{ calibrun.ledvoltage2 }}</td></tr>
+            <tr><td class='descr'>Pulse Sep. [ns]</td><td class='value'>{{ calibrun.ledpulsesep }}</td></tr>
+            <tr><td class='descr'>Frequency [Hz]</td><td class='value'>{{ calibrun.ledfreq }}</td></tr>
+            <tr><td class='descr'>Duration [s]</td><td class='value'>{{ calibrun.duration }}</td></tr>
+            {% endif %}
+            <tr>
+                <td class='descr'>Raw Parameters</td>
+                <td class='value raw'><a href="{{ SITE_ROOT }}/run/calibration/{{ calibrun.runno }}/">raw</a</td>
+            </tr>
+       </tbody>
         </table>
     </div>
     <div class="clear"></div>
