@@ -1,0 +1,14 @@
+<form action="{{SITE_ROOT}}/run/calibration/{{sourcetype}}/" method="get" id='form_searchrunlist' class='ui-widget'>    
+    <fieldset class='ui-widget-content'>        
+    <table>
+        <tr >
+            <td>{{form.site}}</td>
+            <td>{{form.detector}}</td>
+            <td><h6>Run</h6>&nbsp;&nbsp;{{form.run_from}} - {{form.run_to}}</td>
+            <td><h6>Date<h6>&nbsp;&nbsp;{{form.date_from}} - {{form.date_to}}</td>
+            <td>{{form.sort_run}}</td>
+            <td><input id='submit' type="submit" value="Search !" /></td>
+        </tr>
+    </table>
+    </fieldset>
+</form>

@@ -10,14 +10,14 @@
 
 {% block content %}
     
-    {# {% if form %} #}
-    {# <div class="grid_24" style='margin-top: 10px;'> #}
-    {#     {% include "run/search.html" %} #}
-    {# </div> #}
-    {# <div class="clear"></div> #}
-    {# <div class='grid_10'>{{ form.errors }}</div> #}
-    {# <div class='clear'></div> #}
-    {# {% endif %} #}
+    {% if form %}
+    <div class="grid_24" style='margin-top: 10px;'>
+        {% include "run/calibration/search.html" %}
+    </div>
+    <div class="clear"></div>
+    <div class='grid_10'>{{ form.errors }}</div>
+    <div class='clear'></div>
+    {% endif %}
     
     <div class = "grid_24">
          <h2>

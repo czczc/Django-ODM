@@ -72,4 +72,23 @@ class SearchRunListForm(forms.Form):
             ('ASC', 'ASC'),
         ),
     )
+
+
+class SearchCalibRunListForm(SearchRunListForm):
+        
+    detector = forms.ChoiceField(
+        label='Detector',
+        choices=(
+            ('All', 'DETECTOR'),
+            ('AD1', 'AD1'),
+            ('AD2', 'AD2'),
+            ('AD3', 'AD3'),
+            ('AD4', 'AD4'),
+        ),
+    )    
+    
+    runtype = forms.IntegerField(
+        label='Run Type', required=False, min_value=0,
+        widget=forms.TextInput(attrs={'size':'6'})
+    ) # hack, not needed
     

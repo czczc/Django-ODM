@@ -225,7 +225,7 @@ class Daqcalibruninfo(models.Model):
         return "%s/run/%i/" % (settings.SITE_ROOT, self.runno)
     
     def detector(self):
-        return Site.daq_id.get(self.detectorid, 'Unknown')    
+        return Site.daq_detectors.get(self.detectorid, 'Unknown')    
     
     def acu_for_source(self):
         acu_list = []

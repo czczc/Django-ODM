@@ -10,7 +10,7 @@ from django.conf import settings
 from odm.runinfo.models import Daqruninfo, Daqcalibruninfo, Daqruninfovld
 from odm.fileinfo.models import Daqrawdatafileinfo
 from odm.odmrun.models import Run
-from odm.runinfo.forms import SearchRunListForm
+from odm.runinfo.forms import SearchRunListForm, SearchCalibRunListForm
 
 import json, re
 
@@ -198,6 +198,34 @@ def calibration(request, sourcetype, page=1, records=100):
         'ACU_LED' : 'ACU LED',
         'Double_Pulse' : 'Double Pulse',
     } 
+    
+    if request.GET:
+        form = SearchCalibRunListForm(request.GET) # bound form
+        if form.is_valid():
+            
+            if form.cleaned_data['site'] != 'All' and form.cleaned_data['detector'] != 'All':
+                detector =  form.cleaned_data['site'] + '-' + form.cleaned_data['detector']
+                from odm.conventions.conf import Site
+                detectorid = Site.daq_id.get(detector, 0)
+                run_list = run_list.filter(detectorid=detectorid)
+                
+            if form.cleaned_data['run_from']:
+                run_list = run_list.filter(runno__gte=form.cleaned_data['run_from'])
+            if form.cleaned_data['run_to']:
+                run_list = run_list.filter(runno__lte=form.cleaned_data['run_to'])
+            if form.cleaned_data['date_from']:
+                run_list = run_list.filter(vld__timestart__gte=form.cleaned_data['date_from'])
+            if form.cleaned_data['date_to']:
+                run_list = run_list.filter(vld__timestart__lte=form.cleaned_data['date_to'])
+            if form.cleaned_data['sort_run'] == 'ASC':
+                run_list = run_list.order_by('runno')
+
+        else:
+            run_list = run_list.filter(runno=0) # hack, no match
+    else:
+        form = SearchCalibRunListForm() # unbound form
+        
+        
     return object_list(request, 
         template_name = 'run/calibration/list.html',
         queryset = run_list, 
@@ -205,11 +233,13 @@ def calibration(request, sourcetype, page=1, records=100):
         paginate_by = int(records),
         page = int(page),
         extra_context = {
+            'form'         : form,
             'sourcetype'   : sourcetype,
             'description'  : description.get(sourcetype, 'Unknown'),
             'count'        : run_list.count(),  # total count, not per page
             'base_url'     : settings.SITE_ROOT + '/run/calibration/' + sourcetype,
         })
+
 
 @login_required
 def calibrun(request, runno):
@@ -226,6 +256,7 @@ def calibrun(request, runno):
         return HttpResponse(json.dumps(info))
     else:
         return HttpResponse('<pre>'+ json.dumps(info, indent=4) + '</pre>')
+
     
 @login_required
 def archive(request, year=None, month=None, page=1, records=500):

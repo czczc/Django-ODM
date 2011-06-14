@@ -22,10 +22,19 @@ class Site(object):
         'SAB'     : 'SAB',
     }
 
+
     daq_id = {
-        97 : 'SAB-AD1',
-        98 : 'SAB-AD2',
+        'SAB-AD1' : 97,
+        'SAB-AD2' : 98,
     }
+    
+    daq_detectors=dict([(v,k) for (k,v) in daq_id.items()])
+    
+    # daq_detectors = {
+    #     97 : 'SAB-AD1',
+    #     98 : 'SAB-AD2',
+    # }
+    
 # ==============================================
 class Detector(object):
     '''Detetor convention'''
