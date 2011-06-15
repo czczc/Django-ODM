@@ -292,11 +292,37 @@ def archive(request, year=None, month=None, page=1, records=500):
 @login_required
 def stats(request):
     '''graphical stats'''            
-    return direct_to_template(request, 
-        template = 'run/stats.html',
-        extra_context = {
+    run_list = Daqruninfo.objects.select_related()
+    info = {
+        # year-month : nRuns,
+    }
+    integrated_info = {
+        'months' : [],
+        'runs' : [],
+    }
+    for run in run_list:
+        date = run.vld.timestart
+        key = "%04d-%02d" % (date.year, date.month)
+        info.setdefault(key, 0)
+        info[key] = info[key] + 1
         
-        })
+    for month in sorted(info):
+        integrated_info['months'].append(month)
+        integrated_info['runs'].append(info[month])
+    
+    for i, runs in enumerate(integrated_info['runs']):
+        if i > 0:
+            integrated_info['runs'][i] += integrated_info['runs'][i-1]
+           
+    if request.is_ajax():
+        return HttpResponse(json.dumps(integrated_info))
+    else:
+        # return HttpResponse('<pre>'+ json.dumps(integrated_info, indent=4) + '</pre>')
+        return direct_to_template(request, 
+            template = 'run/stats.html',
+            extra_context = {
+        
+            })
 
 
 @login_required
