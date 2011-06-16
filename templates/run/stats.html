@@ -5,13 +5,27 @@
 {% block content %}
 <div class = "grid_24">
      <h2>
-         Graphical Statistics of Daq Runs
+         Graphical Statistics
     </h2>
 </div>    
 <div class="clear"></div>
 
-<div class = "grid_24" id="chart_runstats", style="height: 400px; margin-top:10px; z-index:-100;">
-</div>    
+{# <div class = "grid_24" id="chart_runstats", style="height: 400px; margin-top:10px; z-index:-100;"> #}
+{#     <h3 align='center'>Loading ...</h3> #}
+{# </div>     #}
+{# <div class="clear"></div> #}
+
+<div id="chart_daqstats" class="grid_18" style='height: 400px; margin-top:10px;'>
+    <h3 align='center'>Select Statistics from Right</h3>
+</div>
+<div class="grid_5 prefix_1 draggable notepad" style='margin-top:10px;'>
+    <h3>DAQ Statistics</h3>
+    <ul id='buttons_daqstats'>
+        <li><button mode="run/stats/runcount/">DAQ Runs</button></li>
+        <li><button mode="run/stats/daqtime/">DAQ Time</button></li>
+        <li><button mode="run/file/stats/volume/">Data Volume</button></li>
+    </ul>
+</div>
 <div class="clear"></div>
 
 {% endblock %}

@@ -84,3 +84,47 @@ def rawfilelist(request):
     else:
         raise Http404
 
+
+@login_required
+def stats(request, mode='volume'):
+    '''graphical stats'''          
+   
+    # ajax response
+    info = {
+        'xpoints' : [],
+        'ypoints' : [],
+        'title'   : '',
+        'ytitle'  : '',
+        'legend'  : '',
+    }
+    
+    xpoints = []
+    ypoints = []
+    if mode == 'volume':
+        from django.db.models import Sum
+        value_list = Daqrawdatafileinfo.objects.exclude(filename__contains='test'
+            ).order_by('runno').values('runno'
+            ).annotate(volume=Sum('filesize'))
+        for value in value_list:
+            xpoints.append(value['runno'])
+            ypoints.append(value['volume'])
+        info['title'] = 'Integrated Data Volume'
+        info['ytitle'] = 'Tera Bytes'
+        info['legend'] = 'All Runs'
+    else:
+        return HttpResponse(json.dumps({})) # empty
+    
+    nRuns = len(xpoints)
+    nPoints = 500
+    step = int(nRuns/nPoints)+1            
+    for i in range(nRuns):
+        ypoints[i] = float(ypoints[i])/1.1e12   # TB
+        if i > 0:
+            ypoints[i] += ypoints[i-1]
+    info['xpoints'] = xpoints[::step]
+    info['ypoints'] = ypoints[::step]
+    for i in range(len(info['ypoints'])):
+        info['ypoints'][i] = float('%.6f' % (info['ypoints'][i], ))
+                
+    return HttpResponse(json.dumps(info))
+

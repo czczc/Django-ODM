@@ -274,7 +274,7 @@ def archive(request, year=None, month=None, page=1, records=500):
             ).filter(vld__timestart__year=int(year), vld__timestart__month=int(month)
             )
         description = ''
-        base_url = settings.SITE_ROOT + '/run/archives/' + year + '/' + month
+        base_url = settings.SITE_ROOT + '/run/archive/' + year + '/' + month
         
     return object_list(request, 
         template_name = 'run/archive.html',
@@ -290,39 +290,66 @@ def archive(request, year=None, month=None, page=1, records=500):
         })
 
 @login_required
-def stats(request):
-    '''graphical stats'''            
-    run_list = Daqruninfo.objects.select_related()
-    info = {
-        # year-month : nRuns,
-    }
-    integrated_info = {
-        'months' : [],
-        'runs' : [],
-    }
-    for run in run_list:
-        date = run.vld.timestart
-        key = "%04d-%02d" % (date.year, date.month)
-        info.setdefault(key, 0)
-        info[key] = info[key] + 1
-        
-    for month in sorted(info):
-        integrated_info['months'].append(month)
-        integrated_info['runs'].append(info[month])
-    
-    for i, runs in enumerate(integrated_info['runs']):
-        if i > 0:
-            integrated_info['runs'][i] += integrated_info['runs'][i-1]
-           
-    if request.is_ajax():
-        return HttpResponse(json.dumps(integrated_info))
-    else:
+def stats(request, mode='runcount'):
+    '''graphical stats'''          
+    if not request.is_ajax():
         # return HttpResponse('<pre>'+ json.dumps(integrated_info, indent=4) + '</pre>')
         return direct_to_template(request, 
             template = 'run/stats.html',
             extra_context = {
-        
             })
+    
+    # ajax response
+    raw_info = {
+        # year-month : nRuns,
+    }
+    info = {
+        'xformat' : 'year-month',
+        'xpoints' : [],
+        'ypoints' : [],
+        'title'   : '',
+        'ytitle'  : '',
+        'legend'  : '',
+    }
+    if mode == 'runcount':
+        run_list = Daqruninfo.objects.select_related()
+        for run in run_list:
+            date = run.vld.timestart
+            key = "%04d-%02d" % (date.year, date.month)
+            raw_info.setdefault(key, 0)
+            raw_info[key] = raw_info[key] + 1
+        info['title'] = 'Integrated Number of Runs'
+        info['ytitle'] = 'Runs'
+        info['legend'] = 'All Runs'
+
+    elif mode == 'daqtime':
+        from datetime import timedelta
+        run_list = Daqruninfo.objects.select_related().exclude(partitionname='part_eh1-rpc')
+        for run in run_list:
+            date = run.vld.timestart
+            key = "%04d-%02d" % (date.year, date.month)
+            raw_info.setdefault(key, timedelta())
+            raw_info[key] = raw_info[key] + run.vld.runlength()
+        info['title'] = 'Integrated DAQ Time'
+        info['ytitle'] = 'Days'
+        info['legend'] = 'All Runs'
+
+    else:
+        return HttpResponse(json.dumps(raw_info)) # empty
+            
+    for key in sorted(raw_info):
+        info['xpoints'].append(key)
+        info['ypoints'].append(raw_info[key])
+    
+    for i in range(len(info['xpoints'])):
+        if i > 0:
+            info['ypoints'][i] += info['ypoints'][i-1]
+    
+    if mode == 'daqtime':
+        for i in range(len(info['xpoints'])):
+            info['ypoints'][i] = info['ypoints'][i].days
+            
+    return HttpResponse(json.dumps(info))
 
 
 @login_required
@@ -345,13 +372,11 @@ def daqinfo(request, runno):
 @login_required
 def jsonlist(request):
     '''json list run info'''
-        
-    # for debug
-    # return HttpResponse('<pre>'+ json.dumps(Daqruninfo.objects.json_listall(), indent=4) + '</pre>')
-    
+            
     if request.is_ajax():
         return HttpResponse(json.dumps( Daqruninfo.objects.json_listall() ))
     else:
-        raise Http404
+        return HttpResponse('<pre>'+ json.dumps(Daqruninfo.objects.json_listall(), indent=4) + '</pre>')
+        
 
     

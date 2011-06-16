@@ -26,10 +26,10 @@ class RuninfoManager(models.Manager):
             #     'partition' : 'EH1-SAB',
             # }
         }
-        for run in self.all():
+        for run in self.select_related():
             runinfo = info.setdefault(run.runno, {})
             runinfo['runtype'] = run.runtype
-        
+            runinfo['timestart'] = str(run.vld.timestart)
         return info
 
 

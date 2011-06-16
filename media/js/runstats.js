@@ -2,32 +2,93 @@ chart = null;
 
 var this_url = window.location.href;
 var base_url = this_url.substring(0,this_url.indexOf('run'));
-var url = base_url + 'run/stats/';
-$.getJSON( url, function(data) {
-    var months = data.months;
-    var runs = data.runs;
-    var data_xy = [];
-    var i;
-    for (i=0; i<months.length; i++) {
-        year_month = months[i].split('-');
-        year = parseInt(year_month[0], 10);
-        month = parseInt(year_month[1], 10);
-        data_xy[i] = [Date.UTC(year, month, 1), runs[i]];
+
+$('button').button();
+$(".draggable").draggable({ cursor: 'move', opacity: 0.35 });
+
+var chart_div = $('#chart_daqstats');
+var data_xy = [];
+var title, xtitle, ytitle, legend, xtype;
+var Runs = new Object;
+var clock;
+
+$.getJSON( base_url + 'run/json/list/', function(data) {
+    for (run in data) {
+        Runs[run] = {};
+        Runs[run].timestart = data[run].timestart;
     }
-    chart_runcount(data_xy);
 }); // .getJSON done
 
 
-function chart_runcount(data_xy) {
+$('#buttons_daqstats button').click(function(){
+    chart_div.empty().html('<h3 align="center">Loading ...</h3>');
+    var mode = $(this).attr('mode');
+    var url = base_url + mode;
+    $.getJSON( url, function(data) {
+        chart_div.empty();
+        data_xy = new Array();
+        title = data.title;
+        ytitle = data.ytitle;
+        legend = data.legend;
+        var xpoints = data.xpoints;
+        var ypoints = data.ypoints;
+        var i, runno;
+        if (data.xformat == 'year-month') {
+            xtype = 'datetime';
+            xtitle = '';
+            for (i=0; i<xpoints.length; i++) {
+                year_month = xpoints[i].split('-');
+                year = parseInt(year_month[0], 10);
+                month = parseInt(year_month[1], 10);
+                data_xy[i] = [Date.UTC(year, month, 1), ypoints[i]];
+            }
+            charting();
+        }
+        else {
+            clock = setInterval(function(){
+                // wait until Runs are collected
+                if (! Runs[6]) { 
+                    // console.log('not available');
+                    return; 
+                }
+                // Now it's ready
+                clearInterval(clock);
+                xtype = 'datetime';
+                for (i=0; i<xpoints.length; i++) {
+                    runno = xpoints[i];
+                    if (Runs[runno]) {
+                        date = Runs[runno].timestart.split(' ')[0];
+                        // console.log(date);
+                        data_xy.push( [Date.parse(date), ypoints[i]] );
+                    }
+                }
+                charting();
+            }, 500);
+        }
+        
+    }); // .getJSON done
+});
+
+
+
+function charting() {
    chart = new Highcharts.Chart({
-      chart: { renderTo: 'chart_runstats', type: 'spline' },
+      chart: { renderTo: 'chart_daqstats', type: 'spline', zoomType: 'xy' },
       credits: { enabled: false },
       // legend: { align: 'right', verticalAlign: 'top', floating: true },
-      title: { text: 'Integrated Number of Runs' },
-      xAxis: { type: 'datetime' },
-      yAxis: { title: {text: '# Runs'}, min: 0 },
+      plotOptions: {
+          spline: {
+              marker: {
+                   enabled: false, states: { hover: { enabled: true } }   
+                }
+          } 
+      },
+      title: { text: title },
+      xAxis: { type: xtype, title: {text: xtitle} },
+      yAxis: { title: {text: ytitle}, min: 0 },
       series: [{
-         name: 'All Runs',
+         // animation: false,
+         name: legend,
          data: data_xy
       }]
    });
