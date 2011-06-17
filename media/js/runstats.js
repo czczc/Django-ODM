@@ -33,7 +33,13 @@ $('#buttons_daqstats button').click(function(){
         var xpoints = data.xpoints;
         var ypoints = data.ypoints;
         var i, runno;
-        if (data.xformat == 'year-month') {
+        if (mode == 'run/stats/partition/' || mode == 'run/stats/runtype/') {
+            for (i=0; i<xpoints.length; i++) {
+                data_xy.push( [xpoints[i], ypoints[i]] );
+            }
+            charting_pie();
+        }
+        else if (data.xformat == 'year-month') {
             xtype = 'datetime';
             xtitle = '';
             for (i=0; i<xpoints.length; i++) {
@@ -93,3 +99,34 @@ function charting() {
       }]
    });
 }   
+
+function charting_pie() {
+   chart = new Highcharts.Chart({
+      chart: { 
+          renderTo: 'chart_daqstats', plotBackgroundColor: null,
+          plotBorderWidth: null, plotShadow: false 
+      },
+      credits: { enabled: false },
+      plotOptions: {
+          pie: {
+             allowPointSelect: true,
+             cursor: 'pointer',
+             dataLabels: {
+                enabled: true,
+                color: Highcharts.theme.textColor || '#000000',
+                connectorColor: Highcharts.theme.textColor || '#000000',
+                formatter: function() {
+                   return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+                }
+             }
+          }
+      },
+      title: { text: title },
+      series: [{
+         // animation: false,
+         type: 'pie',
+         name: legend,
+         data: data_xy
+      }]
+   });
+}

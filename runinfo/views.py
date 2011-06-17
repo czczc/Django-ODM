@@ -321,7 +321,6 @@ def stats(request, mode='runcount'):
         info['title'] = 'Integrated Number of Runs'
         info['ytitle'] = 'Runs'
         info['legend'] = 'All Runs'
-
     elif mode == 'daqtime':
         from datetime import timedelta
         run_list = Daqruninfo.objects.select_related().exclude(partitionname='part_eh1-rpc')
@@ -333,7 +332,44 @@ def stats(request, mode='runcount'):
         info['title'] = 'Integrated DAQ Time'
         info['ytitle'] = 'Days'
         info['legend'] = 'All Runs'
-
+    elif mode == 'partition':
+        from django.db.models import Count
+        value_list = Daqruninfo.objects.values('partitionname').annotate(count=Count('partitionname'))
+        xpoints = []
+        ypoints = []
+        for value in value_list:
+            xpoints.append(value['partitionname'][5:].upper())
+            ypoints.append(value['count'])
+        total = sum(ypoints)
+        for i in range(len(ypoints)):
+            ypoints[i] = float(ypoints[i]) * 100 / total
+            if ypoints[i] > 0.5:
+                info['xpoints'].append(xpoints[i])
+                info['ypoints'].append(float('%.1f' % (ypoints[i], )))
+        info['title'] = 'DAQ Partition Shares'
+        info['ytitle'] = ''
+        info['legend'] = 'DAQ Partition Shares'
+        info['xformat'] = 'category'
+        return HttpResponse(json.dumps(info))
+    elif mode == 'runtype':
+        from django.db.models import Count
+        value_list = Daqruninfo.objects.values('runtype').annotate(count=Count('runtype'))
+        xpoints = []
+        ypoints = []
+        for value in value_list:
+            xpoints.append(value['runtype'])
+            ypoints.append(value['count'])
+        total = sum(ypoints)
+        for i in range(len(ypoints)):
+            ypoints[i] = float(ypoints[i]) * 100 / total
+            if ypoints[i] > 0.5:
+                info['xpoints'].append(xpoints[i])
+                info['ypoints'].append(float('%.1f' % (ypoints[i], )))
+        info['title'] = 'Run Type Shares'
+        info['ytitle'] = ''
+        info['legend'] = 'Run Type Shares'
+        info['xformat'] = 'category'
+        return HttpResponse(json.dumps(info))
     else:
         return HttpResponse(json.dumps(raw_info)) # empty
             
