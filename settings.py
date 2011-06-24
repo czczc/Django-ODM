@@ -154,6 +154,7 @@ elif SITE_LOCAL:
         'odm.daqinfo',
         'odm.fileinfo',
         'odm.pmtinfo',
+        'odm.dcs'
     )
 
 # SITE_ROOT dependent settings
