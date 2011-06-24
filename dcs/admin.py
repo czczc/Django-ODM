@@ -6,4 +6,3 @@ class Ad1LidsensorAdmin(admin.ModelAdmin):
     list_filter = ('date_time',)
         
 admin.site.register(Ad1Lidsensor, Ad1LidsensorAdmin)
-
