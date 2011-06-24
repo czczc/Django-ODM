@@ -140,14 +140,14 @@ class Calibration(object):
         2 : 'ACU_B (GdLS Edge)',
         3 : 'ACU_C (Gamma Catcher)',
         # LED only
-        4 : 'AD_Wall_Upper',
+        4 : 'AD_Wall_Lower',
         5 : 'AD_Wall_Center',
-        6 : 'AD_Wall_Lower',
+        6 : 'AD_Wall_Upper',
     }
     
     mo_led_location = {
-        4 : 'Upper',
+        4 : 'Lower',
         5 : 'Center',
-        6 : 'Lower',
+        6 : 'Upper',
     }
     
