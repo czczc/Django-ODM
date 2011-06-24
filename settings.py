@@ -25,8 +25,19 @@ DATABASES = {
         'PASSWORD': conf.get('lbl_db', 'PASSWORD'),
         'HOST'    : conf.get('lbl_db', 'HOST'),
     },
+    'dcs' : {
+        'ENGINE'  : 'mysql',
+        'NAME'    : conf.get('dcs_db', 'NAME'),
+        'USER'    : conf.get('dcs_db', 'USER'),
+        'PASSWORD': conf.get('dcs_db', 'PASSWORD'),
+        'HOST'    : conf.get('dcs_db', 'HOST'),
+    },
 }
-DATABASE_ROUTERS = ['odm.router.DayaBayOfflineRouter', 'odm.router.LocalRouter']
+DATABASE_ROUTERS = [
+    'odm.router.DayaBayOfflineRouter',
+    'odm.router.DayaBayDcsRouter',
+    'odm.router.LocalRouter',
+]
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
 
