@@ -9,7 +9,7 @@ def scrape_odmrun(dryrun):
 
 def scrape_notes(dryrun):
     """update comment table"""
-    cs = CommentScraper(9000)
+    cs = CommentScraper(9500)
     cs.scrape_daq_csv(dryrun)
     
 def run(argv):

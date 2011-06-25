@@ -4,13 +4,20 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.list_detail import object_list, object_detail
 from django.conf import settings
 
-# from odm.dcs.models import *
+@login_required
+def monitor(request, site):
+    '''details of calibration raw parameters'''
+    
+    return direct_to_template(request, 
+        template = 'dcs/monitor.html',
+        extra_context = {
+            'site' : site,
+        })
 
-import json, re
-
+    
 @login_required
 def data(request, model):
-    '''details of calibration raw parameters'''
+    '''json data of the DCS model'''
 
     try:
         exec('from odm.dcs.models import %s as dcsmodel' % (model,))

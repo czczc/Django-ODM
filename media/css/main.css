@@ -118,3 +118,6 @@ a.FEEDiag { background: #ddd3f3; }
 .comment_content { border-top: 1px solid #ddd; margin: 15px 40px 40px 40px; padding: 10px;}
 .comment_content ul { margin-left: 20px;}
 .comment_content ol { margin-left: 25px;}
+
+/* dcs charts */
+.dcs_chart { height: 200px; margin-bottom:10px; }

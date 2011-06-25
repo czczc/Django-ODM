@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}ODM | DCS Monitor | {{ site }}{% endblock %}
+
+{% block content %}
+    <div class = "grid_24">
+         <h1 align='center'>
+             {{ site }} Monitors
+        </h1>
+    </div>    
+    <div class="clear"></div>
+    
+    {% if site == 'EH1' %}
+        {% include "dcs/eh1.html" %}
+    {% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/modules/exporting.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/themes/gray.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/dcs/monitor.js"></script>
+{% endblock %}
