@@ -15,14 +15,14 @@ def monitor(request, site):
 
     
 @login_required
-def data(request, model):
-    '''json data of the DCS model'''
-
+def data(request, model, latest_days=30):
+    '''json data of the DCS model, within latest_days'''
+    from datetime import datetime, timedelta
+    latest = datetime.utcnow() - timedelta(days=int(latest_days))
     try:
         exec('from odm.dcs.models import %s as dcsmodel' % (model,))
-        from datetime import datetime
         keep = 500
-        run_list = dcsmodel.objects.filter(date_time__gte=datetime(2011,5,10))
+        run_list = dcsmodel.objects.filter(date_time__gte=latest)
         count = run_list.count()
         skip = count / keep
         run_list = run_list.extra(where=['id %% %s = 0'], params=[skip])
