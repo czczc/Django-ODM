@@ -120,4 +120,5 @@ a.FEEDiag { background: #ddd3f3; }
 .comment_content ol { margin-left: 25px;}
 
 /* dcs charts */
-.dcs_chart { height: 200px; margin-bottom:10px; }
+.dcs_chart { height: 200px; margin-top:10px; }
+.dcs_header { margin-top:20px; }
