@@ -1,4 +1,52 @@
-<div class = "grid_24">
+{# Tables #}
+<div class="grid_24">
+    <table>
+    <thead><tr>
+       <th colspan="6" style='text-align: center;' id='th_Ad1Lidsensor' title='AD1 Monitors'></th>
+    </tr></thead>
+    <tbody>
+        <tr>
+            <td class='descr'>GdLS Level: Ultrasonic</td><td class='value' id='td_Ad1Lidsensor__ultrasonic_gdls'></td>
+            <td class='descr'>LS Level: Ultrasonic</td><td class='value' id='td_Ad1Lidsensor__ultrasonic_ls'></td>
+            <td class='descr'></td><td class='value'></td>
+        </tr>
+        <tr>
+            <td class='descr'>GdLS Level: Capacitance</td><td class='value' id='td_Ad1Lidsensor__capacitance_gdls'></td>
+            <td class='descr'>LS Level: Capacitance</td><td class='value' id='td_Ad1Lidsensor__capacitance_ls'></td>
+            <td class='descr'>MO Level: Capacitance</td><td class='value' id='td_Ad1Lidsensor__capacitance_mo'></td>
+        </tr>
+        <tr>
+            <td class='descr'>GdLS Temperature</td><td class='value' id='td_Ad1Lidsensor__temp_gdls'></td>
+            <td class='descr'>LS Temperature</td><td class='value' id='td_Ad1Lidsensor__temp_ls'></td>
+            <td class='descr'></td><td class='value'></td>
+        </tr>
+        <tr>
+            <td class='descr'>GdLS Temperature: Capacitance</td><td class='value' id='td_Ad1Lidsensor__capacitance_temp_gdls'></td>
+            <td class='descr'>LS Temperature: Capacitance</td><td class='value' id='td_Ad1Lidsensor__capacitance_temp_ls'></td>
+            <td class='descr'>MO Temperature: Capacitance</td><td class='value'  id='td_Ad1Lidsensor__capacitance_temp_mo'></td>
+        </tr>
+    </tbody>
+    <thead><tr>
+       <th colspan="6" style='text-align: center;' id='th_DbnsEnvPth' title='EH1 Environment Monitors'></th>
+    </tr></thead>
+        <tr>
+            <td class='descr'>Temperature 1</td><td class='value' id='td_DbnsEnvPth__dbns_pth_t1'></td>
+            <td class='descr'>Humidity 1</td><td class='value' id='td_DbnsEnvPth__dbns_pth_h1'></td>
+            <td class='descr'>Pressure 1</td><td class='value' id='td_DbnsEnvPth__dbns_pth_p1'></td>
+        </tr>
+        <tr>
+            <td class='descr'>Temperature 2</td><td class='value'  id='td_DbnsEnvPth__dbns_pth_t2'></td>
+            <td class='descr'>Humidity 2</td><td class='value' id='td_DbnsEnvPth__dbns_pth_h2'></td>
+            <td class='descr'>Pressure 2</td><td class='value' id='td_DbnsEnvPth__dbns_pth_p2'></td>
+        </tr>
+    </table>
+</div>
+<div class="clear"></div>
+
+
+{# Charts #}
+
+<div class = "grid_24" style='margin-top:30px;'>
      <h4 align='center' id='select_days'> 
          <a href="#" days='1'>Last Day</a>&nbsp;|&nbsp;
          <a href="#" days='7'>Week</a>&nbsp;|&nbsp;

@@ -92,6 +92,8 @@ class DaqTriggerType(object):
          'Esum_High' : 1024,
          'Esum_Low'  : 2048,
          'Esum'      : 4096,
+         'NHIT_LOW'  : 8192,
+         'NHIT_High' : 16384,
     }
     
     def __init__(self, trigger_code):

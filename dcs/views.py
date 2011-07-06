@@ -35,3 +35,19 @@ def data(request, model, latest_days=30):
         return HttpResponse(serializers.serialize("json", run_list))
     else:
         return HttpResponse('<pre>'+ serializers.serialize("json", run_list, indent=4) + '</pre>')
+
+
+@login_required
+def fetchone(request, model):
+    '''json data of the DCS model, latest record'''
+    try:
+        exec('from odm.dcs.models import %s as dcsmodel' % (model,))
+        record = dcsmodel.objects.all()[0]
+    except ImportError:
+        return HttpResponse(model + ' does not exist')
+    
+    from django.core import serializers
+    if request.is_ajax():
+        return HttpResponse(serializers.serialize("json", [record,]))
+    else:
+        return HttpResponse('<pre>'+ serializers.serialize("json", [record,], indent=4) + '</pre>')
