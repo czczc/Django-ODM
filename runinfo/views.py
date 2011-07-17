@@ -26,6 +26,9 @@ def quick_search(request):
         if search_term.startswith('sim'): 
             postfix = '/sim/'
             search_term = search_term.replace('sim', '', 1)
+        elif search_term.startswith('monitor'):
+            postfix = '/monitor/'
+            search_term = search_term.replace('monitor', '', 1)
         elif search_term.startswith('files'):
             postfix = '/files/'
             search_term = search_term.replace('files', '', 1)
@@ -413,6 +416,31 @@ def jsonlist(request):
         return HttpResponse(json.dumps( Daqruninfo.objects.json_listall() ))
     else:
         return HttpResponse('<pre>'+ json.dumps(Daqruninfo.objects.json_listall(), indent=4) + '</pre>')
-        
 
-    
+        
+@login_required
+def monitor(request, runno):
+    '''single run monitor'''
+            
+    return direct_to_template(request,
+        template = 'run/monitor.html', 
+        extra_context = { 
+            'runno' : runno,
+        })
+
+@login_required
+def site_monitor(request, site):
+    '''single run monitor'''
+    x = Daqrawdatafileinfo.objects.filter(filename__icontains=site+'-Merged'
+        ).exclude(filename__icontains='test')[:1]
+    if x:
+        return direct_to_template(request,
+            template = 'run/monitor.html', 
+            extra_context = { 
+                'runno' : x[0].runno,
+                'filename' : x[0].filename,
+                'timeend_beijing' : x[0].vld.timeend_beijing(),
+            })
+    else:
+        return HttpResponse('no file found for ' + site + '-Merged')
+        

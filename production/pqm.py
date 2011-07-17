@@ -35,7 +35,7 @@ class Pqm(object):
         '''load pqm run list'''
         try:
             fh = urllib2.urlopen(self.base_url + self.runlist_file)
-        except urllib2.HTTPError:
+        except (urllib2.HTTPError, urllib2.URLError):
             return False
         
         for line in fh:
@@ -50,12 +50,12 @@ class Pqm(object):
         if not self.run_list.get(self.runno, '') :
             return False
         self.info['base_url'] = self.base_url
-        self.info['figure_summary'] = self.run_index[self.runno]
+        self.info['figure_summary'] = self.run_index.get(self.runno, 'not_exist')
         self.info['detectors'] = {}
         
         try:
             fh = urllib2.urlopen(self.base_url + self.info['figure_summary'])
-        except urllib2.HTTPError:
+        except (urllib2.HTTPError, urllib2.URLError):
             return False
                 
         for line in fh:

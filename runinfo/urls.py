@@ -3,7 +3,11 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('odm.runinfo.views',
     # single run
     (r'^(\d+)/$', 'run'),
+    (r'^(\d+)/monitor/$', 'monitor'),
     (r'^(\d+)/sim/$', 'simrun'),
+    
+    # monitor
+    (r'^monitor/(?P<site>\w+)/$', 'site_monitor'),
     
     # query run list
     (r'^list/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'runlist'),

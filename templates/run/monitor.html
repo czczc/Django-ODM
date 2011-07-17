@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/modal.css")?>
+{% endblock %}
+
+{% block title %}ODM | Run Monitor | {{ runno }}{% endblock %}
+
+{% block content %}
+    <div class = "grid_8 prefix_8 suffix_8">
+         <h1 align='center'>
+             Run {{runno}}
+        </h1>
+    </div>    
+    <div class="clear"></div>
+    
+    {% if filename %}
+    <div class = "grid_24" style='margin-top: 20px;'>
+         <h6 align='center'>
+             [{{ timeend_beijing }}] {{ filename }}
+         </h6>
+    </div>    
+    <div class="clear"></div>
+    {% endif %}
+        
+    <div class = "grid_24 ui-widget-header ui-corner-all dcs_header">
+         <h3 align='center' >
+             AD1
+        </h3>
+    </div>
+    <div class="clear"></div>
+    <div class="grid_24" style='margin-top: 20px;'>
+        <div style="border: 1px solid #999;">          
+        <table detector="AD1" class='production'>
+            <tr>
+                <td figname='triggerRate' class='diagnostics'></td>
+                <td figname='logDtTrigger' class='diagnostics'></td>
+                <td figname='preADCRMS' class='pqm'></td>
+            </tr>
+            <tr>
+                <td figname='DarkRate' class='pqm'></td>
+                <td figname='pmtCharge' class='diagnostics'></td>
+                <td figname='adChargeVsTime' class='diagnostics'></td>
+            </tr>            
+        </table>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+    <div class = "grid_24 ui-widget-header ui-corner-all dcs_header">
+         <h3 align='center' >
+             AD2
+        </h3>
+    </div>
+    <div class="clear"></div>
+    <div class="grid_24" style='margin-top: 20px;'>
+        <div style="border: 1px solid #999;">          
+        <table detector="AD2" class='production'>
+            <tr>
+                <td figname='triggerRate' class='diagnostics'></td>
+                <td figname='logDtTrigger' class='diagnostics'></td>
+                <td figname='preADCRMS' class='pqm'></td>
+            </tr>
+            <tr>
+                <td figname='DarkRate' class='pqm'></td>
+                <td figname='pmtCharge' class='diagnostics'></td>
+                <td figname='adChargeVsTime' class='diagnostics'></td>
+            </tr>            
+        </table>
+        </div>
+    </div>
+    <div class="clear"></div>
+    
+    <div class = "grid_24 ui-widget-header ui-corner-all dcs_header">
+         <h3 align='center' >
+             IWS
+        </h3>
+    </div>
+    <div class="clear"></div>
+    <div class="grid_24" style='margin-top: 20px;'>
+        <div style="border: 1px solid #999;">          
+        <table detector="IWS" class='production'>
+            <tr>
+                <td figname='triggerRate' class='diagnostics'></td>
+                <td figname='logDtTrigger' class='diagnostics'></td>
+                <td figname='preADCRMS' class='pqm'></td>
+            </tr>
+            <tr>
+                <td figname='DarkRate' class='pqm'></td>
+                <td figname='muonPmtCharge' class='diagnostics'></td>
+                <td figname='muonChargeVsTime' class='diagnostics'></td>
+            </tr>            
+        </table>
+        </div>
+    </div>
+    <div class="clear"></div>
+    
+    <div class = "grid_24 ui-widget-header ui-corner-all dcs_header">
+         <h3 align='center' >
+             OWS
+        </h3>
+    </div>
+    <div class="clear"></div>
+    <div class="grid_24" style='margin-top: 20px;'>
+        <div style="border: 1px solid #999;">          
+        <table detector="OWS" class='production'>
+            <tr>
+                <td figname='triggerRate' class='diagnostics'></td>
+                <td figname='logDtTrigger' class='diagnostics'></td>
+                <td figname='preADCRMS' class='pqm'></td>
+            </tr>
+            <tr>
+                <td figname='DarkRate' class='pqm'></td>
+                <td figname='muonPmtCharge' class='diagnostics'></td>
+                <td figname='muonChargeVsTime' class='diagnostics'></td>
+            </tr>            
+        </table>
+        </div>
+    </div>
+    <div class="clear"></div>
+    
+    <div class = "grid_24 ui-widget-header ui-corner-all dcs_header">
+         <h3 align='center' >
+             RPC
+        </h3>
+    </div>
+    <div class="clear"></div>
+    
+    
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal.1.4.1.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/runmonitor.js"></script>
+{% endblock %}
