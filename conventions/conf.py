@@ -14,7 +14,18 @@ class Site(object):
         'SAB'          : 32,
         'PMTBenchTest' : 64,
     }
-    
+
+    id_site = {
+        0  : 'Unknown',     
+        1  : 'DayaBay',       
+        2  : 'LingAo',        
+        4  : 'Far',           
+        8  : 'Mid',           
+        16 : 'Aberdeen',      
+        32 : 'SAB',           
+        64 : 'PMTBenchTest',  
+    }
+
     site_alias = {
         'DayaBay' : 'EH1',
         'LingAo'  : 'EH2',
@@ -50,6 +61,17 @@ class Detector(object):
         'IWS' : 5,
         'OWS' : 6,
         'RPC' : 7,
+    }
+    
+    id_detector = {
+        0 : 'All',
+        1 : 'AD1',
+        2 : 'AD2',
+        3 : 'AD3',
+        4 : 'AD4',
+        5 : 'IWS',
+        6 : 'OWS',
+        7 : 'RPC',
     }
     
     detector_alias = {

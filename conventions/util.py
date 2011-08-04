@@ -20,14 +20,24 @@ def DBI_get(objects, context):
         objects = objects.filter(insertdate__lte=rollback_date)
     
     try:
+        # return objects.filter(
+        #         timestart__lte=date, 
+        #         timeend__gte=date,
+        #         subsite=context['detector'],
+        #         simmask=1,
+        #     ).extra(
+        #          where=[ 'sitemask & %s <> 0', ],
+        #         params=[ context['site'], ],
+        #     ).order_by('-seqno')[0]
+
         return objects.filter(
                 timestart__lte=date, 
                 timeend__gte=date,
                 subsite=context['detector'],
-            ).extra(
-                 where=[ 'sitemask & %s <> 0', ],
-                params=[ context['site'], ],
+                simmask=1,
+                sitemask=context['site'],
             ).order_by('-seqno')[0]
+                    
     except IndexError:
         return None
         

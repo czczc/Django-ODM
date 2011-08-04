@@ -1,7 +1,7 @@
 from django.http import HttpResponse, Http404
 from django.contrib.auth.decorators import login_required
 
-from odm.pmtinfo.models import Feecablemapvld, Calibpmtspecvld
+from odm.pmtinfo.models import Feecablemapvld, Calibpmtspecvld, Cablemapvld
 
 import json
 
@@ -29,7 +29,7 @@ def pmt(request, site, detector, year, month, day,
     };
     
     # disable cable map rollback (if need, let me know)
-    cablemaps = Feecablemapvld.objects.cablemapSet(site, detector, year, month, day)
+    cablemaps = Cablemapvld.objects.cablemapSet(site, detector, year, month, day)
     # allow pmt spec rollback
     pmtspecs  = Calibpmtspecvld.objects.pmtspecSet(
         site, detector, year, month, day,
@@ -42,8 +42,8 @@ def pmt(request, site, detector, year, month, day,
         info['cablemap_vld_insert'] = str(cablemap_0.vld.insertdate)
         info['cablemap_vld_seqno'] = str(cablemap_0.vld.seqno)
         for cablemap in cablemaps.all():
-            info['feename_to_id'][cablemap.feechanneldesc] = cablemap.sensorid
-            info['pmtname_to_id'][cablemap.sensordesc] = cablemap.sensorid
+            info['feename_to_id'][cablemap.feechanneldesc()] = cablemap.sensorid
+            info['pmtname_to_id'][cablemap.sensordesc()] = cablemap.sensorid
             
             pmt = info['pmts'].setdefault(cablemap.sensorid, {})
             # pmt['feename'] = cablemap.feechanneldesc

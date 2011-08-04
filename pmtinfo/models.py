@@ -2,6 +2,41 @@ from django.db import models
 from odm.conventions.util import DBI_get
 from odm.conventions.conf import Site, Detector
 
+
+# =====================================
+class CableMapVldManager(models.Manager):
+    
+    def cablemapSet(self, site, detector, year, month, day,
+        rollback=False, rollback_year='', rollback_month='', rollback_day=''):
+        '''Returns a QuerySet of DBI Feecablemap'''
+        
+        try:
+            site = Site.site_id[site]
+            detector = Detector.detector_id[detector]
+        except KeyError:
+            return None
+        
+        context = {
+            'year' : int(year),
+            'month' : int(month),
+            'day' : int(day),
+            'site' : site,
+            'detector' : detector,
+        }
+        if rollback:
+            context['rollback'] = {
+                'year' : int(rollback_year),
+                'month' : int(rollback_month),
+                'day' : int(rollback_day),
+            }
+        
+        vld = DBI_get(self.select_related(), context)
+        if vld:
+            return vld.cablemap_set
+        else:
+            return None
+
+
 # =====================================
 class FeeCableMapManager(models.Manager):
     
@@ -192,3 +227,117 @@ class Calibpmtspec(models.Model):
         return self.pmtdescrib
 
 
+# =====================================
+class Cablemapvld(models.Model):
+    seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
+    timestart = models.DateTimeField(db_column='TIMESTART') # Field name made lowercase.
+    timeend = models.DateTimeField(db_column='TIMEEND') # Field name made lowercase.
+    sitemask = models.IntegerField(null=True, db_column='SITEMASK', blank=True) # Field name made lowercase.
+    simmask = models.IntegerField(null=True, db_column='SIMMASK', blank=True) # Field name made lowercase.
+    subsite = models.IntegerField(null=True, db_column='SUBSITE', blank=True) # Field name made lowercase.
+    task = models.IntegerField(null=True, db_column='TASK', blank=True) # Field name made lowercase.
+    aggregateno = models.IntegerField(null=True, db_column='AGGREGATENO', blank=True) # Field name made lowercase.
+    versiondate = models.DateTimeField(db_column='VERSIONDATE') # Field name made lowercase.
+    insertdate = models.DateTimeField(db_column='INSERTDATE') # Field name made lowercase.
+    
+    objects = CableMapVldManager()
+        
+    class Meta:
+        db_table = u'CableMapVld'
+        ordering = ['-seqno']
+
+    def __unicode__(self):
+        return u'seq %d' % (self.seqno, ) 
+
+# =====================================
+class Cablemap(models.Model):
+    vld = models.ForeignKey(Cablemapvld, db_column='SEQNO') # Field name made lowercase.
+    row_counter = models.IntegerField(primary_key=True, db_column='ROW_COUNTER') # Fake pk, will duplicate (legacy db use multiple fields as pk)
+    sensorid = models.IntegerField(null=True, db_column='SENSORID', blank=True) # Field name made lowercase.
+    channelid = models.IntegerField(null=True, db_column='CHANNELID', blank=True) # Field name made lowercase.
+        
+    class Meta:
+        db_table = u'CableMap'
+
+    def __unicode__(self):
+        return u'channelid: %d' % self.channelid
+
+    def site(self):
+        return (self.channelid & 0xff000000) >> 24
+
+    def detector(self):
+        return (self.channelid & 0x00ff0000) >> 16
+        
+    def board(self):
+        return '%02d' % ((self.channelid & 0x0000ff00) >> 8, )
+
+    def connector(self):
+        return '%02d' % (self.channelid & 0x000000ff, )
+
+    def ring(self):
+        if self.detector() in [1, 2, 3, 4]:
+            return '%02d' % ((self.sensorid & 0x0000ff00) >> 8, )
+        else:
+            return ''
+
+    def column(self):
+        if self.detector() in [1, 2, 3, 4]:
+            return '%02d' % (self.sensorid & 0x000000ff, )
+        else:
+            return ''   
+
+    def wall(self):
+        if self.detector() in [5, 6]:
+            return '%02d' % ((self.sensorid & 0x00000f00) >> 8, )
+        else:
+            return ''
+
+    def spot(self):
+        if self.detector() in [5, 6]:
+            return '%02d' % (self.sensorid & 0x000000ff, )
+        else:
+            return ''
+
+    def in_out(self):
+        if self.detector() in [5, 6]:
+            if ((self.sensorid & 0x0000f000)):
+                return 'in'
+            else:
+                return 'out'
+        else:
+            return ''
+    
+    def feechanneldesc(self):
+        return '%s%s-board%s-connector%s' % (
+            Site.id_site.get(self.site(), ''),
+            Detector.id_detector.get(self.detector(), ''),
+            self.board(), self.connector(),
+        )
+
+    def sensordesc(self):
+        if not self.ring() == '':
+            return '%s%s-ring%s-column%s' % (
+                Site.id_site.get(self.site(), ''),
+                Detector.id_detector.get(self.detector(), ''),
+                self.ring(), self.column(),
+            )
+        else:
+            return '%s%s-wall%s-spot%s' % (
+                Site.id_site.get(self.site(), ''),
+                Detector.id_detector.get(self.detector(), ''),
+                self.wall(), self.spot(),
+            )                           
+                     
+    def unpack(self):
+        return {
+            'site' : self.site(),
+            'detector' : self.detector(),
+            'board' : self.board(),
+            'connector' : self.connector(),
+            'ring' : self.ring(),
+            'column' : self.column(),
+            'wall' : self.wall(),
+            'spot' : self.spot(),
+            'in_out' : self.in_out(),
+        }
+        

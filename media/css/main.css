@@ -122,3 +122,5 @@ a.FEEDiag { background: #ddd3f3; }
 /* dcs charts */
 .dcs_chart { height: 200px; margin-top:10px; }
 .dcs_header { margin-top:20px; }
+
+#content table.monitor td{ width: 450px; height: 338px; vertical-align: bottom;}

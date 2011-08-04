@@ -22,110 +22,164 @@
     </div>    
     <div class="clear"></div>
     {% endif %}
-        
+
+    <div class = "grid_24">
+		<a href="#triggerrate">Trigger Rate</a> &nbsp;|&nbsp; 
+		<a href="#pmtcharge">PMT Charge</a> &nbsp;|&nbsp; 
+		<a href="{{SITE_ROOT}}/run/{{runno}}/">More Details</a>
+    </div>
+
+	<a name="triggerrate"></a>
     <div class = "grid_24 ui-widget-header ui-corner-all dcs_header">
          <h3 align='center' >
-             AD1
+             Trigger Rate
         </h3>
     </div>
     <div class="clear"></div>
     <div class="grid_24" style='margin-top: 20px;'>
         <div style="border: 1px solid #999;">          
-        <table detector="AD1" class='production'>
+        <table class='production monitor'>
             <tr>
-                <td figname='triggerRate' class='diagnostics'></td>
-                <td figname='logDtTrigger' class='diagnostics'></td>
-                <td figname='preADCRMS' class='pqm'></td>
+                <td detector="AD1" figname='triggerRate' class='diagnostics'><span class="figname">AD1 Trigger Rate</span></td>
+                <td detector="AD2" figname='triggerRate' class='diagnostics'><span class="figname">AD2 Trigger Rate</span></td>
             </tr>
             <tr>
-                <td figname='DarkRate' class='pqm'></td>
-                <td figname='pmtCharge' class='diagnostics'></td>
-                <td figname='adChargeVsTime' class='diagnostics'></td>
+	            <td detector="IWS" figname='triggerRate' class='diagnostics'><span class="figname">IWS Trigger Rate</span></td>
+                <td detector="OWS" figname='triggerRate' class='diagnostics'><span class="figname">OWS Trigger Rate</span></td>
             </tr>            
         </table>
         </div>
     </div>
     <div class="clear"></div>
 
+	<a name="pmtcharge"></a>
     <div class = "grid_24 ui-widget-header ui-corner-all dcs_header">
          <h3 align='center' >
-             AD2
+             PMT Charge
         </h3>
     </div>
     <div class="clear"></div>
     <div class="grid_24" style='margin-top: 20px;'>
         <div style="border: 1px solid #999;">          
-        <table detector="AD2" class='production'>
+        <table class='production monitor'>
             <tr>
-                <td figname='triggerRate' class='diagnostics'></td>
-                <td figname='logDtTrigger' class='diagnostics'></td>
-                <td figname='preADCRMS' class='pqm'></td>
+                <td detector="AD1" figname='pmtCharge' class='diagnostics'><span class="figname">AD1 PMT Charge Map</span></td>
+                <td detector="AD2" figname='pmtCharge' class='diagnostics'><span class="figname">AD2 PMT Charge Map</span></td>
             </tr>
             <tr>
-                <td figname='DarkRate' class='pqm'></td>
-                <td figname='pmtCharge' class='diagnostics'></td>
-                <td figname='adChargeVsTime' class='diagnostics'></td>
+	            <td detector="IWS" figname='pmtCharge' class='diagnostics'><span class="figname">IWS PMT Charge Map</span></td>
+                <td detector="OWS" figname='pmtCharge' class='diagnostics'><span class="figname">OWS PMT Charge Map</span></td>
             </tr>            
         </table>
         </div>
     </div>
     <div class="clear"></div>
-    
-    <div class = "grid_24 ui-widget-header ui-corner-all dcs_header">
-         <h3 align='center' >
-             IWS
-        </h3>
-    </div>
-    <div class="clear"></div>
-    <div class="grid_24" style='margin-top: 20px;'>
-        <div style="border: 1px solid #999;">          
-        <table detector="IWS" class='production'>
-            <tr>
-                <td figname='triggerRate' class='diagnostics'></td>
-                <td figname='logDtTrigger' class='diagnostics'></td>
-                <td figname='preADCRMS' class='pqm'></td>
-            </tr>
-            <tr>
-                <td figname='DarkRate' class='pqm'></td>
-                <td figname='muonPmtCharge' class='diagnostics'></td>
-                <td figname='muonChargeVsTime' class='diagnostics'></td>
-            </tr>            
-        </table>
-        </div>
-    </div>
-    <div class="clear"></div>
-    
-    <div class = "grid_24 ui-widget-header ui-corner-all dcs_header">
-         <h3 align='center' >
-             OWS
-        </h3>
-    </div>
-    <div class="clear"></div>
-    <div class="grid_24" style='margin-top: 20px;'>
-        <div style="border: 1px solid #999;">          
-        <table detector="OWS" class='production'>
-            <tr>
-                <td figname='triggerRate' class='diagnostics'></td>
-                <td figname='logDtTrigger' class='diagnostics'></td>
-                <td figname='preADCRMS' class='pqm'></td>
-            </tr>
-            <tr>
-                <td figname='DarkRate' class='pqm'></td>
-                <td figname='muonPmtCharge' class='diagnostics'></td>
-                <td figname='muonChargeVsTime' class='diagnostics'></td>
-            </tr>            
-        </table>
-        </div>
-    </div>
-    <div class="clear"></div>
-    
-    <div class = "grid_24 ui-widget-header ui-corner-all dcs_header">
-         <h3 align='center' >
-             RPC
-        </h3>
-    </div>
-    <div class="clear"></div>
-    
+
+    {#  #}
+    {#      #}
+    {# <div class = "grid_24 ui-widget-header ui-corner-all dcs_header"> #}
+    {#      <h3 align='center' > #}
+    {#          AD1 #}
+    {#     </h3> #}
+    {# </div> #}
+    {# <div class="clear"></div> #}
+    {# <div class="grid_24" style='margin-top: 20px;'> #}
+    {#     <div style="border: 1px solid #999;">           #}
+    {#     <table detector="AD1" class='production'> #}
+    {#         <tr> #}
+    {#             <td figname='triggerRate' class='diagnostics'></td> #}
+    {#             <td figname='logDtTrigger' class='diagnostics'></td> #}
+    {#             <td figname='preADCRMS' class='pqm'></td> #}
+    {#         </tr> #}
+    {#         <tr> #}
+    {#             <td figname='DarkRate' class='pqm'></td> #}
+    {#             <td figname='pmtCharge' class='diagnostics'></td> #}
+    {#             <td figname='adChargeVsTime' class='diagnostics'></td> #}
+    {#         </tr>             #}
+    {#     </table> #}
+    {#     </div> #}
+    {# </div> #}
+    {# <div class="clear"></div> #}
+    {#  #}
+    {# <div class = "grid_24 ui-widget-header ui-corner-all dcs_header"> #}
+    {#      <h3 align='center' > #}
+    {#          AD2 #}
+    {#     </h3> #}
+    {# </div> #}
+    {# <div class="clear"></div> #}
+    {# <div class="grid_24" style='margin-top: 20px;'> #}
+    {#     <div style="border: 1px solid #999;">           #}
+    {#     <table detector="AD2" class='production'> #}
+    {#         <tr> #}
+    {#             <td figname='triggerRate' class='diagnostics'></td> #}
+    {#             <td figname='logDtTrigger' class='diagnostics'></td> #}
+    {#             <td figname='preADCRMS' class='pqm'></td> #}
+    {#         </tr> #}
+    {#         <tr> #}
+    {#             <td figname='DarkRate' class='pqm'></td> #}
+    {#             <td figname='pmtCharge' class='diagnostics'></td> #}
+    {#             <td figname='adChargeVsTime' class='diagnostics'></td> #}
+    {#         </tr>             #}
+    {#     </table> #}
+    {#     </div> #}
+    {# </div> #}
+    {# <div class="clear"></div> #}
+    {#  #}
+    {# <div class = "grid_24 ui-widget-header ui-corner-all dcs_header"> #}
+    {#      <h3 align='center' > #}
+    {#          IWS #}
+    {#     </h3> #}
+    {# </div> #}
+    {# <div class="clear"></div> #}
+    {# <div class="grid_24" style='margin-top: 20px;'> #}
+    {#     <div style="border: 1px solid #999;">           #}
+    {#     <table detector="IWS" class='production'> #}
+    {#         <tr> #}
+    {#             <td figname='triggerRate' class='diagnostics'></td> #}
+    {#             <td figname='logDtTrigger' class='diagnostics'></td> #}
+    {#             <td figname='preADCRMS' class='pqm'></td> #}
+    {#         </tr> #}
+    {#         <tr> #}
+    {#             <td figname='DarkRate' class='pqm'></td> #}
+    {#             <td figname='muonPmtCharge' class='diagnostics'></td> #}
+    {#             <td figname='muonChargeVsTime' class='diagnostics'></td> #}
+    {#         </tr>             #}
+    {#     </table> #}
+    {#     </div> #}
+    {# </div> #}
+    {# <div class="clear"></div> #}
+    {#  #}
+    {# <div class = "grid_24 ui-widget-header ui-corner-all dcs_header"> #}
+    {#      <h3 align='center' > #}
+    {#          OWS #}
+    {#     </h3> #}
+    {# </div> #}
+    {# <div class="clear"></div> #}
+    {# <div class="grid_24" style='margin-top: 20px;'> #}
+    {#     <div style="border: 1px solid #999;">           #}
+    {#     <table detector="OWS" class='production'> #}
+    {#         <tr> #}
+    {#             <td figname='triggerRate' class='diagnostics'></td> #}
+    {#             <td figname='logDtTrigger' class='diagnostics'></td> #}
+    {#             <td figname='preADCRMS' class='pqm'></td> #}
+    {#         </tr> #}
+    {#         <tr> #}
+    {#             <td figname='DarkRate' class='pqm'></td> #}
+    {#             <td figname='muonPmtCharge' class='diagnostics'></td> #}
+    {#             <td figname='muonChargeVsTime' class='diagnostics'></td> #}
+    {#         </tr>             #}
+    {#     </table> #}
+    {#     </div> #}
+    {# </div> #}
+    {# <div class="clear"></div> #}
+    {#  #}
+    {# <div class = "grid_24 ui-widget-header ui-corner-all dcs_header"> #}
+    {#      <h3 align='center' > #}
+    {#          RPC #}
+    {#     </h3> #}
+    {# </div> #}
+    {# <div class="clear"></div> #}
+    {#  #}
     
 {% endblock %}
 
