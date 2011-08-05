@@ -57,19 +57,39 @@
     {% mkrange 1 10 1 as wall_range %}
     {% mkrange 1 30 1 as spot_range %}
     
+    {# <div class="grid_14 pull_10" style='margin-top: 10px;'> #}
+    {#     <table id="feemap_table" class="det_table"> #}
+    {#         <tr><td>connector</td> #}
+    {#         {% for connector in connector_range %} #}
+    {#         <td>{{ connector|stringformat:"02d" }}</td> #}
+    {#         {% endfor %} #}
+    {#         </tr> #}
+    {#  #}
+    {#         {% for board in board_range %} #}
+    {#         <tr board='{{ board|stringformat:"02d" }}'> #}
+    {#             <td>board {{ board|stringformat:"02d" }}</td> #}
+    {#             {% for connector in connector_range %} #}
+    {#             <td connector='{{ connector|stringformat:"02d" }}'></td> #}
+    {#             {% endfor %} #}
+    {#         </tr> #}
+    {#         {% endfor %} #}
+    {#     </table> #}
+    {# </div> #}
+    {# <div class="clear"></div> #}
+
     <div class="grid_14 pull_10" style='margin-top: 10px;'>
         <table id="feemap_table" class="det_table">
-            <tr><td>connector</td>
-            {% for connector in connector_range %}
-            <td>{{ connector|stringformat:"02d" }}</td>
+            <tr><td>board</td>
+            {% for board in board_range %}
+            <td>{{ board|stringformat:"02d" }}</td>
             {% endfor %}
             </tr>
 
-            {% for board in board_range %}
-            <tr board='{{ board|stringformat:"02d" }}'>
-                <td>board {{ board|stringformat:"02d" }}</td>
-                {% for connector in connector_range %}
-                <td connector='{{ connector|stringformat:"02d" }}'></td>
+            {% for connector in connector_range %}
+            <tr connector='{{ connector|stringformat:"02d" }}'>
+                <td>conn {{ connector|stringformat:"02d" }}</td>
+                {% for board in board_range %}
+                <td board='{{ board|stringformat:"02d" }}'></td>
                 {% endfor %}
             </tr>
             {% endfor %}

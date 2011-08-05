@@ -226,8 +226,8 @@ function load_pmtfigures(detname, data) {
         var feemap_tds = $('#feemap_table td');
         feemap_tds.each(function() {
             var html = '';
-            var connector = $(this).attr("connector");
-            var board = $(this).parent().attr("board");
+            var board = $(this).attr("board");
+            var connector = $(this).parent().attr("connector");
             if (board && connector) {
                 $(this).html('');
                 figures = diagnostics_data.detectors[detname];
@@ -240,7 +240,7 @@ function load_pmtfigures(detname, data) {
                         link += '/board/' + board + '/connector/' + connector + '/';
                         html += link +  '">O</a>';
                         $(this).html(html);
-                        
+                        // console.log(html);
                         if (data) {
                             var pmtid = data.feename_to_id[detname + '-board' + board + '-connector' + connector];
                             var pmt = data.pmts[pmtid];
@@ -279,8 +279,8 @@ function enable_pmt_mouse_actions(detname, data) {
     var feemap_tds = $('#feemap_table td');
     feemap_tds.unbind();
     feemap_tds.each(function() {
-        var connector = $(this).attr("connector");
-        var board = $(this).parent().attr("board");
+        var board = $(this).attr("board");
+        var connector = $(this).parent().attr("connector");
         
         if (board && connector) {
             var pmtid = data.feename_to_id[detname + '-board' + board + '-connector' + connector];
@@ -348,7 +348,7 @@ function enable_pmt_mouse_actions(detname, data) {
             if (pmt) {
                 var board = pmt.board;
                 var connector = pmt.connector;                    
-                var selector = 'tr[board="' + board + '"] td[connector="' + connector + '"]';
+                var selector = 'tr[connector="' + connector + '"] td[board="' + board + '"]';
                 var fee_td = $(selector);
 
                 var spehigh = pmt.spehigh;
