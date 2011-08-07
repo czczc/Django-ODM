@@ -77,12 +77,24 @@ function build_figlist(data) {
     // console.log(FIGLIST);
 }
 
+function build_detname(detector) {
+    var sites = ['DayaBay', 'SAB'];
+    var i;
+    var detname = '';
+    for (i=0; i<sites.length; i++) {
+        if (FIGLIST[sites[i] + detector]) {
+            detname = sites[i] + detector;
+            break;
+        }        
+    }
+    return detname;
+}
+
 function build_table(name, data) {
     $(".production td." + name).each(function(){
         var site = 'DayaBay';
         var detector = $(this).attr('detector');
-        var detname = '';
-        if (FIGLIST[site + detector]) {detname = site +detector;}
+        var detname = build_detname(detector);
         var html = $(this).html();
         var html2 = 'N/A<br/>';
         if (detname) {            
