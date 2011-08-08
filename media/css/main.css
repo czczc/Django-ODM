@@ -29,6 +29,8 @@ ul.errorlist { margin: 0; padding: 0; list-style: none;}
 .warning { color: #F2583E; }
 .great { color: green; }
 .sep { color: #bbb; font-weight: normal;}
+.right {float: right;}
+.left {float: left;}
 
 /* link #125ca2 */
 a { color: #125ca2; background-color: transparent; text-decoration: none; font-weight: normal; outline-style: none; }
@@ -124,3 +126,5 @@ a.FEEDiag { background: #ddd3f3; }
 .dcs_header { margin-top:20px; }
 
 #content table.monitor td{ width: 450px; height: 338px; vertical-align: bottom;}
+
+#content .img_comp {float: right; margin-right: 30px;}

@@ -533,7 +533,9 @@ function build_plots(name, detname, data) {
         html += '<td><image class="img_db" src="'
              + url_force_reload(production_url + figure_list[i].figpath)
              + '" width=300 height=225 />'
-             + '<span class="figname">' + figure_list[i].figname + '</span></td>';
+             + '<span class="figname">' + figure_list[i].figname
+             + '<span class="ui-icon ui-icon-search img_comp"></span>'
+             + '</span></td>';
         column_index++;
         if (column_index == 3) {html += "</tr>\n"; column_index=0;}
     }
@@ -541,6 +543,7 @@ function build_plots(name, detname, data) {
 
     // enable image double click to origninal size
     modal_by_click('#table_'+name+'_plots .img_db');
+    enable_img_comp('#table_'+name+'_plots .img_comp', detname, data);
 }
 
 function build_mc_plots(data) {
@@ -616,6 +619,45 @@ function modal_by_click(selector) {
         $.modal('<div><img src="' 
             + $(this).attr("src")
             + '" /></div>',
+            {
+                'overlayClose' : true
+            }
+        );
+        return false;
+    });
+}
+
+
+function enable_img_comp(selector, detname, data) {
+    var site_detector = parse_detname(detname);
+    var site = site_detector[0];
+    var detector = site_detector[1];
+    var has_AD1 = false; 
+    var has_AD2 = false;
+    if ((data.detectors)[site+'AD1']) { has_AD1 = true; }
+    if ((data.detectors)[site+'AD2']) { has_AD2 = true; }
+    $(selector).hover(function() {
+        $(this).css('cursor','pointer');
+    }, function() {
+        $(this).css('cursor','auto');
+    });
+    $(selector).click(function() {
+        var this_link = $(this).parent().prev('img').attr('src');
+        var AD1 = "<h4>N/A</h4>";
+        var AD2 = "<h4>N/A</h4>";
+        if (has_AD1) { 
+            AD1 = '<img src="' + this_link.replace(detector, 'AD1') + '" width=400 height=300 />'; 
+        }
+        if (has_AD2) {
+            AD2 = '<img src="' + this_link.replace(detector, 'AD2') + '" width=400 height=300 />'; 
+        }
+        var html = '<div id="content"><table class="production"><tr>';
+        html += '<td>' + AD1 + '<span class="figname">AD1</span></td>';
+        html += '<td>' + AD2 + '<span class="figname">AD2</span></td>';
+        html += '</tr></table></div>';
+        console.log(AD1);
+        console.log(AD2);
+        $.modal(html,
             {
                 'overlayClose' : true
             }
