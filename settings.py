@@ -4,6 +4,14 @@ PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
 import socket
 HOST_NAME = socket.gethostname()
+SITE_LOCAL = SITE_NERSC = SITE_IHEP = False
+if HOST_NAME.startswith('sgn'):
+    SITE_NERSC = True
+elif HOST_NAME.startswith('dybjob'):
+    SITE_IHEP = True
+else:
+    SITE_LOCAL = True
+    
 
 from ConfigParser import SafeConfigParser
 conf = SafeConfigParser()
@@ -25,6 +33,13 @@ DATABASES = {
         'PASSWORD': conf.get('lbl_db', 'PASSWORD'),
         'HOST'    : conf.get('lbl_db', 'HOST'),
     },
+    'ihep' : {
+        'ENGINE'  : 'mysql',
+        'NAME'    : conf.get('ihep_db', 'NAME'),
+        'USER'    : conf.get('ihep_db', 'USER'),
+        'PASSWORD': conf.get('ihep_db', 'PASSWORD'),
+        'HOST'    : conf.get('ihep_db', 'HOST'),
+    },
     'dcs' : {
         'ENGINE'  : 'mysql',
         'NAME'    : conf.get('dcs_db', 'NAME'),
@@ -38,6 +53,9 @@ DATABASE_ROUTERS = [
     'odm.router.DayaBayDcsRouter',
     'odm.router.LocalRouter',
 ]
+if SITE_IHEP:
+    DATABASE_ROUTERS[0] = 'odm.router.DayaBayIhepRouter'
+    
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
 
@@ -103,11 +121,6 @@ SESSION_COOKIE_AGE = 86400 * 3
 ACCOUNT_ACTIVATION_DAYS = 7
 
 # site specific settings
-SITE_LOCAL = SITE_NERSC = False
-if HOST_NAME.startswith('sgn'):
-    SITE_NERSC = True
-else:
-    SITE_LOCAL = True
 
 if SITE_NERSC:
     DEBUG = TEMPLATE_DEBUG = False
@@ -115,12 +128,18 @@ if SITE_NERSC:
     MEDIA_URL = 'http://portal.nersc.gov/project/dayabay/odm_media/'
     ADMIN_MEDIA_PREFIX = 'http://portal.nersc.gov/project/dayabay/odm_media/admin/'
 
+elif SITE_IHEP:
+    DEBUG = TEMPLATE_DEBUG = True
+    SITE_ROOT = '/odm'
+    MEDIA_URL = '/odm_web/'
+    ADMIN_MEDIA_PREFIX = '/odm_web/admin/'
+    
 elif SITE_LOCAL:
     DEBUG = TEMPLATE_DEBUG = True
     SITE_ROOT = ''
     MEDIA_URL = '/media/'
     ADMIN_MEDIA_PREFIX = '/media/admin/'
-    CACHE_BACKEND = 'memcached://127.0.0.1:11211/?timeout=900'
+    # CACHE_BACKEND = 'memcached://127.0.0.1:11211/?timeout=900'
     # local packages
     sys.path.insert(0, PROJECT_PATH + '/../lib/python2.6/site-packages')
     # DjDT settings

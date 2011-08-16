@@ -29,7 +29,7 @@ def scrape(site='local', target='odmrun', dryrun='dryrun'):
 
 # =============================
 @hosts('chaoz@pdsf3.nersc.gov')
-def deploy(dryrun=False):
+def deploy_pdsf(dryrun=False):
     '''deploy to production site'''
     from fabric.contrib.project import rsync_project
     
@@ -53,7 +53,34 @@ def deploy(dryrun=False):
         exclude=('.svn/', '.htaccess', '*.pyc', 'db/'),
         extra_opts='--update' + dry_run,
     )
+
+
+# =============================
+@hosts('zhangchao@202.122.37.74')
+def deploy_ihep(dryrun=False):
+    '''deploy to production site'''
+    from fabric.contrib.project import rsync_project
     
+    if dryrun: 
+        dry_run = ' --dry-run'
+    else: 
+        dry_run = ''
+    
+    # media server
+    rsync_project(
+        remote_dir = '/data/odm/odmweb/',
+        # remote_dir   = '~/tmp/odm_media/',
+        local_dir    = './media/',
+        exclude      = '.svn/',
+        extra_opts   = '--update' + dry_run,
+    )
+    rsync_project(
+        remote_dir = '~/django-sites/',
+        # remote_dir   = '~/tmp/django-sites/',
+        exclude      = ('.svn/', '.htaccess', '*.pyc', 'db/'),
+        extra_opts   = '--update' + dry_run,
+    )
+                
 # =============================
 def test_remote():
     run('cd dayabay')
