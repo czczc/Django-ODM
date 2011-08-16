@@ -13,8 +13,7 @@ printrawinfo();
 
 function printrawinfo() {
     $('.raw a').click(function(){
-        var runno = $(this).parent().siblings('.runno').find('a').text();
-        var url = base_url + 'run/calibration/' + runno + '/';
+        var url = $(this).attr('href');
         $.getJSON( url, function(data) {
             var html = '<div id="content"><table>';
             var descr = '';

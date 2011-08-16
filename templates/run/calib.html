@@ -10,13 +10,14 @@
 
 {# daq table #}
 <div id="calib_section" style='margin-top: 10px;'>
-
-    <div class="grid_14">
+    {% for calibrun in calibrun_list %}
+    <div class="grid_12">
         <table>
         <thead><tr>
            <th colspan="2" style='text-align: center;'>Calibration Information</th>
         </tr></thead>
         <tbody>
+	        <tr><td class='descr'>AD No.</td><td class='value'>{{ calibrun.adno }}</td></tr>
             <tr><td class='descr'>Source Type</td><td class='value'>{{ calibrun.sourcetype }}</td></tr>
             {% if calibrun.sourcetype == "Ge68" or calibrun.sourcetype == "AmC_Co60" %}
             <tr><td class='descr'>ACU</td><td class='value'>{{ calibrun.acu_for_source }}</td></tr>
@@ -45,11 +46,12 @@
             {% endif %}
             <tr>
                 <td class='descr'>Raw Parameters</td>
-                <td class='value raw'><a href="{{ SITE_ROOT }}/run/calibration/{{ calibrun.runno }}/">raw</a</td>
+                <td class='value raw'><a href="{{ SITE_ROOT }}/run/calibration/{{ calibrun.runno }}/AD/{{calibrun.adno}}/">raw</a</td>
             </tr>
        </tbody>
-        </table>
+       </table>
     </div>
+    {% endfor %}
     <div class="clear"></div>
 
 </div>

@@ -70,26 +70,29 @@ def run(request, runno):
             })
     num_files = Daqrawdatafileinfo.objects.filter(runno=runno).count()
     
-    calibrun = None
+    calibrun_list = None
     if (run.runtype == 'ADCalib'):
-        try:
-            calibrun = Daqcalibruninfo.objects.get(runno=runno)
+        calibrun_list = Daqcalibruninfo.objects.filter(runno=runno)
+        for calibrun in calibrun_list:
             calibrun.humanize()
-        except:
-            calibrun = None
+        # try:
+        #     calibrun = Daqcalibruninfo.objects.filter(runno=runno)[0]
+        #     calibrun.humanize()
+        # except:
+        #     calibrun = None
     
     odmrun = None
     try:
         odmrun = Run.objects.get(runno=runno)
     except:
         odmrun = None
-    
+
     return direct_to_template(request,
         template = 'run/detail.html', 
         extra_context = { 
             'run' : run,
             'num_files' : num_files, 
-            'calibrun' : calibrun,
+            'calibrun_list' : calibrun_list,
             'odmrun' : odmrun,
             'next' : run.get_absolute_url(),
         })
@@ -241,16 +244,17 @@ def calibration(request, sourcetype, page=1, records=100):
             'description'  : description.get(sourcetype, 'Unknown'),
             'count'        : run_list.count(),  # total count, not per page
             'base_url'     : settings.SITE_ROOT + '/run/calibration/' + sourcetype,
+            'query_string' : '?' + request.META.get('QUERY_STRING', '')
         })
 
 
 @login_required
-def calibrun(request, runno):
+def calibrun(request, runno, adno=1):
     '''details of calibration raw parameters'''
     from django.utils.datastructures import SortedDict
     info = {}
     try:
-        run = Daqcalibruninfo.objects.get(runno=runno)
+        run = Daqcalibruninfo.objects.get(runno=runno, adno=adno)
     except:
         return HttpResponse(json.dumps(info))
     

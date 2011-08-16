@@ -678,7 +678,7 @@ function dirname(path) {
 printrawinfo();
 function printrawinfo() {
     $('.raw a').click(function(){
-        var url = base_url + 'run/calibration/' + Run.runno + '/';
+        var url = $(this).attr('href');
         $.getJSON( url, function(data) {
             var html = '<div id="content"><table>';
             var descr = '';
