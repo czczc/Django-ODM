@@ -47,10 +47,18 @@ DATABASES = {
         'PASSWORD': conf.get('dcs_db', 'PASSWORD'),
         'HOST'    : conf.get('dcs_db', 'HOST'),
     },
+    'dq' : {
+        'ENGINE'  : 'mysql',
+        'NAME'    : conf.get('dq_db', 'NAME'),
+        'USER'    : conf.get('dq_db', 'USER'),
+        'PASSWORD': conf.get('dq_db', 'PASSWORD'),
+        'HOST'    : conf.get('dq_db', 'HOST'),
+    },
 }
 DATABASE_ROUTERS = [
     'odm.router.DayaBayOfflineRouter',
     'odm.router.DayaBayDcsRouter',
+    'odm.router.DayaBayDqRouter',
     'odm.router.LocalRouter',
 ]
 if SITE_IHEP:
@@ -173,7 +181,8 @@ elif SITE_LOCAL:
         'odm.daqinfo',
         'odm.fileinfo',
         'odm.pmtinfo',
-        'odm.dcs'
+        'odm.dcs',
+        'odm.dq',
     )
 
 # SITE_ROOT dependent settings
