@@ -81,6 +81,7 @@ SITE_ID = 1
 USE_I18N = True
 USE_L10N = False
 DATETIME_FORMAT = 'Y-m-d H:i:s' 
+MAINTAINENCE = False
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -94,6 +95,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'odm.middleware.MaintainenceMiddleware',
 )
 
 TEMPLATE_DIRS = (
@@ -160,6 +162,7 @@ elif SITE_LOCAL:
         'django.contrib.messages.middleware.MessageMiddleware',
         'debug_toolbar.middleware.DebugToolbarMiddleware',
         'django.middleware.cache.FetchFromCacheMiddleware',
+        'odm.middleware.MaintainenceMiddleware',
     )
     INTERNAL_IPS = ('127.0.0.1',)
     DEBUG_TOOLBAR_PANELS = (

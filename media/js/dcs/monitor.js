@@ -20,7 +20,7 @@ var DcsData = new Object;
 
 load_all_models();
 fetch_latest();
-var timer = setInterval('fetch_latest()', 120000);
+var timer = setInterval('fetch_latest()', 300000);
 
 
 $('#select_days a').click(function(){
