@@ -43,8 +43,8 @@ def fetchone(request, model):
     try:
         exec('from odm.dcs.models import %s as dcsmodel' % (model,))
         record = dcsmodel.objects.all()[0]
-    except ImportError:
-        return HttpResponse(model + ' does not exist')
+    except:
+        return HttpResponse(model + ' does not exist or not record')
     
     from django.core import serializers
     if request.is_ajax():

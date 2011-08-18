@@ -1,7 +1,6 @@
 var this_url = window.location.href;
 var base_url = this_url.substring(0,this_url.indexOf('dcs'));
 $('button').button();
-
 Highcharts.setOptions({
     chart: { type: 'scatter', zoomType: 'xy', animation: false },
     credits: { enabled: false },
@@ -21,7 +20,7 @@ var DcsData = new Object;
 
 load_all_models();
 fetch_latest();
-var timer = setInterval('fetch_latest()', 60000);
+var timer = setInterval('fetch_latest()', 120000);
 
 
 $('#select_days a').click(function(){
@@ -38,11 +37,17 @@ function load_all_models() {
     // console.log(charts.length + ' charts destroyed.');
     charts.length = 0;
     load_model('Ad1Lidsensor');
+    load_model('Ad2Lidsensor');
+    load_model('DbnsIowTemp');
+    load_model('DbnsRpcGas101');
     load_model('DbnsEnvPth');
 }
 
 function fetch_latest() {
     fetch_one('Ad1Lidsensor');
+    fetch_one('Ad2Lidsensor');
+    fetch_one('DbnsIowTemp');
+    fetch_one('DbnsRpcGas101');
     fetch_one('DbnsEnvPth');
 }
 
@@ -60,8 +65,14 @@ function fetch_one(model) {
             if (!is_safe(model, field, record[field])) {
                 td_field.css('color', 'red');
             }
+            else {
+                td_field.css('color', 'black');
+            }
         }
-        heading.html(title + ' [ ' + record.date_time + ' ]');
+        heading.html(title + '&nbsp;&nbsp; [ ' + record.date_time + ' ]');
+        // console.log(parse_datetime(record.date_time));
+        // now = new Date();
+        // console.log(now.getTime());
     });
 }
 
@@ -74,44 +85,36 @@ function load_model(model) {
             row = DcsData[model][i].fields;
             row.date_time = parse_datetime(row.date_time);
         }
-        if (model == 'Ad1Lidsensor') {
-            for (attr in configs.Ad1Lidsensor) {
-                init_chart(configs.Ad1Lidsensor[attr]);
-            }
-        }
-        else if (model == 'DbnsEnvPth') {
-            for (attr in configs.DbnsEnvPth) {
-                init_chart(configs.DbnsEnvPth[attr]);
+        if (configs[model]) {
+            for (field in configs[model]) {
+                init_chart(model, field, configs[model][field]);
             }
         }
     }); // .getJSON done
 }
 
-function init_chart(options) {
-    var model_field = options.renderTo.split('__');
+function init_chart(model, field, options) {
     highchartsOptions = {
-       chart: { renderTo: options.renderTo },
-       title: { text: options.title },
+       chart: { renderTo: model + '__' + field },
+       title: { text: options[0] },
        yAxis: { endOnTick: true },
        series: [{ animation: false,
-             data: convert_data(DcsData[model_field[0]], model_field[1])
+             data: convert_data(DcsData[model],field)
            }
        ]
     };
-    if (options.ymin && options.ymax) {
-        highchartsOptions.yAxis.min = options.ymin;
-        highchartsOptions.yAxis.max = options.ymax;
+    if (options[1] && options[2]) {
+        highchartsOptions.yAxis.min = options[1];
+        highchartsOptions.yAxis.max = options[2];
     }
-    if (options.ysafemin && options.ysafemax) {
+    if (options[3] && options[4]) {
         highchartsOptions.yAxis.plotBands = [{ // reference band
-            from: options.ysafemin, to: options.ysafemax,
+            from: options[3], to: options[4],
             color: 'rgba(144, 238, 144, 0.1)'
         }];
     }
     charts.push(new Highcharts.Chart(highchartsOptions));
-    // console.log(chart.series[0].data);
 }
-
 
 // utility functions
 function datetime_formatter() {
@@ -139,110 +142,63 @@ function parse_datetime(datetime) {
 
 function is_safe(model, field, value) {
     if (configs[model][field]) {
-        return (configs[model][field].ysafemin <= value) && (configs[model][field].ysafemax >= value);
+        return (configs[model][field][3] <= value) && (configs[model][field][4] >= value);
     }
     else {
         return true;
     }
 }
 
-function load_config() {
-    configs.Ad1Lidsensor = {
-        ultrasonic_gdls : { 
-            renderTo: 'Ad1Lidsensor__ultrasonic_gdls', 
-            title: 'AD1 GdLS Level: Ultrasonic',
-            ymin: 2000, ymax: 2400,
-            ysafemin: 2100, ysafemax: 2300
+function load_config(){
+    configs = {
+        // renderTo, title, ymin, ymax, ysafemin, ysafemax
+        Ad1Lidsensor : {
+            ultrasonic_gdls: ['AD1 GdLS Level: Ultrasonic', 2000, 2400, 2100, 2300],
+            ultrasonic_ls: ['AD1 LS Level: Ultrasonic', 1900, 2300, 2000, 2200],
+            capacitance_gdls: ['AD1 GdLS Level: Capacitance', 200, 450, 250, 350],
+            capacitance_ls: ['AD1 LS Level: Capacitance', 200, 450, 300, 400],
+            capacitance_mo: ['AD1 MO Level: Capacitance', 200, 380, 330, 370],
+            temp_gdls: ['AD1 GdLS Temperature', 20, 25, 21, 24],
+            temp_ls: ['AD1 LS Temperature', 20, 25, 21, 24],
+            capacitance_temp_gdls: ['AD1 GdLS Temperature: Capacitance', 23, 28, 24, 27],
+            capacitance_temp_ls: ['AD1 LS Temperature: Capacitance', 23, 28, 24, 27],
+            capacitance_temp_mo: ['AD1 MO Temperature: Capacitance', 20, 26, 21, 25]
         },
-        ultrasonic_ls : {
-            renderTo: 'Ad1Lidsensor__ultrasonic_ls',
-            title: 'AD1 LS Level: Ultrasonic',
-            ymin: 2000, ymax: 2400,
-            ysafemin: 2000, ysafemax: 2200
+        Ad2Lidsensor : {
+            ultrasonic_gdls: ['AD2 GdLS Level: Ultrasonic', 2000, 2400, 2100, 2300],
+            ultrasonic_ls: ['AD2 LS Level: Ultrasonic', 1900, 2300, 2000, 2200],
+            capacitance_gdls: ['AD2 GdLS Level: Capacitance', 200, 450, 250, 350],
+            capacitance_ls: ['AD2 LS Level: Capacitance', 200, 450, 300, 400],
+            capacitance_mo: ['AD2 MO Level: Capacitance', 200, 380, 330, 370],
+            temp_gdls: ['AD2 GdLS Temperature', 20, 25, 21, 24],
+            temp_ls: ['AD2 LS Temperature', 20, 25, 21, 24],
+            capacitance_temp_gdls: ['AD2 GdLS Temperature: Capacitance', 23, 28, 24, 27],
+            capacitance_temp_ls: ['AD2 LS Temperature: Capacitance', 23, 28, 24, 27],
+            capacitance_temp_mo: ['AD2 MO Temperature: Capacitance', 20, 26, 21, 25]
         },
-        capacitance_gdls : {
-            renderTo: 'Ad1Lidsensor__capacitance_gdls',
-            title: 'AD1 GdLS Level: Capacitance',
-            ymin: 200, ymax: 450,
-            ysafemin: 250, ysafemax: 350
+        DbnsIowTemp : {
+            dbns_iw_temp_pt1: ['Inner WP Temerature: 1', 21, 26, 22, 25],
+            dbns_iw_temp_pt2: ['Inner WP Temerature: 2', 21, 26, 22, 25],
+            dbns_iw_temp_pt3: ['Inner WP Temerature: 3', 21, 26, 22, 25],
+            dbns_iw_temp_pt4: ['Inner WP Temerature: 4', 21, 26, 22, 25],
+            dbns_ow_temp_pt1: ['Outer WP Temerature: 1', 21, 26, 22, 25],
+            dbns_ow_temp_pt2: ['Outer WP Temerature: 2', 21, 26, 22, 25],
+            dbns_ow_temp_pt3: ['Outer WP Temerature: 3', 21, 26, 22, 25],
+            dbns_ow_temp_pt4: ['Outer WP Temerature: 4', 21, 26, 22, 25]
         },
-        capacitance_ls : {
-            renderTo: 'Ad1Lidsensor__capacitance_ls',
-            title: 'AD1 LS Level: Capacitance',
-            ymin: 200, ymax: 450,
-            ysafemin: 300, ysafemax: 400
+        DbnsRpcGas101 : {
+            pressure_argon: ['RPC Argon Pressure', 18, 22, 19, 21],
+            pressure_isobutane: ['RPC Isobutane Pressure', 18, 22, 19, 21],
+            pressure_r134a: ['RPC R134A Pressure', 18, 22, 19, 21],
+            pressure_sf6: ['RPC SF6 Pressure', 18, 22, 19, 21]     
         },
-        capacitance_mo : {
-            renderTo: 'Ad1Lidsensor__capacitance_mo',
-            title: 'AD1 MO Level: Capacitance',
-            ymin: 200, ymax: 450,
-            ysafemin: 250, ysafemax: 350
-        },
-        temp_gdls : {
-            renderTo: 'Ad1Lidsensor__temp_gdls',
-            title: 'AD1 GdLS Temperature',
-            ymin: 21, ymax: 26,
-            ysafemin: 22, ysafemax: 25
-        },
-        temp_ls : {
-            renderTo: 'Ad1Lidsensor__temp_ls',
-            title: 'AD1 LS Temperature',
-            ymin: 21, ymax: 26,
-            ysafemin: 22, ysafemax: 25
-        },
-        capacitance_temp_gdls : {
-            renderTo: 'Ad1Lidsensor__capacitance_temp_gdls',
-            title: 'AD1 GdLS Temperature: Capacitance',
-            ymin: 23, ymax: 28,
-            ysafemin: 24, ysafemax: 26.5
-        },
-        capacitance_temp_ls : {
-            renderTo: 'Ad1Lidsensor__capacitance_temp_ls',
-            title: 'AD1 LS Temperature: Capacitance',
-            ymin: 23, ymax: 28,
-            ysafemin: 24, ysafemax: 27
-        },
-        capacitance_temp_mo : {
-            renderTo: 'Ad1Lidsensor__capacitance_temp_mo',
-            title: 'AD1 MO Temperature: Capacitance',
-            ymin: 21, ymax: 26,
-            ysafemin: 22, ysafemax: 25
-        }
-    };
-    configs.DbnsEnvPth = {
-        dbns_pth_t1 : {
-            renderTo: 'DbnsEnvPth__dbns_pth_t1',
-            title: 'EH1 Temperature: 1',
-            ymin: 22, ymax: 29,
-            ysafemin: 25, ysafemax: 28
-        },
-        dbns_pth_t2 : {
-            renderTo: 'DbnsEnvPth__dbns_pth_t2',
-            title: 'EH1 Temperature: 2',
-            ymin: 22, ymax: 29,
-            ysafemin: 24, ysafemax: 27
-        },
-        dbns_pth_h1 : {
-            renderTo: 'DbnsEnvPth__dbns_pth_h1',
-            title: 'EH1 Humidity: 1',
-            ymin: 48, ymax: 70,
-            ysafemin: 40, ysafemax: 60
-        },
-        dbns_pth_h2 : {
-            renderTo: 'DbnsEnvPth__dbns_pth_h2',
-            title: 'EH1 Humidity: 2',
-            ymin: 48, ymax: 70,
-            ysafemin: 40, ysafemax: 60
-        },
-        dbns_pth_p1 : {
-            renderTo: 'DbnsEnvPth__dbns_pth_p1',
-            title: 'EH1 Pressure: 1',
-            ysafemin: 970, ysafemax: 1100
-        },
-        dbns_pth_p2 : {
-            renderTo: 'DbnsEnvPth__dbns_pth_p2',
-            title: 'EH1 Pressure: 2',
-            ysafemin: 970, ysafemax: 1100
+        DbnsEnvPth : {
+            dbns_pth_t1: ['EH1 Temperature: 1', 22, 29, 24, 29],        
+            dbns_pth_t2: ['EH1 Temperature: 2', 22, 29, 24, 29],        
+            dbns_pth_h1: ['EH1 Humidity: 1', 50, 75, 40, 70],        
+            dbns_pth_h2: ['EH1 Humidity: 2', 50, 75, 40, 70],        
+            dbns_pth_p1: ['EH1 Pressure: 1', false, false, 980, 1030],        
+            dbns_pth_p2: ['EH1 Pressure: 2', false, false, 980, 1030]
         }
     };
 }

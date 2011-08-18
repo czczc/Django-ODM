@@ -46,6 +46,7 @@ DATABASES = {
         'USER'    : conf.get('dcs_db', 'USER'),
         'PASSWORD': conf.get('dcs_db', 'PASSWORD'),
         'HOST'    : conf.get('dcs_db', 'HOST'),
+        'PORT'    : conf.get('dcs_db', 'PORT'),          
     },
     'dq' : {
         'ENGINE'  : 'mysql',
@@ -80,7 +81,6 @@ SITE_ID = 1
 USE_I18N = True
 USE_L10N = False
 DATETIME_FORMAT = 'Y-m-d H:i:s' 
-
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
