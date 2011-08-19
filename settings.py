@@ -42,11 +42,11 @@ DATABASES = {
     },
     'dcs' : {
         'ENGINE'  : 'mysql',
-        'NAME'    : conf.get('dcs_db', 'NAME'),
-        'USER'    : conf.get('dcs_db', 'USER'),
-        'PASSWORD': conf.get('dcs_db', 'PASSWORD'),
-        'HOST'    : conf.get('dcs_db', 'HOST'),
-        'PORT'    : conf.get('dcs_db', 'PORT'),          
+        'NAME'    : conf.get('dcs_db_bak', 'NAME'),
+        'USER'    : conf.get('dcs_db_bak', 'USER'),
+        'PASSWORD': conf.get('dcs_db_bak', 'PASSWORD'),
+        'HOST'    : conf.get('dcs_db_bak', 'HOST'),
+        'PORT'    : conf.get('dcs_db_bak', 'PORT'),          
     },
     'dq' : {
         'ENGINE'  : 'mysql',
@@ -81,7 +81,7 @@ SITE_ID = 1
 USE_I18N = True
 USE_L10N = False
 DATETIME_FORMAT = 'Y-m-d H:i:s' 
-MAINTAINENCE = False
+MAINTAINENCE = conf.get('common', 'MAINTAINENCE')
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',

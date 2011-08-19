@@ -1,9 +1,14 @@
+{% extends "dcs/monitor.html" %}
+
+{% block dcs_content %}
+
 {# Tables #}
 <div class="grid_24">
     <table>
-    <thead><tr>
-       <th colspan="6" style='text-align: center;' id='th_Ad1Lidsensor' title='AD1 Monitors'></th>
-    </tr></thead>
+	<thead><tr>
+		<th colspan="2" style='text-align: center;' id='th_Ad1Lidsensor'>AD1 Lid Sensor</th>
+		<th colspan="4" style='text-align: center;' class='th_last_update'></th>
+	</tr></thead>
     <tbody>
         <tr>
             <td class='descr'>GdLS Level: Ultrasonic</td><td class='value' id='td_Ad1Lidsensor__ultrasonic_gdls'></td>
@@ -30,7 +35,8 @@
 
     <table style='margin-top: 20px;'>
     <thead><tr>
-       <th colspan="6" style='text-align: center;' id='th_Ad2Lidsensor' title='AD2 Monitors'></th>
+       	<th colspan="2" style='text-align: center;' id='th_Ad2Lidsensor'>AD2 Lid Sensor</th>
+		<th colspan="4" style='text-align: center;' class='th_last_update'></th>
     </tr></thead>
     <tbody>
         <tr>
@@ -68,7 +74,8 @@
 
 	<table style='margin-top: 20px;'>
     <thead><tr>
-       <th colspan="8" style='text-align: center;' id='th_DbnsIowTemp' title='Water Pool Monitors'></th>
+       	<th colspan="2" style='text-align: center;' id='th_DbnsIowTemp' title=''>Water Pool Temperature</th>
+		<th colspan="6" style='text-align: center;' class='th_last_update'></th>
     </tr></thead>
 	<tbody>
         <tr>
@@ -88,7 +95,8 @@
 		
 	<table style='margin-top: 20px;'>
     <thead><tr>
-       <th colspan="8" style='text-align: center;' id='th_DbnsRpcGas101' title='RPC Monitors'></th>
+       	<th colspan="2" style='text-align: center;' id='th_DbnsRpcGas101' title=''>RPC Gas</th>
+		<th colspan="6" style='text-align: center;' class='th_last_update'></th>
     </tr></thead>
 	<tbody>
         <tr>
@@ -102,7 +110,8 @@
 	
 	<table style='margin-top: 20px;'>
     <thead><tr>
-       <th colspan="6" style='text-align: center;' id='th_DbnsEnvPth' title='EH1 Environment Monitors'></th>
+       	<th colspan="2" style='text-align: center;' id='th_DbnsEnvPth' title=''>Environmental Sensors</th>
+		<th colspan="4" style='text-align: center;' class='th_last_update'></th>
     </tr></thead>
 	<tbody>
         <tr>
@@ -122,18 +131,28 @@
 
 
 {# Charts #}
-
-<div class = "grid_24" style='margin-top:30px;'>
-     <h4 align='center' id='select_days'> 
+<div class = "grid_12" style='margin-top:30px;'>
+     <h4 align='left'> 
+         <a href="#AD">AD</a>&nbsp;|&nbsp;
+         <a href="#WP">Water Pool</a>&nbsp;|&nbsp;
+         <a href="#RPC">RPC</a>&nbsp;|&nbsp;
+         <a href="#Env">Environment</a>
+    </h4>
+</div>
+<div class = "grid_12" style='margin-top:30px;'>
+     <h4 align='right' id='select_days'> 
          <a href="#" days='1'>Last Day</a>&nbsp;|&nbsp;
          <a href="#" days='7'>Week</a>&nbsp;|&nbsp;
          <a href="#" days='31'>Month</a>&nbsp;|&nbsp;
+         <a href="#" days='90'>3 Months</a>&nbsp;|&nbsp;
+         <a href="#" days='180'>6 Months</a>&nbsp;|&nbsp;
          <a href="#" days='365'>Year</a>
     </h4>
 </div>    
 <div class="clear"></div>
 
 <div class = "grid_24">
+	<a name="AD"></a>    
      <h2>
          AD Monitors
     </h2>
@@ -141,12 +160,6 @@
 <div class="clear"></div>
 
 {# Liquid Level #}
-{# <div class = "grid_24 ui-widget-header ui-corner-all dcs_header"> #}
-{#      <h3 align='center' > #}
-{#          Liquid Level: Ultrasonic #}
-{#     </h3> #}
-{# </div>     #}
-{# <div class="clear"></div> #}
 <h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; width: 200px;'>Liquid Level</h4>
 
 <div id="Ad1Lidsensor__ultrasonic_gdls" class="dcs_chart grid_12"></div>
@@ -195,6 +208,7 @@
 
 {# WP #}
 <div class = "grid_24">
+	<a name="WP"></a>   
      <h2>
          Water Pool Monitors
     </h2>
@@ -221,6 +235,7 @@
 
 {# RPC #}
 <div class = "grid_24">
+	<a name="RPC"></a>   
      <h2>
          RPC Monitors
     </h2>
@@ -239,6 +254,7 @@
 
 {# Environment #}
 <div class = "grid_24">
+	<a name="Env"></a>
      <h2>
          EH1 Environment Monitors
     </h2>
@@ -260,3 +276,9 @@
 <div id="DbnsEnvPth__dbns_pth_p1" class="dcs_chart grid_12"></div>
 <div id="DbnsEnvPth__dbns_pth_p2" class="dcs_chart grid_12"></div>
 <div class="clear"></div>
+
+{% endblock %}
+
+
+{% block dcs_js %}<script type="text/javascript" src="{{ MEDIA_URL }}js/dcs/eh1_instrument.js"></script>{% endblock %}
+

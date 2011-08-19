@@ -7,4 +7,4 @@ class MaintainenceMiddleware:
     """
     def process_request(self, request):
         if settings.MAINTAINENCE:
-            return HttpResponse('Sorry, site in maintainence')
+            return HttpResponse('Site under maintainence, please check back later.')

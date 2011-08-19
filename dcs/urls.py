@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('odm.dcs.views',
+    (r'^monitor/(?P<site>\w+)/(?P<category>\w+)/$', 'monitor'),
     (r'^monitor/(?P<site>\w+)/$', 'monitor'),
     
     # ajax data

@@ -27,6 +27,8 @@ ul.errorlist { margin: 0; padding: 0; list-style: none;}
 .errorlist li { color: red; margin: 0 0 5px; padding: 4px 10px; }
 .token { color: #F2583E; }
 .warning { color: #F2583E; }
+#content th.warning { color: red; background-color: white; border: 1px solid red;}
+#content td.warning { color: red; }
 .great { color: green; }
 .sep { color: #bbb; font-weight: normal;}
 .right {float: right;}
@@ -128,3 +130,13 @@ a.FEEDiag { background: #ddd3f3; }
 #content table.monitor td{ width: 450px; height: 338px; vertical-align: bottom;}
 
 #content .img_comp {float: right; margin-right: 30px;}
+
+/* dcs electronic */
+#content .elec_table { border-color: #ccc; border-style: solid; border-width: 0 0 1px 1px; }
+#content .elec_table td { text-align: center; background: transparent; border-width: 1px 1px 0 0; border-style: solid; border-color: #ccc; padding: 10px; }
+#content .elec_table a { padding: 4px;}
+#content .elec_table a:hover { text-decoration: none; color: #ff8f28;}
+#content .elec_table a.live { background: #7F0;}
+#content .elec_table a.down { background: red; color: white;}
+
+

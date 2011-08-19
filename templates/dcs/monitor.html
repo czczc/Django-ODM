@@ -1,18 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}ODM | DCS Monitor | {{ site }}{% endblock %}
+{% block title %}ODM | DCS Monitor | {{ site }} | {{ category|title }}{% endblock %}
 
 {% block content %}
     <div class = "grid_8 prefix_8 suffix_8">
-         <h1 align='center'>
-             {{ site }} Monitors
+         <h1 align='center' id='summary' site='{{ site }}' category='{{ category }}'>
+             {{ site }} {{ category|title }} Monitors
         </h1>
     </div>    
     <div class="clear"></div>
-    
-    {% if site == 'EH1' %}
-        {% include "dcs/eh1.html" %}
-    {% endif %}
+
+    {% block dcs_content %}{% endblock %}
+	
+		{#     {% if site == 'EH1' %} #}
+		{#  		{% if category == 'instrument' %} #}
+		{#         	{% include "dcs/eh1_instrument.html" %} #}
+		{# {% endif %} #}
+		{# {% if category == 'electronics' %} #}
+		{#         	{% include "dcs/eh1_electronics.html" %} #}
+		{# {% endif %} #}
+		{#     {% endif %} #}
 
 {% endblock %}
 
@@ -20,5 +27,6 @@
     <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/highcharts.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/modules/exporting.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/themes/gray.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/dcs/monitor.js?v=2"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/dcs/monitor.js"></script>
+	{% block dcs_js %}{% endblock %}    
 {% endblock %}

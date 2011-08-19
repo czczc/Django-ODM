@@ -4,13 +4,19 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
-def monitor(request, site):
+def monitor(request, site, category='instrument'):
     '''details of calibration raw parameters'''
     
+    template_dict = {
+        'EH1_instrument' : 'dcs/eh1_instrument.html',
+        'EH1_electronics' : 'dcs/eh1_electronics.html',
+    }
+    
     return direct_to_template(request, 
-        template = 'dcs/monitor.html',
+        template = template_dict.get(site+'_'+category, 'dcs/monitor.html'),
         extra_context = {
             'site' : site,
+            'category' : category,
         })
 
     
