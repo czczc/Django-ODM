@@ -1,8 +1,18 @@
 from django.db import models
 
-class Ad1Lidsensor(models.Model):
+# abstract model for all dcs tables
+class DcsModel(models.Model):
     id = models.IntegerField(primary_key=True)
     date_time = models.DateTimeField()
+    class Meta:
+        abstract = True
+        ordering = ['-date_time']
+    def __unicode__(self):
+        return unicode(self.date_time)
+
+
+# abstract model for AD lid sensor tables
+class AbstractAdLidsensor(DcsModel):
     ultrasonic_gdls = models.IntegerField(null=True, db_column='Ultrasonic_GdLS', blank=True) # Field name made lowercase.
     ultrasonic_ls = models.IntegerField(null=True, db_column='Ultrasonic_LS', blank=True) # Field name made lowercase.
     temp_gdls = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Temp_GdLS', blank=True) # Field name made lowercase.
@@ -21,45 +31,20 @@ class Ad1Lidsensor(models.Model):
     capacitance_temp_mo = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Capacitance_Temp_MO', blank=True) # Field name made lowercase.
     ps_output_v = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='PS_Output_V', blank=True) # Field name made lowercase.
     ps_output_i = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='PS_Output_I', blank=True) # Field name made lowercase.
-    sensorstatus = models.IntegerField(null=True, db_column='SensorStatus', blank=True) # Field name made lowercase.    
-    class Meta:
+    sensorstatus = models.IntegerField(null=True, db_column='SensorStatus', blank=True) # Field name made lowercase.
+    class Meta(DcsModel.Meta):
+        abstract = True
+        
+class Ad1Lidsensor(AbstractAdLidsensor):
+    class Meta(AbstractAdLidsensor.Meta):
         db_table = u'AD1_LidSensor'
-        ordering = ['-date_time']
-    def __unicode__(self):
-        return unicode(self.date_time)
 
-class Ad2Lidsensor(models.Model):
-    id = models.IntegerField(primary_key=True)
-    date_time = models.DateTimeField()
-    ultrasonic_gdls = models.IntegerField(null=True, db_column='Ultrasonic_GdLS', blank=True) # Field name made lowercase.
-    ultrasonic_ls = models.IntegerField(null=True, db_column='Ultrasonic_LS', blank=True) # Field name made lowercase.
-    temp_gdls = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Temp_GdLS', blank=True) # Field name made lowercase.
-    temp_ls = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Temp_LS', blank=True) # Field name made lowercase.
-    tiltx_sensor1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Tiltx_Sensor1', blank=True) # Field name made lowercase.
-    tilty_sensor1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Tilty_Sensor1', blank=True) # Field name made lowercase.
-    tiltx_sensor2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Tiltx_Sensor2', blank=True) # Field name made lowercase.
-    tilty_sensor2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Tilty_Sensor2', blank=True) # Field name made lowercase.
-    tiltx_sensor3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Tiltx_Sensor3', blank=True) # Field name made lowercase.
-    tilty_sensor3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Tilty_Sensor3', blank=True) # Field name made lowercase.
-    capacitance_gdls = models.IntegerField(null=True, db_column='Capacitance_GdLS', blank=True) # Field name made lowercase.
-    capacitance_temp_gdls = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Capacitance_Temp_GdLS', blank=True) # Field name made lowercase.
-    capacitance_ls = models.IntegerField(null=True, db_column='Capacitance_LS', blank=True) # Field name made lowercase.
-    capacitance_temp_ls = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Capacitance_Temp_LS', blank=True) # Field name made lowercase.
-    capacitance_mo = models.IntegerField(null=True, db_column='Capacitance_MO', blank=True) # Field name made lowercase.
-    capacitance_temp_mo = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Capacitance_Temp_MO', blank=True) # Field name made lowercase.
-    ps_output_v = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='PS_Output_V', blank=True) # Field name made lowercase.
-    ps_output_i = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='PS_Output_I', blank=True) # Field name made lowercase.
-    sensorstatus = models.IntegerField(null=True, db_column='SensorStatus', blank=True) # Field name made lowercase.    
-    class Meta:
+class Ad2Lidsensor(AbstractAdLidsensor):
+    class Meta(AbstractAdLidsensor.Meta):
         db_table = u'AD2_LidSensor'
-        ordering = ['-date_time']
-    def __unicode__(self):
-        return unicode(self.date_time)
 
 
-class DbnsRpcGas101(models.Model):
-    id = models.IntegerField(primary_key=True)
-    date_time = models.DateTimeField()
+class DbnsRpcGas101(DcsModel):
     flow_rate_isobutane = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
     flow_rate_argon = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
     flow_rate_r134a = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
@@ -71,16 +56,11 @@ class DbnsRpcGas101(models.Model):
     pressure_argon = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
     pressure_r134a = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
     pressure_sf6 = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
-    class Meta:
+    class Meta(DcsModel.Meta):
         db_table = u'DBNS_RPC_GAS_101'
-        ordering = ['-date_time']
-    def __unicode__(self):
-        return unicode(self.date_time)        
 
-
-class DbnsIowTemp(models.Model):
-    id = models.IntegerField(primary_key=True)
-    date_time = models.DateTimeField()
+       
+class DbnsIowTemp(DcsModel):
     dbns_iw_temp_pt1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_IW_Temp_PT1', blank=True) # Field name made lowercase.
     dbns_iw_temp_pt2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_IW_Temp_PT2', blank=True) # Field name made lowercase.
     dbns_iw_temp_pt3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_IW_Temp_PT3', blank=True) # Field name made lowercase.
@@ -91,29 +71,21 @@ class DbnsIowTemp(models.Model):
     dbns_ow_temp_pt4 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_OW_Temp_PT4', blank=True) # Field name made lowercase.
     class Meta:
         db_table = u'DBNS_IOW_Temp'
-        ordering = ['-date_time']
-    def __unicode__(self):
-        return unicode(self.date_time)
-        
+
                     
-class DbnsEnvPth(models.Model):
-    id = models.IntegerField(primary_key=True)
-    date_time = models.DateTimeField()
+class DbnsEnvPth(DcsModel):
     dbns_pth_p1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_PTH_P1', blank=True) # Field name made lowercase.
     dbns_pth_t1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_PTH_T1', blank=True) # Field name made lowercase.
     dbns_pth_h1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_PTH_H1', blank=True) # Field name made lowercase.
     dbns_pth_p2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_PTH_P2', blank=True) # Field name made lowercase.
     dbns_pth_t2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_PTH_T2', blank=True) # Field name made lowercase.
     dbns_pth_h2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_PTH_H2', blank=True) # Field name made lowercase.
-    class Meta:
+    class Meta(DcsModel.Meta):
         db_table = u'DBNS_ENV_PTH'
-        ordering = ['-date_time']
-    def __unicode__(self):
-        return unicode(self.date_time)
 
-class DbnsAd1Hv(models.Model):
-    id = models.IntegerField(primary_key=True)
-    date_time = models.DateTimeField()
+
+# abstract model for AD PMT HV tables
+class AbstractAdHv(DcsModel):
     l8c3r8 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='L8C3R8', blank=True) # Field name made lowercase.
     l8c3r7 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='L8C3R7', blank=True) # Field name made lowercase.
     l8c3r6 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='L8C3R6', blank=True) # Field name made lowercase.
@@ -306,11 +278,15 @@ class DbnsAd1Hv(models.Model):
     l1c1r3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='L1C1R3', blank=True) # Field name made lowercase.
     l1c1r2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='L1C1R2', blank=True) # Field name made lowercase.
     l1c1r1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='L1C1R1', blank=True) # Field name made lowercase.
-    class Meta:
-        db_table = u'DBNS_AD1_HV'
-        ordering = ['-date_time']
-    def __unicode__(self):
-        return unicode(self.date_time)
-                
+    class Meta(DcsModel.Meta):
+        abstract = True
 
                 
+class DbnsAd1Hv(AbstractAdHv):
+    class Meta(AbstractAdHv.Meta):
+        db_table = u'DBNS_AD1_HV'
+
+class DbnsAd2Hv(AbstractAdHv):
+    class Meta(AbstractAdHv.Meta):
+        db_table = u'DBNS_AD2_HV'
+                        

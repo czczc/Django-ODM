@@ -19,6 +19,7 @@ function load_all_models() {
 
 function fetch_latest() {
     HV_fetch_one('DbnsAd1Hv');
+    HV_fetch_one('DbnsAd2Hv');
 }
 
 function HV_fetch_one(model) {
@@ -27,7 +28,7 @@ function HV_fetch_one(model) {
     // var title = heading.attr('title');
     th_last_update.html('updating ...');
     $.getJSON(url, function(data) {
-        $('.HV').removeClass('down').addClass('live');
+        $('#table_'+model+' .HV').removeClass('down').addClass('live');
         var record = data[0].fields;
         var td_field;
         for (field in record) {
@@ -60,7 +61,8 @@ function HV_fetch_one(model) {
 function load_configs(){
     configs = {
         // renderTo, title, ymin, ymax, ysafemin, ysafemax
-        DbnsAd1Hv : {}
+        DbnsAd1Hv : {},
+        DbnsAd2Hv : {}
     };
     var ladder, row, column, field;
     for (ladder=1; ladder<=8; ladder++) {
@@ -68,6 +70,7 @@ function load_configs(){
             for (column=1; column<=3; column++) {
                 field = 'l'+ladder+'c'+column+'r'+row;
                 configs.DbnsAd1Hv[field] = [field, 5, 2000, 10, 1900];
+                configs.DbnsAd2Hv[field] = [field, 5, 2000, 10, 1900];
             }
         }
     }

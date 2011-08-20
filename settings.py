@@ -154,14 +154,14 @@ elif SITE_LOCAL:
     sys.path.insert(0, PROJECT_PATH + '/../lib/python2.6/site-packages')
     # DjDT settings
     MIDDLEWARE_CLASSES = (
-        'django.middleware.cache.UpdateCacheMiddleware',
+        # 'django.middleware.cache.UpdateCacheMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'debug_toolbar.middleware.DebugToolbarMiddleware',
-        'django.middleware.cache.FetchFromCacheMiddleware',
+        # 'django.middleware.cache.FetchFromCacheMiddleware',
         'odm.middleware.MaintainenceMiddleware',
     )
     INTERNAL_IPS = ('127.0.0.1',)
