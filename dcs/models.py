@@ -289,4 +289,57 @@ class DbnsAd1Hv(AbstractAdHv):
 class DbnsAd2Hv(AbstractAdHv):
     class Meta(AbstractAdHv.Meta):
         db_table = u'DBNS_AD2_HV'
-                        
+
+    
+class DbnsRpcHvVmon(DcsModel):
+    dbns_fo00n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO00N', blank=True) # Field name made lowercase.
+    dbns_fo01n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO01N', blank=True) # Field name made lowercase.
+    dbns_fo02n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO02N', blank=True) # Field name made lowercase.
+    dbns_fo03n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO03N', blank=True) # Field name made lowercase.
+    dbns_fo04n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO04N', blank=True) # Field name made lowercase.
+    dbns_fo05n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO05N', blank=True) # Field name made lowercase.
+    dbns_fo06n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO06N', blank=True) # Field name made lowercase.
+    dbns_fo07n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO07N', blank=True) # Field name made lowercase.
+    dbns_fo08n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO08N', blank=True) # Field name made lowercase.
+    dbns_fo09n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO09N', blank=True) # Field name made lowercase.
+    dbns_fo10n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO10N', blank=True) # Field name made lowercase.
+    dbns_fo11n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO11N', blank=True) # Field name made lowercase.
+    dbns_fo12n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO12N', blank=True) # Field name made lowercase.
+    dbns_fo13n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO13N', blank=True) # Field name made lowercase.
+    dbns_fo14n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO14N', blank=True) # Field name made lowercase.
+    dbns_fo15n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO15N', blank=True) # Field name made lowercase.
+    dbns_fo16n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO16N', blank=True) # Field name made lowercase.
+    dbns_fo17n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO17N', blank=True) # Field name made lowercase.
+    dbns_fo18n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO18N', blank=True) # Field name made lowercase.
+    dbns_fo19n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO19N', blank=True) # Field name made lowercase.
+    dbns_fo20n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO20N', blank=True) # Field name made lowercase.
+    dbns_fo21n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO21N', blank=True) # Field name made lowercase.
+    dbns_fo22n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO22N', blank=True) # Field name made lowercase.
+    dbns_fo23n = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO23N', blank=True) # Field name made lowercase.
+    dbns_fo00p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO00P', blank=True) # Field name made lowercase.
+    dbns_fo01p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO01P', blank=True) # Field name made lowercase.
+    dbns_fo02p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO02P', blank=True) # Field name made lowercase.
+    dbns_fo03p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO03P', blank=True) # Field name made lowercase.
+    dbns_fo04p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO04P', blank=True) # Field name made lowercase.
+    dbns_fo05p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO05P', blank=True) # Field name made lowercase.
+    dbns_fo06p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO06P', blank=True) # Field name made lowercase.
+    dbns_fo07p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO07P', blank=True) # Field name made lowercase.
+    dbns_fo08p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO08P', blank=True) # Field name made lowercase.
+    dbns_fo09p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO09P', blank=True) # Field name made lowercase.
+    dbns_fo10p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO10P', blank=True) # Field name made lowercase.
+    dbns_fo11p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO11P', blank=True) # Field name made lowercase.
+    dbns_fo12p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO12P', blank=True) # Field name made lowercase.
+    dbns_fo13p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO13P', blank=True) # Field name made lowercase.
+    dbns_fo14p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO14P', blank=True) # Field name made lowercase.
+    dbns_fo15p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO15P', blank=True) # Field name made lowercase.
+    dbns_fo16p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO16P', blank=True) # Field name made lowercase.
+    dbns_fo17p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO17P', blank=True) # Field name made lowercase.
+    dbns_fo18p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO18P', blank=True) # Field name made lowercase.
+    dbns_fo19p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO19P', blank=True) # Field name made lowercase.
+    dbns_fo20p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO20P', blank=True) # Field name made lowercase.
+    dbns_fo21p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO21P', blank=True) # Field name made lowercase.
+    dbns_fo22p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO22P', blank=True) # Field name made lowercase.
+    dbns_fo23p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO23P', blank=True) # Field name made lowercase.
+    class Meta(DcsModel.Meta):
+        db_table = u'DBNS_RPC_HV_Vmon'
+                              

@@ -21,6 +21,7 @@ function load_all_models() {
 function fetch_latest() {
     HV_fetch_one('DbnsAd1Hv');
     HV_fetch_one('DbnsAd2Hv');
+    fetch_one('DbnsRpcHvVmon');
 }
 
 function HV_fetch_one(model) {
@@ -62,7 +63,8 @@ function load_configs(){
     configs = {
         // renderTo, title, ymin, ymax, ysafemin, ysafemax
         DbnsAd1Hv : {},
-        DbnsAd2Hv : {}
+        DbnsAd2Hv : {},
+        DbnsRpcHvVmon : {}
     };
     var ladder, row, column, field;
     for (ladder=1; ladder<=8; ladder++) {
@@ -73,6 +75,11 @@ function load_configs(){
                 configs.DbnsAd2Hv[field] = [field, 5, 2000, 10, 1900];
             }
         }
+    }
+    var channel;
+    for (channel=0; channel<=23; channel++) {
+        field = sprintf('dbns_fo%02dn', channel);
+        configs.DbnsRpcHvVmon[field] = [field, 3000, 4000, 3500, 3900];
     }
 }
 

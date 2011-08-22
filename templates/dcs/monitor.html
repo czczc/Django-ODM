@@ -15,20 +15,12 @@
     <div class="clear"></div>
 
     {% block dcs_content %}{% endblock %}
-	
-		{#     {% if site == 'EH1' %} #}
-		{#  		{% if category == 'instrument' %} #}
-		{#         	{% include "dcs/eh1_instrument.html" %} #}
-		{# {% endif %} #}
-		{# {% if category == 'electronics' %} #}
-		{#         	{% include "dcs/eh1_electronics.html" %} #}
-		{# {% endif %} #}
-		{#     {% endif %} #}
 
 {% endblock %}
 
 {% block extra_js %}
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal.1.4.1.min.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/sprintf.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/highcharts.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/modules/exporting.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/themes/gray.js"></script>
