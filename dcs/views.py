@@ -33,7 +33,7 @@ def data(request, model, latest_days=30):
         skip = count / keep
         run_list = run_list.extra(where=['id %% %s = 0'], params=[skip])
         
-    except ImportError:
+    except:
         return HttpResponse(model + ' does not exist')
     
     from django.core import serializers

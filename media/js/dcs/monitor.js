@@ -1,13 +1,14 @@
 var this_url = window.location.href;
 var base_url = this_url.substring(0,this_url.indexOf('dcs'));
 $('button').button();
-
-jQuery.fn.center = function () {
-    this.css("position","absolute");
-    this.css("top", (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop() + "px");
-    this.css("left", (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft() + "px");
-    return this;
-};
+$('.th_last_update').qtip({
+    content: 'auto-updates every 5 min',
+    position: {corner: {target: 'topMiddle', tooltip: 'bottomLeft'}},
+    style: {
+        width: 200,
+        name: 'cream'
+    }
+});
 
 Highcharts.setOptions({
     chart: { type: 'scatter', zoomType: 'xy', animation: false },
@@ -27,6 +28,7 @@ var DcsData = new Object;
 var single_chart = null;
 
 // sc == show chart
+
 $('.sc').hover(function() {
     $(this).css('cursor','pointer');
 }, function() {
@@ -117,7 +119,9 @@ function load_model(model) {
         }
         if (configs[model]) {
             for (field in configs[model]) {
-                init_chart(model, field, configs[model][field]);
+                if ($('#' + model + '__' + field).length>0) {
+                    init_chart(model, field, configs[model][field]);
+                }
             }
         }
     }); // .getJSON done
@@ -179,3 +183,26 @@ function is_safe(model, field, value) {
     }
 }
 
+// execute this after loading all configs. 
+function load_tooltips() {
+    $('.sc').each(function() {
+        var str = $(this).attr('id').substring(3);
+        var model_field = str.split('__');
+        var model = model_field[0];
+        var field = model_field[1];
+        var safemin = '-'; 
+        if (configs[model][field]) { safemin = configs[model][field][3]; };
+        var safemax = '-';
+        if (configs[model][field]) { safemax = configs[model][field][4]; };
+        $(this).qtip({
+            content: 'Ref. Values: <span style="color:green; font-weight: bold;"> ' 
+                + safemin + ' - ' + safemax + '</span><br />Click to show last month',
+            position: {corner: {target: 'topMiddle', tooltip: 'bottomLeft'}},
+            style: {
+                width: 200,
+                name: 'light',
+                tooltip: 'bottomLeft'
+            }
+        });
+    });
+}

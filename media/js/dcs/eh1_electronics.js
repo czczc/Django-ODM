@@ -1,4 +1,5 @@
 load_configs();
+load_tooltips();
 load_all_models();
 fetch_latest();
 // var timer = setInterval('fetch_latest()', 300000);

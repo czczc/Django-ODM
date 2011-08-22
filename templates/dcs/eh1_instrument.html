@@ -2,9 +2,6 @@
 
 {% block dcs_content %}
 
-{# <div class="grid_24 dcs_chart" id="single_chart"></div> #}
-{# <div class="clear"></div> #}
-
 {# Tables #}
 <div class="grid_24">
     <table>
@@ -32,6 +29,16 @@
             <td class='descr'>GdLS Temperature: Capacitance</td><td class='value sc' id='td_Ad1Lidsensor__capacitance_temp_gdls'></td>
             <td class='descr'>LS Temperature: Capacitance</td><td class='value sc' id='td_Ad1Lidsensor__capacitance_temp_ls'></td>
             <td class='descr'>MO Temperature: Capacitance</td><td class='value sc'  id='td_Ad1Lidsensor__capacitance_temp_mo'></td>
+        </tr>
+        <tr>
+            <td class='descr'>Tilt X: 1</td><td class='value sc' id='td_Ad1Lidsensor__tiltx_sensor1'></td>
+            <td class='descr'>Tilt X: 2</td><td class='value sc' id='td_Ad1Lidsensor__tiltx_sensor2'></td>
+            <td class='descr'>Tilt X: 3</td><td class='value sc' id='td_Ad1Lidsensor__tiltx_sensor3'></td>
+        </tr>
+        <tr>
+            <td class='descr'>Tilt Y: 1</td><td class='value sc' id='td_Ad1Lidsensor__tilty_sensor1'></td>
+            <td class='descr'>Tilt Y: 2</td><td class='value sc' id='td_Ad1Lidsensor__tilty_sensor2'></td>
+            <td class='descr'>Tilt Y: 3</td><td class='value sc' id='td_Ad1Lidsensor__tilty_sensor3'></td>
         </tr>
     </tbody>
 	</table>
@@ -162,6 +169,7 @@
 </div>    
 <div class="clear"></div>
 
+
 {# Liquid Level #}
 <h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; width: 200px;'>Liquid Level</h4>
 
@@ -184,6 +192,7 @@
 <div id="Ad1Lidsensor__capacitance_mo" class="dcs_chart grid_12"></div>
 <div id="Ad2Lidsensor__capacitance_mo" class="dcs_chart grid_12"></div>
 <div class="clear"></div>
+
 
 {# Lid Temperature #}
 <h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; margin-top: 40px; width: 200px;'>Liquid Temperature</h4>    

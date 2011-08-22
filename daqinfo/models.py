@@ -304,7 +304,7 @@ class Daqrunconfig(models.Model):
     
     class Meta:
         db_table = u'DaqRunConfig'
-        ordering = ['-schemaversion', '-dataversion']
+        ordering = ['-creationversion', '-schemaversion', '-dataversion']
     
     def __unicode__(self):
         return u'%d-%d' % (self.schemaversion, self.dataversion)
