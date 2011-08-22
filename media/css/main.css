@@ -28,6 +28,7 @@ ul.errorlist { margin: 0; padding: 0; list-style: none;}
 .token { color: #F2583E; }
 .warning { color: #F2583E; }
 #content th.warning { color: red; background-color: white; border-bottom: 1px solid red;}
+#content th.good { color: green; background-color: white; border-bottom: 1px solid green;}
 #content td.warning { color: red; }
 .great { color: green; }
 .sep { color: #bbb; font-weight: normal;}

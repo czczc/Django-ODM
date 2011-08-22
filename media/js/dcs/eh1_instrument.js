@@ -4,6 +4,12 @@ fetch_latest();
 // var timer = setInterval('fetch_latest()', 300000);
 // console.log(configs);
 
+$('#select_days a').click(function(){
+    latest_days = $(this).attr('days');
+    load_all_models();
+    return false;
+});
+
 function load_all_models() {
     var i;
     for (i=0; i<charts.length; i++) {

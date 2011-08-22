@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/modal.css")?>
+{% endblock %}
+
 {% block title %}ODM | DCS Monitor | {{ site }} | {{ category|title }}{% endblock %}
 
 {% block content %}
@@ -24,6 +28,7 @@
 {% endblock %}
 
 {% block extra_js %}
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal.1.4.1.min.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/highcharts.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/modules/exporting.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/themes/gray.js"></script>

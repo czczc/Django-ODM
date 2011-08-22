@@ -40,13 +40,15 @@ class SearchRunListForm(forms.Form):
         ),
     )
     
-    run_from = forms.IntegerField(
-        label='Run From', required=False, min_value=0,
+    run_from = forms.CharField(
+        label='Run From', required=False, 
+        # min_value=0,
         widget=forms.TextInput(attrs={'size':'6'})
     )
     
-    run_to = forms.IntegerField(
-        label='Run To', required=False, min_value=0,
+    run_to = forms.CharField(
+        label='Run To', required=False, 
+        # min_value=0,
         widget=forms.TextInput(attrs={'size':'6'})
     )
     

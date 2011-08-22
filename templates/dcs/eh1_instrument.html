@@ -2,33 +2,36 @@
 
 {% block dcs_content %}
 
+{# <div class="grid_24 dcs_chart" id="single_chart"></div> #}
+{# <div class="clear"></div> #}
+
 {# Tables #}
 <div class="grid_24">
     <table>
 	<thead><tr>
 		<th colspan="2" style='text-align: center;' id='th_Ad1Lidsensor'>AD1 Lid Sensors</th>
-		<th colspan="4" style='text-align: center;' class='th_last_update'></th>
+		<th colspan="4" style='text-align: center;' class='th_last_update good'></th>
 	</tr></thead>
     <tbody>
         <tr>
-            <td class='descr'>GdLS Level: Ultrasonic</td><td class='value' id='td_Ad1Lidsensor__ultrasonic_gdls'></td>
-            <td class='descr'>LS Level: Ultrasonic</td><td class='value' id='td_Ad1Lidsensor__ultrasonic_ls'></td>
+            <td class='descr'>GdLS Level: Ultrasonic</td><td class='value sc' id='td_Ad1Lidsensor__ultrasonic_gdls'></td>
+            <td class='descr'>LS Level: Ultrasonic</td><td class='value sc' id='td_Ad1Lidsensor__ultrasonic_ls'></td>
             <td class='descr'></td><td class='value'></td>
         </tr>
         <tr>
-            <td class='descr'>GdLS Level: Capacitance</td><td class='value' id='td_Ad1Lidsensor__capacitance_gdls'></td>
-            <td class='descr'>LS Level: Capacitance</td><td class='value' id='td_Ad1Lidsensor__capacitance_ls'></td>
-            <td class='descr'>MO Level: Capacitance</td><td class='value' id='td_Ad1Lidsensor__capacitance_mo'></td>
+            <td class='descr'>GdLS Level: Capacitance</td><td class='value sc' id='td_Ad1Lidsensor__capacitance_gdls'></td>
+            <td class='descr'>LS Level: Capacitance</td><td class='value sc' id='td_Ad1Lidsensor__capacitance_ls'></td>
+            <td class='descr'>MO Level: Capacitance</td><td class='value sc' id='td_Ad1Lidsensor__capacitance_mo'></td>
         </tr>
         <tr>
-            <td class='descr'>GdLS Temperature</td><td class='value' id='td_Ad1Lidsensor__temp_gdls'></td>
-            <td class='descr'>LS Temperature</td><td class='value' id='td_Ad1Lidsensor__temp_ls'></td>
+            <td class='descr'>GdLS Temperature</td><td class='value sc' id='td_Ad1Lidsensor__temp_gdls'></td>
+            <td class='descr'>LS Temperature</td><td class='value sc' id='td_Ad1Lidsensor__temp_ls'></td>
             <td class='descr'></td><td class='value'></td>
         </tr>
         <tr>
-            <td class='descr'>GdLS Temperature: Capacitance</td><td class='value' id='td_Ad1Lidsensor__capacitance_temp_gdls'></td>
-            <td class='descr'>LS Temperature: Capacitance</td><td class='value' id='td_Ad1Lidsensor__capacitance_temp_ls'></td>
-            <td class='descr'>MO Temperature: Capacitance</td><td class='value'  id='td_Ad1Lidsensor__capacitance_temp_mo'></td>
+            <td class='descr'>GdLS Temperature: Capacitance</td><td class='value sc' id='td_Ad1Lidsensor__capacitance_temp_gdls'></td>
+            <td class='descr'>LS Temperature: Capacitance</td><td class='value sc' id='td_Ad1Lidsensor__capacitance_temp_ls'></td>
+            <td class='descr'>MO Temperature: Capacitance</td><td class='value sc'  id='td_Ad1Lidsensor__capacitance_temp_mo'></td>
         </tr>
     </tbody>
 	</table>
@@ -36,38 +39,38 @@
     <table style='margin-top: 20px;'>
     <thead><tr>
        	<th colspan="2" style='text-align: center;' id='th_Ad2Lidsensor'>AD2 Lid Sensors</th>
-		<th colspan="4" style='text-align: center;' class='th_last_update'></th>
+		<th colspan="4" style='text-align: center;' class='th_last_update good'></th>
     </tr></thead>
     <tbody>
         <tr>
-            <td class='descr'>GdLS Level: Ultrasonic</td><td class='value' id='td_Ad2Lidsensor__ultrasonic_gdls'></td>
-            <td class='descr'>LS Level: Ultrasonic</td><td class='value' id='td_Ad2Lidsensor__ultrasonic_ls'></td>
+            <td class='descr'>GdLS Level: Ultrasonic</td><td class='value sc' id='td_Ad2Lidsensor__ultrasonic_gdls'></td>
+            <td class='descr'>LS Level: Ultrasonic</td><td class='value sc' id='td_Ad2Lidsensor__ultrasonic_ls'></td>
             <td class='descr'></td><td class='value'></td>
         </tr>
         <tr>
-            <td class='descr'>GdLS Level: Capacitance</td><td class='value' id='td_Ad2Lidsensor__capacitance_gdls'></td>
-            <td class='descr'>LS Level: Capacitance</td><td class='value' id='td_Ad2Lidsensor__capacitance_ls'></td>
-            <td class='descr'>MO Level: Capacitance</td><td class='value' id='td_Ad2Lidsensor__capacitance_mo'></td>
+            <td class='descr'>GdLS Level: Capacitance</td><td class='value sc' id='td_Ad2Lidsensor__capacitance_gdls'></td>
+            <td class='descr'>LS Level: Capacitance</td><td class='value sc' id='td_Ad2Lidsensor__capacitance_ls'></td>
+            <td class='descr'>MO Level: Capacitance</td><td class='value sc' id='td_Ad2Lidsensor__capacitance_mo'></td>
         </tr>
         <tr>
-            <td class='descr'>GdLS Temperature</td><td class='value' id='td_Ad2Lidsensor__temp_gdls'></td>
-            <td class='descr'>LS Temperature</td><td class='value' id='td_Ad2Lidsensor__temp_ls'></td>
+            <td class='descr'>GdLS Temperature</td><td class='value sc' id='td_Ad2Lidsensor__temp_gdls'></td>
+            <td class='descr'>LS Temperature</td><td class='value sc' id='td_Ad2Lidsensor__temp_ls'></td>
             <td class='descr'></td><td class='value'></td>
         </tr>
         <tr>
-            <td class='descr'>GdLS Temperature: Capacitance</td><td class='value' id='td_Ad2Lidsensor__capacitance_temp_gdls'></td>
-            <td class='descr'>LS Temperature: Capacitance</td><td class='value' id='td_Ad2Lidsensor__capacitance_temp_ls'></td>
-            <td class='descr'>MO Temperature: Capacitance</td><td class='value'  id='td_Ad2Lidsensor__capacitance_temp_mo'></td>
+            <td class='descr'>GdLS Temperature: Capacitance</td><td class='value sc' id='td_Ad2Lidsensor__capacitance_temp_gdls'></td>
+            <td class='descr'>LS Temperature: Capacitance</td><td class='value sc' id='td_Ad2Lidsensor__capacitance_temp_ls'></td>
+            <td class='descr'>MO Temperature: Capacitance</td><td class='value sc'  id='td_Ad2Lidsensor__capacitance_temp_mo'></td>
         </tr>
         <tr>
-            <td class='descr'>Tilt X: 1</td><td class='value' id='td_Ad2Lidsensor__tiltx_sensor1'></td>
-            <td class='descr'>Tilt X: 2</td><td class='value' id='td_Ad2Lidsensor__tiltx_sensor2'></td>
-            <td class='descr'>Tilt X: 3</td><td class='value' id='td_Ad2Lidsensor__tiltx_sensor3'></td>
+            <td class='descr'>Tilt X: 1</td><td class='value sc' id='td_Ad2Lidsensor__tiltx_sensor1'></td>
+            <td class='descr'>Tilt X: 2</td><td class='value sc' id='td_Ad2Lidsensor__tiltx_sensor2'></td>
+            <td class='descr'>Tilt X: 3</td><td class='value sc' id='td_Ad2Lidsensor__tiltx_sensor3'></td>
         </tr>
         <tr>
-            <td class='descr'>Tilt Y: 1</td><td class='value' id='td_Ad2Lidsensor__tilty_sensor1'></td>
-            <td class='descr'>Tilt Y: 2</td><td class='value' id='td_Ad2Lidsensor__tilty_sensor2'></td>
-            <td class='descr'>Tilt Y: 3</td><td class='value' id='td_Ad2Lidsensor__tilty_sensor3'></td>
+            <td class='descr'>Tilt Y: 1</td><td class='value sc' id='td_Ad2Lidsensor__tilty_sensor1'></td>
+            <td class='descr'>Tilt Y: 2</td><td class='value sc' id='td_Ad2Lidsensor__tilty_sensor2'></td>
+            <td class='descr'>Tilt Y: 3</td><td class='value sc' id='td_Ad2Lidsensor__tilty_sensor3'></td>
         </tr>
     </tbody>
 	</table>
@@ -75,20 +78,20 @@
 	<table style='margin-top: 20px;'>
     <thead><tr>
        	<th colspan="2" style='text-align: center;' id='th_DbnsIowTemp' title=''>Water Pool Temperature</th>
-		<th colspan="6" style='text-align: center;' class='th_last_update'></th>
+		<th colspan="6" style='text-align: center;' class='th_last_update good'></th>
     </tr></thead>
 	<tbody>
         <tr>
-            <td class='descr'>IWS Temperature: 1</td><td class='value' id='td_DbnsIowTemp__dbns_iw_temp_pt1'></td>
-            <td class='descr'>IWS Temperature: 2</td><td class='value' id='td_DbnsIowTemp__dbns_iw_temp_pt2'></td>
-            <td class='descr'>IWS Temperature: 3</td><td class='value' id='td_DbnsIowTemp__dbns_iw_temp_pt3'></td>
-            <td class='descr'>IWS Temperature: 4</td><td class='value' id='td_DbnsIowTemp__dbns_iw_temp_pt4'></td>
+            <td class='descr'>IWS Temperature: 1</td><td class='value sc' id='td_DbnsIowTemp__dbns_iw_temp_pt1'></td>
+            <td class='descr'>IWS Temperature: 2</td><td class='value sc' id='td_DbnsIowTemp__dbns_iw_temp_pt2'></td>
+            <td class='descr'>IWS Temperature: 3</td><td class='value sc' id='td_DbnsIowTemp__dbns_iw_temp_pt3'></td>
+            <td class='descr'>IWS Temperature: 4</td><td class='value sc' id='td_DbnsIowTemp__dbns_iw_temp_pt4'></td>
         </tr>
         <tr>
-            <td class='descr'>OWS Temperature: 1</td><td class='value' id='td_DbnsIowTemp__dbns_ow_temp_pt1'></td>
-            <td class='descr'>OWS Temperature: 2</td><td class='value' id='td_DbnsIowTemp__dbns_ow_temp_pt2'></td>
-            <td class='descr'>OWS Temperature: 3</td><td class='value' id='td_DbnsIowTemp__dbns_ow_temp_pt3'></td>
-            <td class='descr'>OWS Temperature: 4</td><td class='value' id='td_DbnsIowTemp__dbns_ow_temp_pt4'></td>
+            <td class='descr'>OWS Temperature: 1</td><td class='value sc' id='td_DbnsIowTemp__dbns_ow_temp_pt1'></td>
+            <td class='descr'>OWS Temperature: 2</td><td class='value sc' id='td_DbnsIowTemp__dbns_ow_temp_pt2'></td>
+            <td class='descr'>OWS Temperature: 3</td><td class='value sc' id='td_DbnsIowTemp__dbns_ow_temp_pt3'></td>
+            <td class='descr'>OWS Temperature: 4</td><td class='value sc' id='td_DbnsIowTemp__dbns_ow_temp_pt4'></td>
         </tr>
 	</tbody>
     </table>
@@ -96,14 +99,14 @@
 	<table style='margin-top: 20px;'>
     <thead><tr>
        	<th colspan="2" style='text-align: center;' id='th_DbnsRpcGas101' title=''>RPC Gas</th>
-		<th colspan="6" style='text-align: center;' class='th_last_update'></th>
+		<th colspan="6" style='text-align: center;' class='th_last_update good'></th>
     </tr></thead>
 	<tbody>
         <tr>
-            <td class='descr'>Pressure: Argon</td><td class='value' id='td_DbnsRpcGas101__pressure_argon'></td>
-            <td class='descr'>Pressure: Isobutane</td><td class='value' id='td_DbnsRpcGas101__pressure_isobutane'></td>
-            <td class='descr'>Pressure: R134A</td><td class='value' id='td_DbnsRpcGas101__pressure_r134a'></td>
-            <td class='descr'>Pressure: SF6</td><td class='value' id='td_DbnsRpcGas101__pressure_sf6'></td>
+            <td class='descr'>Pressure: Argon</td><td class='value sc' id='td_DbnsRpcGas101__pressure_argon'></td>
+            <td class='descr'>Pressure: Isobutane</td><td class='value sc' id='td_DbnsRpcGas101__pressure_isobutane'></td>
+            <td class='descr'>Pressure: R134A</td><td class='value sc' id='td_DbnsRpcGas101__pressure_r134a'></td>
+            <td class='descr'>Pressure: SF6</td><td class='value sc' id='td_DbnsRpcGas101__pressure_sf6'></td>
         </tr>
 	</tbody>
     </table>
@@ -111,18 +114,18 @@
 	<table style='margin-top: 20px;'>
     <thead><tr>
        	<th colspan="2" style='text-align: center;' id='th_DbnsEnvPth' title=''>Environmental Sensors</th>
-		<th colspan="4" style='text-align: center;' class='th_last_update'></th>
+		<th colspan="4" style='text-align: center;' class='th_last_update good'></th>
     </tr></thead>
 	<tbody>
         <tr>
-            <td class='descr'>Temperature 1</td><td class='value' id='td_DbnsEnvPth__dbns_pth_t1'></td>
-            <td class='descr'>Humidity 1</td><td class='value' id='td_DbnsEnvPth__dbns_pth_h1'></td>
-            <td class='descr'>Pressure 1</td><td class='value' id='td_DbnsEnvPth__dbns_pth_p1'></td>
+            <td class='descr'>Temperature 1</td><td class='value sc' id='td_DbnsEnvPth__dbns_pth_t1'></td>
+            <td class='descr'>Humidity 1</td><td class='value sc' id='td_DbnsEnvPth__dbns_pth_h1'></td>
+            <td class='descr'>Pressure 1</td><td class='value sc' id='td_DbnsEnvPth__dbns_pth_p1'></td>
         </tr>
         <tr>
-            <td class='descr'>Temperature 2</td><td class='value'  id='td_DbnsEnvPth__dbns_pth_t2'></td>
-            <td class='descr'>Humidity 2</td><td class='value' id='td_DbnsEnvPth__dbns_pth_h2'></td>
-            <td class='descr'>Pressure 2</td><td class='value' id='td_DbnsEnvPth__dbns_pth_p2'></td>
+            <td class='descr'>Temperature 2</td><td class='value sc'  id='td_DbnsEnvPth__dbns_pth_t2'></td>
+            <td class='descr'>Humidity 2</td><td class='value sc' id='td_DbnsEnvPth__dbns_pth_h2'></td>
+            <td class='descr'>Pressure 2</td><td class='value sc' id='td_DbnsEnvPth__dbns_pth_p2'></td>
         </tr>
 	</tbody>
     </table>

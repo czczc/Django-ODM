@@ -14,6 +14,24 @@ from odm.runinfo.forms import SearchRunListForm, SearchCalibRunListForm
 
 import json, re
 
+def _timedelta_to_sec(str_time):
+    """ parse a string of timedelta to days """
+    sec = 0
+    try:
+        if str_time.endswith('d'):
+            sec = float(str_time.replace('d', ''))*86400
+        elif str_time.endswith('h'):
+            sec = float(str_time.replace('h', ''))*3600
+        elif str_time.endswith('m'):
+            sec = float(str_time.replace('m', ''))*60           
+        elif str_time.endswith('s'):
+            sec = float(str_time.replace('s', ''))
+        else:
+            sec = -1
+    except ValueError:
+         sec = 0
+    return sec
+    
 @login_required
 def quick_search(request):
     '''quick search box'''
@@ -125,10 +143,51 @@ def runlist(request, page=1, records=500):
             
             if not form.cleaned_data['runtype'] == 'All':
                 run_list = run_list.filter(runtype=form.cleaned_data['runtype'])
+            
+            #  run (length) range
             if form.cleaned_data['run_from']:
-                run_list = run_list.filter(runno__gte=form.cleaned_data['run_from'])
-            if form.cleaned_data['run_to']:
-                run_list = run_list.filter(runno__lte=form.cleaned_data['run_to'])
+                run_from = _timedelta_to_sec(form.cleaned_data['run_from'])
+                if run_from > 0:
+                    if form.cleaned_data['run_to']:
+                        run_to = _timedelta_to_sec(form.cleaned_data['run_to'])
+                        if run_to > 0:
+                            run_list = run_list.extra(
+                                where = ["DaqRunInfo.seqno = DaqRunInfoVld.seqno and TIME_TO_SEC(TIMEDIFF(DaqRunInfoVld.timeend, DaqRunInfoVld.timestart))>%s and TIME_TO_SEC(TIMEDIFF(DaqRunInfoVld.timeend, DaqRunInfoVld.timestart))<%s"], 
+                                params=[run_from, run_to],
+                                tables=["DaqRunInfoVld"])
+                    else:
+                        run_list = run_list.extra(
+                            where = ["DaqRunInfo.seqno = DaqRunInfoVld.seqno and TIME_TO_SEC(TIMEDIFF(DaqRunInfoVld.timeend, DaqRunInfoVld.timestart))>%s"], 
+                            params=[run_from],
+                            tables=["DaqRunInfoVld"])
+                else:
+                    try: 
+                        run_from = int(form.cleaned_data['run_from'])
+                    except ValueError:
+                        run_from = 0    
+                    if form.cleaned_data['run_to']:
+                        try: 
+                            run_to = int(form.cleaned_data['run_to'])
+                        except ValueError:
+                            run_to = 0
+                        run_list = run_list.filter(runno__gte=run_from, runno__lte=run_to)
+                    else:
+                        run_list = run_list.filter(runno__gte=run_from)
+            elif form.cleaned_data['run_to']:
+                run_to = _timedelta_to_sec(form.cleaned_data['run_to'])
+                if run_to > 0:
+                    run_list = run_list.extra(
+                        where = ["DaqRunInfo.seqno = DaqRunInfoVld.seqno and TIME_TO_SEC(TIMEDIFF(DaqRunInfoVld.timeend, DaqRunInfoVld.timestart))<%s"], 
+                        params=[run_to],
+                        tables=["DaqRunInfoVld"])
+                else:
+                    try: 
+                        run_to = int(form.cleaned_data['run_to'])
+                    except ValueError:
+                        run_to = 0    
+                    run_list = run_list.filter(runno__lte=run_to)
+            
+            # time range
             if form.cleaned_data['date_from']:
                 run_list = run_list.filter(vld__timestart__gte=form.cleaned_data['date_from'])
             if form.cleaned_data['date_to']:
@@ -447,4 +506,5 @@ def site_monitor(request, site):
             })
     else:
         return HttpResponse('no file found for ' + site + '-Merged')
-        
+
+            

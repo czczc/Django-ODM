@@ -2,9 +2,12 @@ var this_url = window.location.href;
 var base_url = this_url.substring(0,this_url.indexOf('dcs'));
 $('button').button();
 
-// var summary = $('#summary');
-// var site = summary.attr('site');
-// var category = summary.attr('category');
+jQuery.fn.center = function () {
+    this.css("position","absolute");
+    this.css("top", (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop() + "px");
+    this.css("left", (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft() + "px");
+    return this;
+};
 
 Highcharts.setOptions({
     chart: { type: 'scatter', zoomType: 'xy', animation: false },
@@ -21,12 +24,53 @@ var latest_days = 30;
 var configs = new Object;
 var charts = [];
 var DcsData = new Object;
+var single_chart = null;
 
-
-$('#select_days a').click(function(){
-    latest_days = $(this).attr('days');
-    load_all_models();
-    return false;
+// sc == show chart
+$('.sc').hover(function() {
+    $(this).css('cursor','pointer');
+}, function() {
+    $(this).css('cursor','auto');
+}).click(function() {
+    var str = $(this).attr('id').substring(3);
+    var model_field = str.split('__');
+    var model = model_field[0];
+    var field = model_field[1];
+    var url = base_url + 'dcs/data/' + model + '/latest/days/180/';
+    $.modal('<div style="height:200px; width: 640px;" id="single_chart"><h1 style="color: white;">Updating ...</h1></div>',
+        {
+            'overlayClose' : true
+        }
+    );
+    $.getJSON(url, function(data) {
+        var i;
+        for (i=0; i<data.length; i++) {
+            row = data[i].fields;
+            row.date_time = parse_datetime(row.date_time);
+        }
+        options = configs[model][field];
+        var highchartsOptions = {
+           chart: { renderTo: 'single_chart' },
+           title: { text: options[0] },
+           yAxis: { endOnTick: true },
+           series: [{ animation: false,
+                 data: convert_data(data,field)
+               }
+           ]
+        };
+        if (options[1] && options[2]) {
+            highchartsOptions.yAxis.min = options[1];
+            highchartsOptions.yAxis.max = options[2];
+        }
+        if (options[3] && options[4]) {
+            highchartsOptions.yAxis.plotBands = [{ // reference band
+                from: options[3], to: options[4],
+                color: 'rgba(144, 238, 144, 0.1)'
+            }];
+        }
+        if (single_chart) { single_chart.destroy(); }
+        single_chart = new Highcharts.Chart(highchartsOptions);
+    }); // .getJSON done
 });
 
 
@@ -54,10 +98,10 @@ function fetch_one(model) {
         var now_time_ms = now.getTime();
         var dt_min = (now_time_ms - parse_datetime(record.date_time))/360000;
         if (dt_min>15) { 
-            th_last_update.addClass('warning');
+            th_last_update.removeClass('good').addClass('warning');
         }
         else { 
-            th_last_update.removeClass('warning'); 
+            th_last_update.removeClass('warning').addClass('good'); 
         }
     });
 }
@@ -80,7 +124,7 @@ function load_model(model) {
 }
 
 function init_chart(model, field, options) {
-    highchartsOptions = {
+    var highchartsOptions = {
        chart: { renderTo: model + '__' + field },
        title: { text: options[0] },
        yAxis: { endOnTick: true },

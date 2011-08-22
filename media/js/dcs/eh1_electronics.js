@@ -5,7 +5,7 @@ fetch_latest();
 
 $('a.HV').click(function(){
     var ladder = $(this).attr('id');
-    $('#table_'+ladder).toggle("blind", "", "fast"); 
+    $('#table_'+ladder).toggle("blind").addClass('current'); 
     return false; 
 });
 
@@ -25,7 +25,6 @@ function fetch_latest() {
 function HV_fetch_one(model) {
     var url = base_url + 'dcs/record/' + model + '/last/';
     var th_last_update = $('#th_'+model).next('.th_last_update');
-    // var title = heading.attr('title');
     th_last_update.html('updating ...');
     $.getJSON(url, function(data) {
         $('#table_'+model+' .HV').removeClass('down').addClass('live');
@@ -50,10 +49,10 @@ function HV_fetch_one(model) {
         var now_time_ms = now.getTime();
         var dt_min = (now_time_ms - parse_datetime(record.date_time))/360000;
         if (dt_min>15) { 
-            th_last_update.addClass('warning');
+            th_last_update.removeClass('good').addClass('warning');
         }
         else { 
-            th_last_update.removeClass('warning'); 
+            th_last_update.removeClass('warning').addClass('good'); 
         }
     });
 }
