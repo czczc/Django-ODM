@@ -8,6 +8,15 @@
 {% mkrange 1 4 1 as column_range %}
 {% mkrange 1 9 1 as row_range %}
 
+{# HV #}
+<div class = "grid_24">
+	<a name="HV"></a>    
+     <h2>
+         HV Monitor
+    </h2>
+</div>    
+<div class="clear"></div>
+
 <div class="grid_24" style='margin-bottom: 10px;'>
     <table class='elec_table' id='table_DbnsAd1Hv'>
 	<thead><tr>
@@ -53,7 +62,7 @@
 {% endfor %}
 
 <div class="grid_24" style='margin-bottom: 10px;'>
-    <table class='elec_table' id='table_DbnsAd1Hv'>
+    <table class='elec_table' id='table_DbnsAd2Hv'>
 	<thead><tr>
 		<th colspan="2" style='text-align: center;' id='th_DbnsAd2Hv'>AD2 PMT HV</th>
 		<th colspan="6" style='text-align: center;' class='th_last_update good'></th>
@@ -96,7 +105,7 @@
 {% endfor %}
 
 <div class="grid_24" style='margin-bottom: 10px;'>
-    <table class='elec_table' id='table_DbnsAd1Hv'>
+    <table class='elec_table' id='table_DbnsRpcHvVmon'>
 	<thead><tr>
 		<th colspan="3" style='text-align: center;' id='th_DbnsRpcHvVmon'>RPC HV</th>
 		<th colspan="9" style='text-align: center;' class='th_last_update good'></th>
@@ -163,6 +172,174 @@
 </div>
 <div class="clear"></div>
 
+{# VME Temperature #}
+<div class = "grid_24">
+	<a name="VME"></a>    
+     <h2>
+         VME Temperature Monitor
+    </h2>
+</div>    
+<div class="clear"></div>
+
+<div class="grid_24" style='margin-bottom: 10px;'>
+    <table class='elec_table' id='table_DbnsAd1Vme'>
+	<thead><tr>
+		<th colspan="2" style='text-align: center;' id='th_DbnsAd1Vme'>AD1 VME</th>
+		<th colspan="6" style='text-align: center;' class='th_last_update good'></th>
+	</tr></thead>
+    <tbody>
+	    <tr>
+			<th>&nbsp; 1 &nbsp;</th>
+			<th>&nbsp; 2 &nbsp;</th>
+			<th>&nbsp; 3 &nbsp;</th>
+			<th>&nbsp; 4 &nbsp;</th>
+			<th>&nbsp; 5 &nbsp;</th>
+			<th>&nbsp; 6 &nbsp;</th>
+			<th>&nbsp; 7 &nbsp;</th>
+			<th>&nbsp; 8 &nbsp;</th>
+		</tr>
+        <tr>
+			<td class='sc' id='td_DbnsAd1Vme__temperature1' ></td>
+			<td class='sc' id='td_DbnsAd1Vme__temperature2' ></td>
+			<td class='sc' id='td_DbnsAd1Vme__temperature3' ></td>
+			<td class='sc' id='td_DbnsAd1Vme__temperature4' ></td>
+			<td class='sc' id='td_DbnsAd1Vme__temperature5' ></td>
+			<td class='sc' id='td_DbnsAd1Vme__temperature6' ></td>
+			<td class='sc' id='td_DbnsAd1Vme__temperature7' ></td>
+			<td class='sc' id='td_DbnsAd1Vme__temperature8' ></td>
+		</tr>
+    </tbody>
+	</table>
+</div>
+<div class="clear"></div>
+
+<div class="grid_24" style='margin-bottom: 10px;'>
+    <table class='elec_table' id='table_DbnsAd2Vme'>
+	<thead><tr>
+		<th colspan="2" style='text-align: center;' id='th_DbnsAd2Vme'>AD2 VME</th>
+		<th colspan="6" style='text-align: center;' class='th_last_update good'></th>
+	</tr></thead>
+    <tbody>
+	    <tr>
+			<th>&nbsp; 1 &nbsp;</th>
+			<th>&nbsp; 2 &nbsp;</th>
+			<th>&nbsp; 3 &nbsp;</th>
+			<th>&nbsp; 4 &nbsp;</th>
+			<th>&nbsp; 5 &nbsp;</th>
+			<th>&nbsp; 6 &nbsp;</th>
+			<th>&nbsp; 7 &nbsp;</th>
+			<th>&nbsp; 8 &nbsp;</th>
+		</tr>
+        <tr>
+			<td class='sc' id='td_DbnsAd2Vme__temperature1' ></td>
+			<td class='sc' id='td_DbnsAd2Vme__temperature2' ></td>
+			<td class='sc' id='td_DbnsAd2Vme__temperature3' ></td>
+			<td class='sc' id='td_DbnsAd2Vme__temperature4' ></td>
+			<td class='sc' id='td_DbnsAd2Vme__temperature5' ></td>
+			<td class='sc' id='td_DbnsAd2Vme__temperature6' ></td>
+			<td class='sc' id='td_DbnsAd2Vme__temperature7' ></td>
+			<td class='sc' id='td_DbnsAd2Vme__temperature8' ></td>
+		</tr>
+    </tbody>
+	</table>
+</div>
+<div class="clear"></div>
+
+<div class="grid_24" style='margin-bottom: 10px;'>
+    <table class='elec_table' id='table_DbnsIWVme'>
+	<thead><tr>
+		<th colspan="2" style='text-align: center;' id='th_DbnsIWVme'>Inner WP VME</th>
+		<th colspan="6" style='text-align: center;' class='th_last_update good'></th>
+	</tr></thead>
+    <tbody>
+	    <tr>
+			<th>&nbsp; 1 &nbsp;</th>
+			<th>&nbsp; 2 &nbsp;</th>
+			<th>&nbsp; 3 &nbsp;</th>
+			<th>&nbsp; 4 &nbsp;</th>
+			<th>&nbsp; 5 &nbsp;</th>
+			<th>&nbsp; 6 &nbsp;</th>
+			<th>&nbsp; 7 &nbsp;</th>
+			<th>&nbsp; 8 &nbsp;</th>
+		</tr>
+        <tr>
+			<td class='sc' id='td_DbnsIWVme__temperature1' ></td>
+			<td class='sc' id='td_DbnsIWVme__temperature2' ></td>
+			<td class='sc' id='td_DbnsIWVme__temperature3' ></td>
+			<td class='sc' id='td_DbnsIWVme__temperature4' ></td>
+			<td class='sc' id='td_DbnsIWVme__temperature5' ></td>
+			<td class='sc' id='td_DbnsIWVme__temperature6' ></td>
+			<td class='sc' id='td_DbnsIWVme__temperature7' ></td>
+			<td class='sc' id='td_DbnsIWVme__temperature8' ></td>
+		</tr>
+    </tbody>
+	</table>
+</div>
+<div class="clear"></div>
+
+<div class="grid_24" style='margin-bottom: 10px;'>
+    <table class='elec_table' id='table_DbnsOWVme'>
+	<thead><tr>
+		<th colspan="2" style='text-align: center;' id='th_DbnsOWVme'>Outer WP VME</th>
+		<th colspan="6" style='text-align: center;' class='th_last_update good'></th>
+	</tr></thead>
+    <tbody>
+	    <tr>
+			<th>&nbsp; 1 &nbsp;</th>
+			<th>&nbsp; 2 &nbsp;</th>
+			<th>&nbsp; 3 &nbsp;</th>
+			<th>&nbsp; 4 &nbsp;</th>
+			<th>&nbsp; 5 &nbsp;</th>
+			<th>&nbsp; 6 &nbsp;</th>
+			<th>&nbsp; 7 &nbsp;</th>
+			<th>&nbsp; 8 &nbsp;</th>
+		</tr>
+        <tr>
+			<td class='sc' id='td_DbnsOWVme__temperature1' ></td>
+			<td class='sc' id='td_DbnsOWVme__temperature2' ></td>
+			<td class='sc' id='td_DbnsOWVme__temperature3' ></td>
+			<td class='sc' id='td_DbnsOWVme__temperature4' ></td>
+			<td class='sc' id='td_DbnsOWVme__temperature5' ></td>
+			<td class='sc' id='td_DbnsOWVme__temperature6' ></td>
+			<td class='sc' id='td_DbnsOWVme__temperature7' ></td>
+			<td class='sc' id='td_DbnsOWVme__temperature8' ></td>
+		</tr>
+    </tbody>
+	</table>
+</div>
+<div class="clear"></div>
+
+<div class="grid_24" style='margin-bottom: 10px;'>
+    <table class='elec_table' id='table_DbnsRPCVme'>
+	<thead><tr>
+		<th colspan="2" style='text-align: center;' id='th_DbnsRPCVme'>RPC VME</th>
+		<th colspan="6" style='text-align: center;' class='th_last_update good'></th>
+	</tr></thead>
+    <tbody>
+	    <tr>
+			<th>&nbsp; 1 &nbsp;</th>
+			<th>&nbsp; 2 &nbsp;</th>
+			<th>&nbsp; 3 &nbsp;</th>
+			<th>&nbsp; 4 &nbsp;</th>
+			<th>&nbsp; 5 &nbsp;</th>
+			<th>&nbsp; 6 &nbsp;</th>
+			<th>&nbsp; 7 &nbsp;</th>
+			<th>&nbsp; 8 &nbsp;</th>
+		</tr>
+        <tr>
+			<td class='sc' id='td_DbnsRPCVme__temperature1' ></td>
+			<td class='sc' id='td_DbnsRPCVme__temperature2' ></td>
+			<td class='sc' id='td_DbnsRPCVme__temperature3' ></td>
+			<td class='sc' id='td_DbnsRPCVme__temperature4' ></td>
+			<td class='sc' id='td_DbnsRPCVme__temperature5' ></td>
+			<td class='sc' id='td_DbnsRPCVme__temperature6' ></td>
+			<td class='sc' id='td_DbnsRPCVme__temperature7' ></td>
+			<td class='sc' id='td_DbnsRPCVme__temperature8' ></td>
+		</tr>
+    </tbody>
+	</table>
+</div>
+<div class="clear"></div>
 {% endblock %}
 
 

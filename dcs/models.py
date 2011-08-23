@@ -83,7 +83,53 @@ class DbnsEnvPth(DcsModel):
     class Meta(DcsModel.Meta):
         db_table = u'DBNS_ENV_PTH'
 
+# abstract model for VMR crate tables
+class AbstractVme(DcsModel):
+    voltage_5v = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Voltage_5V', blank=True) # Field name made lowercase.
+    current_5v = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Current_5V', blank=True) # Field name made lowercase.
+    voltage_n5v2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Voltage_N5V2', blank=True) # Field name made lowercase.
+    current_n5v2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Current_N5V2', blank=True) # Field name made lowercase.
+    voltage_12v = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Voltage_12V', blank=True) # Field name made lowercase.
+    current_12v = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Current_12V', blank=True) # Field name made lowercase.
+    voltage_n12v = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Voltage_N12V', blank=True) # Field name made lowercase.
+    current_n12v = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Current_N12V', blank=True) # Field name made lowercase.
+    voltage_3v3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Voltage_3V3', blank=True) # Field name made lowercase.
+    current_3v3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Current_3V3', blank=True) # Field name made lowercase.
+    temperature1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Temperature1', blank=True) # Field name made lowercase.
+    temperature2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Temperature2', blank=True) # Field name made lowercase.
+    temperature3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Temperature3', blank=True) # Field name made lowercase.
+    temperature4 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Temperature4', blank=True) # Field name made lowercase.
+    temperature5 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Temperature5', blank=True) # Field name made lowercase.
+    temperature6 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Temperature6', blank=True) # Field name made lowercase.
+    temperature7 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Temperature7', blank=True) # Field name made lowercase.
+    temperature8 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Temperature8', blank=True) # Field name made lowercase.
+    fantemperature = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FanTemperature', blank=True) # Field name made lowercase.
+    fanspeed = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Fanspeed', blank=True) # Field name made lowercase.
+    powerstatus = models.IntegerField(null=True, db_column='PowerStatus', blank=True) # Field name made lowercase.
+    class Meta(DcsModel.Meta):
+        abstract = True
 
+class DbnsAd1Vme(AbstractVme):
+    class Meta(AbstractVme.Meta):
+        db_table = u'DBNS_AD1_VME'
+
+class DbnsAd2Vme(AbstractVme):
+    class Meta(AbstractVme.Meta):
+        db_table = u'DBNS_AD2_VME'
+
+class DbnsIWVme(AbstractVme):
+    class Meta(AbstractVme.Meta):
+        db_table = u'DBNS_IW_VME'
+
+class DbnsOWVme(AbstractVme):
+    class Meta(AbstractVme.Meta):
+        db_table = u'DBNS_OW_VME'        
+
+class DbnsRPCVme(AbstractVme):
+    class Meta(AbstractVme.Meta):
+        db_table = u'DBNS_RPC_VME'
+
+                        
 # abstract model for AD PMT HV tables
 class AbstractAdHv(DcsModel):
     l8c3r8 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='L8C3R8', blank=True) # Field name made lowercase.

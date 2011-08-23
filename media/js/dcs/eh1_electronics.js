@@ -22,6 +22,11 @@ function fetch_latest() {
     HV_fetch_one('DbnsAd1Hv');
     HV_fetch_one('DbnsAd2Hv');
     fetch_one('DbnsRpcHvVmon');
+    fetch_one('DbnsAd1Vme');
+    fetch_one('DbnsAd2Vme');
+    fetch_one('DbnsIWVme');
+    fetch_one('DbnsOWVme');
+    fetch_one('DbnsRPCVme');
 }
 
 function HV_fetch_one(model) {
@@ -64,7 +69,12 @@ function load_configs(){
         // renderTo, title, ymin, ymax, ysafemin, ysafemax
         DbnsAd1Hv : {},
         DbnsAd2Hv : {},
-        DbnsRpcHvVmon : {}
+        DbnsRpcHvVmon : {},
+        DbnsAd1Vme : {},
+        DbnsAd2Vme : {},
+        DbnsIWVme : {},
+        DbnsOWVme : {},
+        DbnsRPCVme : {}
     };
     var ladder, row, column, field;
     for (ladder=1; ladder<=8; ladder++) {
@@ -80,6 +90,15 @@ function load_configs(){
     for (channel=0; channel<=23; channel++) {
         field = sprintf('dbns_fo%02dn', channel);
         configs.DbnsRpcHvVmon[field] = [field, 3000, 4000, 3500, 3900];
+    }
+    var tp;
+    for (tp=1; tp<=8; tp++) {
+        field = 'temperature' + tp;
+        configs.DbnsAd1Vme[field] = [field, 15, 40, 25, 30];
+        configs.DbnsAd2Vme[field] = [field, 15, 40, 25, 30];
+        configs.DbnsIWVme[field] = [field, 15, 40, 25, 30];
+        configs.DbnsOWVme[field] = [field, 15, 40, 25, 30];
+        configs.DbnsRPCVme[field] = [field, 15, 40, 25, 30];
     }
 }
 
