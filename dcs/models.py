@@ -69,7 +69,7 @@ class DbnsIowTemp(DcsModel):
     dbns_ow_temp_pt2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_OW_Temp_PT2', blank=True) # Field name made lowercase.
     dbns_ow_temp_pt3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_OW_Temp_PT3', blank=True) # Field name made lowercase.
     dbns_ow_temp_pt4 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_OW_Temp_PT4', blank=True) # Field name made lowercase.
-    class Meta:
+    class Meta(DcsModel.Meta):
         db_table = u'DBNS_IOW_Temp'
 
                     

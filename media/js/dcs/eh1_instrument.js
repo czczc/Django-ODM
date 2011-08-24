@@ -1,9 +1,8 @@
 load_configs();
 load_tooltips();
-load_all_models();
 fetch_latest();
-// var timer = setInterval('fetch_latest()', 300000);
-// console.log(configs);
+load_all_models();
+var timer = setInterval('fetch_latest()', 300000);
 
 $('#select_days a').click(function(){
     latest_days = $(this).attr('days');
@@ -21,7 +20,7 @@ function load_all_models() {
 
     load_model('Ad1Lidsensor');
     load_model('Ad2Lidsensor');
-    // load_model('DbnsIowTemp');
+    load_model('DbnsIowTemp');
     load_model('DbnsRpcGas101');
     load_model('DbnsEnvPth');
 
@@ -30,7 +29,7 @@ function load_all_models() {
 function fetch_latest() {
     fetch_one('Ad1Lidsensor');
     fetch_one('Ad2Lidsensor');
-    // fetch_one('DbnsIowTemp');
+    fetch_one('DbnsIowTemp');
     fetch_one('DbnsRpcGas101');
     fetch_one('DbnsEnvPth');
 }
@@ -48,7 +47,13 @@ function load_configs(){
             temp_ls: ['AD1 LS Temperature', 20, 25, 21, 24],
             capacitance_temp_gdls: ['AD1 GdLS Temperature: Capacitance', 23, 28, 24, 27],
             capacitance_temp_ls: ['AD1 LS Temperature: Capacitance', 23, 28, 24, 27],
-            capacitance_temp_mo: ['AD1 MO Temperature: Capacitance', 20, 26, 21, 25]
+            capacitance_temp_mo: ['AD1 MO Temperature: Capacitance', 20, 26, 21, 25],
+            tiltx_sensor1: ['AD1 Tilt X : 1', -2, 2, -1.5, -0.5],
+            tiltx_sensor2: ['AD1 Tilt X : 2', -2, 2, -1, 1],
+            tiltx_sensor3: ['AD1 Tilt X : 3', -2, 2, -1, 1],
+            tilty_sensor1: ['AD1 Tilt Y : 1', -2, 2, -1, 1],
+            tilty_sensor2: ['AD1 Tilt Y : 2', -2, 2, -1, 1],
+            tilty_sensor3: ['AD1 Tilt Y : 3', -2, 2, 0.5, 1.5]
         },
         Ad2Lidsensor : {
             ultrasonic_gdls: ['AD2 GdLS Level: Ultrasonic', 2000, 2400, 2100, 2300],
@@ -60,7 +65,13 @@ function load_configs(){
             temp_ls: ['AD2 LS Temperature', 20, 25, 21, 24],
             capacitance_temp_gdls: ['AD2 GdLS Temperature: Capacitance', 23, 28, 24, 27],
             capacitance_temp_ls: ['AD2 LS Temperature: Capacitance', 23, 28, 24, 27],
-            capacitance_temp_mo: ['AD2 MO Temperature: Capacitance', 20, 26, 21, 25]
+            capacitance_temp_mo: ['AD2 MO Temperature: Capacitance', 20, 26, 21, 25],
+            tiltx_sensor1: ['AD2 Tilt X : 1', -2, 2, -1, 1],
+            tiltx_sensor2: ['AD2 Tilt X : 2', -2, 2, -1, 1],
+            tiltx_sensor3: ['AD2 Tilt X : 3', -2, 2, -1, 1],
+            tilty_sensor1: ['AD2 Tilt Y : 1', -2, 2, -1, 1],
+            tilty_sensor2: ['AD2 Tilt Y : 2', -2, 2, -1, 1],
+            tilty_sensor3: ['AD2 Tilt Y : 3', -2, 2, -1, 1]
         },
         DbnsIowTemp : {
             dbns_iw_temp_pt1: ['Inner WP Temerature: 1', 21, 26, 22, 25],
@@ -73,7 +84,7 @@ function load_configs(){
             dbns_ow_temp_pt4: ['Outer WP Temerature: 4', 21, 26, 22, 25]
         },
         DbnsRpcGas101 : {
-            pressure_argon: ['RPC Argon Pressure', 18, 22, 19, 21],
+            pressure_argon: ['RPC Argon Pressure', 18, 23, 19, 22],
             pressure_isobutane: ['RPC Isobutane Pressure', 18, 22, 19, 21],
             pressure_r134a: ['RPC R134A Pressure', 18, 22, 19, 21],
             pressure_sf6: ['RPC SF6 Pressure', 18, 22, 19, 21]     

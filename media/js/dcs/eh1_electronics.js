@@ -1,8 +1,8 @@
 load_configs();
 load_tooltips();
-load_all_models();
 fetch_latest();
-// var timer = setInterval('fetch_latest()', 300000);
+load_all_models();
+var timer = setInterval('fetch_latest()', 300000);
 
 $('a.HV').click(function(){
     var ladder = $(this).attr('id');
@@ -61,6 +61,9 @@ function HV_fetch_one(model) {
         else { 
             th_last_update.removeClass('warning').addClass('good'); 
         }
+    })
+    .error(function(){
+        th_last_update.html('updating failed (tunnel down)');
     });
 }
 
@@ -81,8 +84,8 @@ function load_configs(){
         for (row=1; row<=8; row++) {
             for (column=1; column<=3; column++) {
                 field = 'l'+ladder+'c'+column+'r'+row;
-                configs.DbnsAd1Hv[field] = [field, 5, 2000, 10, 1900];
-                configs.DbnsAd2Hv[field] = [field, 5, 2000, 10, 1900];
+                configs.DbnsAd1Hv[field] = [field, 1100, 2000, 1200, 1900];
+                configs.DbnsAd2Hv[field] = [field, 1100, 2000, 1200, 1900];
             }
         }
     }
@@ -94,11 +97,11 @@ function load_configs(){
     var tp;
     for (tp=1; tp<=8; tp++) {
         field = 'temperature' + tp;
-        configs.DbnsAd1Vme[field] = [field, 15, 40, 25, 30];
-        configs.DbnsAd2Vme[field] = [field, 15, 40, 25, 30];
-        configs.DbnsIWVme[field] = [field, 15, 40, 25, 30];
-        configs.DbnsOWVme[field] = [field, 15, 40, 25, 30];
-        configs.DbnsRPCVme[field] = [field, 15, 40, 25, 30];
+        configs.DbnsAd1Vme[field] = [field, 15, 40, 20, 30];
+        configs.DbnsAd2Vme[field] = [field, 15, 40, 20, 30];
+        configs.DbnsIWVme[field]  = [field, 15, 40, 20, 30];
+        configs.DbnsOWVme[field]  = [field, 15, 40, 20, 30];
+        configs.DbnsRPCVme[field] = [field, 15, 40, 20, 30];
     }
 }
 

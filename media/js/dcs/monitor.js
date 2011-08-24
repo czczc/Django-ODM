@@ -38,8 +38,8 @@ $('.sc').hover(function() {
     var model_field = str.split('__');
     var model = model_field[0];
     var field = model_field[1];
-    var url = base_url + 'dcs/data/' + model + '/latest/days/180/';
-    $.modal('<div style="height:200px; width: 640px;" id="single_chart"><h1 style="color: white;">Updating ...</h1></div>',
+    var url = base_url + 'dcs/data/' + model + '/latest/days/7/';
+    $.modal('<div style="height:200px; width: 640px;" id="single_chart"><h1 style="color: white;">Retriveing Data ... (may take a few seconds)</h1></div>',
         {
             'overlayClose' : true
         }
@@ -72,6 +72,9 @@ $('.sc').hover(function() {
         }
         if (single_chart) { single_chart.destroy(); }
         single_chart = new Highcharts.Chart(highchartsOptions);
+    })
+    .error(function(){
+        $('#single_chart').html('<h1 style="color: white;">Error retrieving data ...</h1>');
     }); // .getJSON done
 });
 
@@ -105,6 +108,9 @@ function fetch_one(model) {
         else { 
             th_last_update.removeClass('warning').addClass('good'); 
         }
+    })
+    .error(function(){
+        th_last_update.html('updating failed (tunnel down)');
     });
 }
 
@@ -196,7 +202,7 @@ function load_tooltips() {
         if (configs[model][field]) { safemax = configs[model][field][4]; };
         $(this).qtip({
             content: 'Ref. Values: <span style="color:green; font-weight: bold;"> ' 
-                + safemin + ' - ' + safemax + '</span><br />Click to show last month',
+                + safemin + ' - ' + safemax + '</span><br />Click to show last week',
             position: {corner: {target: 'topMiddle', tooltip: 'bottomLeft'}},
             style: {
                 width: 200,

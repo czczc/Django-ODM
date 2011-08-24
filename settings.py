@@ -42,11 +42,11 @@ DATABASES = {
     },
     'dcs' : {
         'ENGINE'  : 'mysql',
-        'NAME'    : conf.get('dcs_db_bak', 'NAME'),
-        'USER'    : conf.get('dcs_db_bak', 'USER'),
-        'PASSWORD': conf.get('dcs_db_bak', 'PASSWORD'),
-        'HOST'    : conf.get('dcs_db_bak', 'HOST'),
-        'PORT'    : conf.get('dcs_db_bak', 'PORT'),          
+        'NAME'    : conf.get('dcs_db', 'NAME'),
+        'USER'    : conf.get('dcs_db', 'USER'),
+        'PASSWORD': conf.get('dcs_db', 'PASSWORD'),
+        'HOST'    : conf.get('dcs_db', 'HOST'),
+        'PORT'    : conf.get('dcs_db', 'PORT'),          
     },
     'dq' : {
         'ENGINE'  : 'mysql',
