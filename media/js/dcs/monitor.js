@@ -110,7 +110,7 @@ function fetch_one(model) {
         }
     })
     .error(function(){
-        th_last_update.html('updating failed (tunnel down)');
+        th_last_update.html('updating failed');
     });
 }
 
@@ -201,7 +201,8 @@ function load_tooltips() {
         var safemax = '-';
         if (configs[model][field]) { safemax = configs[model][field][4]; };
         $(this).qtip({
-            content: 'Ref. Values: <span style="color:green; font-weight: bold;"> ' 
+            content:  '<h4 align="center">' + field + '</h4><br />'
+                + 'Ref. Values: <span style="color:green; font-weight: bold;"> ' 
                 + safemin + ' - ' + safemax + '</span><br />Click to show last week',
             position: {corner: {target: 'topMiddle', tooltip: 'bottomLeft'}},
             style: {

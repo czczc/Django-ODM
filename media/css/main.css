@@ -140,5 +140,5 @@ a.FEEDiag { background: #ddd3f3; }
 #content .elec_table a:hover { text-decoration: none; color: #ff8f28;}
 #content .elec_table a.live { background: #7F0;}
 #content .elec_table a.down { background: red; color: white;}
-
+#content .elec_table td.on_display { background: #d8ebf9;}
 
