@@ -101,7 +101,8 @@ function fetch_one(model) {
         th_last_update.html(record.date_time);
         var now = new Date();
         var now_time_ms = now.getTime();
-        var dt_min = (now_time_ms - parse_datetime(record.date_time))/360000;
+        // confused, why the extra 4 hours?
+        var dt_min = (now_time_ms - parse_datetime(record.date_time))/60000 + 240 + now.getTimezoneOffset();
         if (dt_min>15) { 
             th_last_update.removeClass('good').addClass('warning');
         }
@@ -174,6 +175,7 @@ function convert_data(rawdata, field) {
 }
 
 function parse_datetime(datetime) {
+    // dcs is beijing time
     var first_second = datetime.split(' ');
     var date = first_second[0].split('-');
     var time = first_second[1].split(':');

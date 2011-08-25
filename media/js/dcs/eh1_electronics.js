@@ -56,7 +56,7 @@ function HV_fetch_one(model) {
         th_last_update.html(record.date_time);
         var now = new Date();
         var now_time_ms = now.getTime();
-        var dt_min = (now_time_ms - parse_datetime(record.date_time))/360000;
+        var dt_min = (now_time_ms - parse_datetime(record.date_time))/60000 + 240 + now.getTimezoneOffset();
         if (dt_min>15) { 
             th_last_update.removeClass('good').addClass('warning');
         }
