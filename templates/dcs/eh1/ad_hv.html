@@ -1,0 +1,102 @@
+{# AD HV #}
+{% load range %}
+{% mkrange 1 9 1 as ladder_range %}
+{% mkrange 1 4 1 as column_range %}
+{% mkrange 8 0 -1 as row_range %}
+
+<div class = "grid_24">
+	<a name="HV"></a>    
+     <h2>
+         HV Monitor
+    </h2>
+</div>    
+<div class="clear"></div>
+
+<div class="grid_24" style='margin-bottom: 10px;'>
+    <table class='elec_table' id='table_DbnsAd1Hv'>
+	<thead><tr>
+		<th colspan="2" style='text-align: center;' id='th_DbnsAd1Hv'>AD1 PMT HV</th>
+		<th colspan="6" style='text-align: center;' class='th_last_update good'></th>
+	</tr></thead>
+    <tbody>
+        <tr>
+			<td><a class='HV live' id='DbnsAd1Hv__l1' href='#'>&nbsp; Ladder 1 &nbsp;</a></td>
+			<td><a class='HV live' id='DbnsAd1Hv__l2' href='#'>&nbsp; Ladder 2 &nbsp;</a></td>
+			<td><a class='HV live' id='DbnsAd1Hv__l3' href='#'>&nbsp; Ladder 3 &nbsp;</a></td>
+			<td><a class='HV live' id='DbnsAd1Hv__l4' href='#'>&nbsp; Ladder 4 &nbsp;</a></td>
+			<td><a class='HV live' id='DbnsAd1Hv__l5' href='#'>&nbsp; Ladder 5 &nbsp;</a></td>
+			<td><a class='HV live' id='DbnsAd1Hv__l6' href='#'>&nbsp; Ladder 6 &nbsp;</a></td>
+			<td><a class='HV live' id='DbnsAd1Hv__l7' href='#'>&nbsp; Ladder 7 &nbsp;</a></td>
+			<td><a class='HV live' id='DbnsAd1Hv__l8' href='#'>&nbsp; Ladder 8 &nbsp;</a></td>
+		</tr>
+    </tbody>
+	</table>
+</div>
+<div class="clear"></div>
+
+{% for ladder in ladder_range %}
+<table class='elec_table hidden' id='table_DbnsAd1Hv__l{{ ladder }}'>
+	<tr>
+		<td class='head'>ladder {{ ladder }}</td>
+    	{% for column in column_range %}
+    	<td class='head'>column {{ column }}</td>
+    	{% endfor %}
+    </tr>
+
+    {% for row in row_range %}
+    <tr>
+        <td class='head'>row {{ row }}</td>
+        {% for column in column_range %}
+        <td class='sc' group='l{{ladder}}' id='td_DbnsAd1Hv__l{{ladder}}c{{column}}r{{row}}'></td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+
+	</tr>
+</table>
+{% endfor %}
+
+<div class="grid_24" style='margin-bottom: 10px;'>
+    <table class='elec_table' id='table_DbnsAd2Hv'>
+	<thead><tr>
+		<th colspan="2" style='text-align: center;' id='th_DbnsAd2Hv'>AD2 PMT HV</th>
+		<th colspan="6" style='text-align: center;' class='th_last_update good'></th>
+	</tr></thead>
+    <tbody>
+        <tr>
+			<td><a class='HV live' id='DbnsAd2Hv__l1' href='#'>&nbsp; Ladder 1 &nbsp;</a></td>
+			<td><a class='HV live' id='DbnsAd2Hv__l2' href='#'>&nbsp; Ladder 2 &nbsp;</a></td>
+			<td><a class='HV live' id='DbnsAd2Hv__l3' href='#'>&nbsp; Ladder 3 &nbsp;</a></td>
+			<td><a class='HV live' id='DbnsAd2Hv__l4' href='#'>&nbsp; Ladder 4 &nbsp;</a></td>
+			<td><a class='HV live' id='DbnsAd2Hv__l5' href='#'>&nbsp; Ladder 5 &nbsp;</a></td>
+			<td><a class='HV live' id='DbnsAd2Hv__l6' href='#'>&nbsp; Ladder 6 &nbsp;</a></td>
+			<td><a class='HV live' id='DbnsAd2Hv__l7' href='#'>&nbsp; Ladder 7 &nbsp;</a></td>
+			<td><a class='HV live' id='DbnsAd2Hv__l8' href='#'>&nbsp; Ladder 8 &nbsp;</a></td>
+		</tr>
+    </tbody>
+	</table>
+</div>
+<div class="clear"></div>
+
+<div class="grid_24">
+{% for ladder in ladder_range %}
+<table class='elec_table hidden' id='table_DbnsAd2Hv__l{{ ladder }}'>
+	<tr>
+		<td class='head'>ladder {{ ladder }}</td>
+	    {% for column in column_range %}
+	    <td class='head'>column {{ column }}</td>
+	    {% endfor %}
+    </tr>
+
+    {% for row in row_range %}
+    <tr>
+        <td class='head'>row {{ row }}</td>
+        {% for column in column_range %}
+        <td class='sc' group='l{{ladder}}' id='td_DbnsAd2Hv__l{{ladder}}c{{column}}r{{row}}'></td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+	</tr>
+</table>
+{% endfor %}
+<div class="clear"></div>

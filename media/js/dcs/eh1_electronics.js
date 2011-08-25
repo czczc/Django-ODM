@@ -65,7 +65,7 @@ function HV_fetch_one(model) {
         }
     })
     .error(function(){
-        th_last_update.html('updating failed (tunnel down)');
+        th_last_update.html('updating failed');
     });
 }
 
