@@ -34,27 +34,29 @@
 </div>
 <div class="clear"></div>
 
-{% for ladder in ladder_range %}
-<table class='elec_table hidden' id='table_DbnsAd1Hv__l{{ ladder }}'>
-	<tr>
-		<td class='head'>ladder {{ ladder }}</td>
-    	{% for column in column_range %}
-    	<td class='head'>column {{ column }}</td>
-    	{% endfor %}
-    </tr>
+<div class="grid_24">
+	{% for ladder in ladder_range %}
+	<table class='elec_table hidden' id='table_DbnsAd1Hv__l{{ ladder }}'>
+		<tr>
+			<td class='head'>ladder {{ ladder }}</td>
+	    	{% for column in column_range %}
+	    	<td class='head'>column {{ column }}</td>
+	    	{% endfor %}
+	    </tr>
 
-    {% for row in row_range %}
-    <tr>
-        <td class='head'>row {{ row }}</td>
-        {% for column in column_range %}
-        <td class='sc' group='l{{ladder}}' id='td_DbnsAd1Hv__l{{ladder}}c{{column}}r{{row}}'></td>
-        {% endfor %}
-    </tr>
-    {% endfor %}
+	    {% for row in row_range %}
+	    <tr>
+	        <td class='head'>row {{ row }}</td>
+	        {% for column in column_range %}
+	        <td class='sc' group='l{{ladder}}' id='td_DbnsAd1Hv__l{{ladder}}c{{column}}r{{row}}'></td>
+	        {% endfor %}
+	    </tr>
+	    {% endfor %}
 
-	</tr>
-</table>
-{% endfor %}
+		</tr>
+	</table>
+	{% endfor %}
+</div>
 
 <div class="grid_24" style='margin-bottom: 10px;'>
     <table class='elec_table' id='table_DbnsAd2Hv'>
@@ -79,24 +81,25 @@
 <div class="clear"></div>
 
 <div class="grid_24">
-{% for ladder in ladder_range %}
-<table class='elec_table hidden' id='table_DbnsAd2Hv__l{{ ladder }}'>
-	<tr>
-		<td class='head'>ladder {{ ladder }}</td>
-	    {% for column in column_range %}
-	    <td class='head'>column {{ column }}</td>
-	    {% endfor %}
-    </tr>
+	{% for ladder in ladder_range %}
+	<table class='elec_table hidden' id='table_DbnsAd2Hv__l{{ ladder }}'>
+		<tr>
+			<td class='head'>ladder {{ ladder }}</td>
+		    {% for column in column_range %}
+		    <td class='head'>column {{ column }}</td>
+		    {% endfor %}
+	    </tr>
 
-    {% for row in row_range %}
-    <tr>
-        <td class='head'>row {{ row }}</td>
-        {% for column in column_range %}
-        <td class='sc' group='l{{ladder}}' id='td_DbnsAd2Hv__l{{ladder}}c{{column}}r{{row}}'></td>
-        {% endfor %}
-    </tr>
-    {% endfor %}
-	</tr>
-</table>
-{% endfor %}
+	    {% for row in row_range %}
+	    <tr>
+	        <td class='head'>row {{ row }}</td>
+	        {% for column in column_range %}
+	        <td class='sc' group='l{{ladder}}' id='td_DbnsAd2Hv__l{{ladder}}c{{column}}r{{row}}'></td>
+	        {% endfor %}
+	    </tr>
+	    {% endfor %}
+		</tr>
+	</table>
+	{% endfor %}
+</div>
 <div class="clear"></div>
