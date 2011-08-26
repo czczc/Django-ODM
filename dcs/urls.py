@@ -1,6 +1,8 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('odm.dcs.views',
+    (r'^$', 'search'),
+
     (r'^monitor/(?P<site>\w+)/(?P<category>\w+)/$', 'monitor'),
     (r'^monitor/(?P<site>\w+)/$', 'monitor'),
     

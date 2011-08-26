@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.generic.simple import direct_to_template
 from django.contrib.auth.decorators import login_required
 
+import json
 
 @login_required
 def monitor(request, site, category='instrument'):
@@ -31,8 +32,11 @@ def data(request, model, latest_days=30):
         run_list = dcsmodel.objects.filter(date_time__gte=latest)
         count = run_list.count()
         skip = count / keep
-        run_list = run_list.extra(where=['id %% %s = 0'], params=[skip])
-        
+        last_id = run_list[0].id
+        run_list = run_list.filter(id__in=xrange(last_id, last_id-count, -skip))
+        # run_list = run_list.extra(where=['id %% %s = 0'], params=[skip])
+    except IndexError:
+        pass
     except:
         return HttpResponse(model + ' does not exist')
     
@@ -57,3 +61,19 @@ def fetchone(request, model):
         return HttpResponse(serializers.serialize("json", [record,]))
     else:
         return HttpResponse('<pre>'+ serializers.serialize("json", [record,], indent=4) + '</pre>')
+
+
+@login_required
+def search(request):
+    '''seach dcs db, display the chart'''
+    from odm.dcs.forms import DcsForm
+        
+    if request.is_ajax():
+        form = DcsForm(request.POST)
+    else:
+        form = DcsForm() # An unbound form
+        return HttpResponse(json.dumps({'error' : 'not ajax'}))
+    
+    
+    
+    
