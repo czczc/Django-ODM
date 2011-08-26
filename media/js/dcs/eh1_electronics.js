@@ -20,15 +20,15 @@ function load_all_models() {
 }
 
 function fetch_latest() {
-    // HV_fetch_one('DbnsAd1Hv');
-    // HV_fetch_one('DbnsAd2Hv');
-    // HV_fetch_one('DbnsMuonPmtHvVmon');
-    // fetch_one('DbnsRpcHvVmon');
-    // fetch_one('DbnsAd1Vme');
-    // fetch_one('DbnsAd2Vme');
-    // fetch_one('DbnsIWVme');
-    // fetch_one('DbnsOWVme');
-    // fetch_one('DbnsRPCVme');
+    HV_fetch_one('DbnsAd1Hv');
+    HV_fetch_one('DbnsAd2Hv');
+    HV_fetch_one('DbnsMuonPmtHvVmon');
+    fetch_one('DbnsRpcHvVmon');
+    fetch_one('DbnsAd1Vme');
+    fetch_one('DbnsAd2Vme');
+    fetch_one('DbnsIWVme');
+    fetch_one('DbnsOWVme');
+    fetch_one('DbnsRPCVme');
 }
 
 function HV_fetch_one(model) {
