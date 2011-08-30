@@ -2,8 +2,15 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.generic.simple import direct_to_template
 from django.contrib.auth.decorators import login_required
 
+from django.core import serializers
 import json
-
+from decimal import Decimal
+class DecimalEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Decimal):
+            return float(obj)
+        return json.JSONEncoder.default(self, obj)
+        
 @login_required
 def monitor(request, site, category='instrument'):
     '''details of calibration raw parameters'''
@@ -56,7 +63,6 @@ def fetchone(request, model):
     except:
         return HttpResponse(model + ' does not exist or not record')
     
-    from django.core import serializers
     if request.is_ajax():
         return HttpResponse(serializers.serialize("json", [record,]))
     else:
@@ -70,10 +76,50 @@ def search(request):
         
     if request.is_ajax():
         form = DcsForm(request.POST)
+        if form.is_valid():
+            model = form.cleaned_data['model']
+            fields = form.cleaned_data['fields']
+            fields += ['date_time']
+            try:
+                exec('from odm.dcs.models import %s as dcsmodel' % (model,))
+                keep = 500
+                records = dcsmodel.objects.filter(
+                    date_time__gte=form.cleaned_data['date_from'], 
+                    date_time__lte=form.cleaned_data['date_to'], 
+                )
+                count = records.count()
+                skip = count / keep
+                last_id = records[0].id
+                records = records.filter(id__in=xrange(last_id, last_id-count, -skip))
+
+            except IndexError:
+                return HttpResponse(json.dumps([]))
+            except:
+                return HttpResponse(model + ' does not exist')
+            return HttpResponse(serializers.serialize("json", records, fields=fields))
+            
+        else:
+            return HttpResponse(json.dumps( {
+                'errors': form.errors,
+            }))
     else:
         form = DcsForm() # An unbound form
-        return HttpResponse(json.dumps({'error' : 'not ajax'}))
+        return direct_to_template(request, 
+            template = 'dcs/search.html',
+            extra_context = {
+                'form' : form,
+            })
     
     
-    
+def fields(request, model):
+    '''json data of the model fields'''
+    try:
+        exec('from odm.dcs.models import %s as dcsmodel' % (model,))
+        record = [field.name for field in dcsmodel._meta.fields if (field.name != 'id' and field.name != 'date_time')]
+        record.sort()
+        return HttpResponse(json.dumps(record))
+    except ImportError:
+        return HttpResponse([])        
+
+
     

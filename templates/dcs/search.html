@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}ODM | DCS Search{% endblock %}
+
+{% block content %}
+	<div class = "grid_8 prefix_8 suffix_8">
+	    <h1 align='center'>
+	    	DCS Charts
+		</h1>
+	</div>    
+	<div class="clear"></div>
+	
+	<div class = "grid_8" style='margin-top:10px;'>
+		<form action="{{SITE_ROOT}}/dcs/" method="post" id='form' class='ui-widget'>{% csrf_token %}  
+		    <fieldset class='ui-widget-content'>   
+				<legend class='ui-widget-header ui-corner-all' align='center' style='padding: 5px 10px 5px 10px;'>
+		        	EH1
+		      	</legend>     
+		    <table style='margin-top: 10px;'>
+		        <tr><th><h6>Table</h6></th><td>{{form.model}}</td></tr>
+			    <tr><th></th><td>{{form.fields}}</td></tr>
+				<tr><th><h6>Date</h6></th><td>{{form.date_from}} - {{form.date_to}}</td></tr>
+			    <tr>
+		            <th colspan='2' style='text-align:center; padding:15px 0 10px 0;'>
+		                <input id='submit' type="submit" value="Show Chart" />
+		            </th>
+		        </tr>
+		    </table>
+		    </fieldset>
+		</form>	
+	</div>
+	<div class="clear"></div>
+	<div class='grid_10'>{{ form.errors }}</div>
+	<div class='clear'></div>
+	
+	<div id="single_chart" class="grid_24" style='height: 400px; margin-top:20px;'>
+	    <h3 align='center'>Charts</h3>
+	</div>
+{% endblock %}
+
+{% block extra_js %}
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/ajax_csrf.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/modules/exporting.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/themes/gray.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/dcs/search.js"></script>
+{% endblock %}

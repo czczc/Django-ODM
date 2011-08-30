@@ -139,10 +139,10 @@ if SITE_NERSC:
     ADMIN_MEDIA_PREFIX = 'http://portal.nersc.gov/project/dayabay/odm_media/admin/'
 
 elif SITE_IHEP:
-    DEBUG = TEMPLATE_DEBUG = True
+    DEBUG = TEMPLATE_DEBUG = False
     SITE_ROOT = '/odm'
-    MEDIA_URL = '/odm_web/'
-    ADMIN_MEDIA_PREFIX = '/odm_web/admin/'
+    MEDIA_URL = '/odmfile/odmweb/'
+    ADMIN_MEDIA_PREFIX = '/odmfile/odmweb/admin/'
     
 elif SITE_LOCAL:
     DEBUG = TEMPLATE_DEBUG = True
@@ -160,7 +160,7 @@ elif SITE_LOCAL:
         'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
+        # 'debug_toolbar.middleware.DebugToolbarMiddleware',
         # 'django.middleware.cache.FetchFromCacheMiddleware',
         'odm.middleware.MaintainenceMiddleware',
     )
@@ -179,7 +179,7 @@ elif SITE_LOCAL:
         'SHOW_TEMPLATE_CONTEXT': False,
     }
     INSTALLED_APPS += (
-        'debug_toolbar',
+        # 'debug_toolbar',
         'odm.runinfo',
         'odm.daqinfo',
         'odm.fileinfo',

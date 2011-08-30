@@ -11,4 +11,6 @@ urlpatterns = patterns('odm.dcs.views',
     (r'^data/(?P<model>\w+)/$', 'data'),
     
     (r'^record/(?P<model>\w+)/last/$', 'fetchone'),
+    
+    (r'^model/(?P<model>\w+)/fields/', 'fields'),
 )
