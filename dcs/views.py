@@ -75,18 +75,20 @@ def search(request):
     from odm.dcs.forms import DcsForm
         
     if request.is_ajax():
-        form = DcsForm(request.POST)
+        form = DcsForm(request.POST, auto_id='id_eh1_%s')
         if form.is_valid():
             model = form.cleaned_data['model']
             fields = form.cleaned_data['fields']
             fields += ['date_time']
+            keep = 500
             try:
                 exec('from odm.dcs.models import %s as dcsmodel' % (model,))
-                keep = 500
                 records = dcsmodel.objects.filter(
                     date_time__gte=form.cleaned_data['date_from'], 
                     date_time__lte=form.cleaned_data['date_to'], 
                 )
+                if form.cleaned_data['points']:
+                    keep = form.cleaned_data['points']
                 count = records.count()
                 skip = count / keep
                 last_id = records[0].id
@@ -103,7 +105,7 @@ def search(request):
                 'errors': form.errors,
             }))
     else:
-        form = DcsForm() # An unbound form
+        form = DcsForm(auto_id='id_eh1_%s') # An unbound form
         return direct_to_template(request, 
             template = 'dcs/search.html',
             extra_context = {

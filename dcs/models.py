@@ -680,4 +680,32 @@ class DbnsRpcHvVmon(DcsModel):
     dbns_fo23p = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_FO23P', blank=True) # Field name made lowercase.
     class Meta(DcsModel.Meta):
         db_table = u'DBNS_RPC_HV_Vmon'
-                              
+
+
+class DbnsAd1HvImon(DcsModel):
+    dbns_ad_hv_slot0_i0 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_AD_HV.Slot0.I0', blank=True) # Field name made lowercase.
+    dbns_ad_hv_slot2_i0 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_AD_HV.Slot2.I0', blank=True) # Field name made lowercase.
+    dbns_ad_hv_slot4_i0 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_AD_HV.Slot4.I0', blank=True) # Field name made lowercase.
+    dbns_ad_hv_slot6_i0 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_AD_HV.Slot6.I0', blank=True) # Field name made lowercase.
+    class Meta(DcsModel.Meta):
+        db_table = u'DBNS_AD1_HV_Imon'
+
+class DbnsAd2HvImon(DcsModel):
+    dbns_ad_hv_slot8_i0 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_AD_HV.Slot8.I0', blank=True) # Field name made lowercase.
+    dbns_ad_hv_slot10_i0 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_AD_HV.Slot10.I0', blank=True) # Field name made lowercase.
+    dbns_ad_hv_slot12_i0 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_AD_HV.Slot12.I0', blank=True) # Field name made lowercase.
+    dbns_ad_hv_slot14_i0 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_AD_HV.Slot14.I0', blank=True) # Field name made lowercase.
+    class Meta(DcsModel.Meta):
+        db_table = u'DBNS_AD2_HV_Imon'
+        
+class DbnsMuonPmtHvImon(DcsModel):
+    muonpmthv_slot0_i0 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='MuonPMTHV.Slot0.I0', blank=True) # Field name made lowercase.
+    muonpmthv_slot2_i0 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='MuonPMTHV.Slot2.I0', blank=True) # Field name made lowercase.
+    muonpmthv_slot4_i0 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='MuonPMTHV.Slot4.I0', blank=True) # Field name made lowercase.
+    muonpmthv_slot6_i0 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='MuonPMTHV.Slot6.I0', blank=True) # Field name made lowercase.
+    muonpmthv_slot8_i0 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='MuonPMTHV.Slot8.I0', blank=True) # Field name made lowercase.
+    muonpmthv_slot10_i0 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='MuonPMTHV.Slot10.I0', blank=True) # Field name made lowercase.
+    class Meta(DcsModel.Meta):
+        db_table = u'DBNS_MUON_PMT_HV_Imon'
+        
+                                               

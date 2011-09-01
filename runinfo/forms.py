@@ -35,6 +35,7 @@ class SearchRunListForm(forms.Form):
             ('All', 'RUN TYPE'),
             ('Physics', 'Physics'),
             ('ADCalib', 'ADCalib'),
+            ('WPCalib', 'WPCalib'),
             ('Pedestal', 'Pedestal'),
             ('FEEDiag', 'FEEDiag'),
         ),

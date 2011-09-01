@@ -32,6 +32,7 @@
                     <li class="menu_separator"></li>
                     <li><a href='{{ SITE_ROOT }}/run/type/Physics/'>Physics</a></li>
                     <li><a href='{{ SITE_ROOT }}/run/type/ADCalib/'>ADCalib</a></li>
+                    <li><a href='{{ SITE_ROOT }}/run/type/WPCalib/'>WPCalib</a></li>
                     <li><a href='{{ SITE_ROOT }}/run/type/Pedestal/'>Pedestal</a></li>
                     <li><a href='{{ SITE_ROOT }}/run/type/FEEDiag/'>FEEDiag</a></li>
                     <li class="menu_separator"></li>
@@ -58,7 +59,7 @@
         </ul>
         <ul>            
             <li>
-                <span class="ui-icon ui-icon-pencil" style='float:left;'></span>
+                <span class="ui-icon ui-icon-image" style='float:left;'></span>
                 <a href="#" class="top_menu"><span>
                     Plots
                     <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />&nbsp;
@@ -82,6 +83,21 @@
         {#         </ul> #}
         {#     </li> #}
         {# </ul> #}
+        <ul>            
+            <li>
+                <span class="ui-icon ui-icon-script" style='float:left;'></span>
+                <a href="#" class="top_menu"><span>
+                    DCS
+                    <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />&nbsp;
+                </span></a>
+                <ul class="sub_menu">
+                    <li><a href='{{ SITE_ROOT }}/dcs/'>Search Charts</a></li>
+	                <li class="menu_separator"></li>
+                    <li><a href='{{ SITE_ROOT }}/dcs/monitor/EH1/instrument/'>EH1 &nbsp;|&nbsp; Instrument</a></li>
+                    <li><a href='{{ SITE_ROOT }}/dcs/monitor/EH1/electronics/'>EH1 &nbsp;|&nbsp; Electronics</a></li>
+                </ul>
+            </li>
+        </ul>
         <ul>
             <li>
                 <span class="ui-icon ui-icon-wrench" style='float:left;'></span>
@@ -90,33 +106,24 @@
                     <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />&nbsp;
                 </span></a>
                 <ul class="sub_menu">
+		            <li><a href='{{ SITE_ROOT }}/feeds/run/latest/'>Feeds | Latest Runs</a></li>
+                    <li><a href='{{ SITE_ROOT }}/feeds/run/notes/latest/'>Feeds | Latest Notes</a></li>
+	                <li class="menu_separator"></li>
                     <li><a href='{{ SITE_ROOT }}/pdsf/users/'>PDSF Jobs</a></li>
                 </ul>
             </li>
         </ul>
-        <ul>            
-            <li>
-                <span class="ui-icon ui-icon-signal-diag" style='float:left;'></span>
-                <a href="#" class="top_menu"><span>
-                    Feeds
-                    <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />&nbsp;
-                </span></a>
-                <ul class="sub_menu">
-                    <li><a href='{{ SITE_ROOT }}/feeds/run/latest/'>Latest Runs</a></li>
-                    <li><a href='{{ SITE_ROOT }}/feeds/run/notes/latest/'>Latest Notes</a></li>
-                </ul>
-            </li>
-        </ul>
+
         <ul style='float:right; margin-right:10px;'>            
             <li>
                 <span class="ui-icon ui-icon-person" style='float:left;'></span>
                 <a href="#" class="top_menu"><span>
-                    Accounts
+                    System
                     <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />&nbsp;
                 </span></a>
                 <ul class="sub_menu">
-                    <li><a href='{{ SITE_ROOT }}/accounts/profile/'>Profile</a></li>
-                    <li class="menu_separator"></li>
+                    <li><a href='{{ SITE_ROOT }}/accounts/profile/'>My Profile</a></li>
+	                <li class="menu_separator"></li>
                     <li><a href='{{ SITE_ROOT }}/accounts/logout/'>Logout</a></li>
                 </ul>
             </li>

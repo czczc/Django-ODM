@@ -45,6 +45,7 @@ function load_pqm_list() {
 function load_diagnostics_list() {
     var url = base_url + 'production/diagnostics/run/list/';
     $.getJSON( url, function(data) {
+        if (!data) { return; }
         $("td.Diagnostics").each(function() {
            var run = $(this).attr('runno');
            if (!data[run]) { $(this).html('N/A'); }

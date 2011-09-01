@@ -39,7 +39,7 @@ $('.sc').hover(function() {
     var model = model_field[0];
     var field = model_field[1];
     var url = base_url + 'dcs/data/' + model + '/latest/days/7/';
-    $.modal('<div style="height:200px; width: 640px;" id="single_chart"><h1 style="color: white;">Retriveing Data ... (may take a few seconds)</h1></div>',
+    $.modal('<div style="height:200px; width: 640px;" id="single_chart"><h1 style="color: white;">Retrieving Data ... (may take a few seconds)</h1></div>',
         {
             'overlayClose' : true
         }

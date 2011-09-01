@@ -1,6 +1,7 @@
 # Managing diagnositcs info 
 import urllib2
 from xml.etree import ElementTree
+from django.conf import settings
 import os
  
 class Diagnostics(object):
@@ -16,7 +17,12 @@ class Diagnostics(object):
         # base_url can be different from xml_base_url on a run-by-run basis
         # so that they can be served on diffrent servers.
         # after fixing inodes issue, all can be served on NERCS now
-        self.base_url = 'http://portal.nersc.gov/project/dayabay/dybprod/'
+        if settings.SITE_IHEP:
+            self.base_url = 'http://202.122.37.74/odmfile/'
+            self.local_base_dir = '/data/odm'
+            self.xml_base_url = 'http://202.122.37.74/odmfile/'
+        else:
+            self.base_url = 'http://portal.nersc.gov/project/dayabay/dybprod/'            
  	    
         self.run_index = {}    # {runno: xml}
         self.run_list  = {}    # {runno: 1} 
@@ -51,6 +57,17 @@ class Diagnostics(object):
         if (self.runno):
             self._load_info()
         
+        # fh = open(os.path.join(self.local_base_dir, self.runs_xml))
+        # tree = ElementTree.parse(fh)
+        # return tree            
+        # 
+        # runs = tree.findall('run/runnumber')
+        # for i, run in enumerate(runs):
+            # self.run_index[run.text] = run_xmls[i].text
+            # self.run_list[run.text] = '1'
+        # run_xmls = tree.findall('run/runindex')    
+        # self.run_list['1000'] = '1'
+        
     def _load_index(self):
         '''load diagnostics run list'''
         try:
@@ -68,6 +85,7 @@ class Diagnostics(object):
         for i, run in enumerate(runs):
             self.run_index[run.text] = run_xmls[i].text
             self.run_list[run.text] = '1'
+        
         return True
     
     def _load_info(self):
@@ -106,8 +124,8 @@ class Diagnostics(object):
                 channelname = channelname.replace('board', '')
                 channelname = channelname.replace('connector', '')
                 self.info['channels'][detname][channelname] = '1'
-    
-     
+
+
     def figure_choices(self):
         '''return a Field.Choices of available figures'''
         import os

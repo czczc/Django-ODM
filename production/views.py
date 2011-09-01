@@ -17,12 +17,13 @@ def diagnostics_runlist(request):
     '''return list of processed diagnostics runs'''
     
     run = Diagnostics()
-    run.fetch_all()
+    test = run.fetch_all()
     
     if request.is_ajax():
         return HttpResponse(json.dumps(run.run_list))
     else:
-        raise Http404
+        return HttpResponse(json.dumps(run.run_list))
+        # raise Http404
 
 @login_required      
 def diagnostics_run(request, runno):

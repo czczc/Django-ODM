@@ -42,7 +42,7 @@ function load_configs(){
             ultrasonic_ls: ['AD1 LS Level: Ultrasonic', 1900, 2300, 2000, 2200],
             capacitance_gdls: ['AD1 GdLS Level: Capacitance', 200, 450, 250, 350],
             capacitance_ls: ['AD1 LS Level: Capacitance', 200, 450, 300, 400],
-            capacitance_mo: ['AD1 MO Level: Capacitance', 200, 380, 330, 370],
+            capacitance_mo: ['AD1 MO Level: Capacitance', 200, 380, 320, 370],
             temp_gdls: ['AD1 GdLS Temperature', 20, 25, 21, 24],
             temp_ls: ['AD1 LS Temperature', 20, 25, 21, 24],
             capacitance_temp_gdls: ['AD1 GdLS Temperature: Capacitance', 23, 28, 24, 27],
@@ -60,7 +60,7 @@ function load_configs(){
             ultrasonic_ls: ['AD2 LS Level: Ultrasonic', 1900, 2300, 2000, 2200],
             capacitance_gdls: ['AD2 GdLS Level: Capacitance', 200, 450, 250, 350],
             capacitance_ls: ['AD2 LS Level: Capacitance', 200, 450, 300, 400],
-            capacitance_mo: ['AD2 MO Level: Capacitance', 200, 380, 330, 370],
+            capacitance_mo: ['AD2 MO Level: Capacitance', 200, 380, 320, 370],
             temp_gdls: ['AD2 GdLS Temperature', 20, 25, 21, 24],
             temp_ls: ['AD2 LS Temperature', 20, 25, 21, 24],
             capacitance_temp_gdls: ['AD2 GdLS Temperature: Capacitance', 23, 28, 24, 27],
@@ -85,9 +85,9 @@ function load_configs(){
         },
         DbnsRpcGas101 : {
             pressure_argon: ['RPC Argon Pressure', 18, 23, 19, 22],
-            pressure_isobutane: ['RPC Isobutane Pressure', 18, 22, 19, 21],
-            pressure_r134a: ['RPC R134A Pressure', 18, 22, 19, 21],
-            pressure_sf6: ['RPC SF6 Pressure', 18, 22, 19, 21]     
+            pressure_isobutane: ['RPC Isobutane Pressure', 18, 22, 19, 22],
+            pressure_r134a: ['RPC R134A Pressure', 18, 22, 19, 22],
+            pressure_sf6: ['RPC SF6 Pressure', 18, 22, 19, 22]     
         },
         DbnsEnvPth : {
             dbns_pth_t1: ['EH1 Temperature: 1', 22, 29, 24, 29],        

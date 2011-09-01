@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}ODM | DCS Search{% endblock %}
+{% block title %}ODM | DCS Charts{% endblock %}
 
 {% block content %}
 	<div class = "grid_8 prefix_8 suffix_8">
@@ -18,8 +18,10 @@
 		      	</legend>     
 		    <table style='margin-top: 10px;'>
 		        <tr><th><h6>Table</h6></th><td>{{form.model}}</td></tr>
-			    <tr><th></th><td>{{form.fields}}</td></tr>
+			    <tr><th>Fields</th><td>{{form.fields}}</td></tr>
 				<tr><th><h6>Date</h6></th><td>{{form.date_from}} - {{form.date_to}}</td></tr>
+				<tr><th><h6>(Y-Axis)</h6></th><td>{{form.y_min}} - {{form.y_max}}</td></tr>
+				<tr><th><h6>(Points)</h6></th><td>{{form.points}} &ensp; {{form.plot_type}}</td></tr>
 			    <tr>
 		            <th colspan='2' style='text-align:center; padding:15px 0 10px 0;'>
 		                <input id='submit' type="submit" value="Show Chart" />
@@ -30,11 +32,10 @@
 		</form>	
 	</div>
 	<div class="clear"></div>
-	<div class='grid_10'>{{ form.errors }}</div>
+	<div class='grid_8 .warning' id="form_errors" style='margin-top:10px;'></div>
 	<div class='clear'></div>
 	
 	<div id="single_chart" class="grid_24" style='height: 400px; margin-top:20px;'>
-	    <h3 align='center'>Charts</h3>
 	</div>
 {% endblock %}
 
