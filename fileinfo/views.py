@@ -1,6 +1,7 @@
 from django.http import HttpResponse, Http404
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list_detail import object_list
+from django.conf import settings
 
 from odm.fileinfo.models import Daqrawdatafileinfo
 
@@ -23,7 +24,9 @@ def fileinfo(request, runno):
 @login_required
 def catalog(request, runno):
     '''catalog file info per run'''
-
+    if settings.SITE_IHEP:
+        return HttpResponse(json.dumps({}))
+        
     from DybPython import Catalog
     catalog_list = Catalog.runs[int(runno)]
     file_list = [ filename for filename in catalog_list ]

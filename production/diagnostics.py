@@ -1,6 +1,6 @@
 # Managing diagnositcs info 
 import urllib2
-from xml.etree import ElementTree
+from xml.etree import cElementTree as ElementTree
 from django.conf import settings
 import os
  
@@ -18,6 +18,7 @@ class Diagnostics(object):
         # so that they can be served on diffrent servers.
         # after fixing inodes issue, all can be served on NERCS now
         if settings.SITE_IHEP:
+            pass
             self.base_url = 'http://202.122.37.74/odmfile/'
             self.local_base_dir = '/data/odm'
             self.xml_base_url = 'http://202.122.37.74/odmfile/'

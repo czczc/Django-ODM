@@ -16,8 +16,9 @@ import json, os
 def diagnostics_runlist(request):
     '''return list of processed diagnostics runs'''
     
-    run = Diagnostics()
-    test = run.fetch_all()
+    run = Diagnostics()    
+    run.fetch_all()
+    # raise Http404
     
     if request.is_ajax():
         return HttpResponse(json.dumps(run.run_list))

@@ -655,8 +655,8 @@ function enable_img_comp(selector, detname, data) {
         html += '<td>' + AD1 + '<span class="figname">AD1</span></td>';
         html += '<td>' + AD2 + '<span class="figname">AD2</span></td>';
         html += '</tr></table></div>';
-        console.log(AD1);
-        console.log(AD2);
+        // console.log(AD1);
+        // console.log(AD2);
         $.modal(html,
             {
                 'overlayClose' : true

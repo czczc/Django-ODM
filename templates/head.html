@@ -71,18 +71,6 @@
                 </ul>
             </li>
         </ul>
-        {# <ul>             #}
-        {#     <li> #}
-        {#         <a href="#" class="top_menu"><span> #}
-        {#             Scripts&ensp; #}
-        {#             <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" /> #}
-        {#         </span></a> #}
-        {#         <ul class="sub_menu"> #}
-        {#             <li><a href='{{ SITE_ROOT }}/production/diagnostics/scripts/'>ODM Diagnostics</a></li> #}
-        {#             <li><a href='{{ SITE_ROOT }}/production/simulation/scripts/'>ODM Simulation</a></li> #}
-        {#         </ul> #}
-        {#     </li> #}
-        {# </ul> #}
         <ul>            
             <li>
                 <span class="ui-icon ui-icon-script" style='float:left;'></span>
@@ -122,8 +110,10 @@
                     <img src="{{ MEDIA_URL }}img/zonebar-downarrow.png" alt="dropdown" />&nbsp;
                 </span></a>
                 <ul class="sub_menu">
-                    <li><a href='{{ SITE_ROOT }}/accounts/profile/'>My Profile</a></li>
+				    <li><a href='https://portal-auth.nersc.gov/dayabay/odm/'>Site :: NERSC</a></li>
+				    <li><a href='http://202.122.37.74/odm/'>Site :: IHEP</a></li>
 	                <li class="menu_separator"></li>
+                    <li><a href='{{ SITE_ROOT }}/accounts/profile/'>My Profile</a></li>
                     <li><a href='{{ SITE_ROOT }}/accounts/logout/'>Logout</a></li>
                 </ul>
             </li>
