@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/modal.css")?>
+{% endblock %}
+
 {% block title %}ODM | File Info | Run {{ runno }} {% endblock %}
 
 {% block content %}
@@ -44,10 +48,11 @@
           <th>Raw Data File Name</th>
           <th>File Size</th>
           <th>Checksum</th>
-          <th>Time Transfer [PST]</th>
-          <th>Transfer State</th>
+          <th>Time Transfer [Beijing]</th>
+          {# <th>Transfer State</th> #}
           <th>Catalog?</th>          
-          <th>Diagnostics?</th>          
+          <th>Diagnostics?</th>    
+          <th>More</th>          
        </tr></thead>
        <tbody>
            {% for file in file_list %}
@@ -55,10 +60,11 @@
                <td class='filename'>{{ file.filename }}</td>
                <td>{{ file.filesize|filesizeformat }}</td>
                <td>{{ file.checksum }}</td>
-               <td>{{ file.vld.timeend_pst }}</td>
-               <td>{{ file.transferstate }}</td>
+               <td>{{ file.vld.timeend_beijing }}</td>
+               {# <td>{{ file.transferstate }}</td> #}
                <td class='catalog'></td>
                <td class='diagnostics'></td>
+               <td><a class='more' href='#'>More</a></td>
            </tr>    
            {% endfor %}
        </tbody>
@@ -69,5 +75,6 @@
 {% endblock %}
 
 {% block extra_js %}
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal.1.4.1.min.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/file.js"></script>
 {% endblock %}

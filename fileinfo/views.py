@@ -131,3 +131,16 @@ def stats(request, mode='volume'):
                 
     return HttpResponse(json.dumps(info))
 
+
+@login_required
+def proxy(request, filename):
+    '''proxy to Simon's file service '''
+    url = 'http://dayabay.lbl.gov/dybspade/delivery/service/report/docket/' + filename
+    import urllib2
+    try:
+        fh = urllib2.urlopen(url)
+    except urllib2.HTTPError:
+        return HttpResponse('')
+    
+    return HttpResponse(fh.read(), content_type="application/xml")
+        
