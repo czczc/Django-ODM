@@ -19,7 +19,7 @@ conf.read(os.path.join(PROJECT_PATH, 'odm.conf'))
     
 DATABASES = {
     'default': {
-        'ENGINE'  : 'sqlite3',
+        'ENGINE'  : 'django.db.backends.sqlite3',
         'NAME'    : PROJECT_PATH + conf.get('default_db', 'NAME'),          
         'USER'    : '',          
         'PASSWORD': '',      
@@ -27,21 +27,21 @@ DATABASES = {
         'PORT'    : '',          
     },
     'lbl' : {
-        'ENGINE'  : 'mysql',
+        'ENGINE'  : 'django.db.backends.mysql',
         'NAME'    : conf.get('lbl_db', 'NAME'),
         'USER'    : conf.get('lbl_db', 'USER'),
         'PASSWORD': conf.get('lbl_db', 'PASSWORD'),
         'HOST'    : conf.get('lbl_db', 'HOST'),
     },
     'ihep' : {
-        'ENGINE'  : 'mysql',
+        'ENGINE'  : 'django.db.backends.mysql',
         'NAME'    : conf.get('ihep_db', 'NAME'),
         'USER'    : conf.get('ihep_db', 'USER'),
         'PASSWORD': conf.get('ihep_db', 'PASSWORD'),
         'HOST'    : conf.get('ihep_db', 'HOST'),
     },
     'dcs' : {
-        'ENGINE'  : 'mysql',
+        'ENGINE'  : 'django.db.backends.mysql',
         'NAME'    : conf.get('dcs_db', 'NAME'),
         'USER'    : conf.get('dcs_db', 'USER'),
         'PASSWORD': conf.get('dcs_db', 'PASSWORD'),
@@ -49,7 +49,7 @@ DATABASES = {
         'PORT'    : conf.get('dcs_db', 'PORT'),          
     },
     'dq' : {
-        'ENGINE'  : 'mysql',
+        'ENGINE'  : 'django.db.backends.mysql',
         'NAME'    : conf.get('dq_db', 'NAME'),
         'USER'    : conf.get('dq_db', 'USER'),
         'PASSWORD': conf.get('dq_db', 'PASSWORD'),
@@ -75,7 +75,8 @@ MANAGERS = ADMINS
 
 ROOT_URLCONF = 'odm.urls'
 SECRET_KEY = conf.get('common', 'SECRET_KEY')
-TIME_ZONE = 'America/Los Angeles'
+# TIME_ZONE = 'America/Los Angeles'
+TIME_ZONE = 'America/Los_Angeles'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 USE_I18N = True
