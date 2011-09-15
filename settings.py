@@ -7,7 +7,7 @@ HOST_NAME = socket.gethostname()
 SITE_LOCAL = SITE_NERSC = SITE_IHEP = False
 if HOST_NAME.startswith('sgn'):
     SITE_NERSC = True
-elif HOST_NAME.startswith('dybjob'):
+elif HOST_NAME.startswith('dybdq'):
     SITE_IHEP = True
 else:
     SITE_LOCAL = True
