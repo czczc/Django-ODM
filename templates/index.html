@@ -1,8 +1,81 @@
 {% extends "base.html" %}
 
-{% block content %}
-    <div class="grid_12 prefix_6 suffix_6" style="padding-top: 50px;">
+{% block content %}    
+    <div class="grid_12 prefix_6 suffix_6" style="padding-top: 30px; margin-bottom: 40px;">
         <h1 align='center'>Welcome to Daya Bay ODM</h1>
-        <h3 align='center'>Enjoy monitoring ...</h3>
+        <h3 align='center'>Enjoy monitoring ...</h3>        
     </div>
+    <div class='clear'></div>
+{% endblock %}
+
+{% block extra_content %}    
+    <div class="grid_23" id='front_nav'>
+        <table cellpadding="0" cellspaceing="0" border="0" style="width:100%">
+            <tr>
+                <td class="td" valign="top">                
+                    <h3>Run List</h3>
+                    <ul>
+                        <li><a href="{{ SITE_ROOT }}/run/list/">All Past</a></li>
+                        <li><a href="{{ SITE_ROOT }}/run/list/ongoing/">Ongoing</a></li>
+                        <li><a href="{{ SITE_ROOT }}/run/latest/days/7/">Last Week</a></li>
+                        <li><a href="{{ SITE_ROOT }}/run/latest/days/30/">Last Month</a></li>
+                        <li><a href="{{ SITE_ROOT }}/run/archive/">Monthly Archives</a></li> 
+                    </ul>
+                    
+                    <h3>Run Type</h3>
+                    <ul>
+                        <li><a href="{{ SITE_ROOT }}/run/type/Physics/">Physics</a></li>
+                        <li><a href="{{ SITE_ROOT }}/run/type/ADCalib/">ADCalib</a></li>
+                        <li><a href="{{ SITE_ROOT }}/run/type/WPCalib/">WPCalib</a></li>
+                        <li><a href="{{ SITE_ROOT }}/run/type/Pedastal/">Pedastal</a></li>
+                        <li><a href="{{ SITE_ROOT }}/run/type/FEEDiag/">FEEDiag</a></li> 
+                        <li><a href="{{ SITE_ROOT }}/run/type/MOMonitor/">MOMonitor</a></li> 
+                    </ul>
+                    
+
+                </td>
+
+                <td class="td_sep" valign="top">
+                    <h3>AD Calibration</h3>
+                    <ul>
+                        <li><a href='{{ SITE_ROOT }}/run/calibration/AmC_Co60/'><sup>241</sup>Am<sup>13</sup>C + <sup>60</sup>Co</a></li>
+                        <li><a href='{{ SITE_ROOT }}/run/calibration/Ge68/'><sup>68</sup>Ge</a></li>
+                        <li><a href='{{ SITE_ROOT }}/run/calibration/ACU_LED/'>ACU LED</a></li>
+                        <li><a href='{{ SITE_ROOT }}/run/calibration/MO_LED/'>MO LED</a></li>
+                        <li><a href='{{ SITE_ROOT }}/run/calibration/Double_Pulse/'>Double Pulse</a></li>
+                    </ul>
+
+                    <h3>Run Tools</h3>
+                    <ul>
+                        <li><a href='{{ SITE_ROOT }}/run/list/'>Search</a></li>
+                        <li><a href='{{ SITE_ROOT }}/run/notes/latest/'>Notes</a></li>
+                        <li><a href='{{ SITE_ROOT }}/run/stats/'>Statistics</a></li>
+                    </ul>
+                </td>
+
+                <td class="td_sep" valign="top">
+                    <h3>DCS Monitor</h3>
+                    <ul>
+                        <li><a href='{{ SITE_ROOT }}/dcs/'>Search Charts</a></li>
+                        <li><a href="#">EH1</a>
+                            <ul>
+                                <li><a href='{{ SITE_ROOT }}/dcs/monitor/EH1/instrument/'>Instruments</a></li>
+                                <li><a href='{{ SITE_ROOT }}/dcs/monitor/EH1/electronics/'>Electronics</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <h3>Plots Search</h3>
+                    <ul>
+                        <li><a href='{{ SITE_ROOT }}/production/diagnostics/view/'>Diagnostics</a></li>
+                        <li><a href='{{ SITE_ROOT }}/production/pqm/view/'>PQM</a></li>
+                        <li><a href='{{ SITE_ROOT }}/production/simulation/view/'>Simulation</a></li>
+                    </ul>
+                    
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class='clear'></div>
+    
 {% endblock %}

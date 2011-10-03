@@ -73,6 +73,23 @@ a:hover { /*color: #ff8f28;*/ text-decoration: underline; background-color: tran
 #nav_inner a:visited { color: #eee; }
 #nav_inner a:hover { color: #ccc; }
 
+/* frontpage navigation*/
+#front_nav { 
+    margin-top: 40px; margin-left: 10px; background-color: #f2ffe1; 
+    border-radius: 15px; -moz-border-radius: 15px;
+    -moz-box-shadow: 5px 5px 15px #ccc;
+    -webkit-box-shadow: 5px 5px 15px #ccc;
+    box-shadow: 5px 5px 15px #ccc;
+}
+#front_nav { background-color: transparent; padding: 8px 12px 0 20px; margin: 0; font-family: Lucida Grande, Verdana, Geneva, Sans-serif; font-size: 12px; }
+#front_nav h3 { font-size: 18px; color: green; margin: blue; padding: 16px 0 8px 20px; }
+#front_nav .td_sep {  width: 25%; padding: 0 0 0 20px; }
+#front_nav .td { width: 25%; }
+#front_nav p { color: #eee; background-color: transparent; padding:0; margin: 0 0 10px 0; }
+#front_nav ul { list-style-image: url(../img/arrow.gif); padding: 0 0 0 18px; margin: 12px 0 16px 20px; }
+#front_nav li { padding: 0; margin: 0 0 10px 0; }
+#front_nav a { font-size: 16px;}
+
 /* content form */
 #content form th { border: none; font-weight: bold; text-align: right; vertical-align: middle; font-size: 12px; color: #333; padding-right: 10px; background-color: transparent; }
 #content form td { border: none; font-weight: normal; font-size: 12px; padding: 6px; background-color: transparent; }
