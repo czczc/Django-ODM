@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% load pagination %}
+
+{% block title %}ODM | {{ description }} Runs{% endblock %}
+
+{% block content %}
+    
+    <div class = "grid_24">
+         <h2>
+             {{ description }} Runs ({{ count }})
+        </h2>
+    </div>    
+    <div class="clear"></div> 
+    
+    <div class = "grid_24">          
+        <table>
+           <thead><tr>
+              <th>Run No</th>
+              <th class='RunType'>Run Type</th>
+              <th class='Site'>Site</th>
+              <th class='StartTime hidden'>Start Time [UTC]</th>
+              <th class='StartTimeBeijing'>Start Time [Beijing]</th>
+              <th class='RunLength'>Run Length</th>
+              <th class='NumFiles'># Files</th>
+              <th class='PQM'>PQM</th>
+              <th class='Diagnostics'>Diagnostics</th>
+              <th class='Elog'>Elog</th>
+           </tr></thead>
+           <tbody>
+               {% for run in run_list %}
+                   <tr>
+                       <td><a href="{{ run.get_absolute_url }}">{{ run.runno }}</a></td>
+                       <td class='RunType'>{{ run.runtype }}</td>
+                       <td class='Site'>{{ run.partition }}</td>
+                       <td class='StartTime hidden'>{{ run.vld.timestart }}</td>
+                       <td class='StartTimeBeijing'>{{ run.vld.timestart_beijing }}</td>
+                       <td class='RunLength'>{{ run.vld.runlength }}</td>
+                       <td class='NumFiles' runno='{{ run.runno }}'></td>                       
+                       <td class='PQM' runno='{{ run.runno }}'></td>
+                       <td class='Diagnostics' runno='{{ run.runno }}'></td>
+                       <td class='Elog'>
+                           <a href="http://web.dyb.ihep.ac.cn:8099/Shift/?mode=full&attach=1&reverse=0&reverse=1&all=1&npp=20&subtext={{run.runno}}">Elog</a>
+                       </td>
+                   </tr>    
+               {% endfor %}
+           </tbody>
+        </table>
+    </div>
+    <div class="clear"></div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/runlist.js"></script>
+{% endblock %}

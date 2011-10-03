@@ -219,6 +219,48 @@ def runlist(request, page=1, records=500):
 
 
 @login_required
+def ongoing(request):
+    '''find ongoing runs from file database'''
+    from django.db.models import Max
+    
+    latest_run_from_offline = Daqruninfo.objects.all()[0].runno
+    ongoing_runs = Daqrawdatafileinfo.objects.all(
+        ).filter(runno__gt = latest_run_from_offline
+        ).values('runno').annotate(max=Max('runno'))
+    
+    runnos = [ x['max'] for x in ongoing_runs ]
+    
+    run_list = []
+    for runno in runnos:
+        first_file = Daqrawdatafileinfo.objects.select_related().filter(runno=runno)[0]
+        runno = first_file.runno
+        tmp, tmp, tmp, runtype, partition, tmp, tmp, tmp = first_file.filename.split('.')
+        if partition.endswith('-Merged'):
+            partition = partition.replace('-Merged', '')
+        timestart = first_file.vld.timestart
+        timestart_beijing = first_file.vld.timestart_beijing()
+        run_list.append( {
+            'runno' : runno,
+            'runtype' : runtype,
+            'partition' : partition,
+            'vld' : {
+                'timestart' : timestart,
+                'timestart_beijing' : timestart_beijing,
+                'runlength' : 'ongoing',
+            },
+            'get_absolute_url' : '%s/run/%i/' % (settings.SITE_ROOT, runno),
+        })
+    
+    return direct_to_template(request, 
+        template = 'run/ongoing.html',
+        extra_context = {
+            'run_list' : run_list,
+            'description' : 'Ongoing',
+            'count' : len(run_list),
+        })    
+        
+
+@login_required
 def latest(request, days='7', page=1, records=500):
     '''query by latest days'''
     run_list = Daqruninfo.objects.list_latest(days)

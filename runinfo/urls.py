@@ -10,6 +10,7 @@ urlpatterns = patterns('odm.runinfo.views',
     (r'^monitor/(?P<site>\w+)/$', 'site_monitor'),
     
     # query run list
+    (r'^list/ongoing/$', 'ongoing'),
     (r'^list/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'runlist'),
     (r'^list/', 'runlist'),
     

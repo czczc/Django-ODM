@@ -20,6 +20,9 @@ class Daqrawdatafileinfovld(models.Model):
     def __unicode__(self):
         return u'seq %d' % (self.seqno, )
 
+    def timestart_beijing(self):
+        return self.timestart + timedelta(seconds=8*3600)
+        
     def timeend_beijing(self):
         return self.timeend + timedelta(seconds=8*3600)
 
