@@ -11,18 +11,19 @@ $('.th_last_update').qtip({
 });
 
 Highcharts.setOptions({
-    chart: { type: 'scatter', zoomType: 'xy', animation: false },
+    chart: { type: 'scatter', zoomType: 'xy', animation: false, alignTicks: false },
     credits: { enabled: false },
     legend: { enabled: false },
     xAxis: { type: 'datetime' },       
-    yAxis: { title: {text: ''}, tickPixelInterval: 36 },
+    yAxis: { title: {text: ''}, tickPixelInterval: 24, endOnTick: false },
     tooltip: { formatter: datetime_formatter },
     plotOptions: {
         scatter: { marker: {radius: 1} }
     }
 });
 var latest_days = 30;
-var configs = new Object;
+var formulas = new Object;
+var convertions = new Object;
 var charts = [];
 var DcsData = new Object;
 var single_chart = null;
@@ -56,7 +57,7 @@ $('.sc').hover(function() {
            title: { text: options[0] },
            yAxis: { endOnTick: true },
            series: [{ animation: false,
-                 data: convert_data(data,field)
+                 data: convert_data(data, model, field)
                }
            ]
         };
@@ -85,13 +86,15 @@ function fetch_one(model) {
     var th_last_update = $('#th_'+model).next('.th_last_update');
     // var title = heading.attr('title');
     th_last_update.html('updating ...');
+    var value;
     $.getJSON(url, function(data) {
         var record = data[0].fields;
         var td_field;
         for (field in record) {
             td_field = $('#td_'+model+'__'+field);
-            td_field.html(record[field]);
-            if (!is_safe(model, field, record[field])) {
+            value = apply_formular(record[field], model, field);
+            td_field.html(sprintf("%.2f", value));
+            if (!is_safe(model, field, value)) {
                 td_field.addClass('warning');
             }
             else {
@@ -140,7 +143,7 @@ function init_chart(model, field, options) {
        title: { text: options[0] },
        yAxis: { endOnTick: true },
        series: [{ animation: false,
-             data: convert_data(DcsData[model],field)
+             data: convert_data(DcsData[model], model, field)
            }
        ]
     };
@@ -164,14 +167,26 @@ function datetime_formatter() {
     Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x);
 }
 
-function convert_data(rawdata, field) {
+function convert_data(rawdata, model, field) {
     var data_xy = new Array();
-    var i, row;
+    var i, row, value, f;
     for (i=0; i<rawdata.length; i++) {
         row = rawdata[i].fields;
-        data_xy.push([row.date_time, parseFloat(row[field])]);
+        value = apply_formular(parseFloat(row[field]), model, field);
+        data_xy.push([row.date_time, value]);
     }
     return data_xy;
+}
+
+function apply_formular(value, model, field) {
+    var f;
+    if (formulas[model]) {
+        f = formulas[model][field];
+        if (f) {
+            value = f(value);
+        }
+    }
+    return value;
 }
 
 function parse_datetime(datetime) {

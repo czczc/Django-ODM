@@ -1,4 +1,5 @@
 load_configs();
+load_formulas();
 load_tooltips();
 fetch_latest();
 load_all_models();
@@ -38,11 +39,11 @@ function load_configs(){
     configs = {
         // renderTo, title, ymin, ymax, ysafemin, ysafemax
         Ad1Lidsensor : {
-            ultrasonic_gdls: ['AD1 GdLS Level: Ultrasonic', 2000, 2400, 2100, 2300],
-            ultrasonic_ls: ['AD1 LS Level: Ultrasonic', 1900, 2300, 2000, 2200],
+            ultrasonic_gdls: ['AD1 GdLS Level: Ultrasonic', 65, 95, 70, 90],
+            ultrasonic_ls: ['AD1 LS Level: Ultrasonic', 65, 95, 70, 90],
             capacitance_gdls: ['AD1 GdLS Level: Capacitance', 200, 450, 250, 350],
             capacitance_ls: ['AD1 LS Level: Capacitance', 200, 450, 300, 400],
-            capacitance_mo: ['AD1 MO Level: Capacitance', 200, 380, 320, 370],
+            capacitance_mo: ['AD1 MO Level: Capacitance', 65, 95, 70, 90],
             temp_gdls: ['AD1 GdLS Temperature', 20, 25, 21, 24],
             temp_ls: ['AD1 LS Temperature', 20, 25, 21, 24],
             capacitance_temp_gdls: ['AD1 GdLS Temperature: Capacitance', 23, 28, 24, 27],
@@ -56,11 +57,11 @@ function load_configs(){
             tilty_sensor3: ['AD1 Tilt Y : 3', -2, 2, 0.5, 1.5]
         },
         Ad2Lidsensor : {
-            ultrasonic_gdls: ['AD2 GdLS Level: Ultrasonic', 2000, 2400, 2100, 2300],
-            ultrasonic_ls: ['AD2 LS Level: Ultrasonic', 1900, 2300, 2000, 2200],
+            ultrasonic_gdls: ['AD2 GdLS Level: Ultrasonic', 65, 95, 70, 90],
+            ultrasonic_ls: ['AD2 LS Level: Ultrasonic', 65, 95, 70, 90],
             capacitance_gdls: ['AD2 GdLS Level: Capacitance', 200, 450, 250, 350],
             capacitance_ls: ['AD2 LS Level: Capacitance', 200, 450, 300, 400],
-            capacitance_mo: ['AD2 MO Level: Capacitance', 200, 380, 320, 370],
+            capacitance_mo: ['AD2 MO Level: Capacitance', 65, 95, 70, 90],
             temp_gdls: ['AD2 GdLS Temperature', 20, 25, 21, 24],
             temp_ls: ['AD2 LS Temperature', 20, 25, 21, 24],
             capacitance_temp_gdls: ['AD2 GdLS Temperature: Capacitance', 23, 28, 24, 27],
@@ -99,3 +100,19 @@ function load_configs(){
         }
     };
 }
+
+function load_formulas(){
+  formulas = {
+        Ad1Lidsensor : {
+            ultrasonic_gdls: function(x) { return (2720.6-x)/11.454+41; },
+            ultrasonic_ls:   function(x) { return (2802.2-x)/11.384+23; },
+            capacitance_mo:  function(x) { return 240-224.63+x*0.208044; }
+        },
+        Ad2Lidsensor : {
+            ultrasonic_gdls: function(x) { return (2724.7-x)/11.416+41; },
+            ultrasonic_ls:   function(x) { return (2786.9-x)/11.638+23; },
+            capacitance_mo:  function(x) { return 240-224.24+x*0.208217; }
+        }
+  };
+}
+

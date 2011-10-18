@@ -89,6 +89,7 @@ $('.more').click(function(){
            }
        );
    });
+   return false;
 });
 
 function covert_time(str) {
