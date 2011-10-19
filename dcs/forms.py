@@ -38,8 +38,8 @@ class DcsForm(forms.Form):
     plot_type = forms.ChoiceField(
         label='Type',
         choices=(
-            ('line', 'Line'),
             ('scatter', 'Scatter'),
+            ('line', 'Line'),
         ),
     )
     

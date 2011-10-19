@@ -1,5 +1,4 @@
 load_configs();
-load_formulas();
 load_tooltips();
 fetch_latest();
 load_all_models();
@@ -99,20 +98,5 @@ function load_configs(){
             dbns_pth_p2: ['EH1 Pressure: 2', false, false, 980, 1030]
         }
     };
-}
-
-function load_formulas(){
-  formulas = {
-        Ad1Lidsensor : {
-            ultrasonic_gdls: function(x) { return (2720.6-x)/11.454+41; },
-            ultrasonic_ls:   function(x) { return (2802.2-x)/11.384+23; },
-            capacitance_mo:  function(x) { return 240-224.63+x*0.208044; }
-        },
-        Ad2Lidsensor : {
-            ultrasonic_gdls: function(x) { return (2724.7-x)/11.416+41; },
-            ultrasonic_ls:   function(x) { return (2786.9-x)/11.638+23; },
-            capacitance_mo:  function(x) { return 240-224.24+x*0.208217; }
-        }
-  };
 }
 

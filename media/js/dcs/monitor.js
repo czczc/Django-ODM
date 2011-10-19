@@ -22,8 +22,6 @@ Highcharts.setOptions({
     }
 });
 var latest_days = 30;
-var formulas = new Object;
-var convertions = new Object;
 var charts = [];
 var DcsData = new Object;
 var single_chart = null;

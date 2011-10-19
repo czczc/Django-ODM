@@ -1,5 +1,4 @@
 load_configs();
-load_formulas();
 load_tooltips();
 fetch_latest();
 load_all_models();
@@ -80,14 +79,3 @@ function load_configs(){
         // }
     };
 }
-
-function load_formulas(){
-  formulas = {
-        Ad4Lidsensor : {
-            ultrasonic_gdls: function(x) { return (2680-x)/11.369+41; },
-            ultrasonic_ls:   function(x) { return (2737-x)/11.451+23; },
-            capacitance_mo:  function(x) { return 240-225.4+x*0.208438; }
-        }
-  };
-}
-

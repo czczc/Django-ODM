@@ -1,5 +1,4 @@
 load_configs();
-load_formulas();
 load_tooltips();
 fetch_latest();
 load_all_models();
@@ -79,15 +78,5 @@ function load_configs(){
         //     lans_pth_p2: ['EH2 Pressure: 2', false, false, 980, 1030]
         // }
     };
-}
-
-function load_formulas(){
-  formulas = {
-        Ad3Lidsensor : {
-            ultrasonic_gdls: function(x) { return (2703.6-x)/11.354+41; },
-            ultrasonic_ls:   function(x) { return (2765.9-x)/11.382+23; },
-            capacitance_mo:  function(x) { return 240-225.64+x*0.208335; }
-        }
-  };
 }
 

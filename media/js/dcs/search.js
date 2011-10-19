@@ -3,6 +3,8 @@ enable_ajax_csrf();
 var this_url = window.location.href;
 var base_url = this_url.substring(0,this_url.indexOf('dcs'));
 var site = $("#site_label").html();
+var formulas = new Object;
+load_formulas();
 
 var single_chart = null;
 Highcharts.setOptions({
@@ -49,7 +51,8 @@ $('#id_model').change(function(){
 $("#submit").click(function(){
     if (single_chart) { single_chart.destroy(); }
     $('#single_chart').html('<h3 align="center">Retrieving Data ...</h3>');
-    $('#form_errors').empty();    
+    $('#form_errors').empty();  
+    var model = $('#id_model').val();
     var jqxhr = $.post(base_url + 'dcs/search/' + site + '/', $("#form").serialize(),
         function(data) {
             if (data.errors) { 
@@ -73,7 +76,7 @@ $("#submit").click(function(){
                chart: { renderTo: 'single_chart' },
                title: { text: '' },
                yAxis: { endOnTick: false },
-               series: convert_series(data)
+               series: convert_series(data, model)
             };
             var y_min = $('#id_y_min').val();
             var y_max = $('#id_y_max').val();
@@ -100,17 +103,29 @@ function datetime_formatter() {
     Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x);
 }
 
-function convert_data(rawdata, field) {
+function convert_data(rawdata, model, field) {
     var data_xy = new Array();
-    var i, row;
+    var i, row, value;
     for (i=0; i<rawdata.length; i++) {
         row = rawdata[i].fields;
-        data_xy.push([row.date_time, parseFloat(row[field])]);
+        value = apply_formular(parseFloat(row[field]), model, field);
+        data_xy.push([row.date_time, value]);
     }
     return data_xy;
 }
 
-function convert_series(data) {
+function apply_formular(value, model, field) {
+    var f;
+    if (formulas[model]) {
+        f = formulas[model][field];
+        if (f) {
+            value = f(value);
+        }
+    }
+    return value;
+}
+
+function convert_series(data, model) {
     var series = [];
     if (data[0]) {
         for (attr in data[0].fields) {
@@ -118,7 +133,7 @@ function convert_series(data) {
             series.push({
                 name: attr,
                 animation: false,
-                data: convert_data(data, attr)
+                data: convert_data(data, model, attr)
             });
         }    
     }
@@ -132,3 +147,5 @@ function parse_datetime(datetime) {
     var time = first_second[1].split(':');
     return Date.UTC(date[0], date[1]-1, date[2], time[0], time[1], time[2]);
 }
+
+
