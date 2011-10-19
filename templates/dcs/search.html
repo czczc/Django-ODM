@@ -3,19 +3,24 @@
 {% block title %}ODM | DCS Charts{% endblock %}
 
 {% block content %}
-	<div class = "grid_8 prefix_8 suffix_8">
+	<div class = "grid_8 prefix_8">
 	    <h1 align='center'>
-	    	DCS Charts
-		</h1>
+        DCS Charts
+      </h1>
 	</div>    
-	<div class="clear"></div>
+  <div class = "grid_8">
+       <h4 align='right'> 
+           <a href="{{SITE_ROOT}}/dcs/search/EH1">EH1</a>&nbsp;|&nbsp;
+           <a href="{{SITE_ROOT}}/dcs/search/EH2">EH2</a>&nbsp;|&nbsp;
+           <a href="{{SITE_ROOT}}/dcs/search/EH3">EH3</a>
+      </h4>
+  </div>
+  <div class="clear"></div>
 	
 	<div class = "grid_8" style='margin-top:10px;'>
 		<form action="{{SITE_ROOT}}/dcs/" method="post" id='form' class='ui-widget'>{% csrf_token %}  
 		    <fieldset class='ui-widget-content'>   
-				<legend class='ui-widget-header ui-corner-all' align='center' style='padding: 5px 10px 5px 10px;'>
-		        	EH1
-		      	</legend>     
+				<legend class='ui-widget-header ui-corner-all' align='center' style='padding: 5px 10px 5px 10px;' id="site_label">{{site}}</legend>     
 		    <table style='margin-top: 10px;'>
 		        <tr><th><h6>Table</h6></th><td>{{form.model}}</td></tr>
 			    <tr><th>Fields</th><td>{{form.fields}}</td></tr>
@@ -31,18 +36,19 @@
 		    </fieldset>
 		</form>	
 	</div>
+	<div id="single_chart" class="grid_16" style='height: 500px; margin-top:50px;'>
+	</div>
 	<div class="clear"></div>
 	<div class='grid_8 .warning' id="form_errors" style='margin-top:10px;'></div>
 	<div class='clear'></div>
 	
-	<div id="single_chart" class="grid_24" style='height: 400px; margin-top:20px;'>
-	</div>
+
 {% endblock %}
 
 {% block extra_js %}
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/ajax_csrf.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/highcharts.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/modules/exporting.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/themes/gray.js"></script>
+    <!-- <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/themes/gray.js"></script> -->
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/dcs/search.js"></script>
 {% endblock %}

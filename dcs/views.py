@@ -74,12 +74,21 @@ def fetchone(request, model):
 
 
 @login_required
-def search(request):
+def search(request, site='EH1'):
     '''seach dcs db, display the chart'''
-    from odm.dcs.forms import DcsForm
-        
+    from odm.dcs.forms import EH1DcsForm, EH2DcsForm, EH3DcsForm
+    
+    if site == 'EH1':
+        ThisForm = EH1DcsForm
+    elif site == 'EH2':
+        ThisForm = EH2DcsForm
+    elif site == 'EH3':
+        ThisForm = EH3DcsForm
+    else:
+        return HttpResponse(site + ' does not exist')
+    
     if request.is_ajax():
-        form = DcsForm(request.POST, auto_id='id_eh1_%s')
+        form = ThisForm(request.POST, auto_id='id_%s')
         if form.is_valid():
             model = form.cleaned_data['model']
             fields = form.cleaned_data['fields']
@@ -109,10 +118,12 @@ def search(request):
                 'errors': form.errors,
             }))
     else:
-        form = DcsForm(auto_id='id_eh1_%s') # An unbound form
+        form = ThisForm(auto_id='id_%s') # An unbound form
+        
         return direct_to_template(request, 
             template = 'dcs/search.html',
             extra_context = {
+                'site' : site,
                 'form' : form,
             })
     
