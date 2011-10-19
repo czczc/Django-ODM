@@ -43,7 +43,22 @@ class Ad2Lidsensor(AbstractAdLidsensor):
     class Meta(AbstractAdLidsensor.Meta):
         db_table = u'AD2_LidSensor'
 
-
+class Ad3Lidsensor(AbstractAdLidsensor):
+    class Meta(AbstractAdLidsensor.Meta):
+        db_table = u'AD3_LidSensor'
+        
+class Ad4Lidsensor(AbstractAdLidsensor):
+    class Meta(AbstractAdLidsensor.Meta):
+        db_table = u'AD4_LidSensor'
+        
+class Ad5Lidsensor(AbstractAdLidsensor):
+    class Meta(AbstractAdLidsensor.Meta):
+        db_table = u'AD5_LidSensor'
+        
+class Ad6Lidsensor(AbstractAdLidsensor):
+    class Meta(AbstractAdLidsensor.Meta):
+        db_table = u'AD6_LidSensor'                
+        
 class DbnsRpcGas101(DcsModel):
     flow_rate_isobutane = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
     flow_rate_argon = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
@@ -72,6 +87,17 @@ class DbnsIowTemp(DcsModel):
     class Meta(DcsModel.Meta):
         db_table = u'DBNS_IOW_Temp'
 
+class LansIowTemp(DcsModel):
+    lans_iw_temp_pt1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='LANS_IW_Temp_PT1', blank=True) # Field name made lowercase.
+    lans_iw_temp_pt2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='LANS_IW_Temp_PT2', blank=True) # Field name made lowercase.
+    lans_iw_temp_pt3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='LANS_IW_Temp_PT3', blank=True) # Field name made lowercase.
+    lans_iw_temp_pt4 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='LANS_IW_Temp_PT4', blank=True) # Field name made lowercase.
+    lans_ow_temp_pt1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='LANS_OW_Temp_PT1', blank=True) # Field name made lowercase.
+    lans_ow_temp_pt2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='LANS_OW_Temp_PT2', blank=True) # Field name made lowercase.
+    lans_ow_temp_pt3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='LANS_OW_Temp_PT3', blank=True) # Field name made lowercase.
+    lans_ow_temp_pt4 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='LANS_OW_Temp_PT4', blank=True) # Field name made lowercase.
+    class Meta(DcsModel.Meta):
+        db_table = u'LANS_IOW_Temp'
                     
 class DbnsEnvPth(DcsModel):
     dbns_pth_p1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_PTH_P1', blank=True) # Field name made lowercase.

@@ -16,8 +16,12 @@ def monitor(request, site, category='instrument'):
     '''details of calibration raw parameters'''
     
     template_dict = {
-        'EH1_instrument' : 'dcs/eh1_instrument.html',
+        'EH1_instrument'  : 'dcs/eh1_instrument.html',
         'EH1_electronics' : 'dcs/eh1_electronics.html',
+        'EH2_instrument'  : 'dcs/eh2_instrument.html',
+        'EH2_electronics' : 'dcs/eh3_electronics.html',
+        'EH3_instrument'  : 'dcs/eh3_instrument.html',
+        'EH3_electronics' : 'dcs/eh3_electronics.html',
     }
     
     return direct_to_template(request, 

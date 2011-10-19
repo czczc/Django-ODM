@@ -1,0 +1,251 @@
+{% extends "dcs/monitor.html" %}
+
+{% block dcs_content %}
+
+{# Tables #}
+<div class="grid_24">
+    <table>
+	<thead><tr>
+		<th colspan="2" style='text-align: center;' id='th_Ad3Lidsensor'>AD3 Lid Sensors</th>
+		<th colspan="4" style='text-align: center;' class='th_last_update good'></th>
+	</tr></thead>
+    <tbody>
+        <tr>
+            <td class='descr'>GdLS Level: Ultrasonic [mm]</td><td class='value sc' id='td_Ad3Lidsensor__ultrasonic_gdls'></td>
+            <td class='descr'>LS Level: Ultrasonic [mm]</td><td class='value sc' id='td_Ad3Lidsensor__ultrasonic_ls'></td>
+            <td class='descr'></td><td class='value'></td>
+        </tr>
+        <tr>
+            <td class='descr'>GdLS Level: Capacitance</td><td class='value sc' id='td_Ad3Lidsensor__capacitance_gdls'></td>
+            <td class='descr'>LS Level: Capacitance</td><td class='value sc' id='td_Ad3Lidsensor__capacitance_ls'></td>
+            <td class='descr'>MO Level: Capacitance [mm]</td><td class='value sc' id='td_Ad3Lidsensor__capacitance_mo'></td>
+        </tr>
+        <tr>
+            <td class='descr'>GdLS Temperature</td><td class='value sc' id='td_Ad3Lidsensor__temp_gdls'></td>
+            <td class='descr'>LS Temperature</td><td class='value sc' id='td_Ad3Lidsensor__temp_ls'></td>
+            <td class='descr'></td><td class='value'></td>
+        </tr>
+        <tr>
+            <td class='descr'>GdLS Temperature: Capacitance</td><td class='value sc' id='td_Ad3Lidsensor__capacitance_temp_gdls'></td>
+            <td class='descr'>LS Temperature: Capacitance</td><td class='value sc' id='td_Ad3Lidsensor__capacitance_temp_ls'></td>
+            <td class='descr'>MO Temperature: Capacitance</td><td class='value sc'  id='td_Ad3Lidsensor__capacitance_temp_mo'></td>
+        </tr>
+        <tr>
+            <td class='descr'>Tilt X: 1</td><td class='value sc' id='td_Ad3Lidsensor__tiltx_sensor1'></td>
+            <td class='descr'>Tilt X: 2</td><td class='value sc' id='td_Ad3Lidsensor__tiltx_sensor2'></td>
+            <td class='descr'>Tilt X: 3</td><td class='value sc' id='td_Ad3Lidsensor__tiltx_sensor3'></td>
+        </tr>
+        <tr>
+            <td class='descr'>Tilt Y: 1</td><td class='value sc' id='td_Ad3Lidsensor__tilty_sensor1'></td>
+            <td class='descr'>Tilt Y: 2</td><td class='value sc' id='td_Ad3Lidsensor__tilty_sensor2'></td>
+            <td class='descr'>Tilt Y: 3</td><td class='value sc' id='td_Ad3Lidsensor__tilty_sensor3'></td>
+        </tr>
+    </tbody>
+	</table>
+
+  <table style='margin-top: 20px;'>
+      <thead><tr>
+          <th colspan="2" style='text-align: center;' id='th_LansIowTemp' title=''>Water Pool Temperature</th>
+      <th colspan="6" style='text-align: center;' class='th_last_update good'></th>
+      </tr></thead>
+    <tbody>
+          <tr>
+              <td class='descr'>IWS Temperature: 1</td><td class='value sc' id='td_LansIowTemp__lans_iw_temp_pt1'></td>
+              <td class='descr'>IWS Temperature: 2</td><td class='value sc' id='td_LansIowTemp__lans_iw_temp_pt2'></td>
+              <td class='descr'>IWS Temperature: 3</td><td class='value sc' id='td_LansIowTemp__lans_iw_temp_pt3'></td>
+              <td class='descr'>IWS Temperature: 4</td><td class='value sc' id='td_LansIowTemp__lans_iw_temp_pt4'></td>
+          </tr>
+          <tr>
+              <td class='descr'>OWS Temperature: 1</td><td class='value sc' id='td_LansIowTemp__lans_ow_temp_pt1'></td>
+              <td class='descr'>OWS Temperature: 2</td><td class='value sc' id='td_LansIowTemp__lans_ow_temp_pt2'></td>
+              <td class='descr'>OWS Temperature: 3</td><td class='value sc' id='td_LansIowTemp__lans_ow_temp_pt3'></td>
+              <td class='descr'>OWS Temperature: 4</td><td class='value sc' id='td_LansIowTemp__lans_ow_temp_pt4'></td>
+          </tr>
+    </tbody>
+  </table>
+
+<!--      
+  <table style='margin-top: 20px;'>
+    <thead><tr>
+        <th colspan="2" style='text-align: center;' id='th_LansRpcGas101' title=''>RPC Gas</th>
+    <th colspan="6" style='text-align: center;' class='th_last_update good'></th>
+    </tr></thead>
+  <tbody>
+        <tr>
+            <td class='descr'>Pressure: Argon</td><td class='value sc' id='td_LansRpcGas101__pressure_argon'></td>
+            <td class='descr'>Pressure: Isobutane</td><td class='value sc' id='td_LansRpcGas101__pressure_isobutane'></td>
+            <td class='descr'>Pressure: R134A</td><td class='value sc' id='td_LansRpcGas101__pressure_r134a'></td>
+            <td class='descr'>Pressure: SF6</td><td class='value sc' id='td_LansRpcGas101__pressure_sf6'></td>
+        </tr>
+  </tbody>
+    </table>
+  
+  <table style='margin-top: 20px;'>
+    <thead><tr>
+        <th colspan="2" style='text-align: center;' id='th_LansEnvPth' title=''>Environmental Sensors</th>
+    <th colspan="4" style='text-align: center;' class='th_last_update good'></th>
+    </tr></thead>
+  <tbody>
+        <tr>
+            <td class='descr'>Temperature 1</td><td class='value sc' id='td_LansEnvPth__lans_pth_t1'></td>
+            <td class='descr'>Humidity 1</td><td class='value sc' id='td_LansEnvPth__lans_pth_h1'></td>
+            <td class='descr'>Pressure 1</td><td class='value sc' id='td_LansEnvPth__lans_pth_p1'></td>
+        </tr>
+        <tr>
+            <td class='descr'>Temperature 2</td><td class='value sc'  id='td_LansEnvPth__lans_pth_t2'></td>
+            <td class='descr'>Humidity 2</td><td class='value sc' id='td_LansEnvPth__lans_pth_h2'></td>
+            <td class='descr'>Pressure 2</td><td class='value sc' id='td_LansEnvPth__lans_pth_p2'></td>
+        </tr>
+  </tbody>
+    </table>
+     -->
+</div>
+<div class="clear"></div>
+
+
+{# Charts #}
+<div class = "grid_12" style='margin-top:30px;'>
+     <h4 align='left'> 
+         <a href="#AD">AD</a>&nbsp;|&nbsp;
+         <a href="#WP">Water Pool</a>&nbsp;|&nbsp;
+         <a href="#RPC">RPC</a>&nbsp;|&nbsp;
+         <a href="#Env">Environment</a>
+    </h4>
+</div>
+<div class = "grid_12" style='margin-top:30px;'>
+     <h4 align='right' id='select_days'> 
+         <a href="#" days='1'>Last Day</a>&nbsp;|&nbsp;
+         <a href="#" days='7'>Week</a>&nbsp;|&nbsp;
+         <a href="#" days='31'>Month</a>&nbsp;|&nbsp;
+         <a href="#" days='90'>3 Months</a>&nbsp;|&nbsp;
+         <a href="#" days='180'>6 Months</a>&nbsp;|&nbsp;
+         <a href="#" days='365'>Year</a>
+    </h4>
+</div>    
+<div class="clear"></div>
+
+<div class = "grid_24">
+	<a name="AD"></a>    
+     <h2>
+         AD Monitors
+    </h2>
+</div>    
+<div class="clear"></div>
+
+
+{# Liquid Level #}
+<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; width: 200px;'>Liquid Level</h4>
+
+<div id="Ad3Lidsensor__ultrasonic_gdls" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="Ad3Lidsensor__ultrasonic_ls" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+  
+<div id="Ad3Lidsensor__capacitance_gdls" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="Ad3Lidsensor__capacitance_ls" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="Ad3Lidsensor__capacitance_mo" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+
+{# Lid Temperature #}
+<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; margin-top: 40px; width: 200px;'>Liquid Temperature</h4>    
+
+<div id="Ad3Lidsensor__temp_gdls" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="Ad3Lidsensor__temp_ls" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="Ad3Lidsensor__capacitance_temp_gdls" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="Ad3Lidsensor__capacitance_temp_ls" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="Ad3Lidsensor__capacitance_temp_mo" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+
+{# WP #}
+<div class = "grid_24">
+  <a name="WP"></a>   
+     <h2>
+         Water Pool Monitors
+    </h2>
+</div>    
+<div class="clear"></div>
+<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; width: 200px;'>Temperature</h4>
+
+<div id="LansIowTemp__lans_iw_temp_pt1" class="dcs_chart grid_12"></div>
+<div id="LansIowTemp__lans_ow_temp_pt1" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="LansIowTemp__lans_iw_temp_pt2" class="dcs_chart grid_12"></div>
+<div id="LansIowTemp__lans_ow_temp_pt2" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="LansIowTemp__lans_iw_temp_pt3" class="dcs_chart grid_12"></div>
+<div id="LansIowTemp__lans_ow_temp_pt3" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="LansIowTemp__lans_iw_temp_pt4" class="dcs_chart grid_12"></div>
+<div id="LansIowTemp__lans_ow_temp_pt4" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<!-- 
+{# RPC #}
+<div class = "grid_24">
+  <a name="RPC"></a>   
+     <h2>
+         RPC Monitors
+    </h2>
+</div>    
+<div class="clear"></div>
+<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; width: 200px;'>Gas Pressure</h4>
+
+<div id="LansRpcGas101__pressure_argon" class="dcs_chart grid_12"></div>
+<div id="LansRpcGas101__pressure_isobutane" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="LansRpcGas101__pressure_r134a" class="dcs_chart grid_12"></div>
+<div id="LansRpcGas101__pressure_sf6" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+
+{# Environment #}
+<div class = "grid_24">
+  <a name="Env"></a>
+     <h2>
+         EH1 Environment Monitors
+    </h2>
+</div>    
+<div class="clear"></div>
+
+<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; width: 200px;'>Temperature</h4>
+
+<div id="LansEnvPth__lans_pth_t1" class="dcs_chart grid_12"></div>
+<div id="LansEnvPth__lans_pth_t2" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; margin-top: 40px; width: 200px;'>Humidity</h4>   
+<div id="LansEnvPth__lans_pth_h1" class="dcs_chart grid_12"></div>
+<div id="LansEnvPth__lans_pth_h2" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; margin-top: 40px; width: 200px;'>Pressure</h4>
+<div id="LansEnvPth__lans_pth_p1" class="dcs_chart grid_12"></div>
+<div id="LansEnvPth__lans_pth_p2" class="dcs_chart grid_12"></div>
+ -->
+
+<div class="clear"></div>
+
+{% endblock %}
+
+
+{% block dcs_js %}<script type="text/javascript" src="{{ MEDIA_URL }}js/dcs/eh2_instrument.js"></script>{% endblock %}
+
