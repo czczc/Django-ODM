@@ -29,13 +29,13 @@
     <div class="clear"></div> 
     
     <div class = "grid_20">          
-        <table>
+        <table id='table_list'>
            <thead><tr>
               <th>Run No</th>
               <th class='RunType'>Run Type</th>
               <th class='Site'>Site</th>
-              <th class='StartTime hidden'>Start Time [UTC]</th>
-              <th class='StartTimeBeijing'>Start Time [Beijing]</th>
+              <!-- <th class='StartTime hidden'>Start Time [UTC]</th> -->
+              <th class='StartTimeBeijing'  style='width: 180px;'>Start Time [Beijing]</th>
               <th class='RunLength'>Run Length</th>
               <th class='NumFiles'># Files</th>
               <th class='PQM'>PQM</th>
@@ -48,7 +48,7 @@
                        <td><a href="{{ run.get_absolute_url }}">{{ run.runno }}</td>
                        <td class='RunType'>{{ run.runtype }}</td>
                        <td class='Site'>{{ run.partition }}</td>
-                       <td class='StartTime hidden'>{{ run.vld.timestart }}</td>
+                       <!-- <td class='StartTime hidden'>{{ run.vld.timestart }}</td> -->
                        <td class='StartTimeBeijing'>{{ run.vld.timestart_beijing }}</td>
                        <td class='RunLength'>{{ run.vld.runlength }}</td>
                        <td class='NumFiles' runno='{{ run.runno }}'></td>                       
@@ -78,5 +78,6 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/runlist.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/picnet.table.filter.min.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/runlist.js"></script>
 {% endblock %}

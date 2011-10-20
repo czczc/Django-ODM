@@ -1,6 +1,8 @@
 var this_url = window.location.href;
 var base_url = this_url.substring(0,this_url.indexOf('run'));
 
+$("#table_list").tableFilter();
+
 init_searchform();
 
 load_file_list();
