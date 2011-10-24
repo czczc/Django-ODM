@@ -74,6 +74,14 @@ class DbnsRpcGas101(DcsModel):
     class Meta(DcsModel.Meta):
         db_table = u'DBNS_RPC_GAS_101'
 
+
+class DbnsRpcGas102(DcsModel):
+    weight_r134a = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
+    weight_isobutane = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
+    weight_sf6 = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
+    class Meta(DcsModel.Meta):
+        db_table = u'DBNS_RPC_GAS_102'
+
        
 class DbnsIowTemp(DcsModel):
     dbns_iw_temp_pt1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_IW_Temp_PT1', blank=True) # Field name made lowercase.
