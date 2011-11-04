@@ -147,7 +147,7 @@ def stats(request, mode='volume', site='ALL'):
         info['ypoints'] = ypoints[::step]
         for i in range(len(info['ypoints'])):
             info['ypoints'][i] = float('%.2f' % (info['ypoints'][i], ))
-        info['title'] = 'Live Time (Physics Runs)'
+        info['title'] = 'Integrated Up Time (Physics Runs)'
         info['ytitle'] = 'Days'
         info['legend'] = site
     else:

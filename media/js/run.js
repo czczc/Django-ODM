@@ -28,6 +28,16 @@ Run.translation.EH3 = 'Far'; Run.rtranslation.Far = 'EH3';
 Run.translation.WPI = 'IWS'; Run.rtranslation.IWS = 'WPI';
 Run.translation.WPO = 'OWS'; Run.rtranslation.OWS = 'WPO';
 
+var Ref = new Object;
+set_ref(parseInt($('#ref_runno').html(), 10));
+function set_ref(runno) {
+    Ref.runno = runno;
+    Ref.diagnostics_seg = sprintf('runs_%07d/runs_%07d/run_%07d', 
+        Math.floor(Ref.runno/1000)*1000, Math.floor(Ref.runno/100)*100, Ref.runno);
+    Ref.diagnostics_base_index = 60; // nersc
+    Ref.pqm_shown = Ref.diagnostics_shown = false; // is currently displaying Ref?
+}
+
 $('#sumit_pmtspec_rollback').click(function() {
     date = $('#id_pmtspec_rollback').val().split('/');
     if (date.length == 3) {
@@ -55,6 +65,8 @@ Run.diagnostics_base_url = '';
 Run.diagnostics_detector_list = [];
 Run.diagnostics_rootfile_dir = '#';
 Run.diagnostics_data = null;
+Run.diagnostics_seg = sprintf('runs_%07d/runs_%07d/run_%07d', 
+    Math.floor(Run.runno/1000)*1000, Math.floor(Run.runno/100)*100, Run.runno);
 
 // PQM plots
 Run.pqm_detector_list = [];
@@ -543,7 +555,10 @@ function build_plots(name, detname, data) {
 
     // enable image double click to origninal size
     modal_by_click('#table_'+name+'_plots .img_db');
+    // enable sub-detector comparison
     enable_img_comp('#table_'+name+'_plots .img_comp', detname, data);
+    // enable refenece plot comparison
+    enable_img_ref();    
 }
 
 function build_mc_plots(data) {
@@ -664,6 +679,48 @@ function enable_img_comp(selector, detname, data) {
         );
         return false;
     });
+}
+
+function enable_img_ref() {
+    $(document).unbind('keypress');
+    var names = ['diagnostics', 'pqm'];
+    var i, name;
+    $(document).keypress(function(e){
+        for (i=0; i<names.length; i++) {
+            name = names[i];
+            if(e.charCode == 92){
+                if (Ref[name+'_shown']) {
+                    $('#table_'+name+'_plots').find('.img_ref').remove();
+                    Ref[name+'_shown'] = false;
+                    console.log(name+' emptied');
+                }
+                else {
+                    console.log(name+' added');
+                    Ref[name+'_shown'] = true;
+                    $('#table_'+name+'_plots').find('.img_db').each(function(){
+                        var this_link = $(this).attr('src');
+                        var ref_link = find_ref_plot(name, this_link);
+                        // console.log(ref_link);
+                        $(this).parent().append('<img class="img_ref" src="' + ref_link + '" width=300 height=225/>'); 
+                    });
+                }
+            }
+        } // for loop done.
+    });
+}
+
+// find the reference plot link 
+function find_ref_plot(name, link) {
+    if (name == 'diagnostics') {
+        return link.replace(Run.diagnostics_seg, Ref.diagnostics_seg);
+        // 
+        // return link.substring(0,Ref.diagnostics_base_index) 
+        //     + Ref.diagnostics_seg 
+        //     + link.substring(Ref.diagnostics_base_index+37);
+    }
+    else {
+        return link.replace('run'+Run.runno, 'run'+Ref.runno);
+    }
 }
 
 function basename(path) {

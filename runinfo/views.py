@@ -104,7 +104,9 @@ def run(request, runno):
         odmrun = Run.objects.get(runno=runno)
     except:
         odmrun = None
-
+    
+    from odm.conventions.reference import ReferenceRun
+    
     return direct_to_template(request,
         template = 'run/detail.html', 
         extra_context = { 
@@ -112,6 +114,7 @@ def run(request, runno):
             'num_files' : num_files, 
             'calibrun_list' : calibrun_list,
             'odmrun' : odmrun,
+            'ref_runno' : ReferenceRun.StandardRun.get(run.site()+'-'+run.runtype, 0),
             'next' : run.get_absolute_url(),
         })
 
