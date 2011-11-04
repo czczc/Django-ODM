@@ -63,7 +63,11 @@ def fetchone(request, model):
     '''json data of the DCS model, latest record'''
     try:
         exec('from odm.dcs.models import %s as dcsmodel' % (model,))
-        record = dcsmodel.objects.all()[0]
+        if model == 'DbnsAd1Hv':
+          # temporary fix of a bug in DbnsAd1Hv
+          record = dcsmodel.objects.all()[1] 
+        else:
+          record = dcsmodel.objects.all()[0]
     except:
         return HttpResponse(model + ' does not exist or not record')
     

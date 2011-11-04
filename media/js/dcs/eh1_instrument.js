@@ -86,21 +86,21 @@ function load_configs(){
             dbns_ow_temp_pt4: ['Outer WP Temerature [C]: 4', 21, 26, 22, 25]
         },
         DbnsRpcGas101 : {
-            pressure_argon: ['RPC Argon Pressure', 18, 23, 19, 22],
-            pressure_isobutane: ['RPC Isobutane Pressure', 18, 22, 19, 22],
-            pressure_r134a: ['RPC R134A Pressure', 18, 22, 19, 22],
-            pressure_sf6: ['RPC SF6 Pressure', 18, 22, 19, 22]     
+            pressure_argon: ['RPC Argon Pressure [psi]', 18, 23, 19, 22],
+            pressure_isobutane: ['RPC Isobutane Pressure [psi]', 18, 22, 19, 22],
+            pressure_r134a: ['RPC R134A Pressure [psi]', 18, 22, 18.5, 22],
+            pressure_sf6: ['RPC SF6 Pressure [psi]', 18, 22, 19, 22]     
         },
         DbnsRpcGas102 : {
-            weight_isobutane: ['RPC Isobutane Weight', -10, 80, 2, 75],
-            weight_r134a: ['RPC R134A Weight', -10, 80, 2, 75],
-            weight_sf6: ['RPC SF6 Weight', -10, 80, 2, 75]     
+            weight_isobutane: ['RPC Isobutane Weight [kg]', -10, 80, 2, 75],
+            weight_r134a: ['RPC R134A Weight [kg]', -10, 80, 2, 75],
+            weight_sf6: ['RPC SF6 Weight [kg]', -10, 80, 2, 75]     
         },
         DbnsEnvPth : {
-            dbns_pth_t1: ['EH1 Temperature 1 [C]', 20, 29, 22, 29],        
-            dbns_pth_t2: ['EH1 Temperature 2 [C]', 20, 29, 22, 29],        
-            dbns_pth_h1: ['EH1 Humidity 1 [%]', 50, 75, 40, 70],        
-            dbns_pth_h2: ['EH1 Humidity 2 [%]', 50, 75, 40, 70],        
+            dbns_pth_t1: ['EH1 Temperature 1 [C]', 20, 29, 21, 29],        
+            dbns_pth_t2: ['EH1 Temperature 2 [C]', 20, 29, 21, 29],        
+            dbns_pth_h1: ['EH1 Humidity 1 [%]', 40, 75, 40, 70],        
+            dbns_pth_h2: ['EH1 Humidity 2 [%]', 40, 75, 40, 70],        
             dbns_pth_p1: ['EH1 Pressure 1 [mbar]', false, false, 980, 1030],        
             dbns_pth_p2: ['EH1 Pressure 2 [mbar]', false, false, 980, 1030]
         }

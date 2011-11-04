@@ -89,7 +89,7 @@ def rawfilelist(request):
 
 
 @login_required
-def stats(request, mode='volume'):
+def stats(request, mode='volume', site='ALL'):
     '''graphical stats'''          
    
     # ajax response
@@ -103,31 +103,57 @@ def stats(request, mode='volume'):
     
     xpoints = []
     ypoints = []
+    from django.db.models import Sum
     if mode == 'volume':
-        from django.db.models import Sum
         value_list = Daqrawdatafileinfo.objects.exclude(filename__contains='test'
             ).order_by('runno').values('runno'
             ).annotate(volume=Sum('filesize'))
         for value in value_list:
             xpoints.append(value['runno'])
-            ypoints.append(value['volume'])
+            ypoints.append(value['volume']/1.1e12) # TB
+        nRuns = len(xpoints)
+        nPoints = 500
+        step = int(nRuns/nPoints)+1            
+        for i in range(nRuns):
+            if i > 0:
+                ypoints[i] += ypoints[i-1]
+        info['xpoints'] = xpoints[::step]
+        info['ypoints'] = ypoints[::step]
+        for i in range(len(info['ypoints'])):
+            info['ypoints'][i] = float('%.6f' % (info['ypoints'][i], ))            
         info['title'] = 'Integrated Data Volume'
         info['ytitle'] = 'Tera Bytes'
         info['legend'] = 'All Runs'
+            
+    elif mode == 'livetime':
+        from django.utils.datastructures import SortedDict
+        min_runno = 12400
+        value_list = Daqrawdatafileinfo.objects.select_related(
+            ).filter(filename__contains='Physics.'+site+'-Merged', runno__gte=min_runno
+            ).order_by('runno'
+            ).values('runno', 'vld__timestart', 'vld__timeend')
+        livetime_dict = SortedDict();
+        livetime = 0;
+        for value in value_list:
+            delta = value['vld__timeend'] - value['vld__timestart']
+            livetime += (delta.days + delta.seconds/86400.)
+            livetime_dict[value['runno']] = livetime
+        xpoints = livetime_dict.keys()
+        ypoints = livetime_dict.values()
+        nRuns = len(xpoints)
+        nPoints = 1000
+        step = int(nRuns/nPoints)+1                            
+        info['xpoints'] = xpoints[::step]
+        info['ypoints'] = ypoints[::step]
+        for i in range(len(info['ypoints'])):
+            info['ypoints'][i] = float('%.2f' % (info['ypoints'][i], ))
+        info['title'] = 'Live Time (Physics Runs)'
+        info['ytitle'] = 'Days'
+        info['legend'] = site
     else:
         return HttpResponse(json.dumps({})) # empty
     
-    nRuns = len(xpoints)
-    nPoints = 500
-    step = int(nRuns/nPoints)+1            
-    for i in range(nRuns):
-        ypoints[i] = float(ypoints[i])/1.1e12   # TB
-        if i > 0:
-            ypoints[i] += ypoints[i-1]
-    info['xpoints'] = xpoints[::step]
-    info['ypoints'] = ypoints[::step]
-    for i in range(len(info['ypoints'])):
-        info['ypoints'][i] = float('%.6f' % (info['ypoints'][i], ))
+
                 
     return HttpResponse(json.dumps(info))
 
