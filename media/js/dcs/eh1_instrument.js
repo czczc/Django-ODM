@@ -20,6 +20,8 @@ function load_all_models() {
 
     load_model('Ad1Lidsensor');
     load_model('Ad2Lidsensor');
+    load_model('Ad1Adcovergas');
+    load_model('Ad2Adcovergas');
     load_model('DbnsIowTemp');
     load_model('DbnsRpcGas101');
     load_model('DbnsRpcGas102');
@@ -30,6 +32,8 @@ function load_all_models() {
 function fetch_latest() {
     fetch_one('Ad1Lidsensor');
     fetch_one('Ad2Lidsensor');
+    fetch_one('Ad1Adcovergas');
+    fetch_one('Ad2Adcovergas');
     fetch_one('DbnsIowTemp');
     fetch_one('DbnsRpcGas101');
     fetch_one('DbnsRpcGas102');
@@ -74,6 +78,22 @@ function load_configs(){
             tilty_sensor1: ['AD2 Tilt Y 1', -2, 2, -1, 1],
             tilty_sensor2: ['AD2 Tilt Y 2', -2, 2, -1, 1],
             tilty_sensor3: ['AD2 Tilt Y 3', -2, 2, -1, 1]
+        },
+        Ad1Adcovergas : {
+            supplypressure: ['AD1 Cover Gas Pressure [mm]', 0, 40, 15, 25],
+            oxygen: ['AD1 Cover Gas Oxygen Concentration [ppm]', 50, 200, 100, 150],
+            humidity_covergasreturn: ['Humidity: AD1 Cover Gas Return', 0, 10, 0.1, 5],
+            humidity_electricaldrypipereturn: ['Humidity: Elec. Dry Pipe Return', false, false, 0.1, 20],
+            humidity_gasdrypipereturn: ['Humidity: Gas Dry Pipe Return', 0, 10, 0.1, 5],
+            humidity_pmtcablebellowreturn: ['Humidity: Cable Bellow Return', 0, 10, 0.1, 5]
+        },
+        Ad2Adcovergas : {
+            supplypressure: ['AD2 Cover Gas Pressure [mm]', 0, 40, 15, 25],
+            oxygen: ['AD2 Cover Gas Oxygen Concentration [ppm]', 50, 200, 100, 150],
+            humidity_covergasreturn: ['Humidity: AD2 Cover Gas Return', 0, 10, 0.1, 5],
+            humidity_electricaldrypipereturn: ['Humidity: Elec. Dry Pipe Return', false, false, 0, 20],
+            humidity_gasdrypipereturn: ['Humidity: Gas Dry Pipe Return', 0, 10, 0, 5],
+            humidity_pmtcablebellowreturn: ['Humidity: Cable Bellow Return', 0, 10, 0, 5]
         },
         DbnsIowTemp : {
             dbns_iw_temp_pt1: ['Inner WP Temerature [C]: 1', 21, 26, 22, 25],

@@ -30,7 +30,7 @@
             <td class='descr'>LS Temperature: Capacitance</td><td class='value sc' id='td_Ad3Lidsensor__capacitance_temp_ls'></td>
             <td class='descr'>MO Temperature: Capacitance</td><td class='value sc'  id='td_Ad3Lidsensor__capacitance_temp_mo'></td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td class='descr'>Tilt X: 1</td><td class='value sc' id='td_Ad3Lidsensor__tiltx_sensor1'></td>
             <td class='descr'>Tilt X: 2</td><td class='value sc' id='td_Ad3Lidsensor__tiltx_sensor2'></td>
             <td class='descr'>Tilt X: 3</td><td class='value sc' id='td_Ad3Lidsensor__tiltx_sensor3'></td>
@@ -39,6 +39,25 @@
             <td class='descr'>Tilt Y: 1</td><td class='value sc' id='td_Ad3Lidsensor__tilty_sensor1'></td>
             <td class='descr'>Tilt Y: 2</td><td class='value sc' id='td_Ad3Lidsensor__tilty_sensor2'></td>
             <td class='descr'>Tilt Y: 3</td><td class='value sc' id='td_Ad3Lidsensor__tilty_sensor3'></td>
+        </tr> -->
+    </tbody>
+	</table>
+
+    <table style='margin-top: 20px;'>
+    <thead><tr>
+       	<th colspan="2" style='text-align: center;' id='th_Ad3Adcovergas'>AD3 Cover Gas</th>
+		<th colspan="4" style='text-align: center;' class='th_last_update good'></th>
+    </tr></thead>
+    <tbody>
+        <tr>
+            <td class='descr'>Pressure [psi]</td><td class='value sc' id='td_Ad3Adcovergas__supplypressure'></td>
+            <td class='descr'>Oxygen [ppm]</td><td class='value sc' id='td_Ad3Adcovergas__oxygen'></td>
+            <td class='descr'>Humidity [%]</td><td class='value sc' id='td_Ad3Adcovergas__humidity_covergasreturn'></td>
+        </tr>
+        <tr>
+            <td class='descr'>Humidity (Elec. Dry Pipe) [%]</td><td class='value sc' id='td_Ad3Adcovergas__humidity_electricaldrypipereturn'></td>
+            <td class='descr'>Humidity (Gas Dry Pipe) [%]</td><td class='value sc' id='td_Ad3Adcovergas__humidity_gasdrypipereturn'></td>
+            <td class='descr'>Humidity (Cable Bellow) [%]</td><td class='value sc' id='td_Ad3Adcovergas__humidity_pmtcablebellowreturn'></td>
         </tr>
     </tbody>
 	</table>
@@ -170,6 +189,17 @@
 <div id="Ad3Lidsensor__capacitance_temp_mo" class="dcs_chart grid_12"></div>
 <div class="clear"></div>
 
+{# Cover Gas #}
+<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; margin-top: 40px; width: 200px;'>Cover Gas</h4>    
+
+<div id="Ad3Adcovergas__supplypressure" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="Ad3Adcovergas__oxygen" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="Ad3Adcovergas__humidity_covergasreturn" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
 
 {# WP #}
 <div class = "grid_24">

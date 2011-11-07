@@ -58,7 +58,67 @@ class Ad5Lidsensor(AbstractAdLidsensor):
 class Ad6Lidsensor(AbstractAdLidsensor):
     class Meta(AbstractAdLidsensor.Meta):
         db_table = u'AD6_LidSensor'                
+
+# abstract model for AD lid sensor tables
+class AbstractAdcovergas(DcsModel):
+    ultrasonic_gdls = models.IntegerField(null=True, db_column='Ultrasonic_GdLS', blank=True) # Field name made lowercase.
+    ultrasonic_ls = models.IntegerField(null=True, db_column='Ultrasonic_LS', blank=True) # Field name made lowercase.
+    temp_gdls = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Temp_GdLS', blank=True) # Field name made lowercase.
+    temp_ls = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Temp_LS', blank=True) # Field name made lowercase.
+    tiltx_sensor1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Tiltx_Sensor1', blank=True) # Field name made lowercase.
+    tilty_sensor1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Tilty_Sensor1', blank=True) # Field name made lowercase.
+    tiltx_sensor2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Tiltx_Sensor2', blank=True) # Field name made lowercase.
+    tilty_sensor2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Tilty_Sensor2', blank=True) # Field name made lowercase.
+    tiltx_sensor3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Tiltx_Sensor3', blank=True) # Field name made lowercase.
+    tilty_sensor3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Tilty_Sensor3', blank=True) # Field name made lowercase.
+    capacitance_gdls = models.IntegerField(null=True, db_column='Capacitance_GdLS', blank=True) # Field name made lowercase.
+    capacitance_temp_gdls = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Capacitance_Temp_GdLS', blank=True) # Field name made lowercase.
+    capacitance_ls = models.IntegerField(null=True, db_column='Capacitance_LS', blank=True) # Field name made lowercase.
+    capacitance_temp_ls = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Capacitance_Temp_LS', blank=True) # Field name made lowercase.
+    capacitance_mo = models.IntegerField(null=True, db_column='Capacitance_MO', blank=True) # Field name made lowercase.
+    capacitance_temp_mo = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Capacitance_Temp_MO', blank=True) # Field name made lowercase.
+    ps_output_v = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='PS_Output_V', blank=True) # Field name made lowercase.
+    ps_output_i = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='PS_Output_I', blank=True) # Field name made lowercase.
+    sensorstatus = models.IntegerField(null=True, db_column='SensorStatus', blank=True) # Field name made lowercase.
+    class Meta(DcsModel.Meta):
+        abstract = True
+
+
+class AbstractAdcovergas(DcsModel):
+    supplypressure = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='SupplyPressure', blank=True) # Field name made lowercase.
+    oxygen = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Oxygen', blank=True) # Field name made lowercase.
+    humidity_covergasreturn = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Humidity_CoverGasReturn', blank=True) # Field name made lowercase.
+    humidity_gasdrypipereturn = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Humidity_GasDryPipeReturn', blank=True) # Field name made lowercase.
+    humidity_electricaldrypipereturn = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Humidity_ElectricalDryPipeReturn', blank=True) # Field name made lowercase.
+    humidity_pmtcablebellowreturn = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Humidity_PMTCableBellowReturn', blank=True) # Field name made lowercase.
+    class Meta(DcsModel.Meta):
+        abstract = True
+
+class Ad1Adcovergas(AbstractAdcovergas):
+    class Meta(AbstractAdcovergas.Meta):
+        db_table = u'AD1_ADCoverGas'
+
+class Ad2Adcovergas(AbstractAdcovergas):
+    class Meta(AbstractAdcovergas.Meta):
+        db_table = u'AD2_ADCoverGas'
+
+class Ad3Adcovergas(AbstractAdcovergas):
+    class Meta(AbstractAdcovergas.Meta):
+        db_table = u'AD3_ADCoverGas'
         
+class Ad4Adcovergas(AbstractAdcovergas):
+    class Meta(AbstractAdcovergas.Meta):
+        db_table = u'AD4_ADCoverGas'        
+
+class Ad5Adcovergas(AbstractAdcovergas):
+    class Meta(AbstractAdcovergas.Meta):
+        db_table = u'AD5_ADCoverGas'
+        
+class Ad6Adcovergas(AbstractAdcovergas):
+    class Meta(AbstractAdcovergas.Meta):
+        db_table = u'AD6_ADCoverGas'
+        
+                        
 class DbnsRpcGas101(DcsModel):
     flow_rate_isobutane = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
     flow_rate_argon = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
@@ -656,11 +716,11 @@ class AbstractAdHv(DcsModel):
                 
 class DbnsAd1Hv(AbstractAdHv):
     class Meta(AbstractAdHv.Meta):
-        db_table = u'DBNS_AD1_HV'
+        db_table = u'DBNS_AD1_HV_Vmon'
 
 class DbnsAd2Hv(AbstractAdHv):
     class Meta(AbstractAdHv.Meta):
-        db_table = u'DBNS_AD2_HV'
+        db_table = u'DBNS_AD2_HV_Vmon'
 
     
 class DbnsRpcHvVmon(DcsModel):

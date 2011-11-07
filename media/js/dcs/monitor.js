@@ -1,5 +1,8 @@
 var this_url = window.location.href;
 var base_url = this_url.substring(0,this_url.indexOf('dcs'));
+var is_daylight = false;
+var adjust_seconds = is_daylight? 240 : 180;
+
 $('button').button();
 $('.th_last_update').qtip({
     content: 'auto-updates every 5 min',
@@ -102,8 +105,8 @@ function fetch_one(model) {
         th_last_update.html(record.date_time);
         var now = new Date();
         var now_time_ms = now.getTime();
-        // confused, why the extra 4 hours?
-        var dt_min = (now_time_ms - parse_datetime(record.date_time))/60000 + 240 + now.getTimezoneOffset();
+        // confused, why the extra 4 hours? 
+        var dt_min = (now_time_ms - parse_datetime(record.date_time))/60000 + adjust_seconds + now.getTimezoneOffset();
         if (dt_min>15) { 
             th_last_update.removeClass('good').addClass('warning');
         }

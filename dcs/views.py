@@ -43,12 +43,14 @@ def data(request, model, latest_days=30):
         run_list = dcsmodel.objects.filter(date_time__gte=latest)
         count = run_list.count()
         skip = count / keep
+        if skip == 0: skip = 1
         last_id = run_list[0].id
         run_list = run_list.filter(id__in=xrange(last_id, last_id-count, -skip))
         # run_list = run_list.extra(where=['id %% %s = 0'], params=[skip])
     except IndexError:
         pass
     except:
+        raise
         return HttpResponse(model + ' does not exist')
     
     from django.core import serializers
@@ -63,11 +65,7 @@ def fetchone(request, model):
     '''json data of the DCS model, latest record'''
     try:
         exec('from odm.dcs.models import %s as dcsmodel' % (model,))
-        if model == 'DbnsAd1Hv':
-          # temporary fix of a bug in DbnsAd1Hv
-          record = dcsmodel.objects.all()[1] 
-        else:
-          record = dcsmodel.objects.all()[0]
+        record = dcsmodel.objects.all()[0]
     except:
         return HttpResponse(model + ' does not exist or not record')
     
