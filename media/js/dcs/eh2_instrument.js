@@ -56,12 +56,12 @@ function load_configs(){
             tilty_sensor3: ['AD3 Tilt Y : 3', -2, 2, 0.5, 1.5]
         },
         Ad3Adcovergas : {
-            supplypressure: ['AD3 Cover Gas Pressure [mm]', 0, 40, 15, 25],
-            oxygen: ['AD3 Cover Gas Oxygen Concentration [ppm]', 50, 200, 100, 150],
-            humidity_covergasreturn: ['Humidity: AD3 Cover Gas Return', 0, 10, 0.1, 5],
-            humidity_electricaldrypipereturn: ['Humidity: Elec. Dry Pipe Return', false, false, 0.1, 20],
-            humidity_gasdrypipereturn: ['Humidity: Gas Dry Pipe Return', 0, 10, 0.1, 5],
-            humidity_pmtcablebellowreturn: ['Humidity: Cable Bellow Return', 0, 10, 0.1, 5]
+            supplypressure: ['AD3 Cover Gas Pressure [psi]', 10, 30, 16, 25],
+            oxygen: ['AD3 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
+            humidity_covergasreturn: ['Humidity: AD3 Cover Gas Return [%]', 0.1, 15, 0.1, 10],
+            humidity_electricaldrypipereturn: ['Humidity: AD3 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 100],
+            humidity_gasdrypipereturn: ['Humidity: AD3 Gas Dry Pipe Return [%]', 0.1, 15, 0.001, 10],
+            humidity_pmtcablebellowreturn: ['Humidity: AD3 PMT Cable Bellow Return [%]', 0.1, 15, 0.1, 10]
         },
         LansIowTemp : {
             lans_iw_temp_pt1: ['Inner WP Temerature: 1', 20, 26, 22, 25],

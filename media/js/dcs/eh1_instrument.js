@@ -80,20 +80,20 @@ function load_configs(){
             tilty_sensor3: ['AD2 Tilt Y 3', -2, 2, -1, 1]
         },
         Ad1Adcovergas : {
-            supplypressure: ['AD1 Cover Gas Pressure [mm]', 0, 40, 15, 25],
-            oxygen: ['AD1 Cover Gas Oxygen Concentration [ppm]', 50, 200, 100, 150],
-            humidity_covergasreturn: ['Humidity: AD1 Cover Gas Return', 0, 10, 0.1, 5],
-            humidity_electricaldrypipereturn: ['Humidity: Elec. Dry Pipe Return', false, false, 0.1, 20],
-            humidity_gasdrypipereturn: ['Humidity: Gas Dry Pipe Return', 0, 10, 0.1, 5],
-            humidity_pmtcablebellowreturn: ['Humidity: Cable Bellow Return', 0, 10, 0.1, 5]
+            supplypressure: ['AD1 Cover Gas Pressure [psi]', 10, 30, 16, 25],
+            oxygen: ['AD1 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
+            humidity_covergasreturn: ['Humidity: AD1 Cover Gas Return [%]', 0.1, 15, 0.1, 10],
+            humidity_electricaldrypipereturn: ['Humidity: AD1 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 100],
+            humidity_gasdrypipereturn: ['Humidity: AD1 Gas Dry Pipe Return [%]', 0.1, 15, 0.1, 10],
+            humidity_pmtcablebellowreturn: ['Humidity: AD1 PMT Cable Bellow Return [%]', 0.1, 15, 0.1, 10]
         },
         Ad2Adcovergas : {
-            supplypressure: ['AD2 Cover Gas Pressure [mm]', 0, 40, 15, 25],
-            oxygen: ['AD2 Cover Gas Oxygen Concentration [ppm]', 50, 200, 100, 150],
-            humidity_covergasreturn: ['Humidity: AD2 Cover Gas Return', 0, 10, 0.1, 5],
-            humidity_electricaldrypipereturn: ['Humidity: Elec. Dry Pipe Return', false, false, 0, 20],
-            humidity_gasdrypipereturn: ['Humidity: Gas Dry Pipe Return', 0, 10, 0, 5],
-            humidity_pmtcablebellowreturn: ['Humidity: Cable Bellow Return', 0, 10, 0, 5]
+            supplypressure: ['AD2 Cover Gas Pressure [psi]', 10, 30, 16, 25],
+            oxygen: ['AD2 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
+            humidity_covergasreturn: ['Humidity: AD2 Cover Gas Return [%]', 0.1, 15, 0.1, 10],
+            humidity_electricaldrypipereturn: ['Humidity: AD2 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 100],
+            humidity_gasdrypipereturn: ['Humidity: AD2 Gas Dry Pipe Return [%]', 0.1, 15, 0.001, 10],
+            humidity_pmtcablebellowreturn: ['Humidity: AD2 PMT Cable Bellow Return [%]', 0.1, 15, 0.1, 10]
         },
         DbnsIowTemp : {
             dbns_iw_temp_pt1: ['Inner WP Temerature [C]: 1', 21, 26, 22, 25],
@@ -119,10 +119,10 @@ function load_configs(){
         DbnsEnvPth : {
             dbns_pth_t1: ['EH1 Temperature 1 [C]', 20, 29, 21, 29],        
             dbns_pth_t2: ['EH1 Temperature 2 [C]', 20, 29, 21, 29],        
-            dbns_pth_h1: ['EH1 Humidity 1 [%]', 40, 75, 40, 70],        
-            dbns_pth_h2: ['EH1 Humidity 2 [%]', 40, 75, 40, 70],        
-            dbns_pth_p1: ['EH1 Pressure 1 [mbar]', false, false, 980, 1030],        
-            dbns_pth_p2: ['EH1 Pressure 2 [mbar]', false, false, 980, 1030]
+            dbns_pth_h1: ['EH1 Humidity 1 [%]', 40, 80, 40, 70],        
+            dbns_pth_h2: ['EH1 Humidity 2 [%]', 40, 80, 40, 70],        
+            dbns_pth_p1: ['EH1 Pressure 1 [mbar]', 1000, 1050, 980, 1030],        
+            dbns_pth_p2: ['EH1 Pressure 2 [mbar]', 1000, 1050, 980, 1030]
         }
     };
 }

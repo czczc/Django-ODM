@@ -8,7 +8,6 @@ $('button.to_top').click(function() {
 });
 $("#id_pmtspec_rollback").datepicker({ defaultDate: +0 });
 
-
 var this_url = window.location.href;
 var index_of_run = this_url.indexOf('run');
 var base_url = this_url.substring(0,index_of_run);
@@ -37,6 +36,15 @@ function set_ref(runno) {
     Ref.diagnostics_base_index = 60; // nersc
     Ref.pqm_shown = Ref.diagnostics_shown = false; // is currently displaying Ref?
 }
+$('#form_refrun_submit').click(function() {
+    var field = $('#id_refrun');
+    Ref.runno = parseInt(field.val(), 10) ;
+    Ref.diagnostics_seg = sprintf('runs_%07d/runs_%07d/run_%07d', 
+        Math.floor(Ref.runno/1000)*1000, Math.floor(Ref.runno/100)*100, Ref.runno);
+    field.val(Ref.runno).css('color', 'green');
+    return false; 
+});
+
 
 $('#sumit_pmtspec_rollback').click(function() {
     date = $('#id_pmtspec_rollback').val().split('/');
@@ -558,7 +566,7 @@ function build_plots(name, detname, data) {
     // enable sub-detector comparison
     enable_img_comp('#table_'+name+'_plots .img_comp', detname, data);
     // enable refenece plot comparison
-    enable_img_ref();    
+    enable_toggle_img_ref();    
 }
 
 function build_mc_plots(data) {
@@ -681,32 +689,39 @@ function enable_img_comp(selector, detname, data) {
     });
 }
 
-function enable_img_ref() {
+function enable_toggle_img_ref() {
     $(document).unbind('keypress');
+    $(document).bind('keypress', toggle_img_ref);
+    $('.toggle_img_ref').bind('click', toggle_img_ref);
+}
+
+function toggle_img_ref(e) {
     var names = ['diagnostics', 'pqm'];
     var i, name;
-    $(document).keypress(function(e){
-        for (i=0; i<names.length; i++) {
-            name = names[i];
-            if(e.charCode == 92){
-                if (Ref[name+'_shown']) {
-                    $('#table_'+name+'_plots').find('.img_ref').remove();
-                    Ref[name+'_shown'] = false;
-                    console.log(name+' emptied');
-                }
-                else {
-                    console.log(name+' added');
-                    Ref[name+'_shown'] = true;
-                    $('#table_'+name+'_plots').find('.img_db').each(function(){
-                        var this_link = $(this).attr('src');
-                        var ref_link = find_ref_plot(name, this_link);
-                        // console.log(ref_link);
-                        $(this).parent().append('<img class="img_ref" src="' + ref_link + '" width=300 height=225/>'); 
-                    });
-                }
+    for (i=0; i<names.length; i++) {
+        name = names[i];
+        if(e.charCode == 92){            
+            if (Ref[name+'_shown']) {
+                $('#table_'+name+'_plots').find('.img_ref').remove();
+                Ref[name+'_shown'] = false;
+                $(".ref_runno").html('');
+                
+                // console.log(name+' emptied');
             }
-        } // for loop done.
-    });
+            else {
+                // console.log(name+' added');
+                Ref[name+'_shown'] = true;
+                $('#table_'+name+'_plots').find('.img_db').each(function(){
+                    var this_link = $(this).attr('src');
+                    var ref_link = find_ref_plot(name, this_link);
+                    // console.log(ref_link);
+                    $(this).parent().append('<img class="img_ref" src="' + ref_link + '" width=300 height=225/>'); 
+                    modal_by_click($(this).siblings('.img_ref'));
+                    $(".ref_runno").html('Reference Run: ' + Ref.runno);
+                });
+            }
+        }
+    } // for loop done.
 }
 
 // find the reference plot link 
