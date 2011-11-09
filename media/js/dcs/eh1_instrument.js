@@ -109,7 +109,11 @@ function load_configs(){
             pressure_argon: ['RPC Argon Pressure [psi]', 18, 23, 19, 22],
             pressure_isobutane: ['RPC Isobutane Pressure [psi]', 18, 22, 19, 22],
             pressure_r134a: ['RPC R134A Pressure [psi]', 18, 22, 18.5, 22],
-            pressure_sf6: ['RPC SF6 Pressure [psi]', 18, 22, 19, 22]     
+            pressure_sf6: ['RPC SF6 Pressure [psi]', 18, 22, 19, 22],
+            flow_rate_argon: ['RPC Argon Flow Rate [cc/m]', 950, 1100, 1000, 1050],
+            flow_rate_isobutane: ['RPC Isobutane Flow Rate [cc/m]', 60, 63, 61.5, 62],
+            flow_rate_r134a: ['RPC R134A Flow Rate [cc/m]', 460, 475, 465, 468],
+            flow_rate_sf6: ['RPC SF6 Flow Rate [cc/m]', 7.4, 7.7, 7.55, 7.65]     
         },
         DbnsRpcGas102 : {
             weight_isobutane: ['RPC Isobutane Weight [kg]', -10, 80, 2, 75],

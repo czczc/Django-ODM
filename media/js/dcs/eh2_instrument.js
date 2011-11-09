@@ -21,7 +21,8 @@ function load_all_models() {
     load_model('Ad3Lidsensor');
     load_model('Ad3Adcovergas');
     load_model('LansIowTemp');
-    // load_model('LansRpcGas101');
+    load_model('LansRpcGas101');
+    load_model('LansRpcGas102');
     // load_model('LansEnvPth');
 
 }
@@ -30,7 +31,8 @@ function fetch_latest() {
     fetch_one('Ad3Lidsensor');
     fetch_one('Ad3Adcovergas');
     fetch_one('LansIowTemp');
-    // fetch_one('LansRpcGas101');
+    fetch_one('LansRpcGas101');
+    fetch_one('LansRpcGas102');
     // fetch_one('LansEnvPth');
 }
 
@@ -72,13 +74,22 @@ function load_configs(){
             lans_ow_temp_pt2: ['Outer WP Temerature: 2', 20, 26, 22, 25],
             lans_ow_temp_pt3: ['Outer WP Temerature: 3', 20, 26, 22, 25],
             lans_ow_temp_pt4: ['Outer WP Temerature: 4', 20, 26, 22, 25]
+        },
+        LansRpcGas101 : {
+            pressure_argon: ['RPC Argon Pressure [psi]', 18, 23, 19, 22],
+            pressure_isobutane: ['RPC Isobutane Pressure [psi]', 18, 22, 19, 22],
+            pressure_r134a: ['RPC R134A Pressure [psi]', 18, 22, 18.5, 22],
+            pressure_sf6: ['RPC SF6 Pressure [psi]', 18, 22, 19, 22],
+            flow_rate_argon: ['RPC Argon Flow Rate [cc/m]', 950, 1100, 1000, 1050],
+            flow_rate_isobutane: ['RPC Isobutane Flow Rate [cc/m]', 60, 65, 61.5, 62],
+            flow_rate_r134a: ['RPC R134A Flow Rate [cc/m]', 460, 475, 465, 468],
+            flow_rate_sf6: ['RPC SF6 Flow Rate [cc/m]', 6, 7.7, 7.55, 7.65]     
+        },
+        LansRpcGas102 : {
+            weight_isobutane: ['RPC Isobutane Weight [kg]', -10, 80, 2, 75],
+            weight_r134a: ['RPC R134A Weight [kg]', -10, 80, 2, 75],
+            weight_sf6: ['RPC SF6 Weight [kg]', -10, 80, 2, 75]     
         }
-        // LansRpcGas101 : {
-        //     pressure_argon: ['RPC Argon Pressure', 18, 23, 19, 22],
-        //     pressure_isobutane: ['RPC Isobutane Pressure', 18, 22, 19, 22],
-        //     pressure_r134a: ['RPC R134A Pressure', 18, 22, 19, 22],
-        //     pressure_sf6: ['RPC SF6 Pressure', 18, 22, 19, 22]     
-        // },
         // LansEnvPth : {
         //     lans_pth_t1: ['EH2 Temperature: 1', 22, 29, 24, 29],        
         //     lans_pth_t2: ['EH2 Temperature: 2', 22, 29, 24, 29],        

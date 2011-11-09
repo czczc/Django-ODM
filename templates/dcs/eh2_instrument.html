@@ -83,21 +83,34 @@
     </tbody>
   </table>
 
-<!--      
-  <table style='margin-top: 20px;'>
+	<table style='margin-top: 20px;'>
     <thead><tr>
         <th colspan="2" style='text-align: center;' id='th_LansRpcGas101' title=''>RPC Gas</th>
-    <th colspan="6" style='text-align: center;' class='th_last_update good'></th>
+	    <th colspan="6" style='text-align: center;' class='th_last_update good'></th>
     </tr></thead>
-  <tbody>
-        <tr>
-            <td class='descr'>Pressure: Argon</td><td class='value sc' id='td_LansRpcGas101__pressure_argon'></td>
-            <td class='descr'>Pressure: Isobutane</td><td class='value sc' id='td_LansRpcGas101__pressure_isobutane'></td>
-            <td class='descr'>Pressure: R134A</td><td class='value sc' id='td_LansRpcGas101__pressure_r134a'></td>
-            <td class='descr'>Pressure: SF6</td><td class='value sc' id='td_LansRpcGas101__pressure_sf6'></td>
-        </tr>
-  </tbody>
-    </table>
+	<tbody>
+      <tr>
+          <td class='descr'>Pressure: Argon [psi]</td><td class='value sc' id='td_LansRpcGas101__pressure_argon'></td>
+          <td class='descr'>Pressure: Isobutane [psi]</td><td class='value sc' id='td_LansRpcGas101__pressure_isobutane'></td>
+          <td class='descr'>Pressure: R134A [psi]</td><td class='value sc' id='td_LansRpcGas101__pressure_r134a'></td>
+          <td class='descr'>Pressure: SF6 [psi]</td><td class='value sc' id='td_LansRpcGas101__pressure_sf6'></td>
+      </tr>
+      <tr>
+          <td class='descr'>Flow Rate: Argon [cc/m]</td><td class='value sc' id='td_LansRpcGas101__flow_rate_argon'></td>
+          <td class='descr'>Flow Rate: Isobutane [cc/m]</td><td class='value sc' id='td_LansRpcGas101__flow_rate_isobutane'></td>
+          <td class='descr'>Flow Rate: R134A [cc/m]</td><td class='value sc' id='td_LansRpcGas101__flow_rate_r134a'></td>
+          <td class='descr'>Flow Rate: SF6 [cc/m]</td><td class='value sc' id='td_LansRpcGas101__flow_rate_sf6'></td>
+      </tr>
+      <tr>
+          <td class='descr'></td><td class='value'></td>
+          <td class='descr'>Weight: Isobutane [kg]</td><td class='value sc' id='td_LansRpcGas102__weight_isobutane'></td>
+          <td class='descr'>Weight: R134A [kg]</td><td class='value sc' id='td_LansRpcGas102__weight_r134a'></td>
+          <td class='descr'>Weight: SF6 [kg]</td><td class='value sc' id='td_LansRpcGas102__weight_sf6'></td>
+      </tr>
+	</tbody>
+  </table>
+  
+<!--      
   
   <table style='margin-top: 20px;'>
     <thead><tr>
@@ -236,15 +249,15 @@
 <div id="LansIowTemp__lans_ow_temp_pt4" class="dcs_chart grid_12"></div>
 <div class="clear"></div>
 
-<!-- 
 {# RPC #}
 <div class = "grid_24">
-  <a name="RPC"></a>   
+	<a name="RPC"></a>   
      <h2>
          RPC Monitors
     </h2>
 </div>    
 <div class="clear"></div>
+
 <h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; width: 200px;'>Gas Pressure</h4>
 
 <div id="LansRpcGas101__pressure_argon" class="dcs_chart grid_12"></div>
@@ -255,6 +268,26 @@
 <div id="LansRpcGas101__pressure_sf6" class="dcs_chart grid_12"></div>
 <div class="clear"></div>
 
+<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; width: 200px;'>Gas Flow Rate</h4>
+
+<div id="LansRpcGas101__flow_rate_argon" class="dcs_chart grid_12"></div>
+<div id="LansRpcGas101__flow_rate_isobutane" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="LansRpcGas101__flow_rate_r134a" class="dcs_chart grid_12"></div>
+<div id="LansRpcGas101__flow_rate_sf6" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; width: 200px;'>Gas Dewar Weight</h4>
+
+<div id="LansRpcGas102__weight_isobutane" class="dcs_chart grid_12"></div>
+<div id="LansRpcGas102__weight_r134a" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="LansRpcGas102__weight_sf6" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<!-- 
 
 {# Environment #}
 <div class = "grid_24">

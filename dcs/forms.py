@@ -70,8 +70,11 @@ class EH1DcsForm(DcsForm):
             ('Instrument Sensors', (
                 ('Ad1Lidsensor', 'AD1 Lid Sensors'),
                 ('Ad2Lidsensor', 'AD2 Lid Sensors'),
+                ('Ad1Adcovergas', 'AD1 Cover Gas'),
+                ('Ad2Adcovergas', 'AD2 Cover Gas'),
                 ('DbnsIowTemp', 'WP Temperature'),
-                ('DbnsRpcGas101', 'Rpc Gas'),
+                ('DbnsRpcGas101', 'Rpc Gas Flow/Pressure'),
+                ('DbnsRpcGas102', 'Rpc Gas Others'),
                 ('DbnsEnvPth', 'Environment'),)
             ),
             ('HV', (
@@ -103,6 +106,9 @@ class EH2DcsForm(DcsForm):
         choices=(
             ('Instrument Sensors', (
                 ('Ad3Lidsensor', 'AD3 Lid Sensors'),
+                ('Ad3Adcovergas', 'AD3 Cover Gas'),
+                ('LansRpcGas101', 'Rpc Gas Flow/Pressure'),
+                ('LansRpcGas102', 'Rpc Gas Others'),
                 ('LansIowTemp', 'WP Temperature'),)
             ),
         ),

@@ -118,8 +118,8 @@ class Ad6Adcovergas(AbstractAdcovergas):
     class Meta(AbstractAdcovergas.Meta):
         db_table = u'AD6_ADCoverGas'
         
-                        
-class DbnsRpcGas101(DcsModel):
+
+class AbstractRpcGas101(DcsModel):
     flow_rate_isobutane = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
     flow_rate_argon = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
     flow_rate_r134a = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
@@ -132,15 +132,48 @@ class DbnsRpcGas101(DcsModel):
     pressure_r134a = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
     pressure_sf6 = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
     class Meta(DcsModel.Meta):
+        abstract = True
+                        
+class DbnsRpcGas101(AbstractRpcGas101):
+    class Meta(AbstractRpcGas101.Meta):
         db_table = u'DBNS_RPC_GAS_101'
 
+class LansRpcGas101(AbstractRpcGas101):
+    class Meta(AbstractRpcGas101.Meta):
+        db_table = u'LANS_RPC_GAS_101'
 
-class DbnsRpcGas102(DcsModel):
+
+class AbstractRpcGas102(DcsModel):
+    had_1_out = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='HAD_1_OUT', blank=True) # Field name made lowercase.
+    had_2_out = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='HAD_2_OUT', blank=True) # Field name made lowercase.
+    humidity_fresh = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
+    humidity_return = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
+    ven_status = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
     weight_r134a = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
     weight_isobutane = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
     weight_sf6 = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
+    had_status = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='HAD_status', blank=True) # Field name made lowercase.
+    ven_status_io = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='ven_status_IO', blank=True) # Field name made lowercase.
+    emergency_shutoff = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
+    gassystem_status = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='GasSystem_status', blank=True) # Field name made lowercase.
+    flowrate_status = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
+    pressure_status = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)
+    hv_interlock = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='HV_interlock', blank=True) # Field name made lowercase.
+    slowemergency_shutoff = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='SlowEmergency_shutoff', blank=True) # Field name made lowercase.
+    command_ch2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Command_CH2', blank=True) # Field name made lowercase.
+    command_ch3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Command_CH3', blank=True) # Field name made lowercase.
+    command_ch4 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Command_CH4', blank=True) # Field name made lowercase.
+    command_ch5 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Command_CH5', blank=True) # Field name made lowercase.
     class Meta(DcsModel.Meta):
+        abstract = True
+        
+class DbnsRpcGas102(AbstractRpcGas102):
+    class Meta(AbstractRpcGas102.Meta):
         db_table = u'DBNS_RPC_GAS_102'
+
+class LansRpcGas102(AbstractRpcGas102):
+    class Meta(AbstractRpcGas102.Meta):
+        db_table = u'LANS_RPC_GAS_102'
 
        
 class DbnsIowTemp(DcsModel):
