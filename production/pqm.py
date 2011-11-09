@@ -39,7 +39,7 @@ class Pqm(object):
             return False
         
         for line in fh:
-            runno = line.strip()
+            runno = line.strip().split()[0]
             self.run_list[runno] = '1'
             self.run_index[runno] = 'HistLog/run' + runno + '/available_plots.txt'
         
