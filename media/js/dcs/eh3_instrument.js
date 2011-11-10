@@ -56,7 +56,7 @@ function load_configs(){
             tilty_sensor1: ['AD4 Tilt Y1 [deg]', -2, 2, -1, 1],
             tilty_sensor2: ['AD4 Tilt Y2 [deg]', -2, 2, -1, 1],
             tilty_sensor3: ['AD4 Tilt Y3 [deg]', -2, 2, 0.5, 1.5]
-        }
+        },
         Ad5Lidsensor : {
             ultrasonic_gdls:  ['AD5 GdLS Level: Ultrasonic',  65, 95, 70, 90],
             ultrasonic_ls:    ['AD5 LS Level: Ultrasonic',    65, 95, 70, 90],
@@ -74,7 +74,7 @@ function load_configs(){
             tilty_sensor1: ['AD5 Tilt Y1 [deg]', -2, 2, -1, 1],
             tilty_sensor2: ['AD5 Tilt Y2 [deg]', -2, 2, -1, 1],
             tilty_sensor3: ['AD5 Tilt Y3 [deg]', -2, 2, 0.5, 1.5]
-        }
+        },
         Ad6Lidsensor : {
             ultrasonic_gdls:  ['AD6 GdLS Level: Ultrasonic',  65, 95, 70, 90],
             ultrasonic_ls:    ['AD6 LS Level: Ultrasonic',    65, 95, 70, 90],
