@@ -40,22 +40,23 @@ function load_configs(){
     configs = {
         // renderTo, title, ymin, ymax, ysafemin, ysafemax
         Ad3Lidsensor : {
-            ultrasonic_gdls: ['AD3 GdLS Level: Ultrasonic [mm]', 65, 95, 70, 90],
-            ultrasonic_ls: ['AD3 LS Level: Ultrasonic [mm]', 65, 95, 70, 90],
-            capacitance_gdls: ['AD3 GdLS Level: Capacitance', 200, 450, 250, 350],
-            capacitance_ls: ['AD3 LS Level: Capacitance', 200, 450, 300, 400],
-            capacitance_mo: ['AD3 MO Level: Capacitance', 65, 95, 70, 90],
-            temp_gdls: ['AD3 GdLS Temperature [C]', 20, 25, 21, 24],
-            temp_ls: ['AD3 LS Temperature [C]', 20, 25, 21, 24],
-            capacitance_temp_gdls: ['AD3 GdLS Temperature [C]: Capacitance', 23, 28, 24, 27],
-            capacitance_temp_ls: ['AD3 LS Temperature [C]: Capacitance', 23, 28, 24, 27],
-            capacitance_temp_mo: ['AD3 MO Temperature [C]: Capacitance', 20, 26, 21, 25],
-            tiltx_sensor1: ['AD3 Tilt X : 1', -2, 2, -1.5, -0.5],
-            tiltx_sensor2: ['AD3 Tilt X : 2', -2, 2, -1, 1],
-            tiltx_sensor3: ['AD3 Tilt X : 3', -2, 2, -1, 1],
-            tilty_sensor1: ['AD3 Tilt Y : 1', -2, 2, -1, 1],
-            tilty_sensor2: ['AD3 Tilt Y : 2', -2, 2, -1, 1],
-            tilty_sensor3: ['AD3 Tilt Y : 3', -2, 2, 0.5, 1.5]
+            // liquid levels change by 14 mm/C.  I set +/- 0.3C, +/-4.5 mm
+            ultrasonic_gdls:  ['AD3 GdLS Level: Ultrasonic [mm]',  65, 95, 87.7-4.5, 87.7+4.5],
+            capacitance_gdls: ['AD3 GdLS Level: Capacitance [mm]', 65, 95, 87.7-4.5, 87.7+4.5],    
+            ultrasonic_ls:    ['AD3 LS Level: Ultrasonic [mm]',    65, 95, 85.0-4.5, 85.0+4.5], 
+            capacitance_ls:   ['AD3 LS Level: Capacitance [mm]',   65, 95, 85.0-4.5, 85.0+4.5],
+            capacitance_mo:   ['AD3 MO Level: Capacitance [mm]',   65, 95, 91.2-4.5, 91.2+4.5],
+            temp_gdls:        ['AD3 GdLS Temperature [C]', 21, 25, 22.4, 23],
+            temp_ls:          ['AD3 LS Temperature [C]',   21, 25, 22.4, 23],
+            //capacitance_temp_gdls: ['AD3 GdLS Temperature [C]: Capacitance', 23, 28, 24, 27],
+            //capacitance_temp_ls: ['AD3 LS Temperature [C]: Capacitance', 23, 28, 24, 27],
+            //capacitance_temp_mo: ['AD3 MO Temperature [C]: Capacitance', 20, 26, 21, 25],
+            tiltx_sensor1: ['AD3 Tilt X1 [deg]', -2, 2, -1.5, -0.5],
+            tiltx_sensor2: ['AD3 Tilt X2 [deg]', -2, 2, -1, 1],
+            tiltx_sensor3: ['AD3 Tilt X3 [deg]', -2, 2, -1, 1],
+            tilty_sensor1: ['AD3 Tilt Y1 [deg]', -2, 2, -1, 1],
+            tilty_sensor2: ['AD3 Tilt Y2 [deg]', -2, 2, -1, 1],
+            tilty_sensor3: ['AD3 Tilt Y3 [deg]', -2, 2, 0.5, 1.5]
         },
         Ad3Adcovergas : {
             supplypressure: ['AD3 Cover Gas Pressure [psi]', 10, 30, 16, 25],
@@ -66,14 +67,14 @@ function load_configs(){
             humidity_pmtcablebellowreturn: ['Humidity: AD3 PMT Cable Bellow Return [%]', 0.1, 15, 0.1, 10]
         },
         LansIowTemp : {
-            lans_iw_temp_pt1: ['Inner WP Temerature: 1', 20, 26, 22, 25],
-            lans_iw_temp_pt2: ['Inner WP Temerature: 2', 20, 26, 22, 25],
-            lans_iw_temp_pt3: ['Inner WP Temerature: 3', 20, 26, 22, 25],
-            lans_iw_temp_pt4: ['Inner WP Temerature: 4', 20, 26, 22, 25],
-            lans_ow_temp_pt1: ['Outer WP Temerature: 1', 20, 26, 22, 25],
-            lans_ow_temp_pt2: ['Outer WP Temerature: 2', 20, 26, 22, 25],
-            lans_ow_temp_pt3: ['Outer WP Temerature: 3', 20, 26, 22, 25],
-            lans_ow_temp_pt4: ['Outer WP Temerature: 4', 20, 26, 22, 25]
+            lans_iw_temp_pt1: ['Inner WP Temerature: 1 [C]', 20, 26, 22, 25],
+            lans_iw_temp_pt2: ['Inner WP Temerature: 2 [C]', 20, 26, 22, 25],
+            lans_iw_temp_pt3: ['Inner WP Temerature: 3 [C]', 20, 26, 22, 25],
+            lans_iw_temp_pt4: ['Inner WP Temerature: 4 [C]', 20, 26, 22, 25],
+            lans_ow_temp_pt1: ['Outer WP Temerature: 1 [C]', 20, 26, 22, 25],
+            lans_ow_temp_pt2: ['Outer WP Temerature: 2 [C]', 20, 26, 22, 25],
+            lans_ow_temp_pt3: ['Outer WP Temerature: 3 [C]', 20, 26, 22, 25],
+            lans_ow_temp_pt4: ['Outer WP Temerature: 4 [C]', 20, 26, 22, 25]
         },
         LansRpcGas101 : {
             pressure_argon: ['RPC Argon Pressure [psi]', 18, 23, 19, 22],

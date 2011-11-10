@@ -19,6 +19,8 @@ function load_all_models() {
     charts.length = 0;
 
     load_model('Ad4Lidsensor');
+    load_model('Ad5Lidsensor');
+    load_model('Ad6Lidsensor');
     // load_model('LansIowTemp');
     // load_model('LansRpcGas101');
     // load_model('LansEnvPth');
@@ -27,6 +29,8 @@ function load_all_models() {
 
 function fetch_latest() {
     fetch_one('Ad4Lidsensor');
+    fetch_one('Ad5Lidsensor');
+    fetch_one('Ad6Lidsensor');
     // fetch_one('LansIowTemp');
     // fetch_one('LansRpcGas101');
     // fetch_one('LansEnvPth');
@@ -36,22 +40,58 @@ function load_configs(){
     configs = {
         // renderTo, title, ymin, ymax, ysafemin, ysafemax
         Ad4Lidsensor : {
-            ultrasonic_gdls: ['AD4 GdLS Level: Ultrasonic', 65, 95, 70, 90],
-            ultrasonic_ls: ['AD4 LS Level: Ultrasonic', 65, 95, 70, 90],
-            capacitance_gdls: ['AD4 GdLS Level: Capacitance', 200, 450, 250, 350],
-            capacitance_ls: ['AD4 LS Level: Capacitance', 200, 450, 300, 400],
-            capacitance_mo: ['AD4 MO Level: Capacitance', 65, 95, 70, 90],
-            temp_gdls: ['AD4 GdLS Temperature', 20, 25, 21, 24],
-            temp_ls: ['AD4 LS Temperature', 20, 25, 21, 24],
-            capacitance_temp_gdls: ['AD4 GdLS Temperature: Capacitance', 23, 28, 24, 27],
-            capacitance_temp_ls: ['AD4 LS Temperature: Capacitance', 23, 28, 24, 27],
-            capacitance_temp_mo: ['AD4 MO Temperature: Capacitance', 20, 26, 21, 25],
-            tiltx_sensor1: ['AD4 Tilt X : 1', -2, 2, -1.5, -0.5],
-            tiltx_sensor2: ['AD4 Tilt X : 2', -2, 2, -1, 1],
-            tiltx_sensor3: ['AD4 Tilt X : 3', -2, 2, -1, 1],
-            tilty_sensor1: ['AD4 Tilt Y : 1', -2, 2, -1, 1],
-            tilty_sensor2: ['AD4 Tilt Y : 2', -2, 2, -1, 1],
-            tilty_sensor3: ['AD4 Tilt Y : 3', -2, 2, 0.5, 1.5]
+            ultrasonic_gdls:  ['AD4 GdLS Level: Ultrasonic',  65, 95, 70, 90],
+            ultrasonic_ls:    ['AD4 LS Level: Ultrasonic',    65, 95, 70, 90],
+            capacitance_gdls: ['AD4 GdLS Level: Capacitance', 65, 95, 70, 90],
+            capacitance_ls:   ['AD4 LS Level: Capacitance',   65, 95, 70, 90],
+            capacitance_mo:   ['AD4 MO Level: Capacitance',   65, 95, 70, 90],
+            temp_gdls:        ['AD4 GdLS Temperature', 21, 25, 22.4, 23],
+            temp_ls:          ['AD4 LS Temperature',   21, 25, 22.4, 23],
+            //capacitance_temp_gdls: ['AD4 GdLS Temperature: Capacitance', 23, 28, 24, 27],
+            //capacitance_temp_ls: ['AD4 LS Temperature: Capacitance', 23, 28, 24, 27],
+            //capacitance_temp_mo: ['AD4 MO Temperature: Capacitance', 20, 26, 21, 25],
+            tiltx_sensor1: ['AD4 Tilt X1 [deg]', -2, 2, -1.5, -0.5],
+            tiltx_sensor2: ['AD4 Tilt X2 [deg]', -2, 2, -1, 1],
+            tiltx_sensor3: ['AD4 Tilt X3 [deg]', -2, 2, -1, 1],
+            tilty_sensor1: ['AD4 Tilt Y1 [deg]', -2, 2, -1, 1],
+            tilty_sensor2: ['AD4 Tilt Y2 [deg]', -2, 2, -1, 1],
+            tilty_sensor3: ['AD4 Tilt Y3 [deg]', -2, 2, 0.5, 1.5]
+        }
+        Ad5Lidsensor : {
+            ultrasonic_gdls:  ['AD5 GdLS Level: Ultrasonic',  65, 95, 70, 90],
+            ultrasonic_ls:    ['AD5 LS Level: Ultrasonic',    65, 95, 70, 90],
+            capacitance_gdls: ['AD5 GdLS Level: Capacitance', 65, 95, 70, 90],
+            capacitance_ls:   ['AD5 LS Level: Capacitance',   65, 95, 70, 90],
+            capacitance_mo:   ['AD5 MO Level: Capacitance',   65, 95, 70, 90],
+            temp_gdls:        ['AD5 GdLS Temperature', 21, 25, 22.4, 23],
+            temp_ls:          ['AD5 LS Temperature',   21, 25, 22.4, 23],
+            //capacitance_temp_gdls: ['AD5 GdLS Temperature: Capacitance', 23, 28, 24, 27],
+            //capacitance_temp_ls: ['AD5 LS Temperature: Capacitance', 23, 28, 24, 27],
+            //capacitance_temp_mo: ['AD5 MO Temperature: Capacitance', 20, 26, 21, 25],
+            tiltx_sensor1: ['AD5 Tilt X1 [deg]', -2, 2, -1.5, -0.5],
+            tiltx_sensor2: ['AD5 Tilt X2 [deg]', -2, 2, -1, 1],
+            tiltx_sensor3: ['AD5 Tilt X3 [deg]', -2, 2, -1, 1],
+            tilty_sensor1: ['AD5 Tilt Y1 [deg]', -2, 2, -1, 1],
+            tilty_sensor2: ['AD5 Tilt Y2 [deg]', -2, 2, -1, 1],
+            tilty_sensor3: ['AD5 Tilt Y3 [deg]', -2, 2, 0.5, 1.5]
+        }
+        Ad6Lidsensor : {
+            ultrasonic_gdls:  ['AD6 GdLS Level: Ultrasonic',  65, 95, 70, 90],
+            ultrasonic_ls:    ['AD6 LS Level: Ultrasonic',    65, 95, 70, 90],
+            capacitance_gdls: ['AD6 GdLS Level: Capacitance', 65, 95, 70, 90],
+            capacitance_ls:   ['AD6 LS Level: Capacitance',   65, 95, 70, 90],
+            capacitance_mo:   ['AD6 MO Level: Capacitance',   65, 95, 70, 90],
+            temp_gdls:        ['AD6 GdLS Temperature', 21, 25, 22.4, 23],
+            temp_ls:          ['AD6 LS Temperature',   21, 25, 22.4, 23],
+            //capacitance_temp_gdls: ['AD6 GdLS Temperature: Capacitance', 23, 28, 24, 27],
+            //capacitance_temp_ls: ['AD6 LS Temperature: Capacitance', 23, 28, 24, 27],
+            //capacitance_temp_mo: ['AD6 MO Temperature: Capacitance', 20, 26, 21, 25],
+            tiltx_sensor1: ['AD6 Tilt X1 [deg]', -2, 2, -1.5, -0.5],
+            tiltx_sensor2: ['AD6 Tilt X2 [deg]', -2, 2, -1, 1],
+            tiltx_sensor3: ['AD6 Tilt X3 [deg]', -2, 2, -1, 1],
+            tilty_sensor1: ['AD6 Tilt Y1 [deg]', -2, 2, -1, 1],
+            tilty_sensor2: ['AD6 Tilt Y2 [deg]', -2, 2, -1, 1],
+            tilty_sensor3: ['AD6 Tilt Y3 [deg]', -2, 2, 0.5, 1.5]
         }
         // LansIowTemp : {
         //     lans_iw_temp_pt1: ['Inner WP Temerature: 1', 20, 26, 22, 25],
