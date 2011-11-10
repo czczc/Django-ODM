@@ -124,8 +124,8 @@ function load_configs(){
         DbnsEnvPth : {
             dbns_pth_t1: ['EH1 Temperature 1 [C]', 20, 29, 21, 29],        
             dbns_pth_t2: ['EH1 Temperature 2 [C]', 20, 29, 21, 29],        
-            dbns_pth_h1: ['EH1 Humidity 1 [%]', 40, 80, 40, 70],        
-            dbns_pth_h2: ['EH1 Humidity 2 [%]', 40, 80, 40, 70],        
+            dbns_pth_h1: ['EH1 Humidity 1 [%]', 30, 80, 30, 70],        
+            dbns_pth_h2: ['EH1 Humidity 2 [%]', 30, 80, 30, 70],        
             dbns_pth_p1: ['EH1 Pressure 1 [mbar]', 1000, 1050, 980, 1030],        
             dbns_pth_p2: ['EH1 Pressure 2 [mbar]', 1000, 1050, 980, 1030]
         }

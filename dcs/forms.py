@@ -107,9 +107,10 @@ class EH2DcsForm(DcsForm):
             ('Instrument Sensors', (
                 ('Ad3Lidsensor', 'AD3 Lid Sensors'),
                 ('Ad3Adcovergas', 'AD3 Cover Gas'),
+                ('LansIowTemp', 'WP Temperature'),
                 ('LansRpcGas101', 'Rpc Gas Flow/Pressure'),
                 ('LansRpcGas102', 'Rpc Gas Others'),
-                ('LansIowTemp', 'WP Temperature'),)
+                ('LansEnvPth', 'Environment'),)
             ),
         ),
         widget=forms.Select(attrs={'style':'width:98%;'}),

@@ -23,7 +23,7 @@ function load_all_models() {
     load_model('LansIowTemp');
     load_model('LansRpcGas101');
     load_model('LansRpcGas102');
-    // load_model('LansEnvPth');
+    load_model('LansEnvPth');
 
 }
 
@@ -33,7 +33,7 @@ function fetch_latest() {
     fetch_one('LansIowTemp');
     fetch_one('LansRpcGas101');
     fetch_one('LansRpcGas102');
-    // fetch_one('LansEnvPth');
+    fetch_one('LansEnvPth');
 }
 
 function load_configs(){
@@ -90,15 +90,15 @@ function load_configs(){
             weight_isobutane: ['RPC Isobutane Weight [kg]', -10, 80, 2, 75],
             weight_r134a: ['RPC R134A Weight [kg]', -10, 80, 2, 75],
             weight_sf6: ['RPC SF6 Weight [kg]', -10, 80, 2, 75]     
+        },
+        LansEnvPth : {
+            lans_pth_t1: ['EH2 Temperature 1 [C]', 20, 29, 21, 29],        
+            lans_pth_t2: ['EH2 Temperature 2 [C]', 20, 29, 21, 29],        
+            lans_pth_h1: ['EH2 Humidity 1 [%]', 30, 80, 30, 70],        
+            lans_pth_h2: ['EH2 Humidity 2 [%]', 30, 80, 30, 70],        
+            lans_pth_p1: ['EH2 Pressure 1 [mbar]', 1000, 1050, 980, 1030],        
+            lans_pth_p2: ['EH2 Pressure 2 [mbar]', 1000, 1050, 980, 1030]
         }
-        // LansEnvPth : {
-        //     lans_pth_t1: ['EH2 Temperature: 1', 22, 29, 24, 29],        
-        //     lans_pth_t2: ['EH2 Temperature: 2', 22, 29, 24, 29],        
-        //     lans_pth_h1: ['EH2 Humidity: 1', 50, 75, 40, 70],        
-        //     lans_pth_h2: ['EH2 Humidity: 2', 50, 75, 40, 70],        
-        //     lans_pth_p1: ['EH2 Pressure: 1', false, false, 980, 1030],        
-        //     lans_pth_p2: ['EH2 Pressure: 2', false, false, 980, 1030]
-        // }
     };
 }
 
