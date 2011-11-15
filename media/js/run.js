@@ -565,6 +565,17 @@ function build_plots(name, detname, data) {
     modal_by_click('#table_'+name+'_plots .img_db');
     // enable sub-detector comparison
     enable_img_comp('#table_'+name+'_plots .img_comp', detname, data);
+    // check if need to show ref plots
+    if (Ref[name+'_shown']) {
+        $('#table_'+name+'_plots').find('.img_ref').remove();
+        $('#table_'+name+'_plots').find('.img_db').each(function(){
+            var this_link = $(this).attr('src');
+            var ref_link = find_ref_plot(name, this_link);
+            $(this).parent().append('<img class="img_ref" src="' + ref_link + '" width=300 height=225/>'); 
+            modal_by_click($(this).siblings('.img_ref'));
+            $(".ref_runno").html('Reference Run: ' + Ref.runno);
+        });
+    }
     // enable refenece plot comparison
     enable_toggle_img_ref();    
 }
