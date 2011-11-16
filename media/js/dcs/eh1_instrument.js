@@ -55,12 +55,12 @@ function load_configs(){
             //capacitance_temp_gdls: ['AD1 GdLS Temperature: Capacitance [C]', 23, 28, 24, 27],
             //capacitance_temp_ls: ['AD1 LS Temperature: Capacitance [C]', 23, 28, 24, 27],
             //capacitance_temp_mo: ['AD1 MO Temperature: Capacitance [C]', 20, 26, 21, 25],
-            tiltx_sensor1: ['AD1 Tilt X1 [deg]', -2, 2, -1.5, -0.5],
-            tiltx_sensor2: ['AD1 Tilt X2 [deg]', -2, 2, -1, 1],
-            tiltx_sensor3: ['AD1 Tilt X3 [deg]', -2, 2, -1, 1],
-            tilty_sensor1: ['AD1 Tilt Y1 [deg]', -2, 2, -1, 1],
-            tilty_sensor2: ['AD1 Tilt Y2 [deg]', -2, 2, -1, 1],
-            tilty_sensor3: ['AD1 Tilt Y3 [deg]', -2, 2, 0.5, 1.5]
+            tiltx_sensor1: ['AD1 Tilt X1 [deg]', -2, 2, -0.98, -0.94],
+            tiltx_sensor2: ['AD1 Tilt X2 [deg]', -2, 2, -0.25, -0.21],
+            tiltx_sensor3: ['AD1 Tilt X3 [deg]', -2, 2, -0.75, -0.71],
+            tilty_sensor1: ['AD1 Tilt Y1 [deg]', -2, 2,  0.24,  0.28],
+            tilty_sensor2: ['AD1 Tilt Y2 [deg]', -2, 2, -0.44, -0.40],
+            tilty_sensor3: ['AD1 Tilt Y3 [deg]', -2, 2,  1.22,  1.26]
         },
         Ad2Lidsensor : {
             ultrasonic_gdls:  ['AD2 GdLS Level: Ultrasonic [mm]',  65, 95, 85.0-4.5, 85.0+4.5],
@@ -73,28 +73,28 @@ function load_configs(){
             //capacitance_temp_gdls: ['AD2 GdLS Temperature: Capacitance [C]', 23, 28, 24, 27],
             //capacitance_temp_ls: ['AD2 LS Temperature: Capacitance [C]', 23, 28, 24, 27],
             //capacitance_temp_mo: ['AD2 MO Temperature: Capacitance [C]', 20, 26, 21, 25],
-            tiltx_sensor1: ['AD2 Tilt X1 [deg]', -2, 2, -1, 1],
-            tiltx_sensor2: ['AD2 Tilt X2 [deg]', -2, 2, -1, 1],
-            tiltx_sensor3: ['AD2 Tilt X3 [deg]', -2, 2, -1, 1],
-            tilty_sensor1: ['AD2 Tilt Y1 [deg]', -2, 2, -1, 1],
-            tilty_sensor2: ['AD2 Tilt Y2 [deg]', -2, 2, -1, 1],
-            tilty_sensor3: ['AD2 Tilt Y3 [deg]', -2, 2, -1, 1]
+            tiltx_sensor1: ['AD2 Tilt X1 [deg]', -2, 2,  0.78,  0.82],
+            tiltx_sensor2: ['AD2 Tilt X2 [deg]', -2, 2,  0.18,  0.22],
+            tiltx_sensor3: ['AD2 Tilt X3 [deg]', -2, 2,  0.14,  0.18],
+            tilty_sensor1: ['AD2 Tilt Y1 [deg]', -2, 2, -0.23, -0.19],
+            tilty_sensor2: ['AD2 Tilt Y2 [deg]', -2, 2, -0.80, -0.76],
+            tilty_sensor3: ['AD2 Tilt Y3 [deg]', -2, 2, -0.73, -0.69]
         },
         Ad1Adcovergas : {
             supplypressure: ['AD1 Cover Gas Pressure [psi]', 10, 30, 16, 25],
             oxygen: ['AD1 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
-            humidity_covergasreturn: ['Humidity: AD1 Cover Gas Return [%]', 0.1, 15, 0.1, 10],
-            humidity_electricaldrypipereturn: ['Humidity: AD1 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 100],
-            humidity_gasdrypipereturn: ['Humidity: AD1 Gas Dry Pipe Return [%]', 0.1, 15, 0.1, 10],
-            humidity_pmtcablebellowreturn: ['Humidity: AD1 PMT Cable Bellow Return [%]', 0.1, 15, 0.1, 10]
+            humidity_covergasreturn: ['Humidity: AD1 Cover Gas Return [%]', 0.1, 100, 0.1, 25],
+            humidity_electricaldrypipereturn: ['Humidity: AD1 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
+            humidity_gasdrypipereturn: ['Humidity: AD1 Gas Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
+            humidity_pmtcablebellowreturn: ['Humidity: AD1 PMT Cable Bellow Return [%]', 0.1, 100, 0.1, 25]
         },
         Ad2Adcovergas : {
             supplypressure: ['AD2 Cover Gas Pressure [psi]', 10, 30, 16, 25],
             oxygen: ['AD2 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
-            humidity_covergasreturn: ['Humidity: AD2 Cover Gas Return [%]', 0.1, 15, 0.1, 10],
-            humidity_electricaldrypipereturn: ['Humidity: AD2 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 100],
-            humidity_gasdrypipereturn: ['Humidity: AD2 Gas Dry Pipe Return [%]', 0.1, 15, 0.001, 10],
-            humidity_pmtcablebellowreturn: ['Humidity: AD2 PMT Cable Bellow Return [%]', 0.1, 15, 0.1, 10]
+            humidity_covergasreturn: ['Humidity: AD2 Cover Gas Return [%]', 0.1, 100, 0.1, 25],
+            humidity_electricaldrypipereturn: ['Humidity: AD2 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
+            humidity_gasdrypipereturn: ['Humidity: AD2 Gas Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
+            humidity_pmtcablebellowreturn: ['Humidity: AD2 PMT Cable Bellow Return [%]', 0.1, 100, 0.1, 25]
         },
         DbnsIowTemp : {
             dbns_iw_temp_pt1: ['Inner WP Temerature [C]: 1', 21, 26, 22, 25],

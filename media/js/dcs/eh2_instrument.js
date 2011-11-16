@@ -41,30 +41,30 @@ function load_configs(){
         // renderTo, title, ymin, ymax, ysafemin, ysafemax
         Ad3Lidsensor : {
             // liquid levels change by 14 mm/C.  I set +/- 0.3C, +/-4.5 mm
-            ultrasonic_gdls:  ['AD3 GdLS Level: Ultrasonic [mm]',  65, 95, 87.7-4.5, 87.7+4.5],
-            capacitance_gdls: ['AD3 GdLS Level: Capacitance [mm]', 65, 95, 87.7-4.5, 87.7+4.5],    
+            ultrasonic_gdls:  ['AD3 GdLS Level: Ultrasonic [mm]',  65, 95, 89.1-4.5, 89.1+4.5],
+            capacitance_gdls: ['AD3 GdLS Level: Capacitance [mm]', 65, 95, 89.1-4.5, 89.1+4.5],    
             ultrasonic_ls:    ['AD3 LS Level: Ultrasonic [mm]',    65, 95, 85.0-4.5, 85.0+4.5], 
             capacitance_ls:   ['AD3 LS Level: Capacitance [mm]',   65, 95, 85.0-4.5, 85.0+4.5],
-            capacitance_mo:   ['AD3 MO Level: Capacitance [mm]',   65, 95, 91.2-4.5, 91.2+4.5],
+            capacitance_mo:   ['AD3 MO Level: Capacitance [mm]',   65, 95, 90.0-4.5, 90.0+4.5],
             temp_gdls:        ['AD3 GdLS Temperature [C]', 21, 25, 22.4, 23],
             temp_ls:          ['AD3 LS Temperature [C]',   21, 25, 22.4, 23],
             //capacitance_temp_gdls: ['AD3 GdLS Temperature [C]: Capacitance', 23, 28, 24, 27],
             //capacitance_temp_ls: ['AD3 LS Temperature [C]: Capacitance', 23, 28, 24, 27],
             //capacitance_temp_mo: ['AD3 MO Temperature [C]: Capacitance', 20, 26, 21, 25],
-            tiltx_sensor1: ['AD3 Tilt X1 [deg]', -2, 2, -1.5, -0.5],
-            tiltx_sensor2: ['AD3 Tilt X2 [deg]', -2, 2, -1, 1],
-            tiltx_sensor3: ['AD3 Tilt X3 [deg]', -2, 2, -1, 1],
-            tilty_sensor1: ['AD3 Tilt Y1 [deg]', -2, 2, -1, 1],
-            tilty_sensor2: ['AD3 Tilt Y2 [deg]', -2, 2, -1, 1],
-            tilty_sensor3: ['AD3 Tilt Y3 [deg]', -2, 2, 0.5, 1.5]
+            tiltx_sensor1: ['AD3 Tilt X1 [deg]', -2, 2,  0.38,  0.42],
+            tiltx_sensor2: ['AD3 Tilt X2 [deg]', -2, 2, -0.22, -0.18],
+            tiltx_sensor3: ['AD3 Tilt X3 [deg]', -2, 2, -0.37, -0.33],
+            tilty_sensor1: ['AD3 Tilt Y1 [deg]', -2, 2,  0.78,  0.82],
+            tilty_sensor2: ['AD3 Tilt Y2 [deg]', -2, 2,  1.40,  1.44],
+            tilty_sensor3: ['AD3 Tilt Y3 [deg]', -2, 2, -0.19, -0.15]
         },
         Ad3Adcovergas : {
             supplypressure: ['AD3 Cover Gas Pressure [psi]', 10, 30, 16, 25],
             oxygen: ['AD3 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
-            humidity_covergasreturn: ['Humidity: AD3 Cover Gas Return [%]', 0.1, 15, 0.1, 10],
-            humidity_electricaldrypipereturn: ['Humidity: AD3 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 100],
-            humidity_gasdrypipereturn: ['Humidity: AD3 Gas Dry Pipe Return [%]', 0.1, 15, 0.001, 10],
-            humidity_pmtcablebellowreturn: ['Humidity: AD3 PMT Cable Bellow Return [%]', 0.1, 15, 0.1, 10]
+            humidity_covergasreturn: ['Humidity: AD3 Cover Gas Return [%]', 0.1, 100, 0.1, 25],
+            humidity_electricaldrypipereturn: ['Humidity: AD3 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
+            humidity_gasdrypipereturn: ['Humidity: AD3 Gas Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
+            humidity_pmtcablebellowreturn: ['Humidity: AD3 PMT Cable Bellow Return [%]', 0.1, 100, 0.1, 25]
         },
         LansIowTemp : {
             lans_iw_temp_pt1: ['Inner WP Temerature: 1 [C]', 20, 26, 22, 25],
