@@ -226,13 +226,14 @@ def ongoing(request):
     '''find ongoing runs from file database'''
     from django.db.models import Max
     
-    latest_run_from_offline = Daqruninfo.objects.all()[0].runno
+    latest_runs_from_offline = [x['runno'] for x in Daqruninfo.objects.all()[:300].values('runno')]
     ongoing_runs = Daqrawdatafileinfo.objects.all(
-        ).filter(runno__gt = latest_run_from_offline
+        ).filter(runno__gt = latest_runs_from_offline[-1]
         ).values('runno').annotate(max=Max('runno'))
     
     runnos = [ x['max'] for x in ongoing_runs ]
-    
+    runnos = sorted(list(set(runnos) - set(latest_runs_from_offline)))
+    runnos.reverse()
     run_list = []
     for runno in runnos:
         first_file = Daqrawdatafileinfo.objects.select_related().filter(runno=runno)[0]
