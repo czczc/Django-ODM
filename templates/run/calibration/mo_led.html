@@ -1,3 +1,5 @@
+{% load lazyutil %}
+
 <table id="table_list">
    <thead><tr>
       <th>Run No</th>
@@ -16,7 +18,7 @@
                <td class='runno'><a href="{{ run.get_absolute_url }}">{{ run.runno }}</a></td>                   
                <td>{{ run.detector }}</td>
                <td>{{ run.vld.timestart_beijing }}</td>
-               <td>{{ run.vld.runlength }}</td>
+               <td>{{ run.vld.runlength|timedelta }}</td>
                <td>{{ run.mo_led }}</td>
                <td>{{ run.ledvoltage1 }}</td>
                <td>{{ run.ledfreq }}</td>

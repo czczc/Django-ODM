@@ -1,3 +1,5 @@
+{% load lazyutil %}
+
 <table id="table_list">
    <thead><tr>
       <th>Run No</th>
@@ -14,7 +16,7 @@
                <td class='runno'><a href="{{ run.get_absolute_url }}">{{ run.runno }}</a></td>
                <td>{{ run.detector }}</td>
                <td>{{ run.vld.timestart_beijing }}</td>
-               <td>{{ run.vld.runlength }}</td>
+               <td>{{ run.vld.runlength|timedelta }}</td>
                <td>{{ run.acu_for_source }}</td>
                <td>{{ run.z_for_source }}</td>
                <td class='raw'><a href="{{ SITE_ROOT }}/run/calibration/{{ run.runno }}/AD/{{ run.adno }}/">raw</a></td>

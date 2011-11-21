@@ -19,6 +19,16 @@ def field_type(field, ftype):
         pass
     return False
 
+
+@register.filter
+def timedelta(delta):
+    from datetime import timedelta
+    total_sec = delta.days*86400 + delta.seconds
+    hours, remainder = divmod(total_sec, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    return "%02d:%02d:%02d" % (hours, minutes, seconds)
+        
+        
 @register.filter
 def add_hours(date, hours):
     from datetime import timedelta

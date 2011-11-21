@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load pagination %}
+{% load lazyutil %}
 
 {% block title %}ODM | {{ description }} Runs{% endblock %}
 
@@ -45,7 +46,7 @@
                        <td class='Site'>{{ run.partition }}</td>
                        <!-- <td class='StartTime hidden'>{{ run.vld.timestart }}</td> -->
                        <td class='StartTimeBeijing'>{{ run.vld.timestart_beijing }}</td>
-                       <td class='RunLength'>{{ run.vld.runlength }}</td>
+                       <td class='RunLength'>{{ run.vld.runlength|timedelta }}</td>
                        <td class='NumFiles' runno='{{ run.runno }}'></td>                       
                        <td class='PQM' runno='{{ run.runno }}'></td>
                        <td class='Diagnostics' runno='{{ run.runno }}'></td>
