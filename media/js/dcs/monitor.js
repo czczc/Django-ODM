@@ -215,6 +215,7 @@ function load_tooltips() {
         var model = model_field[0];
         var field = model_field[1];
         var safemin = '-'; 
+        // if (!configs[model]) { console.log(model_field); console.log(configs);}
         if (configs[model][field]) { safemin = configs[model][field][3]; };
         var safemax = '-';
         if (configs[model][field]) { safemax = configs[model][field][4]; };
