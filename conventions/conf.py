@@ -40,6 +40,9 @@ class Site(object):
         'EH1-AD1' : 17,
         'EH1-AD2' : 18,
         'EH2-AD1' : 33,
+        'EH3-AD1' : 49,
+        'EH3-AD2' : 50,
+        'EH3-AD3' : 51,
     }
     
     daq_detectors=dict([(v,k) for (k,v) in daq_id.items()])
