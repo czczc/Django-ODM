@@ -4,7 +4,7 @@ var is_daylight = false;
 var adjust_seconds = is_daylight? 240 : 180;
 
 $('button').button();
-$('.th_last_update').qtip({
+$('.last_update').qtip({
     content: 'auto-updates every 5 min',
     position: {corner: {target: 'topMiddle', tooltip: 'bottomLeft'}},
     style: {
@@ -84,9 +84,10 @@ $('.sc').hover(function() {
 
 function fetch_one(model) {
     var url = base_url + 'dcs/record/' + model + '/last/';
-    var th_last_update = $('#th_'+model).next('.th_last_update');
+    // var th_last_update = $('#th_'+model).next('.th_last_update');
+    var last_update = $('#td_'+model+'__date_time');    
     // var title = heading.attr('title');
-    th_last_update.html('updating ...');
+    last_update.html('updating ...');
     var value;
     $.getJSON(url, function(data) {
         var record = data[0].fields;
@@ -102,20 +103,20 @@ function fetch_one(model) {
                 td_field.removeClass('warning');                
             }
         }
-        th_last_update.html(record.date_time);
+        last_update.html(record.date_time);
         var now = new Date();
         var now_time_ms = now.getTime();
         // confused, why the extra 4 hours? 
         var dt_min = (now_time_ms - parse_datetime(record.date_time))/60000 + adjust_seconds + now.getTimezoneOffset();
         if (dt_min>15) { 
-            th_last_update.removeClass('good').addClass('warning');
+            last_update.removeClass('good').addClass('warning');
         }
         else { 
-            th_last_update.removeClass('warning').addClass('good'); 
+            last_update.removeClass('warning').addClass('good'); 
         }
     })
     .error(function(){
-        th_last_update.html('updating failed');
+        last_update.html('updating failed');
     });
 }
 

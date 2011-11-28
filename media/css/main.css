@@ -34,6 +34,7 @@ ul.errorlist { margin: 0; padding: 0; list-style: none;}
 .sep { color: #bbb; font-weight: normal;}
 .right {float: right;}
 .left {float: left;}
+.botline {border-bottom: 1px solid #333;}
 
 /* link #125ca2 */
 a { color: #125ca2; background-color: transparent; text-decoration: none; font-weight: normal; outline-style: none; }
@@ -55,6 +56,8 @@ a:hover { /*color: #ff8f28;*/ text-decoration: underline; background-color: tran
 #content td { border: 1px solid #fff; font-weight: normal; font-size: 12px; padding: 6px; background-color: #f3f3f3; }
 #content td.descr { font-weight: bold; background-color: #deedf7; text-align: right; padding-right: 15px; }
 #content td.value { font-weight: bold; background-color: #e3f9e2; padding-left: 10px;}
+#content td.dc { font-weight: bold; background-color: #deedf7; text-align: center; }
+#content td.vc { font-weight: bold; background-color: #e3f9e2; text-align: center; }
 #content table.nostyle td { border: none; background-color: transparent; text-align: center;}
 #pmtinfo_table td.descr {}
 #pmtinfo_table td.value { width: 60px; }

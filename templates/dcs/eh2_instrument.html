@@ -6,132 +6,164 @@
 <div class="grid_24">
     <table>
 	<thead><tr>
-		<th colspan="2" style='text-align: center;' id='th_Ad3Lidsensor'>AD3 Lid Sensors</th>
-		<th colspan="4" style='text-align: center;' class='th_last_update good'></th>
+		<th colspan="3" style='text-align: center;'>AD Lid Sensors</th>
 	</tr></thead>
     <tbody>
         <tr>
-            <td class='descr'>GdLS Level: Ultrasonic [mm]</td><td class='value sc' id='td_Ad3Lidsensor__ultrasonic_gdls'></td>
-            <td class='descr'>LS Level: Ultrasonic [mm]</td><td class='value sc' id='td_Ad3Lidsensor__ultrasonic_ls'></td>
-            <td class='descr'></td><td class='value'></td>
+            <td class='dc'></td>
+            <td class='dc'>GdLS Level<br />(Ultrasonic)<br />[mm]</td>
+            <td class='dc'>LS Level<br />(Ultrasonic)<br />[mm]</td>
+            <td class='dc'>GdLS Level<br />(Capacitance)<br />[mm]</td>
+            <td class='dc'>LS Level<br />(Capacitance)<br />[mm]</td>
+            <td class='dc'>MO Level<br />(Capacitance)<br />[mm]</td>
+            <td class='dc'>GdLS Temperature<br />[&deg;C]</td>
+            <td class='dc'>LS Temperature<br />[&deg;C]</td>
+            <td class='dc' style="width:180px;">Last Update</td>
         </tr>
         <tr>
-            <td class='descr'>GdLS Level: Capacitance [mm]</td><td class='value sc' id='td_Ad3Lidsensor__capacitance_gdls'></td>
-            <td class='descr'>LS Level: Capacitance [mm]</td><td class='value sc' id='td_Ad3Lidsensor__capacitance_ls'></td>
-            <td class='descr'>MO Level: Capacitance [mm]</td><td class='value sc' id='td_Ad3Lidsensor__capacitance_mo'></td>
+            <td class='dc'>AD3</td>
+            <td class='vc sc' id='td_Ad3Lidsensor__ultrasonic_gdls'></td>
+            <td class='vc sc' id='td_Ad3Lidsensor__ultrasonic_ls'></td>
+            <td class='vc sc' id='td_Ad3Lidsensor__capacitance_gdls'></td>
+            <td class='vc sc' id='td_Ad3Lidsensor__capacitance_ls'></td>
+            <td class='vc sc' id='td_Ad3Lidsensor__capacitance_mo'></td>
+            <td class='vc sc' id='td_Ad3Lidsensor__temp_gdls'></td>
+            <td class='vc sc' id='td_Ad3Lidsensor__temp_ls'></td>
+            <td class='vc last_update good' id='td_Ad3Lidsensor__date_time'></td>
         </tr>
-        <tr>
-            <td class='descr'>GdLS Temperature [&deg;C]</td><td class='value sc' id='td_Ad3Lidsensor__temp_gdls'></td>
-            <td class='descr'>LS Temperature [&deg;C]</td><td class='value sc' id='td_Ad3Lidsensor__temp_ls'></td>
-            <td class='descr'></td><td class='value'></td>
-        </tr>
-        <!-- <tr>
-            <td class='descr'>GdLS Temperature: Capacitance</td><td class='value sc' id='td_Ad3Lidsensor__capacitance_temp_gdls'></td>
-            <td class='descr'>LS Temperature: Capacitance</td><td class='value sc' id='td_Ad3Lidsensor__capacitance_temp_ls'></td>
-            <td class='descr'>MO Temperature: Capacitance</td><td class='value sc'  id='td_Ad3Lidsensor__capacitance_temp_mo'></td>
-        </tr> -->
-        <!-- <tr>
-            <td class='descr'>Tilt X: 1</td><td class='value sc' id='td_Ad3Lidsensor__tiltx_sensor1'></td>
-            <td class='descr'>Tilt X: 2</td><td class='value sc' id='td_Ad3Lidsensor__tiltx_sensor2'></td>
-            <td class='descr'>Tilt X: 3</td><td class='value sc' id='td_Ad3Lidsensor__tiltx_sensor3'></td>
-        </tr>
-        <tr>
-            <td class='descr'>Tilt Y: 1</td><td class='value sc' id='td_Ad3Lidsensor__tilty_sensor1'></td>
-            <td class='descr'>Tilt Y: 2</td><td class='value sc' id='td_Ad3Lidsensor__tilty_sensor2'></td>
-            <td class='descr'>Tilt Y: 3</td><td class='value sc' id='td_Ad3Lidsensor__tilty_sensor3'></td>
-        </tr> -->
-    </tbody>
 	</table>
-
-    <table style='margin-top: 20px;'>
-    <thead><tr>
-       	<th colspan="2" style='text-align: center;' id='th_Ad3Adcovergas'>AD3 Cover Gas</th>
-		<th colspan="4" style='text-align: center;' class='th_last_update good'></th>
-    </tr></thead>
+	
+	<table style='margin-top: 20px;'>
+	<thead><tr>
+		<th colspan="3" style='text-align: center;'>AD Cover Gas</th>
+	</tr></thead>
     <tbody>
         <tr>
-            <td class='descr'>Pressure [psi]</td><td class='value sc' id='td_Ad3Adcovergas__supplypressure'></td>
-            <td class='descr'>Oxygen [ppm]</td><td class='value sc' id='td_Ad3Adcovergas__oxygen'></td>
-            <td class='descr'>Humidity [%]</td><td class='value sc' id='td_Ad3Adcovergas__humidity_covergasreturn'></td>
+            <td class='dc'></td>
+            <td class='dc'>Pressure<br />[psi]</td>
+            <td class='dc'>Oxygen<br />[ppm]</td>
+            <td class='dc'>Humidity<br />[%]</td>
+            <td class='dc'>Humidity<br />(Elec. Dry Pipe)<br />[%]</td>
+            <td class='dc'>Humidity<br />(Gas Dry Pipe)<br />[%]</td>
+            <td class='dc'>Humidity<br />(PMT Cable Bellow)<br />[%]</td>
+            <td class='dc' style="width:180px;">Last Update</td>
         </tr>
         <tr>
-            <td class='descr'>Humidity (Elec. Dry Pipe) [%]</td><td class='value sc' id='td_Ad3Adcovergas__humidity_electricaldrypipereturn'></td>
-            <td class='descr'>Humidity (Gas Dry Pipe) [%]</td><td class='value sc' id='td_Ad3Adcovergas__humidity_gasdrypipereturn'></td>
-            <td class='descr'>Humidity (PMT Cable Bellow) [%]</td><td class='value sc' id='td_Ad3Adcovergas__humidity_pmtcablebellowreturn'></td>
+            <td class='dc'>AD3</td>
+            <td class='vc sc' id='td_Ad3Adcovergas__supplypressure'></td>
+            <td class='vc sc' id='td_Ad3Adcovergas__oxygen'></td>
+            <td class='vc sc' id='td_Ad3Adcovergas__humidity_covergasreturn'></td>
+            <td class='vc sc' id='td_Ad3Adcovergas__humidity_electricaldrypipereturn'></td>
+            <td class='vc sc' id='td_Ad3Adcovergas__humidity_gasdrypipereturn'></td>
+            <td class='vc sc' id='td_Ad3Adcovergas__humidity_pmtcablebellowreturn'></td>
+            <td class='vc last_update good' id='td_Ad3Adcovergas__date_time'></td>
         </tr>
     </tbody>
 	</table>
-
-  <table style='margin-top: 20px;'>
-      <thead><tr>
-          <th colspan="2" style='text-align: center;' id='th_LansIowTemp' title=''>Water Pool Temperature</th>
-      <th colspan="6" style='text-align: center;' class='th_last_update good'></th>
-      </tr></thead>
+	
+	<table style='margin-top: 20px;'>
+	<thead><tr>
+		<th colspan="2" style='text-align: center;'>Water Pool</th>
+	</tr></thead>
     <tbody>
-          <tr>
-              <td class='descr'>IWS Temperature: 1</td><td class='value sc' id='td_LansIowTemp__lans_iw_temp_pt1'></td>
-              <td class='descr'>IWS Temperature: 2</td><td class='value sc' id='td_LansIowTemp__lans_iw_temp_pt2'></td>
-              <td class='descr'>IWS Temperature: 3</td><td class='value sc' id='td_LansIowTemp__lans_iw_temp_pt3'></td>
-              <td class='descr'>IWS Temperature: 4</td><td class='value sc' id='td_LansIowTemp__lans_iw_temp_pt4'></td>
-          </tr>
-          <tr>
-              <td class='descr'>OWS Temperature: 1</td><td class='value sc' id='td_LansIowTemp__lans_ow_temp_pt1'></td>
-              <td class='descr'>OWS Temperature: 2</td><td class='value sc' id='td_LansIowTemp__lans_ow_temp_pt2'></td>
-              <td class='descr'>OWS Temperature: 3</td><td class='value sc' id='td_LansIowTemp__lans_ow_temp_pt3'></td>
-              <td class='descr'>OWS Temperature: 4</td><td class='value sc' id='td_LansIowTemp__lans_ow_temp_pt4'></td>
-          </tr>
+        <tr>
+            <td class='dc'></td>
+            <td class='dc'>Temperature 1<br />[&deg;C]</td>
+            <td class='dc'>Temperature 2<br />[&deg;C]</td>
+            <td class='dc'>Temperature 3<br />[&deg;C]</td>
+            <td class='dc'>Temperature 4<br />[&deg;C]</td>
+            <td class='dc' style="width:180px;">Last Update</td>
+        </tr>
+        <tr>
+            <td class='dc'>IWS</td>
+            <td class='vc sc' id='td_LansIowTemp__lans_iw_temp_pt1'></td>
+            <td class='vc sc' id='td_LansIowTemp__lans_iw_temp_pt2'></td>
+            <td class='vc sc' id='td_LansIowTemp__lans_iw_temp_pt3'></td>
+            <td class='vc sc' id='td_LansIowTemp__lans_iw_temp_pt4'></td>
+            <td class='vc last_update good' id='td_LansIowTemp__date_time'></td>
+        </tr>
+        <tr>
+            <td class='dc'>OWS</td>
+            <td class='vc sc' id='td_LansIowTemp__lans_ow_temp_pt1'></td>
+            <td class='vc sc' id='td_LansIowTemp__lans_ow_temp_pt2'></td>
+            <td class='vc sc' id='td_LansIowTemp__lans_ow_temp_pt3'></td>
+            <td class='vc sc' id='td_LansIowTemp__lans_ow_temp_pt4'></td>
+            <td class='vc'>-</td>
+        </tr>
     </tbody>
-  </table>
+	</table>
+	
+	<table style='margin-top: 20px;'>
+	<thead><tr>
+		<th colspan="1" style='text-align: center;'>RPC Gas</th>
+	</tr></thead>
+    <tbody>
+        <tr>
+            <td class='dc'></td>
+            <td class='dc'>Pressure<br />[psi]</td>
+            <td class='dc'>Flow Rate<br />[cc/m]</td>
+            <td class='dc'>Weight<br />[kg]</td>
+            <td class='dc' style="width:180px;">Last Update</td>
+        </tr>
+        <tr>
+            <td class='dc'>Argon</td>
+            <td class='vc sc' id='td_LansRpcGas101__pressure_argon'></td>
+            <td class='vc sc' id='td_LansRpcGas101__flow_rate_argon'></td>
+            <td class='vc'>-</td>
+            <td class='vc last_update good' id='td_LansRpcGas101__date_time'></td>
+        </tr>
+        <tr>
+            <td class='dc'>Isobutane</td>
+            <td class='vc sc' id='td_LansRpcGas101__pressure_isobutane'></td>
+            <td class='vc sc' id='td_LansRpcGas101__flow_rate_isobutane'></td>
+            <td class='vc sc' id='td_LansRpcGas102__weight_isobutane'></td>
+            <td class='vc last_update good' id='td_LansRpcGas102__date_time'></td>
+        </tr>
+        <tr>
+            <td class='dc'>R134A</td>
+            <td class='vc sc' id='td_LansRpcGas101__pressure_r134a'></td>
+            <td class='vc sc' id='td_LansRpcGas101__flow_rate_r134a'></td>
+            <td class='vc sc' id='td_LansRpcGas102__weight_r134a'></td>
+            <td class='vc'>-</td>
+        </tr>
+        <tr>
+            <td class='dc'>SF6</td>
+            <td class='vc sc' id='td_LansRpcGas101__pressure_sf6'></td>
+            <td class='vc sc' id='td_LansRpcGas101__flow_rate_sf6'></td>
+            <td class='vc sc' id='td_LansRpcGas102__weight_sf6'></td>
+            <td class='vc'>-</td>
+        </tr>
+    </tbody>
+	</table>
 
 	<table style='margin-top: 20px;'>
-    <thead><tr>
-        <th colspan="2" style='text-align: center;' id='th_LansRpcGas101' title=''>RPC Gas</th>
-	    <th colspan="6" style='text-align: center;' class='th_last_update good'></th>
-    </tr></thead>
-	<tbody>
-      <tr>
-          <td class='descr'>Pressure: Argon [psi]</td><td class='value sc' id='td_LansRpcGas101__pressure_argon'></td>
-          <td class='descr'>Pressure: Isobutane [psi]</td><td class='value sc' id='td_LansRpcGas101__pressure_isobutane'></td>
-          <td class='descr'>Pressure: R134A [psi]</td><td class='value sc' id='td_LansRpcGas101__pressure_r134a'></td>
-          <td class='descr'>Pressure: SF6 [psi]</td><td class='value sc' id='td_LansRpcGas101__pressure_sf6'></td>
-      </tr>
-      <tr>
-          <td class='descr'>Flow Rate: Argon [cc/m]</td><td class='value sc' id='td_LansRpcGas101__flow_rate_argon'></td>
-          <td class='descr'>Flow Rate: Isobutane [cc/m]</td><td class='value sc' id='td_LansRpcGas101__flow_rate_isobutane'></td>
-          <td class='descr'>Flow Rate: R134A [cc/m]</td><td class='value sc' id='td_LansRpcGas101__flow_rate_r134a'></td>
-          <td class='descr'>Flow Rate: SF6 [cc/m]</td><td class='value sc' id='td_LansRpcGas101__flow_rate_sf6'></td>
-      </tr>
-      <tr>
-          <td class='descr'></td><td class='value'></td>
-          <td class='descr'>Weight: Isobutane [kg]</td><td class='value sc' id='td_LansRpcGas102__weight_isobutane'></td>
-          <td class='descr'>Weight: R134A [kg]</td><td class='value sc' id='td_LansRpcGas102__weight_r134a'></td>
-          <td class='descr'>Weight: SF6 [kg]</td><td class='value sc' id='td_LansRpcGas102__weight_sf6'></td>
-      </tr>
-	</tbody>
-  </table>
-  
-     
-  
-  <table style='margin-top: 20px;'>
-      <thead><tr>
-          <th colspan="2" style='text-align: center;' id='th_LansEnvPth' title=''>Environmental Sensors</th>
-          <th colspan="4" style='text-align: center;' class='th_last_update good'></th>
-      </tr></thead>
-      <tbody>
-          <tr>
-              <td class='descr'>Temperature 1</td><td class='value sc' id='td_LansEnvPth__lans_pth_t1'></td>
-              <td class='descr'>Humidity 1</td><td class='value sc' id='td_LansEnvPth__lans_pth_h1'></td>
-              <td class='descr'>Pressure 1</td><td class='value sc' id='td_LansEnvPth__lans_pth_p1'></td>
-          </tr>         
-          <tr>          
-              <td class='descr'>Temperature 2</td><td class='value sc'  id='td_LansEnvPth__lans_pth_t2'></td>
-              <td class='descr'>Humidity 2</td><td class='value sc' id='td_LansEnvPth__lans_pth_h2'></td>
-              <td class='descr'>Pressure 2</td><td class='value sc' id='td_LansEnvPth__lans_pth_p2'></td>
-          </tr>
-      </tbody>
-  </table>
-
-    
+	<thead><tr>
+		<th colspan="2" style='text-align: center;'>Environmental Sensors</th>
+	</tr></thead>
+    <tbody>
+        <tr>
+            <td class='dc'></td>
+            <td class='dc'>Temperature 1<br />[&deg;C]</td>
+            <td class='dc'>Temperature 2<br />[&deg;C]</td>
+            <td class='dc'>Humidity 1<br />[%]</td>
+            <td class='dc'>Humidity 2<br />([%]</td>
+            <td class='dc'>Pressure 1<br />[mbar]</td>
+            <td class='dc'>Pressure 2<br />[mbar]</td>
+            <td class='dc' style="width:180px;">Last Update</td>
+        </tr>
+        <tr>
+            <td class='dc'>EH2</td>
+            <td class='vc sc' id='td_LansEnvPth__lans_pth_t1'></td>
+            <td class='vc sc' id='td_LansEnvPth__lans_pth_t2'></td>
+            <td class='vc sc' id='td_LansEnvPth__lans_pth_h1'></td>
+            <td class='vc sc' id='td_LansEnvPth__lans_pth_h2'></td>
+            <td class='vc sc' id='td_LansEnvPth__lans_pth_p1'></td>
+            <td class='vc sc' id='td_LansEnvPth__lans_pth_p2'></td>
+            <td class='vc last_update good' id='td_LansEnvPth__date_time'></td>
+        </tr>
+    </tbody>
+	</table>
+	        
 </div>
 <div class="clear"></div>
 
@@ -293,7 +325,7 @@
 <div class = "grid_24">
   <a name="Env"></a>
      <h2>
-         EH1 Environment Monitors
+         Environment Monitors
     </h2>
 </div>    
 <div class="clear"></div>

@@ -27,7 +27,7 @@ function load_all_models() {
     
     // load_model('LansIowTemp');
     // load_model('LansRpcGas101');
-    // load_model('LansEnvPth');
+    load_model('FarsEnvPth');
 
 }
 
@@ -41,21 +41,20 @@ function fetch_latest() {
     
     // fetch_one('LansIowTemp');
     // fetch_one('LansRpcGas101');
-    // fetch_one('LansEnvPth');
+    fetch_one('FarsEnvPth');
 }
 
 function load_configs(){
     configs = {
         // renderTo, title, ymin, ymax, ysafemin, ysafemax
         Ad4Lidsensor : {
-            //ultrasonic_gdls:  ['AD4 GdLS Level: Ultrasonic',  65, 95, 70, 90],
-            ultrasonic_gdls:  ['AD4 GdLS Level: Ultrasonic',  43, 95, 70, 90],
-            ultrasonic_ls:    ['AD4 LS Level: Ultrasonic',    43, 95, 70, 90],
-            capacitance_gdls: ['AD4 GdLS Level: Capacitance', 43, 95, 70, 90],
-            capacitance_ls:   ['AD4 LS Level: Capacitance',   43, 95, 70, 90],
-            capacitance_mo:   ['AD4 MO Level: Capacitance',   43, 95, 70, 90],
-            temp_gdls:        ['AD4 GdLS Temperature', 21, 25, 22.4, 23],
-            temp_ls:          ['AD4 LS Temperature',   21, 25, 22.4, 23],
+            ultrasonic_gdls:  ['AD4 GdLS Level: Ultrasonic [mm]',  43, 95, 70, 90],
+            ultrasonic_ls:    ['AD4 LS Level: Ultrasonic [mm]',    43, 95, 70, 90],
+            capacitance_gdls: ['AD4 GdLS Level: Capacitance [mm]', 43, 95, 70, 90],
+            capacitance_ls:   ['AD4 LS Level: Capacitance [mm]',   43, 95, 70, 90],
+            capacitance_mo:   ['AD4 MO Level: Capacitance [mm]',   43, 95, 70, 90],
+            temp_gdls:        ['AD4 GdLS Temperature [C]', 21, 25, 22.4, 23],
+            temp_ls:          ['AD4 LS Temperature [C]',   21, 25, 22.4, 23],
             //capacitance_temp_gdls: ['AD4 GdLS Temperature: Capacitance', 23, 28, 24, 27],
             //capacitance_temp_ls: ['AD4 LS Temperature: Capacitance', 23, 28, 24, 27],
             //capacitance_temp_mo: ['AD4 MO Temperature: Capacitance', 20, 26, 21, 25],
@@ -67,13 +66,13 @@ function load_configs(){
             tilty_sensor3: ['AD4 Tilt Y3 [deg]', -2, 2,  0.78,  0.82]
         },
         Ad5Lidsensor : {
-            ultrasonic_gdls:  ['AD5 GdLS Level: Ultrasonic',  43, 95, 70, 90],
-            ultrasonic_ls:    ['AD5 LS Level: Ultrasonic',    43, 95, 70, 90],
-            capacitance_gdls: ['AD5 GdLS Level: Capacitance', 43, 95, 70, 90],
-            capacitance_ls:   ['AD5 LS Level: Capacitance',   43, 95, 70, 90],
-            capacitance_mo:   ['AD5 MO Level: Capacitance',   43, 95, 70, 90],
-            temp_gdls:        ['AD5 GdLS Temperature', 21, 25, 22.4, 23],
-            temp_ls:          ['AD5 LS Temperature',   21, 25, 22.4, 23],
+            ultrasonic_gdls:  ['AD5 GdLS Level: Ultrasonic [mm]',  43, 95, 70, 90],
+            ultrasonic_ls:    ['AD5 LS Level: Ultrasonic [mm]',    43, 95, 70, 90],
+            capacitance_gdls: ['AD5 GdLS Level: Capacitance [mm]', 43, 95, 70, 90],
+            capacitance_ls:   ['AD5 LS Level: Capacitance [mm]',   43, 95, 70, 90],
+            capacitance_mo:   ['AD5 MO Level: Capacitance [mm]',   43, 95, 70, 90],
+            temp_gdls:        ['AD5 GdLS Temperature [C]', 21, 25, 22.4, 23],
+            temp_ls:          ['AD5 LS Temperature [C]',   21, 25, 22.4, 23],
             //capacitance_temp_gdls: ['AD5 GdLS Temperature: Capacitance', 23, 28, 24, 27],
             //capacitance_temp_ls: ['AD5 LS Temperature: Capacitance', 23, 28, 24, 27],
             //capacitance_temp_mo: ['AD5 MO Temperature: Capacitance', 20, 26, 21, 25],
@@ -85,13 +84,13 @@ function load_configs(){
             tilty_sensor3: ['AD5 Tilt Y3 [deg]', -2, 2,  0.70,  0.74]
         },
         Ad6Lidsensor : {
-            ultrasonic_gdls:  ['AD6 GdLS Level: Ultrasonic',  43, 95, 70, 90],
-            ultrasonic_ls:    ['AD6 LS Level: Ultrasonic',    43, 95, 70, 90],
-            capacitance_gdls: ['AD6 GdLS Level: Capacitance', 43, 95, 70, 90],
-            capacitance_ls:   ['AD6 LS Level: Capacitance',   43, 95, 70, 90],
-            capacitance_mo:   ['AD6 MO Level: Capacitance',   43, 95, 70, 90],
-            temp_gdls:        ['AD6 GdLS Temperature', 21, 25, 22.4, 23],
-            temp_ls:          ['AD6 LS Temperature',   21, 25, 22.4, 23],
+            ultrasonic_gdls:  ['AD6 GdLS Level: Ultrasonic [mm]',  43, 95, 70, 90],
+            ultrasonic_ls:    ['AD6 LS Level: Ultrasonic [mm]',    43, 95, 70, 90],
+            capacitance_gdls: ['AD6 GdLS Level: Capacitance [mm]', 43, 95, 70, 90],
+            capacitance_ls:   ['AD6 LS Level: Capacitance [mm]',   43, 95, 70, 90],
+            capacitance_mo:   ['AD6 MO Level: Capacitance [mm]',   43, 95, 70, 90],
+            temp_gdls:        ['AD6 GdLS Temperature [C]', 21, 25, 22.4, 23],
+            temp_ls:          ['AD6 LS Temperature [C]',   21, 25, 22.4, 23],
             //capacitance_temp_gdls: ['AD6 GdLS Temperature: Capacitance', 23, 28, 24, 27],
             //capacitance_temp_ls: ['AD6 LS Temperature: Capacitance', 23, 28, 24, 27],
             //capacitance_temp_mo: ['AD6 MO Temperature: Capacitance', 20, 26, 21, 25],
@@ -125,7 +124,7 @@ function load_configs(){
             humidity_electricaldrypipereturn: ['Humidity: AD6 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
             humidity_gasdrypipereturn: ['Humidity: AD6 Gas Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
             humidity_pmtcablebellowreturn: ['Humidity: AD6 PMT Cable Bellow Return [%]', 0.1, 100, 0.1, 25]
-        }
+        },
         // LansIowTemp : {
         //     lans_iw_temp_pt1: ['Inner WP Temerature: 1', 20, 26, 22, 25],
         //     lans_iw_temp_pt2: ['Inner WP Temerature: 2', 20, 26, 22, 25],
@@ -142,13 +141,13 @@ function load_configs(){
         //     pressure_r134a: ['RPC R134A Pressure', 18, 22, 19, 22],
         //     pressure_sf6: ['RPC SF6 Pressure', 18, 22, 19, 22]     
         // },
-        // LansEnvPth : {
-        //     lans_pth_t1: ['EH2 Temperature: 1', 22, 29, 24, 29],        
-        //     lans_pth_t2: ['EH2 Temperature: 2', 22, 29, 24, 29],        
-        //     lans_pth_h1: ['EH2 Humidity: 1', 50, 75, 40, 70],        
-        //     lans_pth_h2: ['EH2 Humidity: 2', 50, 75, 40, 70],        
-        //     lans_pth_p1: ['EH2 Pressure: 1', false, false, 980, 1030],        
-        //     lans_pth_p2: ['EH2 Pressure: 2', false, false, 980, 1030]
-        // }
+        FarsEnvPth : {
+            fars_pth_t1: ['EH3 Temperature 1 [C]', 20, 29, 21, 29],        
+            fars_pth_t2: ['EH3 Temperature 2 [C]', 20, 29, 21, 29],        
+            fars_pth_h1: ['EH3 Humidity 1 [%]', 30, 80, 30, 70],        
+            fars_pth_h2: ['EH3 Humidity 2 [%]', 30, 80, 30, 70],        
+            fars_pth_p1: ['EH3 Pressure 1 [mbar]', 1000, 1050, 980, 1030],        
+            fars_pth_p2: ['EH3 Pressure 2 [mbar]', 1000, 1050, 980, 1030]
+        }
     };
 }

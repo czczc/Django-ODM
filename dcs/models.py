@@ -220,6 +220,16 @@ class LansEnvPth(DcsModel):
     class Meta(DcsModel.Meta):
         db_table = u'LANS_ENV_PTH'
 
+class FarsEnvPth(DcsModel):
+    fars_pth_p1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FARS_PTH_P1', blank=True) # Field name made lowercase.
+    fars_pth_t1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FARS_PTH_T1', blank=True) # Field name made lowercase.
+    fars_pth_h1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FARS_PTH_H1', blank=True) # Field name made lowercase.
+    fars_pth_p2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FARS_PTH_P2', blank=True) # Field name made lowercase.
+    fars_pth_t2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FARS_PTH_T2', blank=True) # Field name made lowercase.
+    fars_pth_h2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FARS_PTH_H2', blank=True) # Field name made lowercase.
+    class Meta(DcsModel.Meta):
+        db_table = u'FARS_ENV_PTH'
+        
 # abstract model for VMR crate tables
 class AbstractVme(DcsModel):
     voltage_5v = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='Voltage_5V', blank=True) # Field name made lowercase.
