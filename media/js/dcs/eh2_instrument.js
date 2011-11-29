@@ -62,7 +62,7 @@ function load_configs(){
             supplypressure: ['AD3 Cover Gas Pressure [psi]', 10, 30, 16, 25],
             oxygen: ['AD3 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
             humidity_covergasreturn: ['Humidity: AD3 Cover Gas Return [%]', 0.1, 100, 0.1, 25],
-            humidity_electricaldrypipereturn: ['Humidity: AD3 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
+            humidity_electricaldrypipereturn: ['Humidity: AD3 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 31],
             humidity_gasdrypipereturn: ['Humidity: AD3 Gas Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
             humidity_pmtcablebellowreturn: ['Humidity: AD3 PMT Cable Bellow Return [%]', 0.1, 100, 0.1, 25]
         },

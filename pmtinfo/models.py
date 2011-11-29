@@ -1,5 +1,5 @@
 from django.db import models
-from odm.conventions.util import DBI_get
+from odm.conventions.util import DBI_get, DBI_format
 from odm.conventions.conf import Site, Detector
 
 
@@ -102,7 +102,30 @@ class CalibPMTSpecManager(models.Manager):
             return vld.calibpmtspec_set
         else:
             return None
-            
+    
+    
+    def pmtspecTrend(self, site, detector, pmtid, format='txt'):
+        '''Returns DBI values'''
+        try:
+            site = Site.site_id[site]
+            detector = Detector.detector_id[detector]
+        except KeyError:
+            return None
+        
+        values = self.select_related().filter(
+            subsite=detector,
+            simmask=1,
+            sitemask=site
+        ).filter(calibpmtspec__pmtid=pmtid
+        ).values('seqno', 'timestart', 'timeend', 'insertdate',
+            'calibpmtspec__pmtspehigh',
+            'calibpmtspec__pmtspelow',
+            'calibpmtspec__pmttoffset',
+        )
+        
+        output = DBI_format(values, format)
+        
+        return
 
 # =====================================
 class Feecablemapvld(models.Model):
