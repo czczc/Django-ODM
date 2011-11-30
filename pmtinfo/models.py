@@ -38,7 +38,7 @@ class CableMapVldManager(models.Manager):
 
     def records(self, site, detector, task=0, sim=1, character='|', width=50):
         '''Returns formated DBI records'''
-        output = DBI_records(self, site, detector, task, sim, character, width)
+        output = DBI_records(self, 'cablemap', site, detector, task, sim, character, width)
         return output
 
 
@@ -108,7 +108,7 @@ class CalibPMTSpecVldManager(models.Manager):
     
     def records(self, site, detector, task=0, sim=1, character='|', width=50):
         '''Returns formated DBI records'''
-        output = DBI_records(self, site, detector, task, sim, character, width)
+        output = DBI_records(self, 'calibpmtspec', site, detector, task, sim, character, width)
         return output
         
     

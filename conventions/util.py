@@ -44,7 +44,7 @@ def DBI_get(objects, context):
         return None
 
 
-def DBI_records(objects, site, detector, task, sim, character, width):
+def DBI_records(objects, fk, site, detector, task, sim, character, width):
     '''
     Format DBI records
     
@@ -59,12 +59,14 @@ def DBI_records(objects, site, detector, task, sim, character, width):
     except KeyError:
         return site + '-' + detector + ' not found.'
     
+    from django.db.models import Count
     values = objects.filter(
         sitemask=site,
         subsite=detector,
         simmask=sim,
         task=task,
-    ).values('seqno', 'timestart', 'timeend', 'insertdate')
+    ).values('seqno', 'timestart', 'timeend', 'insertdate'
+    ).annotate(count=Count(fk))
     
     options = {
         'width' : width,
@@ -73,10 +75,10 @@ def DBI_records(objects, site, detector, task, sim, character, width):
     }
     
     output = ''
-    fmt_title = "%%7s  %%-19s %%-%ds %%-19s %%s\n" % (options['span'],)
-    fmt = "[%%5d]  %%s %%-%ds %%s [%%s]\n" % (options['span'],)    
-    output += fmt_title % ('[seqno]', '    valid from', ' ', '    valid to', '    [insert date]')
-    output += fmt_title % ('=======', '='*19, ' ', '='*19, '='*21)
+    fmt_title = "%%7s  %%-19s %%-%ds %%-19s %%5s %%s\n" % (options['span'],)
+    fmt = "[%%5d]  %%s %%-%ds %%s %%4d  [%%s]\n" % (options['span'],)    
+    output += fmt_title % ('[seqno]', '    valid from', ' ', '    valid to', 'count', '    [insert date]')
+    output += fmt_title % ('=======', '='*19, ' ', '='*19, '=====', '='*21)
     
     timemin = datetime(2038, 1, 20)
     timemax = datetime(1979, 1, 1)
@@ -104,7 +106,9 @@ def DBI_records(objects, site, detector, task, sim, character, width):
         else:
             span = options['character'] * int((timeend - timestart).days/scale)
                     
-        output += fmt % (value['seqno'], timestart, pre+span, timeend, value['insertdate'],)
+        output += fmt % (value['seqno'], timestart, pre+span, timeend, value['count'], value['insertdate'],)
+        
+        # print value['count']
             
     return output
             
