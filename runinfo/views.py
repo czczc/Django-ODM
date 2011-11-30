@@ -202,7 +202,7 @@ def runlist(request, page=1, records=500):
             run_list = run_list.filter(runno=0) # hack, no match
     else:
         # return HttpResponse(json.dumps(request.GET, indent=4))
-        description = 'All'
+        description = 'All Completed'
         form = SearchRunListForm() # unbound form
     
    
@@ -234,6 +234,7 @@ def ongoing(request):
     runnos = [ x['max'] for x in ongoing_runs ]
     runnos = sorted(list(set(runnos) - set(latest_runs_from_offline)))
     runnos.reverse()
+    seen = {}
     run_list = []
     for runno in runnos:
         first_file = Daqrawdatafileinfo.objects.select_related().filter(runno=runno)[0]
@@ -241,6 +242,15 @@ def ongoing(request):
         tmp, tmp, tmp, runtype, partition, tmp, tmp, tmp = first_file.filename.split('.')
         if partition.endswith('-Merged'):
             partition = partition.replace('-Merged', '')
+        
+        if partition == 'AllStreams': continue
+        if seen.get(partition, ''): continue
+        
+        seen[partition] = 1
+        if partition in ['EH1', 'EH2', 'EH3']:
+            for detector in ['AD1', 'AD2', 'AD3', 'AD4', 'WPI', 'WPO', 'AD', 'WP']:
+                seen[partition+'-'+detector] = 1
+            
         timestart = first_file.vld.timestart
         timestart_beijing = first_file.vld.timestart_beijing()
         run_list.append( {
