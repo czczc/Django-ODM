@@ -50,7 +50,7 @@ def data(request, model, latest_days=30):
     except IndexError:
         pass
     except:
-        raise
+        # raise
         return HttpResponse(model + ' does not exist')
     
     from django.core import serializers

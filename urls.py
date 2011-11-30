@@ -21,8 +21,8 @@ urlpatterns = patterns('',
     (r'^pdsf/', include('odm.pdsf.urls')), 
     (r'^local/', include('odm.odmrun.urls')),
     (r'^feeds/', include('odm.feeds.urls')),
-    
     (r'^dcs/', include('odm.dcs.urls')),
+    (r'^dbi/', include('odm.dbi.urls')),
     
     (r'^robots\.txt$', direct_to_template, {'template': 'robots.txt', 'mimetype': 'text/plain'}),
 )

@@ -1,7 +1,6 @@
 from django.db import models
-from odm.conventions.util import DBI_get, DBI_format
+from odm.conventions.util import DBI_get, DBI_records
 from odm.conventions.conf import Site, Detector
-
 
 # =====================================
 class CableMapVldManager(models.Manager):
@@ -37,41 +36,44 @@ class CableMapVldManager(models.Manager):
             return None
 
 
-# =====================================
-class FeeCableMapManager(models.Manager):
-    
-    def cablemapSet(self, site, detector, year, month, day,
-        rollback=False, rollback_year='', rollback_month='', rollback_day=''):
-        '''Returns a QuerySet of DBI Feecablemap'''
-        
-        try:
-            site = Site.site_id[site]
-            detector = Detector.detector_id[detector]
-        except KeyError:
-            return None
-        
-        context = {
-            'year' : int(year),
-            'month' : int(month),
-            'day' : int(day),
-            'site' : site,
-            'detector' : detector,
-        }
-        if rollback:
-            context['rollback'] = {
-                'year' : int(rollback_year),
-                'month' : int(rollback_month),
-                'day' : int(rollback_day),
-            }
-        
-        vld = DBI_get(self.select_related(), context)
-        if vld:
-            return vld.feecablemap_set
-        else:
-            return None
+    def records(self, site, detector, task=0, sim=1, character='|', width=50):
+        '''Returns formated DBI records'''
+        output = DBI_records(self, site, detector, task, sim, character, width)
+        return output
+
+
+    # def trend(self, site, detector, sensorid=None, format='txt', character='-', width=50):
+    #     '''Returns DBI records'''
+    #     try:
+    #         site = Site.site_id[site]
+    #         detector = Detector.detector_id[detector]
+    #     except KeyError:
+    #         return site + '-' + detector + ' not found.'
+    #     
+    #     if sensorid:
+    #         values = self.select_related().filter(
+    #             subsite=detector,
+    #             sitemask=site,
+    #             simmask=1,
+    #             task=0,
+    #         ).filter(cablemap__sensorid=sensorid
+    #         ).values('seqno', 'timestart', 'timeend', 'insertdate',
+    #             'cablemap__sensorid',
+    #             'cablemap__channelid',
+    #         )
+    #     else:
+    #         values = self.select_related().filter(
+    #             subsite=detector,
+    #             simmask=1,
+    #             sitemask=site
+    #         ).values('seqno', 'timestart', 'timeend', 'insertdate')
+    #     
+    #     output = DBI_format(values, format, character, width)
+    #     
+    #     return output
 
 # =====================================
-class CalibPMTSpecManager(models.Manager):
+class CalibPMTSpecVldManager(models.Manager):
     
     def pmtspecSet(self, site, detector, year, month, day,
         rollback=False, rollback_year='', rollback_month='', rollback_day=''):
@@ -104,103 +106,43 @@ class CalibPMTSpecManager(models.Manager):
             return None
     
     
-    def pmtspecTrend(self, site, detector, pmtid, format='txt'):
-        '''Returns DBI values'''
-        try:
-            site = Site.site_id[site]
-            detector = Detector.detector_id[detector]
-        except KeyError:
-            return None
+    def records(self, site, detector, task=0, sim=1, character='|', width=50):
+        '''Returns formated DBI records'''
+        output = DBI_records(self, site, detector, task, sim, character, width)
+        return output
         
-        values = self.select_related().filter(
-            subsite=detector,
-            simmask=1,
-            sitemask=site
-        ).filter(calibpmtspec__pmtid=pmtid
-        ).values('seqno', 'timestart', 'timeend', 'insertdate',
-            'calibpmtspec__pmtspehigh',
-            'calibpmtspec__pmtspelow',
-            'calibpmtspec__pmttoffset',
-        )
-        
-        output = DBI_format(values, format)
-        
-        return
+    
+    # def trend(self, site, detector, pmtid=None, format='txt', character='-', width=50):
+    #     '''Returns DBI records'''
+    #     try:
+    #         site = Site.site_id[site]
+    #         detector = Detector.detector_id[detector]
+    #     except KeyError:
+    #         return site + '-' + detector + ' not found.'
+    #     
+    #     if pmtid:
+    #         values = self.select_related().filter(
+    #             subsite=detector,
+    #             sitemask=site,
+    #             simmask=1,
+    #             task=0,
+    #         ).filter(calibpmtspec__pmtid=pmtid
+    #         ).values('seqno', 'timestart', 'timeend', 'insertdate',
+    #             'calibpmtspec__pmtspehigh',
+    #             'calibpmtspec__pmtspelow',
+    #             'calibpmtspec__pmttoffset',
+    #         )
+    #     else:
+    #         values = self.select_related().filter(
+    #             subsite=detector,
+    #             simmask=1,
+    #             sitemask=site
+    #         ).values('seqno', 'timestart', 'timeend', 'insertdate')
+    #     
+    #     output = DBI_format(values, format, character)
+    #     
+    #     return output
 
-# =====================================
-class Feecablemapvld(models.Model):
-    seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
-    timestart = models.DateTimeField(db_column='TIMESTART') # Field name made lowercase.
-    timeend = models.DateTimeField(db_column='TIMEEND') # Field name made lowercase.
-    sitemask = models.IntegerField(null=True, db_column='SITEMASK', blank=True) # Field name made lowercase.
-    simmask = models.IntegerField(null=True, db_column='SIMMASK', blank=True) # Field name made lowercase.
-    subsite = models.IntegerField(null=True, db_column='SUBSITE', blank=True) # Field name made lowercase.
-    task = models.IntegerField(null=True, db_column='TASK', blank=True) # Field name made lowercase.
-    aggregateno = models.IntegerField(null=True, db_column='AGGREGATENO', blank=True) # Field name made lowercase.
-    versiondate = models.DateTimeField(db_column='VERSIONDATE') # Field name made lowercase.
-    insertdate = models.DateTimeField(db_column='INSERTDATE') # Field name made lowercase.
-    
-    objects = FeeCableMapManager()
-    
-    class Meta:
-        db_table = u'FeeCableMapVld'
-        ordering = ['-seqno']
-
-    def __unicode__(self):
-        return u'seq %d' % (self.seqno, )
- 
-        
-# =====================================
-class Feecablemap(models.Model):
-    vld = models.ForeignKey(Feecablemapvld, db_column='SEQNO') # Field name made lowercase.
-    row_counter = models.IntegerField(primary_key=True, db_column='ROW_COUNTER') # Fake pk, will duplicate (legacy db use multiple fields as pk)
-    feechannelid = models.IntegerField(null=True, db_column='FEECHANNELID', blank=True) # Field name made lowercase.
-    feechanneldesc = models.CharField(max_length=90, db_column='FEECHANNELDESC', blank=True) # Field name made lowercase.
-    feehardwareid = models.IntegerField(null=True, db_column='FEEHARDWAREID', blank=True) # Field name made lowercase.
-    chanhrdwdesc = models.CharField(max_length=90, db_column='CHANHRDWDESC', blank=True) # Field name made lowercase.
-    sensorid = models.IntegerField(null=True, db_column='SENSORID', blank=True) # Field name made lowercase.
-    sensordesc = models.CharField(max_length=90, db_column='SENSORDESC', blank=True) # Field name made lowercase.
-    pmthardwareid = models.IntegerField(null=True, db_column='PMTHARDWAREID', blank=True) # Field name made lowercase.
-    pmthrdwdesc = models.CharField(max_length=90, db_column='PMTHRDWDESC', blank=True) # Field name made lowercase.
-    
-    class Meta:
-        db_table = u'FeeCableMap'
-        ordering = ['row_counter']
-
-    def __unicode__(self):
-        return self.feechanneldesc
-    
-    def unpack(self):
-        sitedet, board, connector = self.feechanneldesc.split('-')
-        board = board.replace('board', '')
-        connector = connector.replace('connector', '')
-        
-        try:
-            sitedet, ring, column, in_out = self.sensordesc.split('-')
-        except ValueError:
-            sitedet, ring, column = self.sensordesc.split('-')
-            in_out = ''
-        
-        ring = ring.replace('ring', '')
-        column = column.replace('column', '')
-        wall = spot = ''
-        
-        try:
-            int(ring)
-        except ValueError:
-            wall = ring.replace('wall', '')
-            spot = column.replace('spot', '')
-            ring = column = ''
-             
-        return {
-            'board' : board,
-            'connector' : connector,
-            'ring' : ring,
-            'column' : column,
-            'wall' : wall,
-            'spot' : spot,
-            'in_out' : in_out,
-        }
 
 # =====================================
 class Calibpmtspecvld(models.Model):
@@ -215,7 +157,7 @@ class Calibpmtspecvld(models.Model):
     versiondate = models.DateTimeField(db_column='VERSIONDATE') # Field name made lowercase.
     insertdate = models.DateTimeField(db_column='INSERTDATE') # Field name made lowercase.
     
-    objects = CalibPMTSpecManager()
+    objects = CalibPMTSpecVldManager()
     
     class Meta:
         db_table = u'CalibPmtSpecVld'

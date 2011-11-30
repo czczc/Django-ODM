@@ -7,5 +7,4 @@ urlpatterns = patterns('odm.pmtinfo.views',
         'pmt'),
     (r'^(?P<site>\w+)/(?P<detector>\w+)/(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/', 
         'pmt'),
-
 )

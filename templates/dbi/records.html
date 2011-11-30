@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}ODM | DBI Records{% endblock %}
+
+{% block content %}
+    <div class = "grid_8 prefix_8">
+	    <h1 align='center'>
+            DBI Records
+        </h1>
+	</div>
+	
+    {% if form %}
+    <div class="grid_24" style='margin-top: 10px;'>
+        {% include "dbi/search.html" %}
+    </div>
+    <div class="clear"></div>
+    <div class='grid_10'>{{ form.errors }}</div>
+    <div class='clear'></div>
+    {% endif %}
+    
+    <div class = "grid_24">
+         <h2>
+             Results
+        </h2>
+    </div>    
+    <div class="clear"></div> 
+    
+    <div class="grid_24" id="output">
+        <pre>{{ output }}</pre>     
+    </div>
+    <div class="clear"></div>
+{% endblock %}
+
+{% block extra_js %}
+  <!-- <script type="text/javascript" src="{{ MEDIA_URL }}js/runlist.js"></script> -->
+{% endblock %}

@@ -1,7 +1,7 @@
 from django.http import HttpResponse, Http404
 from django.contrib.auth.decorators import login_required
 
-from odm.pmtinfo.models import Feecablemapvld, Calibpmtspecvld, Cablemapvld
+from odm.pmtinfo.models import Calibpmtspecvld, Cablemapvld
 
 import json
 
@@ -71,3 +71,4 @@ def pmt(request, site, detector, year, month, day,
         return HttpResponse(json.dumps(info))
     else:
         raise Http404
+        

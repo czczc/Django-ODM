@@ -1,6 +1,8 @@
 # some utility functions from DYB conventions
 from datetime import datetime, timedelta        
 
+from odm.conventions.conf import Site, Detector
+
 def DBI_get(objects, context):
     '''
     poor man's DBI filter
@@ -42,22 +44,39 @@ def DBI_get(objects, context):
         return None
 
 
-def DBI_format(values, format='txt'):
+def DBI_records(objects, site, detector, task, sim, character, width):
     '''
-    Format DBI values to human readable
+    Format DBI records
     
     Params:
-        - values: a value list from .values query, must at least contain key 'timestart', 'timeend'
+        - objects: the validity table manager
     
     Return: formated output
     '''
-    output = "[%-6s %s]\n%s\n" % ('seqno', 'insert date', '=' * 20)
+    try:
+        site = Site.site_id[site]
+        detector = Detector.detector_id[detector]
+    except KeyError:
+        return site + '-' + detector + ' not found.'
     
-    txt_option = {
-        'width' : 80,
-        'span'  : 90,
-        'character' : '|',
+    values = objects.filter(
+        sitemask=site,
+        subsite=detector,
+        simmask=sim,
+        task=task,
+    ).values('seqno', 'timestart', 'timeend', 'insertdate')
+    
+    options = {
+        'width' : width,
+        'span'  : width+5,
+        'character' : character,
     }
+    
+    output = ''
+    fmt_title = "%%7s  %%-19s %%-%ds %%-19s %%s\n" % (options['span'],)
+    fmt = "[%%5d]  %%s %%-%ds %%s [%%s]\n" % (options['span'],)    
+    output += fmt_title % ('[seqno]', '    valid from', ' ', '    valid to', '    [insert date]')
+    output += fmt_title % ('=======', '='*19, ' ', '='*19, '='*21)
     
     timemin = datetime(2038, 1, 20)
     timemax = datetime(1979, 1, 1)
@@ -72,7 +91,7 @@ def DBI_format(values, format='txt'):
         # print timestart, '-'*days, timeend
     
     entire_days = (timemax-timemin).days
-    scale = entire_days / float(txt_option['width'])
+    scale = entire_days / float(options['width'])
     # print timemin, '--->', timemax, ": ", entire_days, 'days'
     
     for value in values[::-1]:
@@ -81,15 +100,11 @@ def DBI_format(values, format='txt'):
         pre_width = int((timestart - timemin).days / scale)
         pre = ' ' * pre_width
         if timeend > timemax:  # overflow
-            span = txt_option['character'] * (txt_option['span'] - pre_width)
+            span = options['character'] * (options['span'] - pre_width)
         else:
-            span = txt_option['character'] * int((timeend - timestart).days/scale)
-        
-        fmt = "[%%-6d %%s]  %%s %%-%ds %%s\n" % (txt_option['span'],)
+            span = options['character'] * int((timeend - timestart).days/scale)
+                    
+        output += fmt % (value['seqno'], timestart, pre+span, timeend, value['insertdate'],)
             
-        output += fmt % (value['seqno'], value['insertdate'], timestart, pre+span, timeend)
-    
-    print output
-        
     return output
             
