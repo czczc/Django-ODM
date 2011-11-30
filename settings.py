@@ -185,6 +185,7 @@ elif SITE_LOCAL:
         'odm.daqinfo',
         'odm.fileinfo',
         'odm.pmtinfo',
+        'odm.misc',
         'odm.dcs',
         'odm.dq',
     )

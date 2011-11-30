@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.simple import direct_to_template
 
 from odm.pmtinfo.models import Calibpmtspecvld, Cablemapvld
+from odm.misc.models import Energyreconvld
+
 from odm.dbi.forms import DBIRecordsForm
 
 @login_required

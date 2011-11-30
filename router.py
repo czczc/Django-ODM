@@ -1,5 +1,5 @@
 # Router for multiple database
-offline_db_applist = ['runinfo', 'daqinfo', 'pmtinfo', 'fileinfo']
+offline_db_applist = ['runinfo', 'daqinfo', 'pmtinfo', 'fileinfo', 'misc']
 dcs_db_applist = ['dcs',]
 dq_db_applist = ['dq',]
 

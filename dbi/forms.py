@@ -7,6 +7,7 @@ class DBIRecordsForm(forms.Form):
         choices=(
             ('CableMap', 'CableMap'),
             ('CalibPmtSpec', 'CalibPmtSpec'),
+            ('EnergyRecon', 'EnergyRecon'),
         ),
     )
     
@@ -55,7 +56,7 @@ class DBIRecordsForm(forms.Form):
     )
     
     width = forms.IntegerField(
-        label='Width', required=False, 
+        label='Width', required=True, 
         max_value=1000, min_value=20, initial=45,
         widget=forms.TextInput(attrs={'size':'3'})
     )
