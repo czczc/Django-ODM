@@ -1,16 +1,7 @@
 from django import forms
 
-class DBIRecordsForm(forms.Form):
-    
-    table = forms.ChoiceField(
-        label='Table',
-        choices=(
-            ('CableMap', 'CableMap'),
-            ('CalibPmtSpec', 'CalibPmtSpec'),
-            ('EnergyRecon', 'EnergyRecon'),
-        ),
-    )
-    
+class DBIForm(forms.Form):
+        
     site = forms.ChoiceField(
         label='Site',
         choices=(
@@ -33,19 +24,31 @@ class DBIRecordsForm(forms.Form):
         ),
     )
     
-    task = forms.ChoiceField(
-        label='Task',
-        choices=(
-            (0, 'Task 0'),
-            (1, 'Task 1'),
-        ),
-    )
-    
     sim = forms.ChoiceField(
         label='Simulation',
         choices=(
             (1, 'Exp'),
             (2, 'MC'),
+        ),
+    )
+
+
+class DBIRecordsForm(DBIForm):
+    
+    table = forms.ChoiceField(
+        label='Table',
+        choices=(
+            ('CableMap', 'CableMap'),
+            ('CalibPmtSpec', 'CalibPmtSpec'),
+            ('EnergyRecon', 'EnergyRecon'),
+        ),
+    )
+    
+    task = forms.ChoiceField(
+        label='Task',
+        choices=(
+            (0, 'Task 0'),
+            (1, 'Task 1'),
         ),
     )
     
@@ -60,6 +63,67 @@ class DBIRecordsForm(forms.Form):
         max_value=1000, min_value=20, initial=45,
         widget=forms.TextInput(attrs={'size':'3'})
     )
-    
-    
 
+
+class EnergyReconForm(DBIForm):
+            
+    task = forms.ChoiceField(
+        label='Task',
+        choices=(
+            (0, 'AdScaled'),
+            (1, 'AdSimple'),
+        ),
+    )
+    
+    field = forms.ChoiceField(
+        label='Value',
+        choices=(
+            ('peevis', 'PE to Evis'),
+        ),
+    )
+
+class PMTForm(DBIForm):
+    ring = forms.IntegerField(
+        label='Ring', required=True, 
+        max_value=40, min_value=0, initial=1,
+        widget=forms.TextInput(attrs={'size':'2'})
+    )
+    
+    column = forms.IntegerField(
+        label='Column', required=True, 
+        max_value=40, min_value=0, initial=1,
+        widget=forms.TextInput(attrs={'size':'2'})
+    )
+    
+    in_out = forms.ChoiceField(
+        label='Inward',
+        choices=(
+            (1, 'Inward Facing'),
+            (0, 'Outward Facing'),
+        ),
+        widget=forms.Select(attrs={'class':'hidden'})
+    )
+    
+class CalibPMTSpecForm(PMTForm):
+    field = forms.ChoiceField(
+        label='Value',
+        choices=(
+            ('pmtspehigh', 'High Gain SPE'),
+            ('pmtspelow', 'Low Gain SPE'),
+            ('pmttoffset', 'Time Offset'),
+        ),
+    )
+
+class CableMapForm(PMTForm):
+    field = forms.ChoiceField(
+        label='Value',
+        choices=(
+            ('board', 'Board'),
+            ('connector', 'Connector'),
+        ),
+    )    
+
+    
+    
+    
+    

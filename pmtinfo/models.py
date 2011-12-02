@@ -1,9 +1,12 @@
 from django.db import models
-from odm.conventions.util import DBI_get, DBI_records
+from odm.conventions.util import DBI_get, DBI_records, DBI_trend
 from odm.conventions.conf import Site, Detector
+from odm.conventions.pmt import SensorId
+
+from datetime import datetime, timedelta        
 
 # =====================================
-class CableMapVldManager(models.Manager):
+class CablemapvldManager(models.Manager):
     
     def cablemapSet(self, site, detector, year, month, day,
         rollback=False, rollback_year='', rollback_month='', rollback_day=''):
@@ -41,50 +44,63 @@ class CableMapVldManager(models.Manager):
         output = DBI_records(self, 'cablemap', site, detector, task, sim, character, width)
         return output
 
-
-    # def trend(self, site, detector, sensorid=None, format='txt', character='-', width=50):
-    #     '''Returns DBI records'''
-    #     try:
-    #         site = Site.site_id[site]
-    #         detector = Detector.detector_id[detector]
-    #     except KeyError:
-    #         return site + '-' + detector + ' not found.'
-    #     
-    #     if sensorid:
-    #         values = self.select_related().filter(
-    #             subsite=detector,
-    #             sitemask=site,
-    #             simmask=1,
-    #             task=0,
-    #         ).filter(cablemap__sensorid=sensorid
-    #         ).values('seqno', 'timestart', 'timeend', 'insertdate',
-    #             'cablemap__sensorid',
-    #             'cablemap__channelid',
-    #         )
-    #     else:
-    #         values = self.select_related().filter(
-    #             subsite=detector,
-    #             simmask=1,
-    #             sitemask=site
-    #         ).values('seqno', 'timestart', 'timeend', 'insertdate')
-    #     
-    #     output = DBI_format(values, format, character, width)
-    #     
-    #     return output
+# =====================================
+class CablemapManager(models.Manager):
+    
+    def trend(self, site, detector, ring, column, in_out=1, task=0, sim=1):
+        '''Returns correct dbi values as a funtion of time'''
+        try:
+            if detector in ['AD1', 'AD2', 'AD3', 'AD4']:
+                sensorid = SensorId.ADfullPackedData(
+                    Site.site_id[site], 
+                    Detector.detector_id[detector], 
+                    ring, column)
+            elif detector in ['IWS', 'OWS']:
+                sensorid = SensorId.WPfullPackedData(
+                    Site.site_id[site], 
+                    Detector.detector_id[detector], 
+                    ring, column, in_out) # wall = ring, spot = column
+            else:
+                return []
+        except KeyError:
+            return []
+            
+        
+        dbi_records = DBI_trend(
+            self.select_related().filter(
+                sensorid=sensorid,
+            ), site, detector, task, sim)
+        
+        values = [] 
+        for key in sorted(dbi_records):
+            value = dbi_records[key]
+            values.append({
+                'start' : str(key),
+                'end' : str(value['end']),
+                'seqno' : value['record'].vld.seqno,
+                'timestart' : str(value['record'].vld.timestart),
+                'timeend' : str(value['record'].vld.timeend),
+                'insertdate' : str(value['record'].vld.insertdate),
+                'versiondate' : str(value['record'].vld.versiondate),
+                'board' : int(value['record'].board()),
+                'connector' : int(value['record'].connector()),
+            })
+            
+        return values
 
 # =====================================
-class CalibPMTSpecVldManager(models.Manager):
+class CalibpmtspecvldManager(models.Manager):
+    '''Manager'''
     
     def pmtspecSet(self, site, detector, year, month, day,
         rollback=False, rollback_year='', rollback_month='', rollback_day=''):
         '''Returns a QuerySet of DBI Calibpmtspec'''
-        
         try:
             site = Site.site_id[site]
             detector = Detector.detector_id[detector]
         except KeyError:
             return None
-
+            
         context = {
             'year' : int(year),
             'month' : int(month),
@@ -111,39 +127,58 @@ class CalibPMTSpecVldManager(models.Manager):
         output = DBI_records(self, 'calibpmtspec', site, detector, task, sim, character, width)
         return output
         
+
+# =====================================
+class CalibpmtspecManager(models.Manager):
     
-    # def trend(self, site, detector, pmtid=None, format='txt', character='-', width=50):
-    #     '''Returns DBI records'''
-    #     try:
-    #         site = Site.site_id[site]
-    #         detector = Detector.detector_id[detector]
-    #     except KeyError:
-    #         return site + '-' + detector + ' not found.'
-    #     
-    #     if pmtid:
-    #         values = self.select_related().filter(
-    #             subsite=detector,
-    #             sitemask=site,
-    #             simmask=1,
-    #             task=0,
-    #         ).filter(calibpmtspec__pmtid=pmtid
-    #         ).values('seqno', 'timestart', 'timeend', 'insertdate',
-    #             'calibpmtspec__pmtspehigh',
-    #             'calibpmtspec__pmtspelow',
-    #             'calibpmtspec__pmttoffset',
-    #         )
-    #     else:
-    #         values = self.select_related().filter(
-    #             subsite=detector,
-    #             simmask=1,
-    #             sitemask=site
-    #         ).values('seqno', 'timestart', 'timeend', 'insertdate')
-    #     
-    #     output = DBI_format(values, format, character)
-    #     
-    #     return output
+    def trend(self, site, detector, ring, column, in_out=1, task=0, sim=1):
+        '''Returns correct dbi values as a funtion of time'''
+        try:
+            if detector in ['AD1', 'AD2', 'AD3', 'AD4']:
+                pmtid = SensorId.ADfullPackedData(
+                    Site.site_id[site], 
+                    Detector.detector_id[detector], 
+                    ring, column)
+            elif detector in ['IWS', 'OWS']:
+                pmtid = SensorId.WPfullPackedData(
+                    Site.site_id[site], 
+                    Detector.detector_id[detector], 
+                    ring, column, in_out) # wall = ring, spot = column
+            else:
+                return []
+        except KeyError:
+            return []
+            
+        
+        dbi_records = DBI_trend(
+            self.select_related().filter(
+                pmtid=pmtid,
+            ), site, detector, task, sim)
+        
+        values = [] 
+        for key in sorted(dbi_records):
+            value = dbi_records[key]
+            values.append({
+                'start' : str(key),
+                'end' : str(value['end']),
+                'seqno' : value['record'].vld.seqno,
+                'timestart' : str(value['record'].vld.timestart),
+                'timeend' : str(value['record'].vld.timeend),
+                'insertdate' : str(value['record'].vld.insertdate),
+                'versiondate' : str(value['record'].vld.versiondate),
+                'pmtdescrib' : value['record'].pmtdescrib,
+                'pmtspehigh' : value['record'].pmtspehigh,
+                'pmtspelow' : value['record'].pmtspelow,
+                'pmttoffset' : value['record'].pmttoffset,
+            })
+            
+        # from pprint import pprint
+        # pprint(values)
+        # pprint(uncovered_periods)
+            
+        return values
 
-
+            
 # =====================================
 class Calibpmtspecvld(models.Model):
     seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
@@ -157,7 +192,7 @@ class Calibpmtspecvld(models.Model):
     versiondate = models.DateTimeField(db_column='VERSIONDATE') # Field name made lowercase.
     insertdate = models.DateTimeField(db_column='INSERTDATE') # Field name made lowercase.
     
-    objects = CalibPMTSpecVldManager()
+    objects = CalibpmtspecvldManager()
     
     class Meta:
         db_table = u'CalibPmtSpecVld'
@@ -184,9 +219,11 @@ class Calibpmtspec(models.Model):
     pmtafterpulse = models.FloatField(null=True, db_column='PMTAFTERPULSE', blank=True) # Field name made lowercase.
     pmtdarkrate = models.FloatField(null=True, db_column='PMTDARKRATE', blank=True) # Field name made lowercase.
     
+    objects = CalibpmtspecManager()
+    
     class Meta:
         db_table = u'CalibPmtSpec'
-        ordering = ['row_counter']
+        ordering = ['vld']
 
     def __unicode__(self):
         return self.pmtdescrib
@@ -205,7 +242,7 @@ class Cablemapvld(models.Model):
     versiondate = models.DateTimeField(db_column='VERSIONDATE') # Field name made lowercase.
     insertdate = models.DateTimeField(db_column='INSERTDATE') # Field name made lowercase.
     
-    objects = CableMapVldManager()
+    objects = CablemapvldManager()
         
     class Meta:
         db_table = u'CableMapVld'
@@ -220,6 +257,8 @@ class Cablemap(models.Model):
     row_counter = models.IntegerField(primary_key=True, db_column='ROW_COUNTER') # Fake pk, will duplicate (legacy db use multiple fields as pk)
     sensorid = models.IntegerField(null=True, db_column='SENSORID', blank=True) # Field name made lowercase.
     channelid = models.IntegerField(null=True, db_column='CHANNELID', blank=True) # Field name made lowercase.
+    
+    objects = CablemapManager()
         
     class Meta:
         db_table = u'CableMap'

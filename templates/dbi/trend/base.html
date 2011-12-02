@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}ODM | DBI Values{% endblock %}
+
+{% block content %}
+    <div class = "grid_8">
+        <h1 align='center'>
+            DBI Time Series
+        </h1>
+    </div>
+    
+    <div class = "grid_12 prefix_4" align='center' style='margin-top: 30px;'>
+        <div id="jumper" class='ui-widget-header ui-corner-all' style='padding: 10px;'>
+            <button href="{{SITE_ROOT}}/dbi/trend/EnergyRecon">Energy Calibration</button>
+            <button href="{{SITE_ROOT}}/dbi/trend/CalibPMTSpec">PMT Calibration</button>
+            <button href="{{SITE_ROOT}}/dbi/trend/CableMap">Cable Map</button>
+        </div>
+    </div>    
+    <div class="clear"></div>
+	    
+	<div class = "grid_24">
+         <h2 id='model' model='{{model}}'>
+             {{ description }}
+        </h2>
+    </div>    
+    <div class="clear"></div>
+    
+    <div class="grid_24" style='margin-top: 10px;'>
+        <form action="{{SITE_ROOT}}/dbi/trend/{{model}}/" method="post" id='form' class='ui-widget'>{% csrf_token %}    
+            <fieldset class='ui-widget-content'>
+                {% block form_table %}{% endblock %}   
+            </fieldset>
+        </form>
+    </div>
+    <div class="clear"></div>
+    <div class='grid_12 .warning' id="form_errors" style='margin-top:10px;'></div>
+    <div class='clear'></div>
+    
+	<div id="single_chart" class="grid_24" style='height: 400px; margin-top:50px;'>
+	</div>
+	<div class="clear"></div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/ajax_csrf.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/modules/exporting.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/dbi/trend.js"></script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "dbi/trend/base.html" %}
+
+{% block form_table %}
+<table>
+    <tr>
+        <td>{{form.site}} {{form.detector}} {{form.sim}}</td> 
+        <td><h6>Reconstruction Algorithm</h6> {{form.task}}</td>
+        <td><h6>Display Value</h6> {{form.field}}</td>
+        <td><input id='submit' type="submit" value="Display !" /></td>
+    </tr>
+</table>
+{% endblock %}
