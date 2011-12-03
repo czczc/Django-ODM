@@ -5,7 +5,7 @@
 
 /* menu deedf7 */ 
 #zone-bar { /*background: #9c9;*/ height: 28px; padding-top: 3px; margin-top: 10px;/* border-top: 1px solid #aaa;*/}
-#zone-bar ul { list-style: none inside; display: block; float: left; }
+#zone-bar ul { list-style: none inside; display: block; float: left; z-index: 1000;}
 #zone-bar ul li { height: 18px; padding: 4px 0 3px 0; margin-left: 20px; position: relative; float: left; }
 #zone-bar ul li:hover { background: #67bde9; /*url(../img/zonebar-navleft.png) center left no-repeat*/}
 #zone-bar ul li a { 
