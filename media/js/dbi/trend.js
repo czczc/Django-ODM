@@ -135,7 +135,7 @@ function convert_series(data) {
 function format_name(row, field) {
     str = '';
     if (model == 'EnergyRecon') {
-        str += '[PE to Evis(MeV)] <b>' + row.peevis + ' +/- ' + row.peevisunc + '</b><br/>';
+        str += '[PE to Evis/MeV] <b>' + row.peevis + ' +/- ' + row.peevisunc + '</b><br/>';
     }
     else if (model == 'CalibPMTSpec') {
         str += '[High Gain SPE] <b>' + row.pmtspehigh + '</b> ADC<br/>'
@@ -166,7 +166,7 @@ function parse_datetime(datetime) {
 function load_configs() {
     configs = {
         'EnergyRecon' : {
-          'peevis' : {'title' : 'PE to Visible Energy(MeV)'}
+          'peevis' : {'title' : 'PE to Visible Energy/MeV'}
         },
         'CalibPMTSpec' : {
           'pmtspehigh' : {'title' : 'High Gain SPE [ADC]'},

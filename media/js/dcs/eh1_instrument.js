@@ -122,12 +122,12 @@ function load_configs(){
             weight_sf6: ['RPC SF6 Weight [kg]', -10, 80, 2, 75]     
         },
         DbnsEnvPth : {
-            dbns_pth_t1: ['EH1 Temperature 1 [C]', 20, 29, 21, 29],        
-            dbns_pth_t2: ['EH1 Temperature 2 [C]', 20, 29, 21, 29],        
-            dbns_pth_h1: ['EH1 Humidity 1 [%]', 30, 80, 30, 70],        
-            dbns_pth_h2: ['EH1 Humidity 2 [%]', 30, 80, 30, 70],        
-            dbns_pth_p1: ['EH1 Pressure 1 [mbar]', 1000, 1050, 980, 1030],        
-            dbns_pth_p2: ['EH1 Pressure 2 [mbar]', 1000, 1050, 980, 1030]
+            dbns_pth_t1: ['Temperature: E-Room [C]', 20, 29, 21, 29],        
+            dbns_pth_t2: ['Temperature: Near Gas-Room [C]', 20, 29, 21, 29],        
+            dbns_pth_h1: ['Humidity: E-Room [%]', 30, 80, 30, 70],        
+            dbns_pth_h2: ['Humidity: Near Gas-Room [%]', 30, 80, 30, 70],        
+            dbns_pth_p1: ['Pressure: E-Room [mbar]', 1000, 1050, 980, 1030],        
+            dbns_pth_p2: ['Pressure: Near Gas-Room [mbar]', 1000, 1050, 980, 1030]
         }
     };
 }

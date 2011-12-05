@@ -248,7 +248,7 @@ def ongoing(request):
         
         seen[partition] = 1
         if partition in ['EH1', 'EH2', 'EH3']:
-            for detector in ['AD1', 'AD2', 'AD3', 'AD4', 'WPI', 'WPO', 'AD', 'WP']:
+            for detector in ['AD1', 'AD2', 'AD3', 'AD4', 'WPI', 'WPO']:
                 seen[partition+'-'+detector] = 1
             
         timestart = first_file.vld.timestart
