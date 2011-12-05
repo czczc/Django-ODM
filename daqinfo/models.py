@@ -39,7 +39,7 @@ class RunconfigManager(models.Manager):
         for version in ['base', 'data']:
             self.fetch_active_detectors(version)
         
-        for detector in self.info['detectors']:
+        for detector in self.info['detectors']:            
             for version in ['base', 'data']:
                 self.fetch_detector_settings(version, detector)
                 LTBName = self.info['detectors'][detector].get('LTBName', '')
@@ -47,7 +47,7 @@ class RunconfigManager(models.Manager):
                     self.fetch_LTB_settings(version, detector, LTBName)
                     self.fetchmore_LTB_settings(version, detector, LTBName)
                 FEEPrefix = self.info['detectors'][detector].get('FEEPrefix', '')
-                if FEEPrefix:
+                if FEEPrefix:                    
                     self.fetch_FEE_settings(version, detector, FEEPrefix)
         self.finalize()
     
@@ -245,8 +245,8 @@ class RunconfigManager(models.Manager):
             
                        
     def fetch_FEE_settings(self, version, detector, FEEPrefix):
-        '''fetch LTB settings'''
-        
+        '''fetch FEE settings'''
+        if (FEEPrefix=='EH2_6'): FEEPrefix = '2_6'
         object_list = self.filter(
             schemaversion=self.info['schemaversion'],
             dataversion=self.info[version+'version'],
@@ -254,7 +254,7 @@ class RunconfigManager(models.Manager):
             objectid__startswith=self.info['runtype']+'Threshold_'+FEEPrefix,
             stringvalue='UniformVal',
         )
-        
+        # print 'fetching', detector, object_list
         for daq in object_list:
             detinfo = self.info['detectors'][detector]
             

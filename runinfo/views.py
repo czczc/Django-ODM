@@ -525,6 +525,7 @@ def daqinfo(request, runno):
     if request.is_ajax():
         return HttpResponse(json.dumps(Daqrunconfig.objects.info))
     else:
+        return HttpResponse('<pre>'+ json.dumps(Daqrunconfig.objects.info, indent=4) + '</pre>')
         raise Http404
         
 @login_required
