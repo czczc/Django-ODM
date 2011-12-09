@@ -48,6 +48,13 @@ DATABASES = {
         'HOST'    : conf.get('dcs_db', 'HOST'),
         'PORT'    : conf.get('dcs_db', 'PORT'),          
     },
+    'dcs_ihep' : {
+        'ENGINE'  : 'django.db.backends.mysql',
+        'NAME'    : conf.get('dcs_db_ihep', 'NAME'),
+        'USER'    : conf.get('dcs_db_ihep', 'USER'),
+        'PASSWORD': conf.get('dcs_db_ihep', 'PASSWORD'),
+        'HOST'    : conf.get('dcs_db_ihep', 'HOST'),
+    },
     'dq' : {
         'ENGINE'  : 'django.db.backends.mysql',
         'NAME'    : conf.get('dq_db', 'NAME'),
@@ -64,6 +71,7 @@ DATABASE_ROUTERS = [
 ]
 if SITE_IHEP:
     DATABASE_ROUTERS[0] = 'odm.router.DayaBayIhepRouter'
+    DATABASE_ROUTERS[1] = 'odm.router.DayaBayIhepDcsRouter'
     
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')

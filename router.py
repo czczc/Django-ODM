@@ -87,6 +87,33 @@ class DayaBayDcsRouter(object):
         return None
 
 
+class DayaBayIhepDcsRouter(object):
+    """DayaBay DCS DB @IHEP"""
+       
+    def db_for_read(self, model, **hints):
+        if model._meta.app_label in dcs_db_applist:
+            return 'dcs_ihep'
+        return None
+
+    def db_for_write(self, model, **hints):
+        # if model._meta.app_label in offline_db_applist:
+        #     return 'lbl'
+        # only allow write to local db
+        # also to prevent a bug in django 1.2.4 (the NERSC version)
+        return None
+
+    def allow_relation(self, obj1, obj2, **hints):
+        if obj1._meta.app_label in dcs_db_applist or obj2._meta.app_label in dcs_db_applist:
+            return True
+        return None
+
+    def allow_syncdb(self, db, model):
+        if db == 'dcs_ihep':
+            return model._meta.app_label == 'dummy'
+        elif model._meta.app_label in dcs_db_applist:
+            return False
+        return None
+
 class DayaBayDqRouter(object):
     """DayaBay DataQuality DB"""
        
