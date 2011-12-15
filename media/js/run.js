@@ -666,10 +666,11 @@ function enable_img_comp(selector, detname, data) {
     var site_detector = parse_detname(detname);
     var site = site_detector[0];
     var detector = site_detector[1];
-    var has_AD1 = false; 
-    var has_AD2 = false;
+    var has_AD1 = has_AD2 = has_AD3 = has_AD4 = false; 
     if ((data.detectors)[site+'AD1']) { has_AD1 = true; }
     if ((data.detectors)[site+'AD2']) { has_AD2 = true; }
+    if ((data.detectors)[site+'AD3']) { has_AD3 = true; }
+    if ((data.detectors)[site+'AD4']) { has_AD4 = true; }
     $(selector).hover(function() {
         $(this).css('cursor','pointer');
     }, function() {
@@ -677,17 +678,28 @@ function enable_img_comp(selector, detname, data) {
     });
     $(selector).click(function() {
         var this_link = $(this).parent().prev('img').attr('src');
-        var AD1 = "<h4>N/A</h4>";
-        var AD2 = "<h4>N/A</h4>";
+        var AD1 = AD2 = AD3 = AD4 = "<h4>N/A</h4>";
+        // var AD2 = "<h4>N/A</h4>";
         if (has_AD1) { 
             AD1 = '<img src="' + this_link.replace(detector, 'AD1') + '" width=400 height=300 />'; 
         }
         if (has_AD2) {
             AD2 = '<img src="' + this_link.replace(detector, 'AD2') + '" width=400 height=300 />'; 
         }
+        if (has_AD3) {
+            AD3 = '<img src="' + this_link.replace(detector, 'AD3') + '" width=400 height=300 />'; 
+        }
+        if (has_AD4) {
+            AD4 = '<img src="' + this_link.replace(detector, 'AD4') + '" width=400 height=300 />'; 
+        }
         var html = '<div id="content"><table class="production"><tr>';
         html += '<td>' + AD1 + '<span class="figname">AD1</span></td>';
         html += '<td>' + AD2 + '<span class="figname">AD2</span></td>';
+        if (has_AD3) {
+            html += '</tr><tr>';
+            html += '<td>' + AD3 + '<span class="figname">AD3</span></td>';
+            html += '<td>' + AD4 + '<span class="figname">AD4</span></td>';
+        }
         html += '</tr></table></div>';
         // console.log(AD1);
         // console.log(AD2);
