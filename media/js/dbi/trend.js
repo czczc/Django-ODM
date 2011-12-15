@@ -14,16 +14,33 @@ Highcharts.setOptions({
     // legend: { layout: 'vertical', align: 'right', verticalAlign: 'top',
     //    x: -10, y: 100, borderWidth: 0
     // },    
-    xAxis: { type: 'datetime' },       
-    yAxis: { title: {text: ''} }, // tickPixelInterval: 36
-    tooltip: { backgroundColor: '#FCFFC5', formatter: dbi_formatter },
-    plotOptions: {
-        line: { marker: {
-            radius: 3, 
-            fillColor: '#FFFFFF', 
-            lineWidth: 2,
-            lineColor: null } // inherit from series
+    xAxis: { 
+        type: 'datetime',
+        labels: {
+            style: {fontSize: '13px', color: '#222'}
         }
+    },       
+    yAxis: { 
+        title: {text: ''}, 
+        labels: {
+            style: {fontSize: '13px', color: '#222'}
+        }
+        // tickPixelInterval: 36,
+    }, 
+    tooltip: { backgroundColor: '#FCFFC5', formatter: dbi_formatter },
+    legend: {itemStyle: {fontSize: '13px'}},
+    plotOptions: {
+        series: {
+            color: '#335bbe',
+            lineWidth: 3
+        },
+        line: { 
+            marker: {
+                radius: 3, 
+                fillColor: '#FFFFFF', 
+                lineWidth: 2,
+                lineColor: null } // inherit from series
+            }
     }
 });
 
@@ -90,7 +107,8 @@ function convert_data(data, field) {
         data_xy.push({
             x: parse_datetime(row.start),
             y: value,
-            name: format_name(row, field)
+            name: format_name(row, field),
+            marker: {radius: 3}
         });
         if (i < length-1) {
             data_xy.push({
