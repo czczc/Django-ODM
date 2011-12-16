@@ -38,7 +38,7 @@ def DBI_get(objects, context):
                 subsite=context['detector'],
                 simmask=1,
                 sitemask=context['site'],
-            ).order_by('-seqno')[0]
+            ).order_by('-versiondate')[0]
                     
     except IndexError:
         return None
@@ -66,6 +66,7 @@ def DBI_records(objects, fk, site, detector, task, sim, character, width):
         simmask=sim,
         task=task,
     ).values('seqno', 'timestart', 'timeend', 'insertdate'
+    ).order_by('-versiondate'
     ).annotate(count=Count(fk))
     
     options = {
@@ -136,7 +137,8 @@ def DBI_trend(objects, site, detector, task, sim):
         vld__subsite=detector,
         vld__simmask=sim,
         vld__task=task,
-    ).order_by('-vld__seqno')
+    ).order_by('-vld__versiondate')
+    # ).order_by('-vld__seqno')
     
     if not records: 
         return {}
