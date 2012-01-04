@@ -11,6 +11,7 @@ urlpatterns = patterns('odm.runinfo.views',
     
     # query run list
     (r'^list/ongoing/$', 'ongoing'),
+    (r'^list/missing/$', 'missing'),
     (r'^list/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'runlist'),
     (r'^list/', 'runlist'),
     

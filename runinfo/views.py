@@ -244,6 +244,7 @@ def ongoing(request):
             partition = partition.replace('-Merged', '')
         
         if partition == 'AllStreams': continue
+        if 'RPC' in partition: continue
         if seen.get(partition, ''): continue
         
         seen[partition] = 1
@@ -273,6 +274,60 @@ def ongoing(request):
             'count' : len(run_list),
         })    
         
+
+@login_required
+def missing(request):
+    '''find missing runs from file database'''
+    from django.db.models import Max
+    
+    latest_runs_from_offline = [x['runno'] for x in Daqruninfo.objects.filter(runno__gt=10000).values('runno')]
+    ongoing_runs = Daqrawdatafileinfo.objects.all(
+        ).filter(runno__gt = latest_runs_from_offline[-1]
+        ).values('runno').annotate(max=Max('runno'))
+    
+    runnos = [ x['max'] for x in ongoing_runs ]
+    runnos = sorted(list(set(runnos) - set(latest_runs_from_offline)))
+    runnos.reverse()
+    # seen = {}
+    run_list = []
+    for runno in runnos:
+        first_file = Daqrawdatafileinfo.objects.select_related().filter(runno=runno)[0]
+        runno = first_file.runno
+        tmp, tmp, tmp, runtype, partition, tmp, tmp, tmp = first_file.filename.split('.')
+        if partition.endswith('-Merged'):
+            partition = partition.replace('-Merged', '')
+        
+        runlength_str = 'missing'
+        if partition == 'AllStreams': continue
+        if 'RPC' in partition: continue
+        # if seen.get(partition, ''): 'ongoing'
+        
+        # seen[partition] = 1
+        # if partition in ['EH1', 'EH2', 'EH3']:
+        #     for detector in ['AD1', 'AD2', 'AD3', 'AD4', 'WPI', 'WPO']:
+        #         seen[partition+'-'+detector] = 1
+            
+        timestart = first_file.vld.timestart
+        timestart_beijing = first_file.vld.timestart_beijing()
+        run_list.append( {
+            'runno' : runno,
+            'runtype' : runtype,
+            'partition' : partition,
+            'vld' : {
+                'timestart' : timestart,
+                'timestart_beijing' : timestart_beijing,
+                'runlength' : runlength_str,
+            },
+            'get_absolute_url' : '%s/run/%i/' % (settings.SITE_ROOT, runno),
+        })
+    
+    return direct_to_template(request, 
+        template = 'run/ongoing.html',
+        extra_context = {
+            'run_list' : run_list,
+            'description' : 'Missing',
+            'count' : len(run_list),
+        })    
 
 @login_required
 def latest(request, days='7', page=1, records=500):
