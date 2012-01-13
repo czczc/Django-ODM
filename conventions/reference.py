@@ -6,5 +6,6 @@ class ReferenceRun(object):
     
     StandardRun = {
         'EH1-Physics' : 17158,
-        'EH2-Physics' : 17435,
+        'EH2-Physics' : 21361,
+        'EH3-Physics' : 21364,
     }

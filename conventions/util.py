@@ -89,10 +89,9 @@ def DBI_records(objects, fk, site, detector, task, sim, character, width):
         timeend = value['timeend']
         if timestart < timemin: timemin = timestart
         if timestart > timemax: timemax = timestart
-        # days = (timeend - timestart).days
-        # if days > 100: days = 100
-        # print timestart, '-'*days, timeend
+        if timemin == timemax: timemax = timemin + timedelta(days=10) # only one record
     
+    # print timemax, timemin
     entire_days = (timemax-timemin).days
     scale = entire_days / float(options['width'])
     # print timemin, '--->', timemax, ": ", entire_days, 'days'
