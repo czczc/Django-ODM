@@ -32,14 +32,11 @@
                 daq.&lt;<span class='token'>tag name</span>&gt;.&lt;<span class='token'>run no.</span>&gt;.&lt;<span class='token'>stream type</span>&gt;.&lt;<span class='token'>stream name</span>&gt;.&lt;<span class='token'>application name</span>&gt;._&lt;<span class='token'>file no.</span>&gt;.data
             </td>
         </tr>
-        <tr>
-            <td class='descr'>Catalog Dir.</td>
-            <td class='value' id='catalog_base_dir'></td>
-        </tr>
-        <tr>
-            <td class='descr'>Diagnostics Dir.</td>
-            <td class='value' id='diagnostics_base_dir'></td>
-        </tr>
+        <tr><td class='descr'>Raw Files</td><td class='value' id='RAW'>checking ...</td></tr>
+        <tr><td class='descr'>D2R Files</td><td class='value' id='D2R'>checking ...</td></tr>
+        <tr><td class='descr'>KUP Files</td><td class='value' id='KUP'>checking ...</td></tr>
+        <tr><td class='descr'>P11A Files</td><td class='value' id='P11A'>checking ...</td></tr>
+        <tr><td class='descr'>ODM Files</td><td class='value' id='ODM'>checking ...</td></tr>
     </tbody>
     </table>
             
@@ -47,24 +44,27 @@
        <thead><tr>
           <th>Raw Data File Name</th>
           <th>File Size</th>
-          <th>Checksum</th>
           <th>Time Transfer [Beijing]</th>
-          {# <th>Transfer State</th> #}
-          <th>Catalog?</th>          
-          <th>Diagnostics?</th>    
-          <th>More</th>          
+          <th>RAW</th>          
+          <th>D2R</th>    
+          <th>KUP</th>    
+          <th>P11A</th>    
+          <th>ODM</th>    
+          <!-- <th>More</th>           -->
        </tr></thead>
        <tbody>
            {% for file in file_list %}
            <tr>
                <td class='filename'>{{ file.filename }}</td>
                <td>{{ file.filesize|filesizeformat }}</td>
-               <td>{{ file.checksum }}</td>
+               <!-- <td>{{ file.checksum }}</td> -->
                <td>{{ file.vld.timeend_beijing }}</td>
-               {# <td>{{ file.transferstate }}</td> #}
-               <td class='catalog'></td>
-               <td class='diagnostics'></td>
-               <td><a class='more' href='#'>More</a></td>
+               <td class='RAW'></td>
+               <td class='D2R'></td>
+               <td class='KUP'></td>
+               <td class='P11A'></td>
+               <td class='ODM'></td>
+               <!-- <td><a class='more' href='#'>More</a></td> -->
            </tr>    
            {% endfor %}
        </tbody>

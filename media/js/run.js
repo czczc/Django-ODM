@@ -571,6 +571,9 @@ function build_plots(name, detname, data) {
         $('#table_'+name+'_plots').find('.img_db').each(function(){
             var this_link = $(this).attr('src');
             var ref_link = find_ref_plot(name, this_link);
+            if (Run.ref == 'cluster') {
+                ref_link = find_alt_plot(this_link);
+            }
             $(this).parent().append('<img class="img_ref" src="' + ref_link + '" width=300 height=225/>'); 
             modal_by_click($(this).siblings('.img_ref'));
             $(".ref_runno").html('Reference Run: ' + Ref.runno);
@@ -723,7 +726,8 @@ function toggle_img_ref(e) {
     var i, name;
     for (i=0; i<names.length; i++) {
         name = names[i];
-        if(e.charCode == 92){            
+        if(e.charCode == 92){
+            Run.ref = 'ref';            
             if (Ref[name+'_shown']) {
                 $('#table_'+name+'_plots').find('.img_ref').remove();
                 Ref[name+'_shown'] = false;
@@ -744,6 +748,26 @@ function toggle_img_ref(e) {
                 });
             }
         }
+        if(e.charCode == 96){ // '`'  
+            Run.ref = 'cluster';
+            if (name=='pqm') { continue; }
+            if (Ref[name+'_shown']) {
+                $('#table_'+name+'_plots').find('.img_ref').remove();
+                Ref[name+'_shown'] = false;
+                $(".ref_runno").html('');                
+            }
+            else {
+                Ref[name+'_shown'] = true;
+                $('#table_'+name+'_plots').find('.img_db').each(function(){
+                    var this_link = $(this).attr('src');
+                    var ref_link = find_alt_plot(this_link);
+                    // console.log(ref_link);
+                    $(this).parent().append('<img class="img_ref" src="' + ref_link + '" width=300 height=225/>'); 
+                    modal_by_click($(this).siblings('.img_ref'));
+                    $(".ref_runno").html('Reference: ' + Run.clusterRef);
+                });
+            }
+        }
     } // for loop done.
 }
 
@@ -760,6 +784,19 @@ function find_ref_plot(name, link) {
         return link.replace('run'+Run.runno, 'run'+Ref.runno);
     }
 }
+
+// find the odm plot in other site 
+function find_alt_plot(link) {
+    if (base_url.indexOf('portal')>0) {
+        Run.clusterRef = 'IHEP';
+        return link.replace('http://portal.nersc.gov/project/dayabay/dybprod', 'http://202.122.37.74/odmfile');
+    }
+    else {
+        Run.clusterRef = 'PDSF';
+        return link.replace('http://202.122.37.74/odmfile', 'http://portal.nersc.gov/project/dayabay/dybprod');
+    }
+}
+
 
 function basename(path) {
     return path.replace(/\\/g,'/').replace( /.*\//, '' );

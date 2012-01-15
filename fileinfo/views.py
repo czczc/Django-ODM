@@ -21,24 +21,24 @@ def fileinfo(request, runno):
         })
 
 
-@login_required
-def catalog(request, runno):
-    '''catalog file info per run'''
-    if settings.SITE_IHEP:
-        return HttpResponse(json.dumps({}))
-        
-    from DybPython import Catalog
-    catalog_list = Catalog.runs[int(runno)]
-    file_list = [ filename for filename in catalog_list ]
-    info = {}
-    if file_list:
-        info['catalog_base_dir'] = os.path.dirname(file_list[0])
-        info['files'] = dict( (os.path.basename(afile), 1) for afile in file_list )
-    
-    if request.is_ajax():
-        return HttpResponse(json.dumps(info))
-    else:
-        return HttpResponse('<pre>'+ json.dumps(info, indent=4) + '</pre>')
+# @login_required
+# def catalog(request, runno):
+#     '''catalog file info per run'''
+#     if settings.SITE_IHEP:
+#         return HttpResponse(json.dumps({}))
+#         
+#     from DybPython import Catalog
+#     catalog_list = Catalog.runs[int(runno)]
+#     file_list = [ filename for filename in catalog_list ]
+#     info = {}
+#     if file_list:
+#         info['catalog_base_dir'] = os.path.dirname(file_list[0])
+#         info['files'] = dict( (os.path.basename(afile), 1) for afile in file_list )
+#     
+#     if request.is_ajax():
+#         return HttpResponse(json.dumps(info))
+#     else:
+#         return HttpResponse('<pre>'+ json.dumps(info, indent=4) + '</pre>')
 
 
 @login_required
@@ -159,7 +159,7 @@ def stats(request, mode='volume', site='ALL'):
 
 
 @login_required
-def proxy(request, filename):
+def proxy(request, runno):
     '''proxy to Simon's file service '''
     url = 'http://dayabay.lbl.gov/dybspade/delivery/service/report/docket/' + filename
     import urllib2
@@ -169,4 +169,18 @@ def proxy(request, filename):
         return HttpResponse('')
     
     return HttpResponse(fh.read(), content_type="application/xml")
-        
+
+
+@login_required
+def catalog(request, runno, appl=None):
+    '''proxy to Simon's file service '''
+    url = "http://dayabay.lbl.gov/production/catalog/service/report/run/" + str(runno)
+    if (appl): url += '/?application=' + appl + '-P'
+    # print url
+    import urllib2
+    try:
+        fh = urllib2.urlopen(url)
+    except urllib2.HTTPError:
+        return HttpResponse('')
+    
+    return HttpResponse(fh.read(), content_type="application/xml")        

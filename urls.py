@@ -14,6 +14,8 @@ urlpatterns = patterns('',
     (r'^$', direct_to_template, { 'template': 'index.html', }),
     (r'^quick-search/$', 'odm.runinfo.views.quick_search'),
     (r'^files/proxy/(.*)/$', 'odm.fileinfo.views.proxy'),
+    (r'^files/catalog/run/(\d+)/$', 'odm.fileinfo.views.catalog'),
+    (r'^files/catalog/run/(\d+)/appl/(\w+)/$', 'odm.fileinfo.views.catalog'),
     
     (r'^run/', include('odm.runinfo.urls')), 
     (r'^production/', include('odm.production.urls')),   
