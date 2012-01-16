@@ -31,7 +31,7 @@ function load_formulas(){
             ultrasonic_gdls:  function(x) { return (2680-x)/11.369+41; },
             ultrasonic_ls:    function(x) { return (2737-x)/11.451+23; },
             capacitance_mo:   function(x) { return 240-225.4+x*0.208438; },
-            capacitance_gdls: function(x) { return 0.14815*x-5.88.0+41; },
+            capacitance_gdls: function(x) { return 0.14815*x-5.88+41; },
             capacitance_ls:   function(x) { return 0.14830*x+0.77+23; }
         },
         Ad5Lidsensor : {

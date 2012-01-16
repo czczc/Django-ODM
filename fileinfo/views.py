@@ -159,7 +159,7 @@ def stats(request, mode='volume', site='ALL'):
 
 
 @login_required
-def proxy(request, runno):
+def proxy(request, filename):
     '''proxy to Simon's file service '''
     url = 'http://dayabay.lbl.gov/dybspade/delivery/service/report/docket/' + filename
     import urllib2
