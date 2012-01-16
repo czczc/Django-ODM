@@ -31,22 +31,22 @@ function load_formulas(){
             ultrasonic_gdls:  function(x) { return (2680-x)/11.369+41; },
             ultrasonic_ls:    function(x) { return (2737-x)/11.451+23; },
             capacitance_mo:   function(x) { return 240-225.4+x*0.208438; },
-            capacitance_gdls: function(x) { return 0.14815*x-6.0+41; },
-            capacitance_ls:   function(x) { return 0.14830*x-1.67+23; }
+            capacitance_gdls: function(x) { return 0.14815*x-5.88.0+41; },
+            capacitance_ls:   function(x) { return 0.14830*x+0.77+23; }
         },
         Ad5Lidsensor : {
             ultrasonic_gdls:  function(x) { return (2694.39-x)/11.334+41; },
             ultrasonic_ls:    function(x) { return (2764.12-x)/11.403+23; },
             capacitance_mo:   function(x) { return 240-226.2+x*0.205716; },
-            capacitance_gdls: function(x) { return 0.1452*x+3.8587+41; },
-            capacitance_ls:   function(x) { return 0.14790*x-2.7816+23; }
+            capacitance_gdls: function(x) { return 0.1452*x+5.15+41; },
+            capacitance_ls:   function(x) { return 0.14790*x-2.0+23; }
         },
         Ad6Lidsensor : { // TODO: check GdLS, LS capacitance offsets
             ultrasonic_gdls:  function(x) { return (2708.48-x)/11.366+41; },
             ultrasonic_ls:    function(x) { return (2767.67-x)/11.378+23; },
             capacitance_mo:   function(x) { return 240-225.66+x*0.208487; },
-            capacitance_gdls: function(x) { return 0.1471*x-1.0000+41; },
-            capacitance_ls:   function(x) { return 0.15125*x+0.00+23; }
+            capacitance_gdls: function(x) { return 0.1471*x-1.5+41; },
+            capacitance_ls:   function(x) { return 0.15125*x-4.41+23; }
         },
         Ad7Lidsensor : { // placeholders only
             ultrasonic_gdls:  function(x) { return -(2720.6-x)/11.454+41; },
