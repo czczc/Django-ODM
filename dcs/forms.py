@@ -123,7 +123,8 @@ class EH3DcsForm(DcsForm):
             ('Instrument Sensors', (
                 ('Ad4Lidsensor', 'AD4 Lid Sensors'),
                 ('Ad5Lidsensor', 'AD5 Lid Sensors'),
-                ('Ad6Lidsensor', 'AD6 Lid Sensors'),)
+                ('Ad6Lidsensor', 'AD6 Lid Sensors'),
+                ('FarsEnvPth', 'Environment'),)
             ),
         ),
         widget=forms.Select(attrs={'style':'width:98%;'}),

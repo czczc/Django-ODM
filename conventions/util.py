@@ -15,7 +15,7 @@ def DBI_get(objects, context):
     '''
     date = datetime(context['year'], context['month'], context['day'])
     if context.get('rollback', ''):
-        rollback_date = datetime.datetime(
+        rollback_date = datetime(
             context['rollback']['year'], 
             context['rollback']['month'], 
             context['rollback']['day'])
