@@ -94,7 +94,7 @@ function fetch_one(model) {
         var td_field;
         for (field in record) {
             td_field = $('#td_'+model+'__'+field);
-            value = apply_formular(record[field], model, field);
+            value = apply_formular(parseFloat(record[field]), model, field);
             td_field.html(sprintf("%.2f", value));
             if (!is_safe(model, field, value)) {
                 td_field.addClass('warning');
@@ -185,6 +185,7 @@ function apply_formular(value, model, field) {
     if (formulas[model]) {
         f = formulas[model][field];
         if (f) {
+            // console.log(value+","+model+","+field+"  changed to: "+f(value));
             value = f(value);
         }
     }
