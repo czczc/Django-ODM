@@ -73,6 +73,7 @@ class EH1DcsForm(DcsForm):
                 ('Ad1Adcovergas', 'AD1 Cover Gas'),
                 ('Ad2Adcovergas', 'AD2 Cover Gas'),
                 ('DbnsIowTemp', 'WP Temperature'),
+                ('DbnsWatersystem', 'Water System'),
                 ('DbnsRpcGas101', 'Rpc Gas Flow/Pressure'),
                 ('DbnsRpcGas102', 'Rpc Gas Others'),
                 ('DbnsEnvPth', 'Environment'),)
@@ -108,6 +109,7 @@ class EH2DcsForm(DcsForm):
                 ('Ad3Lidsensor', 'AD3 Lid Sensors'),
                 ('Ad3Adcovergas', 'AD3 Cover Gas'),
                 ('LansIowTemp', 'WP Temperature'),
+                ('LansWatersystem', 'Water System'),
                 ('LansRpcGas101', 'Rpc Gas Flow/Pressure'),
                 ('LansRpcGas102', 'Rpc Gas Others'),
                 ('LansEnvPth', 'Environment'),)
@@ -124,6 +126,7 @@ class EH3DcsForm(DcsForm):
                 ('Ad4Lidsensor', 'AD4 Lid Sensors'),
                 ('Ad5Lidsensor', 'AD5 Lid Sensors'),
                 ('Ad6Lidsensor', 'AD6 Lid Sensors'),
+                ('FarsWatersystem', 'Water System'),
                 ('FarsEnvPth', 'Environment'),)
             ),
         ),

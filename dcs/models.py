@@ -93,7 +93,32 @@ class Ad5Adcovergas(AbstractAdcovergas):
 class Ad6Adcovergas(AbstractAdcovergas):
     class Meta(AbstractAdcovergas.Meta):
         db_table = u'AD6_ADCoverGas'
+
+
         
+class AbstractWatersystem(DcsModel):
+    poolwaterresistivity = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='PoolWaterResistivity', blank=True) # Field name made lowercase.
+    productresistivity = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='ProductResistivity', blank=True) # Field name made lowercase.
+    waterlevel = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='WaterLevel', blank=True) # Field name made lowercase.
+    iwateroxygencontent = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='IWaterOxygenContent', blank=True) # Field name made lowercase.
+    owateroxygencontent = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='OWaterOxygenContent', blank=True) # Field name made lowercase.
+    heatertemperature = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='HeaterTemperature', blank=True) # Field name made lowercase.
+    heatexchangetemperature = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='HeatExchangeTemperature', blank=True) # Field name made lowercase.
+    class Meta(DcsModel.Meta):
+        abstract = True
+
+class DbnsWatersystem(AbstractWatersystem):
+    class Meta(AbstractWatersystem.Meta):
+        db_table = u'DBNS_WaterSystem'
+
+class LansWatersystem(AbstractWatersystem):
+    class Meta(AbstractWatersystem.Meta):
+        db_table = u'LANS_WaterSystem'
+        
+class FarsWatersystem(AbstractWatersystem):
+    class Meta(AbstractWatersystem.Meta):
+        db_table = u'FARS_WaterSystem'
+
 
 class AbstractRpcGas101(DcsModel):
     flow_rate_isobutane = models.DecimalField(null=True, max_digits=8, decimal_places=2, blank=True)

@@ -34,6 +34,7 @@ function fetch_latest() {
     fetch_one('LansRpcGas101');
     fetch_one('LansRpcGas102');
     fetch_one('LansEnvPth');
+    fetch_one('LansWatersystem');
 }
 
 function load_configs(){
@@ -98,7 +99,17 @@ function load_configs(){
             lans_pth_h2: ['Humidity: Near Gas-Room [%]', 30, 80, 30, 70],        
             lans_pth_p1: ['Pressure: E-Room [mbar]', 1000, 1050, 980, 1030],        
             lans_pth_p2: ['Pressure: Near Gas-Room [mbar]', 1000, 1050, 980, 1030]
+        },
+        LansWatersystem : {
+            waterlevel: ['Water Level: [m]', 8, 11, 7, 12],        
+            poolwaterresistivity: ['Resistivity: Pool Water [M.Ohm]', 0, 20, 0, 21],        
+            productresistivity: ['Resistivity: Product Water [M.Ohm]', 0, 20, 0, 21],        
+            iwateroxygencontent: ['Oxygen: In Flow [ppm]', 10, 350, 0, 400],        
+            owateroxygencontent: ['Oxygen: Out Flow [ppm]', 10, 350, 0, 400],        
+            heatertemperature: ['Temperature: Heater [C]', 20, 30, 15, 35],
+            heatexchangetemperature: ['Temperature: Heater Exchange [C]', 20, 30, 15, 35]
         }
     };
 }
+
 
