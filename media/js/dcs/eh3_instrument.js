@@ -28,6 +28,7 @@ function load_all_models() {
     // load_model('LansIowTemp');
     // load_model('LansRpcGas101');
     load_model('FarsEnvPth');
+    load_model('FarsWatersystem');
 
 }
 
@@ -152,13 +153,13 @@ function load_configs(){
             fars_pth_p2: ['Pressure: Near Gas-Room [mbar]', 1000, 1050, 980, 1030]
         },
         FarsWatersystem : {
-            waterlevel: ['Water Level: [m]', 8, 11, 7, 12],        
-            poolwaterresistivity: ['Resistivity: Pool Water [M.Ohm]', 0, 20, 0, 21],        
-            productresistivity: ['Resistivity: Product Water [M.Ohm]', 0, 20, 0, 21],        
-            iwateroxygencontent: ['Oxygen: In Flow [ppm]', 10, 350, 0, 400],        
-            owateroxygencontent: ['Oxygen: Out Flow [ppm]', 10, 350, 0, 400],        
-            heatertemperature: ['Temperature: Heater [C]', 20, 30, 15, 35],
-            heatexchangetemperature: ['Temperature: Heater Exchange [C]', 20, 30, 15, 35]
+            waterlevel: ['Water Level: [m]', 7, 12, 8, 11],        
+            poolwaterresistivity: ['Resistivity: Pool Water [M.Ohm]', 0, 18, 0.1, 16],        
+            productresistivity: ['Resistivity: Product Water [M.Ohm]', 0, 20, 0.1, 18],        
+            iwateroxygencontent: ['Oxygen: In Flow [ppm]', 0, 400, 10, 350],        
+            owateroxygencontent: ['Oxygen: Out Flow [ppm]', 0, 400, 10, 350],        
+            heatertemperature: ['Temperature: Heater [C]', 15, 35, 20, 30],
+            heatexchangetemperature: ['Temperature: Heater Exchange [C]', 15, 35, 20, 30]
         }
     };
 }
