@@ -65,7 +65,7 @@ def DBI_records(objects, fk, site, detector, task, sim, character, width):
         subsite=detector,
         simmask=sim,
         task=task,
-    ).values('seqno', 'timestart', 'timeend', 'insertdate'
+    ).values('seqno', 'timestart', 'timeend', 'insertdate', 'versiondate'
     ).order_by('-versiondate'
     ).annotate(count=Count(fk))
     
@@ -76,10 +76,10 @@ def DBI_records(objects, fk, site, detector, task, sim, character, width):
     }
     
     output = ''
-    fmt_title = "%%7s  %%-19s %%-%ds %%-19s %%5s %%s\n" % (options['span'],)
-    fmt = "[%%5d]  %%s %%-%ds %%s %%4d  [%%s]\n" % (options['span'],)    
-    output += fmt_title % ('[seqno]', '    valid from', ' ', '    valid to', 'count', '    [insert date]')
-    output += fmt_title % ('=======', '='*19, ' ', '='*19, '=====', '='*21)
+    fmt_title = "%%7s  %%-19s %%-%ds %%-19s %%5s %%s %%s\n" % (options['span'],)
+    fmt = "[%%5d]  %%s %%-%ds %%s %%4d  [%%s] [%%s]\n" % (options['span'],)    
+    output += fmt_title % ('[seqno]', '    valid from', ' ', '    valid to', 'count', '    [insert date]', '       [version date]')
+    output += fmt_title % ('=======', '='*19, ' ', '='*19, '=====', '='*21, '='*21)
     
     timemin = datetime(2038, 1, 20)
     timemax = datetime(1979, 1, 1)
@@ -106,7 +106,7 @@ def DBI_records(objects, fk, site, detector, task, sim, character, width):
         else:
             span = options['character'] * int((timeend - timestart).days/scale)
                     
-        output += fmt % (value['seqno'], timestart, pre+span, timeend, value['count'], value['insertdate'],)
+        output += fmt % (value['seqno'], timestart, pre+span, timeend, value['count'], value['insertdate'], value['versiondate'])
         
         # print value['count']
             

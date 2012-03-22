@@ -60,7 +60,7 @@ class DBIRecordsForm(DBIForm):
     
     width = forms.IntegerField(
         label='Width', required=True, 
-        max_value=1000, min_value=20, initial=45,
+        max_value=1000, min_value=20, initial=28,
         widget=forms.TextInput(attrs={'size':'3'})
     )
 
