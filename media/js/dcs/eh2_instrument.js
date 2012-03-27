@@ -63,10 +63,10 @@ function load_configs(){
         Ad3Adcovergas : {
             supplypressure: ['AD3 Cover Gas Pressure [psi]', 10, 30, 16, 25],
             oxygen: ['AD3 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
-            humidity_covergasreturn: ['Humidity: AD3 Cover Gas Return [%]', 0.1, 100, 0.1, 25],
-            humidity_electricaldrypipereturn: ['Humidity: AD3 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 31],
-            humidity_gasdrypipereturn: ['Humidity: AD3 Gas Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
-            humidity_pmtcablebellowreturn: ['Humidity: AD3 PMT Cable Bellow Return [%]', 0.1, 100, 0.1, 25]
+            humidity_covergasreturn: ['Humidity: AD3 Cover Gas Return [%]', 0.1, 100, -0.9, 5],
+            humidity_electricaldrypipereturn: ['Humidity: AD3 Elec. Dry Pipe Return [%]', 0.1, 100, -0.9, 110],
+            humidity_gasdrypipereturn: ['Humidity: AD3 Gas Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
+            humidity_pmtcablebellowreturn: ['Humidity: AD3 PMT Cable Bellow Return [%]', 0.1, 100, -0.9, 10]
         },
         LansIowTemp : {
             lans_iw_temp_pt1: ['Inner WP Temerature: 1 [C]', 20, 26, 22, 25],

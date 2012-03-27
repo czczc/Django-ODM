@@ -107,26 +107,26 @@ function load_configs(){
         Ad4Adcovergas : {
             supplypressure: ['AD4 Cover Gas Pressure [psi]', 10, 30, 16, 25],
             oxygen: ['AD4 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
-            humidity_covergasreturn: ['Humidity: AD4 Cover Gas Return [%]', 0.1, 100, 0.1, 25],
-            humidity_electricaldrypipereturn: ['Humidity: AD4 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 31],
-            humidity_gasdrypipereturn: ['Humidity: AD4 Gas Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
-            humidity_pmtcablebellowreturn: ['Humidity: AD4 PMT Cable Bellow Return [%]', 0.1, 100, 0.1, 25]
+            humidity_covergasreturn: ['Humidity: AD4 Cover Gas Return [%]', 0.1, 100, -0.9, 5],
+            humidity_electricaldrypipereturn: ['Humidity: AD4 Elec. Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
+            humidity_gasdrypipereturn: ['Humidity: AD4 Gas Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
+            humidity_pmtcablebellowreturn: ['Humidity: AD4 PMT Cable Bellow Return [%]', 0.1, 100, -0.9, 10]
         },
         Ad5Adcovergas : {
             supplypressure: ['AD5 Cover Gas Pressure [psi]', 10, 30, 16, 25],
             oxygen: ['AD5 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
-            humidity_covergasreturn: ['Humidity: AD5 Cover Gas Return [%]', 0.1, 100, 0.1, 25],
-            humidity_electricaldrypipereturn: ['Humidity: AD5 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 31],
-            humidity_gasdrypipereturn: ['Humidity: AD5 Gas Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
-            humidity_pmtcablebellowreturn: ['Humidity: AD5 PMT Cable Bellow Return [%]', 0.1, 100, 0.1, 25]
+            humidity_covergasreturn: ['Humidity: AD5 Cover Gas Return [%]', 0.1, 100, -0.9, 5],
+            humidity_electricaldrypipereturn: ['Humidity: AD5 Elec. Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
+            humidity_gasdrypipereturn: ['Humidity: AD5 Gas Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
+            humidity_pmtcablebellowreturn: ['Humidity: AD5 PMT Cable Bellow Return [%]', 0.1, 100, -0.9, 10]
         },
         Ad6Adcovergas : {
             supplypressure: ['AD6 Cover Gas Pressure [psi]', 10, 30, 16, 25],
             oxygen: ['AD6 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
-            humidity_covergasreturn: ['Humidity: AD6 Cover Gas Return [%]', 0.1, 100, 0.1, 25],
-            humidity_electricaldrypipereturn: ['Humidity: AD6 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 31],
-            humidity_gasdrypipereturn: ['Humidity: AD6 Gas Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
-            humidity_pmtcablebellowreturn: ['Humidity: AD6 PMT Cable Bellow Return [%]', 0.1, 100, 0.1, 25]
+            humidity_covergasreturn: ['Humidity: AD6 Cover Gas Return [%]', 0.1, 100, -0.9, 5],
+            humidity_electricaldrypipereturn: ['Humidity: AD6 Elec. Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
+            humidity_gasdrypipereturn: ['Humidity: AD6 Gas Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
+            humidity_pmtcablebellowreturn: ['Humidity: AD6 PMT Cable Bellow Return [%]', 0.1, 100, -0.9, 10]
         },
         // LansIowTemp : {
         //     lans_iw_temp_pt1: ['Inner WP Temerature: 1', 20, 26, 22, 25],

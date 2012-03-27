@@ -85,18 +85,18 @@ function load_configs(){
         Ad1Adcovergas : {
             supplypressure: ['AD1 Cover Gas Pressure [psi]', 10, 30, 16, 25],
             oxygen: ['AD1 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
-            humidity_covergasreturn: ['Humidity: AD1 Cover Gas Return [%]', 0.1, 100, 0.1, 25],
-            humidity_electricaldrypipereturn: ['Humidity: AD1 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 31],
-            humidity_gasdrypipereturn: ['Humidity: AD1 Gas Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
-            humidity_pmtcablebellowreturn: ['Humidity: AD1 PMT Cable Bellow Return [%]', 0.1, 100, 0.1, 25]
+            humidity_covergasreturn: ['Humidity: AD1 Cover Gas Return [%]', 0.1, 100, -0.9, 5],
+            humidity_electricaldrypipereturn: ['Humidity: AD1 Elec. Dry Pipe Return [%]', 0.1, 100, -0.9, 31],
+            humidity_gasdrypipereturn: ['Humidity: AD1 Gas Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
+            humidity_pmtcablebellowreturn: ['Humidity: AD1 PMT Cable Bellow Return [%]', 0.1, 100, -0.9, 10]
         },
         Ad2Adcovergas : {
             supplypressure: ['AD2 Cover Gas Pressure [psi]', 10, 30, 16, 25],
             oxygen: ['AD2 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
-            humidity_covergasreturn: ['Humidity: AD2 Cover Gas Return [%]', 0.1, 100, 0.1, 25],
-            humidity_electricaldrypipereturn: ['Humidity: AD2 Elec. Dry Pipe Return [%]', 0.1, 100, 0.1, 31],
-            humidity_gasdrypipereturn: ['Humidity: AD2 Gas Dry Pipe Return [%]', 0.1, 100, 0.1, 25],
-            humidity_pmtcablebellowreturn: ['Humidity: AD2 PMT Cable Bellow Return [%]', 0.1, 100, 0.1, 25]
+            humidity_covergasreturn: ['Humidity: AD2 Cover Gas Return [%]', 0.1, 100, -0.9, 5],
+            humidity_electricaldrypipereturn: ['Humidity: AD2 Elec. Dry Pipe Return [%]', 0.1, 100, -0.9, 31],
+            humidity_gasdrypipereturn: ['Humidity: AD2 Gas Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
+            humidity_pmtcablebellowreturn: ['Humidity: AD2 PMT Cable Bellow Return [%]', 0.1, 100, -0.9, 10]
         },
         DbnsIowTemp : {
             dbns_iw_temp_pt1: ['Inner WP Temerature [C]: 1', 21, 26, 22, 25],
