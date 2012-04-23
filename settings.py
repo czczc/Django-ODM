@@ -11,20 +11,20 @@ elif HOST_NAME.startswith('dybdq'):
     SITE_IHEP = True
 else:
     SITE_LOCAL = True
-    
+
 
 from ConfigParser import SafeConfigParser
 conf = SafeConfigParser()
 conf.read(os.path.join(PROJECT_PATH, 'odm.conf'))
-    
+
 DATABASES = {
     'default': {
         'ENGINE'  : 'django.db.backends.sqlite3',
-        'NAME'    : PROJECT_PATH + conf.get('default_db', 'NAME'),          
-        'USER'    : '',          
-        'PASSWORD': '',      
-        'HOST'    : '',          
-        'PORT'    : '',          
+        'NAME'    : PROJECT_PATH + conf.get('default_db', 'NAME'),
+        'USER'    : '',
+        'PASSWORD': '',
+        'HOST'    : '',
+        'PORT'    : '',
     },
     'lbl' : {
         'ENGINE'  : 'django.db.backends.mysql',
@@ -46,7 +46,7 @@ DATABASES = {
         'USER'    : conf.get('dcs_db', 'USER'),
         'PASSWORD': conf.get('dcs_db', 'PASSWORD'),
         'HOST'    : conf.get('dcs_db', 'HOST'),
-        'PORT'    : conf.get('dcs_db', 'PORT'),          
+        'PORT'    : conf.get('dcs_db', 'PORT'),
     },
     'dcs_ihep' : {
         'ENGINE'  : 'django.db.backends.mysql',
@@ -72,7 +72,7 @@ DATABASE_ROUTERS = [
 if SITE_IHEP:
     DATABASE_ROUTERS[0] = 'odm.router.DayaBayIhepRouter'
     DATABASE_ROUTERS[1] = 'odm.router.DayaBayIhepDcsRouter'
-    
+
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
 
@@ -89,7 +89,7 @@ LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 USE_I18N = True
 USE_L10N = False
-DATETIME_FORMAT = 'Y-m-d H:i:s' 
+DATETIME_FORMAT = 'Y-m-d H:i:s'
 MAINTAINENCE = conf.get('common', 'MAINTAINENCE')
 
 TEMPLATE_LOADERS = (
@@ -152,7 +152,7 @@ elif SITE_IHEP:
     SITE_ROOT = '/odm'
     MEDIA_URL = '/odmfile/odmweb/'
     ADMIN_MEDIA_PREFIX = '/odmfile/odmweb/admin/'
-    
+
 elif SITE_LOCAL:
     DEBUG = TEMPLATE_DEBUG = True
     SITE_ROOT = ''
