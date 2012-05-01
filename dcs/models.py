@@ -143,7 +143,10 @@ class LansRpcGas101(AbstractRpcGas101):
     class Meta(AbstractRpcGas101.Meta):
         db_table = u'LANS_RPC_GAS_101'
 
-
+class FarsRpcGas101(AbstractRpcGas101):
+    class Meta(AbstractRpcGas101.Meta):
+        db_table = u'FARS_RPC_GAS_101'
+        
 class AbstractRpcGas102(DcsModel):
     had_1_out = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='HAD_1_OUT', blank=True) # Field name made lowercase.
     had_2_out = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='HAD_2_OUT', blank=True) # Field name made lowercase.
@@ -176,6 +179,9 @@ class LansRpcGas102(AbstractRpcGas102):
     class Meta(AbstractRpcGas102.Meta):
         db_table = u'LANS_RPC_GAS_102'
 
+class FarsRpcGas102(AbstractRpcGas102):
+    class Meta(AbstractRpcGas102.Meta):
+        db_table = u'FARS_RPC_GAS_102'
        
 class DbnsIowTemp(DcsModel):
     dbns_iw_temp_pt1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_IW_Temp_PT1', blank=True) # Field name made lowercase.

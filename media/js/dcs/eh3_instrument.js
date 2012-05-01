@@ -26,7 +26,8 @@ function load_all_models() {
     load_model('Ad6Adcovergas');
     
     // load_model('LansIowTemp');
-    // load_model('LansRpcGas101');
+    load_model('FarsRpcGas101');
+    load_model('FarsRpcGas102');
     load_model('FarsEnvPth');
     load_model('FarsWatersystem');
 
@@ -41,7 +42,8 @@ function fetch_latest() {
     fetch_one('Ad6Adcovergas');
     
     // fetch_one('LansIowTemp');
-    // fetch_one('LansRpcGas101');
+    fetch_one('FarsRpcGas101');
+    fetch_one('FarsRpcGas102');
     fetch_one('FarsEnvPth');
     fetch_one('FarsWatersystem');
     
@@ -138,12 +140,21 @@ function load_configs(){
         //     lans_ow_temp_pt3: ['Outer WP Temerature: 3', 20, 26, 22, 25],
         //     lans_ow_temp_pt4: ['Outer WP Temerature: 4', 20, 26, 22, 25]
         // }
-        // LansRpcGas101 : {
-        //     pressure_argon: ['RPC Argon Pressure', 18, 23, 19, 22],
-        //     pressure_isobutane: ['RPC Isobutane Pressure', 18, 22, 19, 22],
-        //     pressure_r134a: ['RPC R134A Pressure', 18, 22, 19, 22],
-        //     pressure_sf6: ['RPC SF6 Pressure', 18, 22, 19, 22]     
-        // },
+        FarsRpcGas101 : {
+            pressure_argon: ['RPC Argon Pressure [psi]', 18, 35, 19, 34],
+            pressure_isobutane: ['RPC Isobutane Pressure [psi]', 18, 35, 19, 34],
+            pressure_r134a: ['RPC R134A Pressure [psi]', 18, 35, 19, 34],
+            pressure_sf6: ['RPC SF6 Pressure [psi]', 18, 35, 19, 34],
+            flow_rate_argon: ['RPC Argon Flow Rate [cc/m]', 950, 1600, 949, 1599],
+            flow_rate_isobutane: ['RPC Isobutane Flow Rate [cc/m]', 60, 110, 61.5, 109],
+            flow_rate_r134a: ['RPC R134A Flow Rate [cc/m]', 460, 800, 465, 799],
+            flow_rate_sf6: ['RPC SF6 Flow Rate [cc/m]', 6, 13, 7.55, 12.9]     
+        },
+        FarsRpcGas102 : {
+            weight_isobutane: ['RPC Isobutane Weight [kg]', -10, 80, 2, 75],
+            weight_r134a: ['RPC R134A Weight [kg]', -10, 80, 2, 75],
+            weight_sf6: ['RPC SF6 Weight [kg]', -10, 100, 2, 90]     
+        },
         FarsEnvPth : {
             fars_pth_t1: ['Temperature: E-Room [C]', 20, 29, 21, 29],        
             fars_pth_t2: ['Temperature: Near Gas-Room [C]', 20, 29, 21, 29],        

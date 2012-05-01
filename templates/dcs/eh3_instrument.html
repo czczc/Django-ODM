@@ -132,6 +132,49 @@
             <td class='vc last_update good' id='td_FarsWatersystem__date_time'></td>
         </tr>
 	</table>
+
+	<table style='margin-top: 20px;'>
+	<thead><tr>
+		<th colspan="1" style='text-align: center;'>RPC Gas</th>
+	</tr></thead>
+    <tbody>
+        <tr>
+            <td class='dc'></td>
+            <td class='dc'>Pressure<br />[psi]</td>
+            <td class='dc'>Flow Rate<br />[cc/m]</td>
+            <td class='dc'>Weight<br />[kg]</td>
+            <td class='dc' style="width:180px;">Last Update</td>
+        </tr>
+        <tr>
+            <td class='dc'>Argon</td>
+            <td class='vc sc' id='td_FarsRpcGas101__pressure_argon'></td>
+            <td class='vc sc' id='td_FarsRpcGas101__flow_rate_argon'></td>
+            <td class='vc'>-</td>
+            <td class='vc last_update good' id='td_FarsRpcGas101__date_time'></td>
+        </tr>
+        <tr>
+            <td class='dc'>Isobutane</td>
+            <td class='vc sc' id='td_FarsRpcGas101__pressure_isobutane'></td>
+            <td class='vc sc' id='td_FarsRpcGas101__flow_rate_isobutane'></td>
+            <td class='vc sc' id='td_FarsRpcGas102__weight_isobutane'></td>
+            <td class='vc last_update good' id='td_FarsRpcGas102__date_time'></td>
+        </tr>
+        <tr>
+            <td class='dc'>R134A</td>
+            <td class='vc sc' id='td_FarsRpcGas101__pressure_r134a'></td>
+            <td class='vc sc' id='td_FarsRpcGas101__flow_rate_r134a'></td>
+            <td class='vc sc' id='td_FarsRpcGas102__weight_r134a'></td>
+            <td class='vc'>-</td>
+        </tr>
+        <tr>
+            <td class='dc'>SF6</td>
+            <td class='vc sc' id='td_FarsRpcGas101__pressure_sf6'></td>
+            <td class='vc sc' id='td_FarsRpcGas101__flow_rate_sf6'></td>
+            <td class='vc sc' id='td_FarsRpcGas102__weight_sf6'></td>
+            <td class='vc'>-</td>
+        </tr>
+    </tbody>
+	</table>
 	
 	
 	<table style='margin-top: 20px;'>
@@ -183,40 +226,6 @@
           </tr>
     </tbody>
   </table>
-
-  <table style='margin-top: 20px;'>
-    <thead><tr>
-        <th colspan="2" style='text-align: center;' id='th_LansRpcGas101' title=''>RPC Gas</th>
-    <th colspan="6" style='text-align: center;' class='th_last_update good'></th>
-    </tr></thead>
-  <tbody>
-        <tr>
-            <td class='descr'>Pressure: Argon</td><td class='value sc' id='td_LansRpcGas101__pressure_argon'></td>
-            <td class='descr'>Pressure: Isobutane</td><td class='value sc' id='td_LansRpcGas101__pressure_isobutane'></td>
-            <td class='descr'>Pressure: R134A</td><td class='value sc' id='td_LansRpcGas101__pressure_r134a'></td>
-            <td class='descr'>Pressure: SF6</td><td class='value sc' id='td_LansRpcGas101__pressure_sf6'></td>
-        </tr>
-  </tbody>
-    </table>
-  
-  <table style='margin-top: 20px;'>
-    <thead><tr>
-        <th colspan="2" style='text-align: center;' id='th_LansEnvPth' title=''>Environmental Sensors</th>
-    <th colspan="4" style='text-align: center;' class='th_last_update good'></th>
-    </tr></thead>
-  <tbody>
-        <tr>
-            <td class='descr'>Temperature 1</td><td class='value sc' id='td_LansEnvPth__lans_pth_t1'></td>
-            <td class='descr'>Humidity 1</td><td class='value sc' id='td_LansEnvPth__lans_pth_h1'></td>
-            <td class='descr'>Pressure 1</td><td class='value sc' id='td_LansEnvPth__lans_pth_p1'></td>
-        </tr>
-        <tr>
-            <td class='descr'>Temperature 2</td><td class='value sc'  id='td_LansEnvPth__lans_pth_t2'></td>
-            <td class='descr'>Humidity 2</td><td class='value sc' id='td_LansEnvPth__lans_pth_h2'></td>
-            <td class='descr'>Pressure 2</td><td class='value sc' id='td_LansEnvPth__lans_pth_p2'></td>
-        </tr>
-  </tbody>
-    </table>
      -->
 </div>
 <div class="clear"></div>
@@ -387,25 +396,46 @@
 <div id="LansIowTemp__lans_ow_temp_pt4" class="dcs_chart grid_12"></div>
 <div class="clear"></div>
 
-{# RPC #}
-<div class = "grid_24">
-  <a name="RPC"></a>   
-     <h2>
-         RPC Monitors
-    </h2>
-</div>    
-<div class="clear"></div>
-<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; width: 200px;'>Gas Pressure</h4>
-
-<div id="LansRpcGas101__pressure_argon" class="dcs_chart grid_12"></div>
-<div id="LansRpcGas101__pressure_isobutane" class="dcs_chart grid_12"></div>
-<div class="clear"></div>
-
-<div id="LansRpcGas101__pressure_r134a" class="dcs_chart grid_12"></div>
-<div id="LansRpcGas101__pressure_sf6" class="dcs_chart grid_12"></div>
-<div class="clear"></div>
  -->
 
+{# RPC #}
+<div class = "grid_24">
+	<a name="RPC"></a>   
+  <h2>
+      RPC Monitors
+  </h2>
+</div>    
+<div class="clear"></div>
+
+<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; width: 200px;'>Gas Pressure</h4>
+
+<div id="FarsRpcGas101__pressure_argon" class="dcs_chart grid_12"></div>
+<div id="FarsRpcGas101__pressure_isobutane" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="FarsRpcGas101__pressure_r134a" class="dcs_chart grid_12"></div>
+<div id="FarsRpcGas101__pressure_sf6" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; width: 200px;'>Gas Flow Rate</h4>
+
+<div id="FarsRpcGas101__flow_rate_argon" class="dcs_chart grid_12"></div>
+<div id="FarsRpcGas101__flow_rate_isobutane" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="FarsRpcGas101__flow_rate_r134a" class="dcs_chart grid_12"></div>
+<div id="FarsRpcGas101__flow_rate_sf6" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; width: 200px;'>Gas Dewar Weight</h4>
+
+<div id="FarsRpcGas102__weight_isobutane" class="dcs_chart grid_12"></div>
+<div id="FarsRpcGas102__weight_r134a" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="FarsRpcGas102__weight_sf6" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+ 
 {# Environment #}
 <div class = "grid_24">
   <a name="Env"></a>
