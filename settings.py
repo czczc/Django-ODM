@@ -144,8 +144,8 @@ ACCOUNT_ACTIVATION_DAYS = 7
 if SITE_NERSC:
     DEBUG = TEMPLATE_DEBUG = False
     SITE_ROOT = '/dayabay/odm'
-    MEDIA_URL = 'http://portal.nersc.gov/project/dayabay/odm_media/'
-    ADMIN_MEDIA_PREFIX = 'http://portal.nersc.gov/project/dayabay/odm_media/admin/'
+    MEDIA_URL = 'https://portal.nersc.gov/project/dayabay/odm_media/'
+    ADMIN_MEDIA_PREFIX = 'https://portal.nersc.gov/project/dayabay/odm_media/admin/'
 
 elif SITE_IHEP:
     DEBUG = TEMPLATE_DEBUG = False
