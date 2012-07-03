@@ -120,6 +120,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'odm.context_processors.setting',
 )
 
+BLACKLIST_IPS = (
+    '128.3.41.57',  # gsa-crawler
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -172,6 +176,7 @@ elif SITE_LOCAL:
         # 'debug_toolbar.middleware.DebugToolbarMiddleware',
         # 'django.middleware.cache.FetchFromCacheMiddleware',
         'odm.middleware.MaintainenceMiddleware',
+        'odm.middleware.BlockingMiddleware',
     )
     INTERNAL_IPS = ('127.0.0.1',)
     DEBUG_TOOLBAR_PANELS = (
