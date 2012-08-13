@@ -21,6 +21,7 @@ class DBIForm(forms.Form):
             ('AD4', 'AD4'),
             ('IWS', 'IWS'),
             ('OWS', 'OWS'),
+            ('RPC', 'RPC'),
         ),
     )
     
