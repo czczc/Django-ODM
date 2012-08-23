@@ -21,6 +21,7 @@ function load_all_models() {
     load_model('Ad4Lidsensor');
     load_model('Ad5Lidsensor');
     load_model('Ad6Lidsensor');
+    load_model('Ad7Lidsensor');
     load_model('Ad4Adcovergas');
     load_model('Ad5Adcovergas');
     load_model('Ad6Adcovergas');
@@ -37,6 +38,8 @@ function fetch_latest() {
     fetch_one('Ad4Lidsensor');
     fetch_one('Ad5Lidsensor');
     fetch_one('Ad6Lidsensor');
+    fetch_one('Ad7Lidsensor');
+
     fetch_one('Ad4Adcovergas');
     fetch_one('Ad5Adcovergas');
     fetch_one('Ad6Adcovergas');
@@ -105,6 +108,24 @@ function load_configs(){
             tilty_sensor1: ['AD6 Tilt Y1 [deg]', -2, 2,  0.02,  0.06],
             tilty_sensor2: ['AD6 Tilt Y2 [deg]', -2, 2,  0.35,  0.39],
             tilty_sensor3: ['AD6 Tilt Y3 [deg]', -2, 2, -0.14, -0.10]
+        },
+        Ad7Lidsensor : {
+            ultrasonic_gdls:  ['AD7 GdLS Level: Ultrasonic [mm]',  99.5 -15,  99.5 +15,  99.5 -4.5,  99.5 +4.5],
+            ultrasonic_ls:    ['AD7 LS Level: Ultrasonic [mm]',    97.2 -15,  97.2 +15,  97.2 -4.5,  97.2 +4.5],
+            capacitance_gdls: ['AD7 GdLS Level: Capacitance [mm]', 99.5 -15,  99.5 +15,  99.5 -4.5,  99.5 +4.5],
+            capacitance_ls:   ['AD7 LS Level: Capacitance [mm]',   97.2 -15,  97.2 +15,  97.2 -4.5,  97.2 +4.5],
+            capacitance_mo:   ['AD7 MO Level: Capacitance [mm]',   95.2 -15,  95.2 +15,  95.2 -4.5,  95.2 +4.5],
+            temp_gdls:        ['AD7 GdLS Temperature [C]', 21, 25, 22.4, 23],
+            temp_ls:          ['AD7 LS Temperature [C]',   21, 25, 22.4, 23],
+            //capacitance_temp_gdls: ['AD7 GdLS Temperature: Capacitance', 23, 28, 24, 27],
+            //capacitance_temp_ls: ['AD7 LS Temperature: Capacitance', 23, 28, 24, 27],
+            //capacitance_temp_mo: ['AD7 MO Temperature: Capacitance', 20, 26, 21, 25],
+            tiltx_sensor1: ['AD7 Tilt X1 [deg]', -2, 2, -0.16, -0.12],
+            tiltx_sensor2: ['AD7 Tilt X2 [deg]', -2, 2, -0.71, -0.67],
+            tiltx_sensor3: ['AD7 Tilt X3 [deg]', -2, 2, -0.69, -0.65],
+            tilty_sensor1: ['AD7 Tilt Y1 [deg]', -2, 2,  0.02,  0.06],
+            tilty_sensor2: ['AD7 Tilt Y2 [deg]', -2, 2,  0.35,  0.39],
+            tilty_sensor3: ['AD7 Tilt Y3 [deg]', -2, 2, -0.14, -0.10]
         },
         Ad4Adcovergas : {
             supplypressure: ['AD4 Cover Gas Pressure [psi]', 10, 30, 16, 25],

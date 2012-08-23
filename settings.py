@@ -72,8 +72,9 @@ DATABASE_ROUTERS = [
 if SITE_IHEP:
     DATABASE_ROUTERS[0] = 'odm.router.DayaBayIhepRouter'
     DATABASE_ROUTERS[1] = 'odm.router.DayaBayIhepDcsRouter'
-
-
+elif SITE_LOCAL:
+    DATABASE_ROUTERS[1] = 'odm.router.DayaBayIhepDcsRouter'
+    
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
 
 ADMINS = (

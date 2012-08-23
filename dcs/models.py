@@ -59,6 +59,10 @@ class Ad6Lidsensor(AbstractAdLidsensor):
     class Meta(AbstractAdLidsensor.Meta):
         db_table = u'AD6_LidSensor'                
 
+class Ad7Lidsensor(AbstractAdLidsensor):
+    class Meta(AbstractAdLidsensor.Meta):
+        db_table = u'AD7_LidSensor'
+
 # abstract model for AD cover gas tables
 class AbstractAdcovergas(DcsModel):
     supplypressure = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='SupplyPressure', blank=True) # Field name made lowercase.
