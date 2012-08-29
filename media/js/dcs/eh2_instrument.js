@@ -19,6 +19,7 @@ function load_all_models() {
     charts.length = 0;
 
     load_model('Ad3Lidsensor');
+    load_model('Ad8Lidsensor');
     load_model('Ad3Adcovergas');
     load_model('LansIowTemp');
     load_model('LansRpcGas101');
@@ -30,6 +31,7 @@ function load_all_models() {
 
 function fetch_latest() {
     fetch_one('Ad3Lidsensor');
+    fetch_one('Ad8Lidsensor');
     fetch_one('Ad3Adcovergas');
     fetch_one('LansIowTemp');
     fetch_one('LansRpcGas101');
@@ -59,6 +61,25 @@ function load_configs(){
             tilty_sensor1: ['AD3 Tilt Y1 [deg]', -2, 2,  0.78,  0.82],
             tilty_sensor2: ['AD3 Tilt Y2 [deg]', -2, 2,  1.40,  1.44],
             tilty_sensor3: ['AD3 Tilt Y3 [deg]', -2, 2, -0.19, -0.15]
+        },
+        Ad8Lidsensor : {
+            // liquid levels change by 14 mm/C.  I set +/- 0.3C, +/-4.5 mm
+            ultrasonic_gdls:  ['AD8 GdLS Level: Ultrasonic [mm]',  65, 95, 89.1-4.5, 89.1+4.5],
+            capacitance_gdls: ['AD8 GdLS Level: Capacitance [mm]', 65, 95, 89.1-4.5, 89.1+4.5],    
+            ultrasonic_ls:    ['AD8 LS Level: Ultrasonic [mm]',    65, 95, 85.0-4.5, 85.0+4.5], 
+            capacitance_ls:   ['AD8 LS Level: Capacitance [mm]',   65, 95, 85.0-4.5, 85.0+4.5],
+            capacitance_mo:   ['AD8 MO Level: Capacitance [mm]',   65, 95, 90.0-4.5, 90.0+4.5],
+            temp_gdls:        ['AD8 GdLS Temperature [C]', 21, 25, 22.4, 23],
+            temp_ls:          ['AD8 LS Temperature [C]',   21, 25, 22.4, 23],
+            //capacitance_temp_gdls: ['AD8 GdLS Temperature [C]: Capacitance', 23, 28, 24, 27],
+            //capacitance_temp_ls: ['AD8 LS Temperature [C]: Capacitance', 23, 28, 24, 27],
+            //capacitance_temp_mo: ['AD8 MO Temperature [C]: Capacitance', 20, 26, 21, 25],
+            tiltx_sensor1: ['AD8 Tilt X1 [deg]', -2, 2,  0.38,  0.42],
+            tiltx_sensor2: ['AD8 Tilt X2 [deg]', -2, 2, -0.22, -0.18],
+            tiltx_sensor3: ['AD8 Tilt X3 [deg]', -2, 2, -0.37, -0.33],
+            tilty_sensor1: ['AD8 Tilt Y1 [deg]', -2, 2,  0.78,  0.82],
+            tilty_sensor2: ['AD8 Tilt Y2 [deg]', -2, 2,  1.40,  1.44],
+            tilty_sensor3: ['AD8 Tilt Y3 [deg]', -2, 2, -0.19, -0.15]
         },
         Ad3Adcovergas : {
             supplypressure: ['AD3 Cover Gas Pressure [psi]', 10, 30, 16, 25],
