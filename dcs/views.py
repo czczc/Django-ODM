@@ -107,12 +107,14 @@ def search(request, site='EH1'):
                 count = records.count()
                 skip = count / keep
                 last_id = records[0].id
-                records = records.filter(id__in=xrange(last_id, last_id-count, -skip))
-
+                if not skip == 0:
+                    records = records.filter(id__in=xrange(last_id, last_id-count, -skip))
+                    
             except IndexError:
                 return HttpResponse(json.dumps([]))
             except:
-                return HttpResponse(model + ' does not exist')
+                raise
+                # return HttpResponse(model + ' does not exist')
             return HttpResponse(serializers.serialize("json", records, fields=fields))
             
         else:
