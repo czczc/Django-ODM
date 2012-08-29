@@ -26,8 +26,7 @@ function load_all_models() {
     load_model('Ad5Adcovergas');
     load_model('Ad6Adcovergas');
     load_model('Ad7Adcovergas');
-    
-    // load_model('LansIowTemp');
+    load_model('FarsIowTemp');
     load_model('FarsRpcGas101');
     load_model('FarsRpcGas102');
     load_model('FarsEnvPth');
@@ -46,7 +45,7 @@ function fetch_latest() {
     fetch_one('Ad6Adcovergas');
     fetch_one('Ad7Adcovergas');
     
-    // fetch_one('LansIowTemp');
+    fetch_one('FarsIowTemp');
     fetch_one('FarsRpcGas101');
     fetch_one('FarsRpcGas102');
     fetch_one('FarsEnvPth');
@@ -161,16 +160,16 @@ function load_configs(){
             humidity_gasdrypipereturn: ['Humidity: AD7 Gas Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
             humidity_pmtcablebellowreturn: ['Humidity: AD7 PMT Cable Bellow Return [%]', 0.1, 100, -0.9, 10]
         },
-        // LansIowTemp : {
-        //     lans_iw_temp_pt1: ['Inner WP Temerature: 1', 20, 26, 22, 25],
-        //     lans_iw_temp_pt2: ['Inner WP Temerature: 2', 20, 26, 22, 25],
-        //     lans_iw_temp_pt3: ['Inner WP Temerature: 3', 20, 26, 22, 25],
-        //     lans_iw_temp_pt4: ['Inner WP Temerature: 4', 20, 26, 22, 25],
-        //     lans_ow_temp_pt1: ['Outer WP Temerature: 1', 20, 26, 22, 25],
-        //     lans_ow_temp_pt2: ['Outer WP Temerature: 2', 20, 26, 22, 25],
-        //     lans_ow_temp_pt3: ['Outer WP Temerature: 3', 20, 26, 22, 25],
-        //     lans_ow_temp_pt4: ['Outer WP Temerature: 4', 20, 26, 22, 25]
-        // }
+        FarsIowTemp : {
+            fars_iw_temp_pt1: ['Inner WP Temerature: 1 [C]', 20, 26, 22, 25],
+            fars_iw_temp_pt2: ['Inner WP Temerature: 2 [C]', 20, 26, 22, 25],
+            fars_iw_temp_pt3: ['Inner WP Temerature: 3 [C]', 20, 26, 22, 25],
+            fars_iw_temp_pt4: ['Inner WP Temerature: 4 [C]', 20, 26, 22, 25],
+            fars_ow_temp_pt1: ['Outer WP Temerature: 1 [C]', 20, 26, 22, 25],
+            fars_ow_temp_pt2: ['Outer WP Temerature: 2 [C]', 20, 26, 22, 25],
+            fars_ow_temp_pt3: ['Outer WP Temerature: 3 [C]', 20, 26, 22, 25],
+            fars_ow_temp_pt4: ['Outer WP Temerature: 4 [C]', 20, 26, 22, 25]
+        },
         FarsRpcGas101 : {
             pressure_argon: ['RPC Argon Pressure [psi]', 18, 35, 19, 34],
             pressure_isobutane: ['RPC Isobutane Pressure [psi]', 18, 35, 19, 34],

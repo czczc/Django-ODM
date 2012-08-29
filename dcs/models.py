@@ -221,6 +221,18 @@ class LansIowTemp(DcsModel):
     lans_ow_temp_pt4 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='LANS_OW_Temp_PT4', blank=True) # Field name made lowercase.
     class Meta(DcsModel.Meta):
         db_table = u'LANS_IOW_Temp'
+
+class FarsIowTemp(DcsModel):
+    fars_iw_temp_pt1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FARS_IW_Temp_PT1', blank=True) # Field name made lowercase.
+    fars_iw_temp_pt2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FARS_IW_Temp_PT2', blank=True) # Field name made lowercase.
+    fars_iw_temp_pt3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FARS_IW_Temp_PT3', blank=True) # Field name made lowercase.
+    fars_iw_temp_pt4 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FARS_IW_Temp_PT4', blank=True) # Field name made lowercase.
+    fars_ow_temp_pt1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FARS_OW_Temp_PT1', blank=True) # Field name made lowercase.
+    fars_ow_temp_pt2 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FARS_OW_Temp_PT2', blank=True) # Field name made lowercase.
+    fars_ow_temp_pt3 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FARS_OW_Temp_PT3', blank=True) # Field name made lowercase.
+    fars_ow_temp_pt4 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='FARS_OW_Temp_PT4', blank=True) # Field name made lowercase.
+    class Meta(DcsModel.Meta):
+        db_table = u'FARS_IOW_Temp'
                     
 class DbnsEnvPth(DcsModel):
     dbns_pth_p1 = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='DBNS_PTH_P1', blank=True) # Field name made lowercase.

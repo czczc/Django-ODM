@@ -127,6 +127,38 @@
 	
 	<table style='margin-top: 20px;'>
 	<thead><tr>
+		<th colspan="2" style='text-align: center;'>Water Pool</th>
+	</tr></thead>
+    <tbody>
+        <tr>
+            <td class='dc'></td>
+            <td class='dc'>Temperature 1<br />[&deg;C]</td>
+            <td class='dc'>Temperature 2<br />[&deg;C]</td>
+            <td class='dc'>Temperature 3<br />[&deg;C]</td>
+            <td class='dc'>Temperature 4<br />[&deg;C]</td>
+            <td class='dc' style="width:180px;">Last Update</td>
+        </tr>
+        <tr>
+            <td class='dc'>IWS</td>
+            <td class='vc sc' id='td_FarsIowTemp__fars_iw_temp_pt1'></td>
+            <td class='vc sc' id='td_FarsIowTemp__fars_iw_temp_pt2'></td>
+            <td class='vc sc' id='td_FarsIowTemp__fars_iw_temp_pt3'></td>
+            <td class='vc sc' id='td_FarsIowTemp__fars_iw_temp_pt4'></td>
+            <td class='vc last_update good' id='td_FarsIowTemp__date_time'></td>
+        </tr>
+        <tr>
+            <td class='dc'>OWS</td>
+            <td class='vc sc' id='td_FarsIowTemp__fars_ow_temp_pt1'></td>
+            <td class='vc sc' id='td_FarsIowTemp__fars_ow_temp_pt2'></td>
+            <td class='vc sc' id='td_FarsIowTemp__fars_ow_temp_pt3'></td>
+            <td class='vc sc' id='td_FarsIowTemp__fars_ow_temp_pt4'></td>
+            <td class='vc'>-</td>
+        </tr>
+    </tbody>
+	</table>
+	
+	<table style='margin-top: 20px;'>
+	<thead><tr>
 		<th colspan="3" style='text-align: center;'>Water System</th>
 	</tr></thead>
     <tbody>
@@ -226,28 +258,6 @@
     </tbody>
 	</table>
 		
-<!--      
-  <table style='margin-top: 20px;'>
-      <thead><tr>
-          <th colspan="2" style='text-align: center;' id='th_LansIowTemp' title=''>Water Pool Temperature</th>
-      <th colspan="6" style='text-align: center;' class='th_last_update good'></th>
-      </tr></thead>
-    <tbody>
-          <tr>
-              <td class='descr'>IWS Temperature: 1</td><td class='value sc' id='td_LansIowTemp__lans_iw_temp_pt1'></td>
-              <td class='descr'>IWS Temperature: 2</td><td class='value sc' id='td_LansIowTemp__lans_iw_temp_pt2'></td>
-              <td class='descr'>IWS Temperature: 3</td><td class='value sc' id='td_LansIowTemp__lans_iw_temp_pt3'></td>
-              <td class='descr'>IWS Temperature: 4</td><td class='value sc' id='td_LansIowTemp__lans_iw_temp_pt4'></td>
-          </tr>
-          <tr>
-              <td class='descr'>OWS Temperature: 1</td><td class='value sc' id='td_LansIowTemp__lans_ow_temp_pt1'></td>
-              <td class='descr'>OWS Temperature: 2</td><td class='value sc' id='td_LansIowTemp__lans_ow_temp_pt2'></td>
-              <td class='descr'>OWS Temperature: 3</td><td class='value sc' id='td_LansIowTemp__lans_ow_temp_pt3'></td>
-              <td class='descr'>OWS Temperature: 4</td><td class='value sc' id='td_LansIowTemp__lans_ow_temp_pt4'></td>
-          </tr>
-    </tbody>
-  </table>
-     -->
 </div>
 <div class="clear"></div>
 
@@ -382,6 +392,32 @@
 <div id="Ad6Adcovergas__humidity_pmtcablebellowreturn" class="dcs_chart grid_12"></div>
 <div id="Ad7Adcovergas__humidity_pmtcablebellowreturn" class="dcs_chart grid_12"></div>
 <div class="clear"></div><h2></h2>
+
+{# WP #}
+<div class = "grid_24">
+  <a name="WP"></a>   
+     <h2>
+         Water Pool Monitors
+    </h2>
+</div>    
+<div class="clear"></div>
+<h4 class='ui-widget-header ui-corner-all' align='center' style='padding: 5px; width: 200px;'>Temperature</h4>
+
+<div id="FarsIowTemp__fars_iw_temp_pt1" class="dcs_chart grid_12"></div>
+<div id="FarsIowTemp__fars_ow_temp_pt1" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="FarsIowTemp__fars_iw_temp_pt2" class="dcs_chart grid_12"></div>
+<div id="FarsIowTemp__fars_ow_temp_pt2" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="FarsIowTemp__fars_iw_temp_pt3" class="dcs_chart grid_12"></div>
+<div id="FarsIowTemp__fars_ow_temp_pt3" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
+
+<div id="FarsIowTemp__fars_iw_temp_pt4" class="dcs_chart grid_12"></div>
+<div id="FarsIowTemp__fars_ow_temp_pt4" class="dcs_chart grid_12"></div>
+<div class="clear"></div>
 
 {# Water System #}
 <div class = "grid_24">
