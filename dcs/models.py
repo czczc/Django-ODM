@@ -102,6 +102,9 @@ class Ad6Adcovergas(AbstractAdcovergas):
     class Meta(AbstractAdcovergas.Meta):
         db_table = u'AD6_ADCoverGas'
 
+class Ad7Adcovergas(AbstractAdcovergas):
+    class Meta(AbstractAdcovergas.Meta):
+        db_table = u'AD7_ADCoverGas'
 
         
 class AbstractWatersystem(DcsModel):

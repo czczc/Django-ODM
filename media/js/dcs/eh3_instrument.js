@@ -25,6 +25,7 @@ function load_all_models() {
     load_model('Ad4Adcovergas');
     load_model('Ad5Adcovergas');
     load_model('Ad6Adcovergas');
+    load_model('Ad7Adcovergas');
     
     // load_model('LansIowTemp');
     load_model('FarsRpcGas101');
@@ -43,6 +44,7 @@ function fetch_latest() {
     fetch_one('Ad4Adcovergas');
     fetch_one('Ad5Adcovergas');
     fetch_one('Ad6Adcovergas');
+    fetch_one('Ad7Adcovergas');
     
     // fetch_one('LansIowTemp');
     fetch_one('FarsRpcGas101');
@@ -150,6 +152,14 @@ function load_configs(){
             humidity_electricaldrypipereturn: ['Humidity: AD6 Elec. Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
             humidity_gasdrypipereturn: ['Humidity: AD6 Gas Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
             humidity_pmtcablebellowreturn: ['Humidity: AD6 PMT Cable Bellow Return [%]', 0.1, 100, -0.9, 10]
+        },
+        Ad7Adcovergas : {
+            supplypressure: ['AD7 Cover Gas Pressure [psi]', 10, 30, 16, 25],
+            oxygen: ['AD7 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
+            humidity_covergasreturn: ['Humidity: AD7 Cover Gas Return [%]', 0.1, 100, -0.9, 5],
+            humidity_electricaldrypipereturn: ['Humidity: AD7 Elec. Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
+            humidity_gasdrypipereturn: ['Humidity: AD7 Gas Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
+            humidity_pmtcablebellowreturn: ['Humidity: AD7 PMT Cable Bellow Return [%]', 0.1, 100, -0.9, 10]
         },
         // LansIowTemp : {
         //     lans_iw_temp_pt1: ['Inner WP Temerature: 1', 20, 26, 22, 25],
