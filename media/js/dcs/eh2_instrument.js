@@ -21,6 +21,7 @@ function load_all_models() {
     load_model('Ad3Lidsensor');
     load_model('Ad8Lidsensor');
     load_model('Ad3Adcovergas');
+    load_model('Ad8Adcovergas');
     load_model('LansIowTemp');
     load_model('LansRpcGas101');
     load_model('LansRpcGas102');
@@ -33,6 +34,7 @@ function fetch_latest() {
     fetch_one('Ad3Lidsensor');
     fetch_one('Ad8Lidsensor');
     fetch_one('Ad3Adcovergas');
+    fetch_one('Ad8Adcovergas');
     fetch_one('LansIowTemp');
     fetch_one('LansRpcGas101');
     fetch_one('LansRpcGas102');
@@ -88,6 +90,14 @@ function load_configs(){
             humidity_electricaldrypipereturn: ['Humidity: AD3 Elec. Dry Pipe Return [%]', 0.1, 100, -0.9, 110],
             humidity_gasdrypipereturn: ['Humidity: AD3 Gas Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
             humidity_pmtcablebellowreturn: ['Humidity: AD3 PMT Cable Bellow Return [%]', 0.1, 100, -0.9, 10]
+        },
+        Ad8Adcovergas : {
+            supplypressure: ['AD8 Cover Gas Pressure [psi]', 10, 30, 16, 25],
+            oxygen: ['AD8 Cover Gas Oxygen Concentration [ppm]', 0.1, 550, 0.1, 500],
+            humidity_covergasreturn: ['Humidity: AD8 Cover Gas Return [%]', 0.1, 100, -0.9, 5],
+            humidity_electricaldrypipereturn: ['Humidity: AD8 Elec. Dry Pipe Return [%]', 0.1, 100, -0.9, 110],
+            humidity_gasdrypipereturn: ['Humidity: AD8 Gas Dry Pipe Return [%]', 0.1, 100, -0.9, 10],
+            humidity_pmtcablebellowreturn: ['Humidity: AD8 PMT Cable Bellow Return [%]', 0.1, 100, -0.9, 10]
         },
         LansIowTemp : {
             lans_iw_temp_pt1: ['Inner WP Temerature: 1 [C]', 20, 26, 22, 25],

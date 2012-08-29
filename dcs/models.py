@@ -106,7 +106,11 @@ class Ad7Adcovergas(AbstractAdcovergas):
     class Meta(AbstractAdcovergas.Meta):
         db_table = u'AD7_ADCoverGas'
 
-        
+class Ad8Adcovergas(AbstractAdcovergas):
+    class Meta(AbstractAdcovergas.Meta):
+        db_table = u'AD8_ADCoverGas'
+
+
 class AbstractWatersystem(DcsModel):
     poolwaterresistivity = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='PoolWaterResistivity', blank=True) # Field name made lowercase.
     productresistivity = models.DecimalField(decimal_places=2, null=True, max_digits=8, db_column='ProductResistivity', blank=True) # Field name made lowercase.
