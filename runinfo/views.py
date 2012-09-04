@@ -330,6 +330,47 @@ def missing(request):
         })    
 
 @login_required
+def mcs(request):
+    '''mcs run list view'''
+    f = open(settings.PROJECT_PATH+'/data/mcs/runlist.txt')
+    run_dict = {}
+    for line in f:
+        if (line.startswith("\n")): continue
+        runno, r, z, phi = line.split()
+        # print runno, r, z, phi
+        runno = int(runno)
+        run_dict[runno] = {
+            'runno': runno,
+            'r': int(r),
+            'z': int(z),
+            'phi': int(phi),
+            'get_absolute_url' : '%s/run/%s/' % (settings.SITE_ROOT, runno),
+        }
+    f.close()
+    daq_list = Daqruninfo.objects.select_related().filter(runno__in=run_dict.keys())
+    for run in daq_list:
+        run_dict[run.runno].update({
+            'vld': {
+                'timestart' : run.vld.timestart,
+                'timestart_beijing' : run.vld.timestart_beijing(),
+                'runlength' : run.vld.runlength(),
+            },
+            # 'runtype': run.runtype,
+        })
+    
+    run_list = run_dict.values()
+    run_list.sort(key=lambda k: k['runno'], reverse=True)
+
+    # return HttpResponse('<pre>'+ json.dumps(run_list, indent=4) + '</pre>')
+    return direct_to_template(request, 
+        template = 'run/mcs.html',
+        extra_context = {
+            'run_list' : run_list,
+            'description' : 'MCS',
+            'count' : len(run_list),
+        })
+
+@login_required
 def latest(request, days='7', page=1, records=500):
     '''query by latest days'''
     run_list = Daqruninfo.objects.list_latest(days)
@@ -433,7 +474,6 @@ def calibrun(request, runno, adno=1):
         return HttpResponse(json.dumps(info))
     else:
         return HttpResponse('<pre>'+ json.dumps(info, indent=4) + '</pre>')
-
     
 @login_required
 def archive(request, year=None, month=None, page=1, records=500):

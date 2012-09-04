@@ -12,8 +12,10 @@ urlpatterns = patterns('odm.runinfo.views',
     # query run list
     (r'^list/ongoing/$', 'ongoing'),
     (r'^list/missing/$', 'missing'),
+    (r'^list/mcs/$', 'mcs'),
+    
     (r'^list/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'runlist'),
-    (r'^list/', 'runlist'),
+    (r'^list/$', 'runlist'),
     
     # list by run type
     (r'^type/(?P<runtype>\w+)/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'runtype'),
@@ -24,7 +26,7 @@ urlpatterns = patterns('odm.runinfo.views',
     (r'^calibration/(?P<runno>\d+)/AD/(?P<adno>\d+)/$', 'calibrun'),
     (r'^calibration/(?P<sourcetype>\w+)/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'calibration'),
     (r'^calibration/(\w+)/', 'calibration'),
-    
+        
     (r'^latest/days/(?P<days>\d+)/page/(?P<page>\d+)/records/(?P<records>\d+)/', 'latest'),
     (r'^latest/days/(?P<days>\d+)/', 'latest'),
     (r'^latest/days/', 'latest'),

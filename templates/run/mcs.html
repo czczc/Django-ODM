@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}ODM | {{ description }} Runs{% endblock %}
+
+{% load lazyutil %}
+
+{% block content %}
+    
+    <div class = "grid_24">
+         <h2>
+             {{ description }} Runs ({{ count }})
+        </h2>
+    </div>    
+    <div class="clear"></div> 
+    
+    <div class = "grid_24">  
+        <table id="table_list">
+           <thead><tr>
+              <th>Run No</th>
+              <th style='width: 180px;'>Start Time [Beijing]</th>
+              <th>Run Length</th>
+              <th class='NumFiles'># Files</th>
+              <th>R [mm]</th>              
+              <th>Z [mm]</th>
+              <th>Phi [&deg]</th>
+              <th class='PQM'>PQM</th>
+              <th class='Diagnostics'>Diagnostics</th>
+              <th class='Elog'>Elog</th>
+           </tr></thead>
+           <tbody>
+               {% for run in run_list %}
+                   <tr>
+                       <td class='runno'><a href="{{ run.get_absolute_url }}">{{ run.runno }}</a></td>
+                       <td>{{ run.vld.timestart_beijing }}</td>
+                       <td>{{ run.vld.runlength }}</td>
+                       <td class='NumFiles' runno='{{ run.runno }}'></td>                       
+                       <td>{{ run.r }}</td>
+                       <td>{{ run.z}}</td>
+                       <td>{{ run.phi}}</td>
+                       <td class='PQM' runno='{{ run.runno }}'></td>
+                       <td class='Diagnostics' runno='{{ run.runno }}'></td>
+                       <td class='Elog'>
+                           <a href="http://web.dyb.ihep.ac.cn:8099/Shift/?mode=full&attach=1&reverse=0&reverse=1&all=1&npp=20&subtext={{run.runno}}">Elog</a>
+                       </td>
+                   </tr>    
+               {% endfor %}
+           </tbody>
+        </table>
+                
+    </div>
+    <div class="clear"></div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/picnet.table.filter.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/runlist.js"></script>
+{% endblock %}
