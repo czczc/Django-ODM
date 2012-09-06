@@ -168,39 +168,39 @@ function load_ODM(runno) {
 //         });
 //     }); // .getJSON done
 // };
-// 
-// $('.more').click(function(){
-//    var filename = $(this).parent().siblings('.filename').html();
-//    var url = base_url + 'files/proxy/' + filename + '/';
-//    $.get(url, function(xml){
-//        var html = '<div id="content"><table style="width: 600px;">';
-//        html += '<tr><td class="descr">File Name' 
-//              + '</td><td class="value">' + filename + '</td></tr>';
-//         $(xml).find('role').each(function(){
-//             var role = $(this).text();
-//             var whenSigned = $(this).parent().siblings('whenSigned').text();
-//             html += '<tr><td class="descr">' + role 
-//                   + '</td><td class="value">' + covert_time(whenSigned) + '</td></tr>';
-//             // console.log(role + ' : ' + whenSigned);
-//         });
-//         html += '</table></div>';
-//         $.modal(html,
-//             {
-//                 'overlayClose' : true
-//             }
-//         );
-//    }, "xml")
-//    .error(function(){
-//        $.modal('Failed',
-//            {
-//                'overlayClose' : true
-//            }
-//        );
-//    });
-//    return false;
-// });
-// 
-// function covert_time(str) {
-//     var date_time = str.split('T');
-//     return date_time[0] + ' ' + date_time[1].split('-')[0];
-// }
+
+$('.more').click(function(){
+   var filename = $(this).parent().siblings('.filename').html();
+   var url = base_url + 'files/proxy/' + filename + '/';
+   $.get(url, function(xml){
+       var html = '<div id="content"><table style="width: 600px;">';
+       html += '<tr><td class="descr">File Name' 
+             + '</td><td class="value">' + filename + '</td></tr>';        
+       $(xml).find('endorsement').each(function(){           
+            var role = $(this).find('role').text();            
+            var whenSigned = $(this).find('whenSigned').text();
+            html += '<tr><td class="descr">' + role 
+                  + '</td><td class="value">' + covert_time(whenSigned) + '</td></tr>';
+            // console.log(role + ' : ' + whenSigned);
+        });
+        html += '</table></div>';        
+        $.modal(html,
+            {
+                'overlayClose' : true
+            }
+        );
+   }, "xml")
+   .error(function(){
+       $.modal('Failed',
+           {
+               'overlayClose' : true
+           }
+       );
+   });
+   return false;
+});
+
+function covert_time(str) {
+    var date_time = str.split('T');
+    return date_time[0] + ' ' + date_time[1].split('-')[0];
+}
