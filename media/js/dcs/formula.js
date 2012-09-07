@@ -61,21 +61,21 @@ function load_formulas(){
             temp_gdls:        function(x) { return 0.997*x+0.283; },
             temp_ls:          function(x) { return 0.995*x-0.160; }
         },
-        Ad7Lidsensor : { // placeholders only
+        Ad7Lidsensor : { // Checked on Sept 7, 2012
             ultrasonic_gdls:  function(x) { return (2725.4-x)/11.397+41; },
             ultrasonic_ls:    function(x) { return (2769.4-x)/11.357+23; },
             capacitance_mo:   function(x) { return 240-226.29+x*0.204427; },
-            capacitance_gdls: function(x) { return 0.1485*x+0.0+41; },
-            capacitance_ls:   function(x) { return 0.1488*x-0.0+23; },
+            capacitance_gdls: function(x) { return 0.1485*x-2.1+41; },
+            capacitance_ls:   function(x) { return 0.1488*x+0.5+23; },
             temp_gdls:        function(x) { return 0.992*x+0.391; }, 
             temp_ls:          function(x) { return 0.995*x+0.355; }  
         },
-        Ad8Lidsensor : { // placeholders only
+        Ad8Lidsensor : { // Checked on Sept 7, 2012
             ultrasonic_gdls:  function(x) { return (2710.2-x)/11.325+41; },
             ultrasonic_ls:    function(x) { return (2766.9-x)/11.368+23; },
             capacitance_mo:   function(x) { return 240-224.09+x*0.208103; },
-            capacitance_gdls: function(x) { return 0.14805*x+0.0+41; },
-            capacitance_ls:   function(x) { return 0.14795*x+0.0+23; },
+            capacitance_gdls: function(x) { return 0.14805*x-2.6+41; },
+            capacitance_ls:   function(x) { return 0.14795*x-3.5+23; },
             temp_gdls:        function(x) { return 0.992*x+0.262; }, 
             temp_ls:          function(x) { return 0.996*x+0.220; }  
         }
