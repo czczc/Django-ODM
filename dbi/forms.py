@@ -106,6 +106,20 @@ class PMTForm(DBIForm):
         ),
         widget=forms.Select(attrs={'class':'hidden'})
     )
+
+
+class ChannelForm(DBIForm):
+    board = forms.IntegerField(
+        label='Board', required=True, 
+        max_value=40, min_value=0, initial=6,
+        widget=forms.TextInput(attrs={'size':'2'})
+    )
+    
+    connector = forms.IntegerField(
+        label='Connector', required=True, 
+        max_value=40, min_value=0, initial=1,
+        widget=forms.TextInput(attrs={'size':'2'})
+    )
     
 class CalibPMTSpecForm(PMTForm):
     field = forms.ChoiceField(
@@ -114,6 +128,15 @@ class CalibPMTSpecForm(PMTForm):
             ('pmtspehigh', 'High Gain SPE'),
             ('pmtspelow', 'Low Gain SPE'),
             ('pmttoffset', 'Time Offset'),
+        ),
+    )
+
+class CalibPmtFineGainForm(ChannelForm):
+    field = forms.ChoiceField(
+        label='Value',
+        choices=(
+            ('spehigh', 'High Gain SPE'),
+            ('sigmaspehigh', 'High Gain SPE Width'),
         ),
     )
 

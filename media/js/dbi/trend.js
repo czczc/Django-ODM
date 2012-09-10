@@ -155,14 +155,21 @@ function format_name(row, field) {
     if (model == 'EnergyRecon') {
         str += '[PE to Evis/MeV] <b>' + row.peevis + ' +/- ' + row.peevisunc + '</b><br/>';
     }
+    else if (model == 'CalibPmtFineGain') {
+        str += '[High Gain SPE] <b>' + row.spehigh + '</b> ADC<br/>'
+             + '[High Gain SPE Error] <b>' + row.spehigherror + '</b> ADC<br/>'
+             + '[High Gain SPE Width] <b>' + row.sigmaspehigh + '</b> ADC<br/>'
+             + '[Fit Quality] <b>' + row.spehighfitqual + '</b><br/>';
+    }
+    else if (model == 'CableMap') {
+        str += '[Board-Connector] <b>' + row.board + '-' + row.connector + '</b><br/>';
+    }
     else if (model == 'CalibPMTSpec') {
         str += '[High Gain SPE] <b>' + row.pmtspehigh + '</b> ADC<br/>'
              + '[Low Gain SPE] <b>' + row.pmtspelow + '</b> ADC<br/>'
              + '[Time Offset] <b>' + row.pmttoffset + '</b> TDC<br/>';
     }
-    else if (model == 'CableMap') {
-        str += '[Board-Connector] <b>' + row.board + '-' + row.connector + '</b><br/>';
-    }
+    // console.log(model);
     return str
         + '[From] <b>' + row.start + '</b><br/>'
         + '[To] <b>' + row.end + '</b><br/>'
@@ -190,6 +197,10 @@ function load_configs() {
           'pmtspehigh' : {'title' : 'High Gain SPE [ADC]'},
           'pmtspelow'  : {'title' : 'Low Gain SPE [ADC]'},
           'pmttoffset' : {'title' : 'Time Offset [TDC]'}
+        },
+        'CalibPmtFineGain' : {
+          'spehigh' : {'title' : 'High Gain SPE [ADC]'},
+          'sigmaspehigh'  : {'title' : 'High Gain SPE Width [ADC]'},
         },
         'CableMap' : {
           'board' : {'title' : 'Board'},

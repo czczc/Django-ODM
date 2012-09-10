@@ -1,7 +1,7 @@
 from django.db import models
 from odm.conventions.util import DBI_get, DBI_records, DBI_trend
 from odm.conventions.conf import Site, Detector
-from odm.conventions.pmt import SensorId
+from odm.conventions.pmt import SensorId, ChannelId
 
 from datetime import datetime, timedelta        
 
@@ -239,6 +239,49 @@ class CalibpmtfinegainvldManager(models.Manager):
         return output
 
 # =====================================
+class CalibpmtfinegainManager(models.Manager):
+    
+    def trend(self, site, detector, board, connector, task=0, sim=1):
+        '''Returns correct dbi values as a funtion of time'''
+        try:
+            channelid = ChannelId.fullPackedData(
+                Site.site_id[site], 
+                Detector.detector_id[detector], 
+                board, connector)
+            print channelid
+        except KeyError:
+            return []
+            
+        
+        dbi_records = DBI_trend(
+            self.select_related().filter(
+                channelid=channelid,
+            ), site, detector, task, sim)
+        
+        values = [] 
+        for key in sorted(dbi_records):
+            value = dbi_records[key]
+            values.append({
+                'start' : str(key),
+                'end' : str(value['end']),
+                'seqno' : value['record'].vld.seqno,
+                'timestart' : str(value['record'].vld.timestart),
+                'timeend' : str(value['record'].vld.timeend),
+                'insertdate' : str(value['record'].vld.insertdate),
+                'versiondate' : str(value['record'].vld.versiondate),
+                'spehigh' : value['record'].spehigh,
+                'spehigherror' : value['record'].spehigherror,
+                'sigmaspehigh' : value['record'].sigmaspehigh,
+                'spehighfitqual' : value['record'].spehighfitqual,
+            })
+            
+        # from pprint import pprint
+        # pprint(values)
+        # pprint(uncovered_periods)
+            
+        return values
+
+# =====================================
 class Calibpmtfinegainvld(models.Model):
     seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
     timestart = models.DateTimeField(db_column='TIMESTART') # Field name made lowercase.
@@ -269,6 +312,9 @@ class Calibpmtfinegain(models.Model):
     spehigherror = models.FloatField(null=True, db_column='SPEHIGHERROR', blank=True) # Field name made lowercase.
     sigmaspehigh = models.FloatField(null=True, db_column='SIGMASPEHIGH', blank=True) # Field name made lowercase.
     spehighfitqual = models.FloatField(null=True, db_column='SPEHIGHFITQUAL', blank=True) # Field name made lowercase.
+    
+    objects = CalibpmtfinegainManager()
+    
     class Meta:
         db_table = u'CalibPmtFineGain'
         ordering = ['vld']

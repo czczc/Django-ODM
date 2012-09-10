@@ -5,7 +5,7 @@ from django.views.generic.simple import direct_to_template
 from odm.pmtinfo.models import Calibpmtspecvld, Cablemapvld, Calibpmtspec, Cablemap, Calibpmtfinegainvld, Calibpmtfinegain, Calibpmttimingvld, Calibpmttiming
 from odm.misc.models import Energyreconvld, Energyrecon
 
-from odm.dbi.forms import DBIRecordsForm, EnergyReconForm, CalibPMTSpecForm, CableMapForm
+from odm.dbi.forms import DBIRecordsForm, EnergyReconForm, CalibPMTSpecForm, CableMapForm, CalibPmtFineGainForm
 
 import json
 
@@ -53,9 +53,12 @@ def trend(request, model='EnergyRecon'):
     if model == 'EnergyRecon':
         ThisForm = EnergyReconForm
         description = 'Energy Calibration'
-    elif model == 'CalibPMTSpec':
-        ThisForm = CalibPMTSpecForm
-        description = 'PMT Calibration'
+    # elif model == 'CalibPMTSpec':
+    #     ThisForm = CalibPMTSpecForm
+    #     description = 'PMT Gain Calibration'
+    elif model == 'CalibPmtFineGain':
+        ThisForm = CalibPmtFineGainForm
+        description = 'PMT Gain Calibration'
     elif model == 'CableMap':
         ThisForm = CableMapForm
         description = 'Cable Map'
@@ -73,19 +76,23 @@ def trend(request, model='EnergyRecon'):
                 task = form.cleaned_data['task']
                 manager = Energyrecon.objects
                 values = manager.trend(site, detector, task, sim)
-            elif model == 'CalibPMTSpec':
-                ring = form.cleaned_data['ring']
-                column = form.cleaned_data['column']
-                in_out = int(form.cleaned_data['in_out'])
-                manager = Calibpmtspec.objects
-                values = manager.trend(site, detector, ring, column, in_out, 0, sim)
+            # elif model == 'CalibPMTSpec':
+            #     ring = form.cleaned_data['ring']
+            #     column = form.cleaned_data['column']
+            #     in_out = int(form.cleaned_data['in_out'])
+            #     manager = Calibpmtspec.objects
+            #     values = manager.trend(site, detector, ring, column, in_out, 0, sim)
+            elif model == 'CalibPmtFineGain':
+                board = form.cleaned_data['board']
+                connector = form.cleaned_data['connector']
+                manager = Calibpmtfinegain.objects
+                values = manager.trend(site, detector, board, connector, 1, sim)
             elif model == 'CableMap':
                 ring = form.cleaned_data['ring']
                 column = form.cleaned_data['column']
                 in_out = int(form.cleaned_data['in_out'])
                 manager = Cablemap.objects
                 values = manager.trend(site, detector, ring, column, in_out, 0, sim)
-                                            
             return HttpResponse(json.dumps(values))
         else:
             return HttpResponse(json.dumps( {
