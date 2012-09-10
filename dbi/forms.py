@@ -40,8 +40,10 @@ class DBIRecordsForm(DBIForm):
         label='Table',
         choices=(
             ('CableMap', 'CableMap'),
-            ('CalibPmtSpec', 'CalibPmtSpec'),
+            ('CalibPmtFineGain', 'CalibPmtFineGain'),
+            ('CalibPmtTiming', 'CalibPmtTiming'),
             ('EnergyRecon', 'EnergyRecon'),
+            ('CalibPmtSpec', 'CalibPmtSpec'),
         ),
     )
     

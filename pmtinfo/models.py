@@ -230,6 +230,15 @@ class Calibpmtspec(models.Model):
 
 
 # =====================================
+class CalibpmtfinegainvldManager(models.Manager):
+    '''Manager'''
+    
+    def records(self, site, detector, task=1, sim=1, character='|', width=50):
+        '''Returns formated DBI records'''
+        output = DBI_records(self, 'calibpmtfinegain', site, detector, task, sim, character, width)
+        return output
+
+# =====================================
 class Calibpmtfinegainvld(models.Model):
     seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
     timestart = models.DateTimeField(db_column='TIMESTART') # Field name made lowercase.
@@ -241,6 +250,8 @@ class Calibpmtfinegainvld(models.Model):
     aggregateno = models.IntegerField(null=True, db_column='AGGREGATENO', blank=True) # Field name made lowercase.
     versiondate = models.DateTimeField(db_column='VERSIONDATE') # Field name made lowercase.
     insertdate = models.DateTimeField(db_column='INSERTDATE') # Field name made lowercase.
+
+    objects = CalibpmtfinegainvldManager()
 
     class Meta:
         db_table = u'CalibPmtFineGainVld'
@@ -265,6 +276,16 @@ class Calibpmtfinegain(models.Model):
     def __unicode__(self):
         return self.channelid    
 
+
+# =====================================
+class CalibpmttimingvldManager(models.Manager):
+    '''Manager'''
+    
+    def records(self, site, detector, task=0, sim=1, character='|', width=50):
+        '''Returns formated DBI records'''
+        output = DBI_records(self, 'calibpmttiming', site, detector, task, sim, character, width)
+        return output
+
 # =====================================
 class Calibpmttimingvld(models.Model):
     seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
@@ -277,6 +298,9 @@ class Calibpmttimingvld(models.Model):
     aggregateno = models.IntegerField(null=True, db_column='AGGREGATENO', blank=True) # Field name made lowercase.
     versiondate = models.DateTimeField(db_column='VERSIONDATE') # Field name made lowercase.
     insertdate = models.DateTimeField(db_column='INSERTDATE') # Field name made lowercase.
+
+    objects = CalibpmttimingvldManager()
+
     class Meta:
         db_table = u'CalibPmtTimingVld'
         ordering = ['-seqno']

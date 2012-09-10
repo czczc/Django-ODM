@@ -2,7 +2,7 @@ from django.http import HttpResponse, Http404
 from django.contrib.auth.decorators import login_required
 from django.views.generic.simple import direct_to_template
 
-from odm.pmtinfo.models import Calibpmtspecvld, Cablemapvld, Calibpmtspec, Cablemap
+from odm.pmtinfo.models import Calibpmtspecvld, Cablemapvld, Calibpmtspec, Cablemap, Calibpmtfinegainvld, Calibpmtfinegain, Calibpmttimingvld, Calibpmttiming
 from odm.misc.models import Energyreconvld, Energyrecon
 
 from odm.dbi.forms import DBIRecordsForm, EnergyReconForm, CalibPMTSpecForm, CableMapForm
