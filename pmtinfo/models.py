@@ -230,6 +230,81 @@ class Calibpmtspec(models.Model):
 
 
 # =====================================
+class Calibpmtfinegainvld(models.Model):
+    seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
+    timestart = models.DateTimeField(db_column='TIMESTART') # Field name made lowercase.
+    timeend = models.DateTimeField(db_column='TIMEEND') # Field name made lowercase.
+    sitemask = models.IntegerField(null=True, db_column='SITEMASK', blank=True) # Field name made lowercase.
+    simmask = models.IntegerField(null=True, db_column='SIMMASK', blank=True) # Field name made lowercase.
+    subsite = models.IntegerField(null=True, db_column='SUBSITE', blank=True) # Field name made lowercase.
+    task = models.IntegerField(null=True, db_column='TASK', blank=True) # Field name made lowercase.
+    aggregateno = models.IntegerField(null=True, db_column='AGGREGATENO', blank=True) # Field name made lowercase.
+    versiondate = models.DateTimeField(db_column='VERSIONDATE') # Field name made lowercase.
+    insertdate = models.DateTimeField(db_column='INSERTDATE') # Field name made lowercase.
+
+    class Meta:
+        db_table = u'CalibPmtFineGainVld'
+        ordering = ['-seqno']
+
+    def __unicode__(self):
+        return u'seq %d' % (self.seqno, ) 
+
+# =====================================
+class Calibpmtfinegain(models.Model):
+    vld = models.ForeignKey(Calibpmtfinegainvld, db_column='SEQNO') # Field name made lowercase.    
+    row_counter = models.IntegerField(primary_key=True, db_column='ROW_COUNTER') # Field name made lowercase.
+    channelid = models.IntegerField(null=True, db_column='CHANNELID', blank=True) # Field name made lowercase.
+    spehigh = models.FloatField(null=True, db_column='SPEHIGH', blank=True) # Field name made lowercase.
+    spehigherror = models.FloatField(null=True, db_column='SPEHIGHERROR', blank=True) # Field name made lowercase.
+    sigmaspehigh = models.FloatField(null=True, db_column='SIGMASPEHIGH', blank=True) # Field name made lowercase.
+    spehighfitqual = models.FloatField(null=True, db_column='SPEHIGHFITQUAL', blank=True) # Field name made lowercase.
+    class Meta:
+        db_table = u'CalibPmtFineGain'
+        ordering = ['vld']
+    
+    def __unicode__(self):
+        return self.channelid    
+
+# =====================================
+class Calibpmttimingvld(models.Model):
+    seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
+    timestart = models.DateTimeField(db_column='TIMESTART') # Field name made lowercase.
+    timeend = models.DateTimeField(db_column='TIMEEND') # Field name made lowercase.
+    sitemask = models.IntegerField(null=True, db_column='SITEMASK', blank=True) # Field name made lowercase.
+    simmask = models.IntegerField(null=True, db_column='SIMMASK', blank=True) # Field name made lowercase.
+    subsite = models.IntegerField(null=True, db_column='SUBSITE', blank=True) # Field name made lowercase.
+    task = models.IntegerField(null=True, db_column='TASK', blank=True) # Field name made lowercase.
+    aggregateno = models.IntegerField(null=True, db_column='AGGREGATENO', blank=True) # Field name made lowercase.
+    versiondate = models.DateTimeField(db_column='VERSIONDATE') # Field name made lowercase.
+    insertdate = models.DateTimeField(db_column='INSERTDATE') # Field name made lowercase.
+    class Meta:
+        db_table = u'CalibPmtTimingVld'
+        ordering = ['-seqno']
+
+    def __unicode__(self):
+        return u'seq %d' % (self.seqno, )
+        
+# =====================================
+class Calibpmttiming(models.Model):
+    vld = models.ForeignKey(Calibpmttimingvld, db_column='SEQNO') # Field name made lowercase.        
+    row_counter = models.IntegerField(primary_key=True, db_column='ROW_COUNTER') # Field name made lowercase.
+    channelid = models.IntegerField(null=True, db_column='CHANNELID', blank=True) # Field name made lowercase.
+    status = models.IntegerField(null=True, db_column='STATUS', blank=True) # Field name made lowercase.
+    par0 = models.FloatField(null=True, db_column='PAR0', blank=True) # Field name made lowercase.
+    par1 = models.FloatField(null=True, db_column='PAR1', blank=True) # Field name made lowercase.
+    par2 = models.FloatField(null=True, db_column='PAR2', blank=True) # Field name made lowercase.
+    par3 = models.FloatField(null=True, db_column='PAR3', blank=True) # Field name made lowercase.
+    par4 = models.FloatField(null=True, db_column='PAR4', blank=True) # Field name made lowercase.
+    par5 = models.FloatField(null=True, db_column='PAR5', blank=True) # Field name made lowercase.
+    fitqual = models.FloatField(null=True, db_column='FITQUAL', blank=True) # Field name made lowercase.
+    class Meta:
+        db_table = u'CalibPmtTiming'
+        ordering = ['vld']
+    
+    def __unicode__(self):
+        return self.channelid
+
+# =====================================
 class Cablemapvld(models.Model):
     seqno = models.IntegerField(primary_key=True, db_column='SEQNO') # Field name made lowercase.
     timestart = models.DateTimeField(db_column='TIMESTART') # Field name made lowercase.
