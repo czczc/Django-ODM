@@ -17,7 +17,13 @@ function init_searchform() {
 }
 
 function load_file_list() {
-    var url = base_url + 'run/file/list/';
+    var allRunsOnPage = $(".RunNo").map(function(){
+        return this.innerHTML;
+    });
+    var lastRun = allRunsOnPage[0];
+    var firstRun = allRunsOnPage[allRunsOnPage.length-1];
+    var url = base_url + 'run/file/list/' + firstRun + '/' + lastRun + '/';
+    
     $.getJSON( url, function(data) {
         $("td.NumFiles").each(function() {
            var run = $(this).attr('runno');

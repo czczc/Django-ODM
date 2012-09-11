@@ -51,6 +51,7 @@ urlpatterns += patterns('odm.fileinfo.views',
 
     # ajax urls
     (r'^file/list/$', 'rawfilelist'),
+    (r'^file/list/(\d+)/(\d+)/$', 'rawfilelist'),
     
     (r'^file/stats/(?P<mode>\w+)/(?P<site>\w+)', 'stats'),
     (r'^file/stats/(?P<mode>\w+)/$', 'stats'),

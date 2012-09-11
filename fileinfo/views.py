@@ -72,11 +72,13 @@ def diagnostics(request, runno):
 
         
 @login_required
-def rawfilelist(request):
+def rawfilelist(request, firstRun=None, lastRun=None):
     '''json raw file list (all runs)'''
     from django.db.models import Count
-    file_list = Daqrawdatafileinfo.objects.values(
-        'runno').annotate(num_files=Count('runno'))
+    file_list = Daqrawdatafileinfo.objects
+    if firstRun:
+        file_list = file_list.filter(runno__gte=firstRun, runno__lte=lastRun)
+    file_list = file_list.values('runno').annotate(num_files=Count('runno'))
     info = dict( (afile['runno'], afile['num_files']) for afile in file_list )
         
     # for debug

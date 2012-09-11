@@ -30,7 +30,7 @@
            <tbody>
                {% for run in run_list %}
                    <tr>
-                       <td class='runno'><a href="{{ run.get_absolute_url }}">{{ run.runno }}</a></td>
+                       <td class='runno'><a class='RunNo' href="{{ run.get_absolute_url }}">{{ run.runno }}</a></td>
                        <td>{{ run.vld.timestart_beijing }}</td>
                        <td>{{ run.vld.runlength }}</td>
                        <td class='NumFiles' runno='{{ run.runno }}'></td>                       
