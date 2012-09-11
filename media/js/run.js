@@ -291,7 +291,9 @@ function enable_pmt_mouse_actions(detname, data) {
     var pmt_spot = $("#pmt_spot");
     var pmt_spehigh = $("#pmt_spehigh");
     var pmt_spelow = $("#pmt_spelow");
-    var pmt_toffset = $("#pmt_toffset");
+    // var pmt_toffset = $("#pmt_toffset");
+    var pmt_sigmaspehigh = $("#pmt_sigmaspehigh");
+    var pmt_spehighfitqual = $("#pmt_spehighfitqual");
     
     var color_select = '#4682B4';
     
@@ -317,7 +319,9 @@ function enable_pmt_mouse_actions(detname, data) {
                 var in_out = pmt.in_out;
                 var spehigh = pmt.spehigh;
                 var spelow = pmt.spelow;
-                var toffset = pmt.toffset;
+                var sigmaspehigh = pmt.sigmaspehigh;
+                var spehighfitqual = pmt.spehighfitqual;
+                // var toffset = pmt.toffset;
             }
             
             $(this).bind('click', function(){
@@ -335,7 +339,9 @@ function enable_pmt_mouse_actions(detname, data) {
                      pmt_spot.html(spot + ' ' + in_out);
                      pmt_spehigh.html(spehigh);
                      pmt_spelow.html(spelow);
-                     pmt_toffset.html(toffset);
+                     pmt_sigmaspehigh.html(sigmaspehigh);
+                     pmt_spehighfitqual.html(spehighfitqual);
+                     // pmt_toffset.html(toffset);
                  }
                  else {
                      pmt_ring.html('');
@@ -373,7 +379,9 @@ function enable_pmt_mouse_actions(detname, data) {
 
                 var spehigh = pmt.spehigh;
                 var spelow = pmt.spelow;
-                var toffset = pmt.toffset;
+                // var toffset = pmt.toffset;
+                var sigmaspehigh = pmt.sigmaspehigh;
+                var spehighfitqual = pmt.spehighfitqual;
             }
             
             // setup admpt table cell mouse over
@@ -385,7 +393,9 @@ function enable_pmt_mouse_actions(detname, data) {
                      pmt_connector.html(connector);
                      pmt_spehigh.html(spehigh);
                      pmt_spelow.html(spelow);
-                     pmt_toffset.html(toffset);
+                     // pmt_toffset.html(toffset);
+                     pmt_sigmaspehigh.html(sigmaspehigh);
+                     pmt_spehighfitqual.html(spehighfitqual);
                  }
                  else {
                       pmt_board.html('');

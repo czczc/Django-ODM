@@ -233,6 +233,35 @@ class Calibpmtspec(models.Model):
 class CalibpmtfinegainvldManager(models.Manager):
     '''Manager'''
     
+    def pmtspecSet(self, site, detector, year, month, day,
+        rollback=False, rollback_year='', rollback_month='', rollback_day=''):
+        '''Returns a QuerySet of DBI Calibpmtspec'''
+        try:
+            site = Site.site_id[site]
+            detector = Detector.detector_id[detector]
+        except KeyError:
+            return None
+            
+        context = {
+            'year' : int(year),
+            'month' : int(month),
+            'day' : int(day),
+            'site' : site,
+            'detector' : detector,
+        }
+        if rollback:
+            context['rollback'] = {
+                'year' : int(rollback_year),
+                'month' : int(rollback_month),
+                'day' : int(rollback_day),
+            }
+                    
+        vld = DBI_get(self.select_related(), context)
+        if vld:
+            return vld.calibpmtfinegain_set
+        else:
+            return None
+    
     def records(self, site, detector, task=1, sim=1, character='|', width=50):
         '''Returns formated DBI records'''
         output = DBI_records(self, 'calibpmtfinegain', site, detector, task, sim, character, width)
