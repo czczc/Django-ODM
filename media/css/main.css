@@ -123,6 +123,7 @@ a:hover { /*color: #ff8f28;*/ text-decoration: underline; background-color: tran
 .legend { padding: 5px 5px 8px 30px; }
 .legend a { border: 1px solid #333; }
 a.ADCalib { background: #cfeaa5; }
+a.WPCalib { background: #feb688; }
 a.Physics { background: white; }
 a.Pedestal { background: #f2c1ba; }
 a.FEEDiag { background: #ddd3f3; }

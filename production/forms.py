@@ -39,6 +39,7 @@ class SearchPlotsForm(forms.Form):
             ('All', 'All'),
             ('Physics', 'Physics'),
             ('ADCalib', 'ADCalib'),
+            ('WPCalib', 'WPCalib'),
             ('Pedestal', 'Pedestal'),
             ('FEEDiag', 'FEEDiag')
         )
