@@ -19,7 +19,7 @@
         <tbody>
 	        <tr><td class='descr'>AD No.</td><td class='value'>{{ calibrun.adno }}</td></tr>
             <tr><td class='descr'>Source Type</td><td class='value'>{{ calibrun.sourcetype }}</td></tr>
-            {% if calibrun.sourcetype == "Ge68" or calibrun.sourcetype == "AmC_Co60" %}
+            {% if calibrun.sourcetype == "Ge68" or calibrun.sourcetype == "Co60" or calibrun.sourcetype == "AmC_Ge68" or calibrun.sourcetype == "AmC_Co60" %}
             <tr><td class='descr'>ACU</td><td class='value'>{{ calibrun.acu_for_source }}</td></tr>
             <tr><td class='descr'>Z Position [mm]</td><td class='value'>{{ calibrun.z_for_source }}</td></tr>
             {% endif %}

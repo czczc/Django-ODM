@@ -34,18 +34,107 @@ class RuninfoManager(models.Manager):
 
 
 class CalibruninfoManager(models.Manager):
+    p2_runNo_EH1 = 32556 # first run of period II (after source modification)
+    p2_runNo_EH2 = 28940 # first run of period II (after source modification)
+    p2_runNo_EH3 = 28930 # first run of period II (after source modification)
     def list_sourcetype(self, sourcetype):
         '''list by source type'''
         if sourcetype == 'Ge68':
             return self.select_related().filter(
-                  Q(sourceida=3, homea=0, lednumber1=0, lednumber2=0)
-                | Q(sourceidb=3, homeb=0, lednumber1=0, lednumber2=0)
-                | Q(sourceidc=3, homec=0, lednumber1=0, lednumber2=0))
+                  Q(sourceida=3, homea=0, lednumber1=0, lednumber2=0, runno__lt=self.p2_runNo_EH3)
+                | Q(sourceidb=3, homeb=0, lednumber1=0, lednumber2=0, runno__lt=self.p2_runNo_EH3)
+                | Q(sourceidc=3, homec=0, lednumber1=0, lednumber2=0, runno__lt=self.p2_runNo_EH3)
+                
+                | Q(detectorid=Site.daq_id['EH1-AD1'], sourceidb=3, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH1)
+                | Q(detectorid=Site.daq_id['EH1-AD2'], sourceidb=3, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH1)
+
+                | Q(detectorid=Site.daq_id['EH2-AD1'], sourceida=3, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH2)
+                | Q(detectorid=Site.daq_id['EH2-AD1'], sourceidb=3, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH2)
+
+                | Q(detectorid=Site.daq_id['EH3-AD1'], sourceida=3, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+                | Q(detectorid=Site.daq_id['EH3-AD1'], sourceidb=3, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+                | Q(detectorid=Site.daq_id['EH3-AD1'], sourceidc=3, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+
+                | Q(detectorid=Site.daq_id['EH3-AD2'], sourceida=3, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+                | Q(detectorid=Site.daq_id['EH3-AD2'], sourceidb=3, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+                | Q(detectorid=Site.daq_id['EH3-AD2'], sourceidc=3, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+
+                | Q(detectorid=Site.daq_id['EH3-AD3'], sourceida=3, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+                | Q(detectorid=Site.daq_id['EH3-AD3'], sourceidb=3, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+                | Q(detectorid=Site.daq_id['EH3-AD3'], sourceidc=3, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+
+                | Q(detectorid=Site.daq_id['EH3-AD4'], sourceidb=3, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+                | Q(detectorid=Site.daq_id['EH3-AD4'], sourceidc=3, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+
+            )
+        elif sourcetype == 'Co60':
+            return self.select_related().filter(
+                Q(detectorid=Site.daq_id['EH1-AD1'], sourceida=3, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH1)
+              | Q(detectorid=Site.daq_id['EH1-AD1'], sourceidc=3, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH1)
+
+              | Q(detectorid=Site.daq_id['EH1-AD2'], sourceida=3, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH1)
+              | Q(detectorid=Site.daq_id['EH1-AD2'], sourceidc=3, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH1)
+              
+              | Q(detectorid=Site.daq_id['EH2-AD1'], sourceidc=3, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH2)
+
+              | Q(detectorid=Site.daq_id['EH2-AD2'], sourceida=3, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH2)
+              | Q(detectorid=Site.daq_id['EH2-AD2'], sourceidb=3, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH2)
+              | Q(detectorid=Site.daq_id['EH2-AD2'], sourceidc=3, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH2)
+              
+              | Q(detectorid=Site.daq_id['EH3-AD1'], sourceidb=2, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+              | Q(detectorid=Site.daq_id['EH3-AD1'], sourceidc=2, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+              
+              | Q(detectorid=Site.daq_id['EH3-AD2'], sourceidb=2, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+              | Q(detectorid=Site.daq_id['EH3-AD2'], sourceidc=2, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+              
+              | Q(detectorid=Site.daq_id['EH3-AD3'], sourceidb=2, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+              | Q(detectorid=Site.daq_id['EH3-AD3'], sourceidc=2, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+              
+              | Q(detectorid=Site.daq_id['EH3-AD4'], sourceida=3, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+              | Q(detectorid=Site.daq_id['EH3-AD4'], sourceidb=2, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+              | Q(detectorid=Site.daq_id['EH3-AD4'], sourceidc=2, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+            
+            )
+        elif sourcetype == 'K40':
+            return self.select_related().filter(
+                Q(detectorid=Site.daq_id['EH3-AD1'], sourceidc=1, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+                # Q(detectorid=Site.daq_id['EH3-AD1'], lednumber1=1, homea=0, runno__gt=self.p1_runNo)
+                
+            )
         elif sourcetype == 'AmC_Co60':
             return self.select_related().filter(
-                  Q(sourceida=2, homea=0, lednumber1=0, lednumber2=0)
-                | Q(sourceidb=2, homeb=0, lednumber1=0, lednumber2=0)
-                | Q(sourceidc=2, homec=0, lednumber1=0, lednumber2=0))
+                  Q(sourceida=2, homea=0, lednumber1=0, lednumber2=0, runno__lt=self.p2_runNo_EH3)
+                | Q(sourceidb=2, homeb=0, lednumber1=0, lednumber2=0, runno__lt=self.p2_runNo_EH3)
+                | Q(sourceidc=2, homec=0, lednumber1=0, lednumber2=0, runno__lt=self.p2_runNo_EH3)
+                
+                | Q(detectorid=Site.daq_id['EH1-AD1'], sourceidb=2, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH1)
+                | Q(detectorid=Site.daq_id['EH1-AD2'], sourceidb=2, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH1)
+
+                | Q(detectorid=Site.daq_id['EH2-AD1'], sourceida=2, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH2)
+                | Q(detectorid=Site.daq_id['EH2-AD1'], sourceidb=2, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH2)
+
+                | Q(detectorid=Site.daq_id['EH3-AD1'], sourceida=2, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+                | Q(detectorid=Site.daq_id['EH3-AD2'], sourceida=2, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+                | Q(detectorid=Site.daq_id['EH3-AD3'], sourceida=2, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+                
+            )
+        elif sourcetype == 'AmC_Ge68':
+            return self.select_related().filter(
+                Q(detectorid=Site.daq_id['EH1-AD1'], sourceida=2, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH1)
+              | Q(detectorid=Site.daq_id['EH1-AD1'], sourceidc=2, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH1)
+
+              | Q(detectorid=Site.daq_id['EH1-AD2'], sourceida=2, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH1)
+              | Q(detectorid=Site.daq_id['EH1-AD2'], sourceidc=2, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH1)
+              
+              | Q(detectorid=Site.daq_id['EH2-AD1'], sourceidc=2, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH2)
+
+              | Q(detectorid=Site.daq_id['EH2-AD2'], sourceida=2, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH2)
+              | Q(detectorid=Site.daq_id['EH2-AD2'], sourceidb=2, homeb=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH2)
+              | Q(detectorid=Site.daq_id['EH2-AD2'], sourceidc=2, homec=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH2)
+                            
+              | Q(detectorid=Site.daq_id['EH3-AD4'], sourceida=2, homea=0, lednumber1=0, lednumber2=0, runno__gte=self.p2_runNo_EH3)
+                
+            )
         elif sourcetype == 'MO_LED':
             return self.select_related().filter(
                   Q(lednumber1__gt=3))
@@ -305,16 +394,101 @@ class Daqcalibruninfo(models.Model):
 
 
     def _humanize_source(self):
-        if (self.lednumber1==0 and self.lednumber2==0
+        
+        if (self.lednumber1==0 and self.lednumber2==0 and self.runno<CalibruninfoManager.p2_runNo_EH3
             ) and ( (self.sourceida==3 and self.homea==0)
                  or (self.sourceidb==3 and self.homeb==0)
                  or (self.sourceidc==3 and self.homec==0) ):
             self.sourcetype = 'Ge68'
         elif (self.lednumber1==0 and self.lednumber2==0
+            ) and ( (self.detectorid==Site.daq_id['EH1-AD1'] and self.sourceidb==3 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH1)
+                 or (self.detectorid==Site.daq_id['EH1-AD2'] and self.sourceidb==3 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH1)
+
+                 or (self.detectorid==Site.daq_id['EH2-AD1'] and self.sourceida==3 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH2) 
+                 or (self.detectorid==Site.daq_id['EH2-AD1'] and self.sourceidb==3 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH2) 
+
+                 or (self.detectorid==Site.daq_id['EH3-AD1'] and self.sourceida==3 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3) 
+                 or (self.detectorid==Site.daq_id['EH3-AD1'] and self.sourceidb==3 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3) 
+                 or (self.detectorid==Site.daq_id['EH3-AD1'] and self.sourceidc==3 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3) 
+
+                 or (self.detectorid==Site.daq_id['EH3-AD2'] and self.sourceida==3 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3) 
+                 or (self.detectorid==Site.daq_id['EH3-AD2'] and self.sourceidb==3 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3) 
+                 or (self.detectorid==Site.daq_id['EH3-AD2'] and self.sourceidc==3 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3)
+
+                 or (self.detectorid==Site.daq_id['EH3-AD3'] and self.sourceida==3 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3) 
+                 or (self.detectorid==Site.daq_id['EH3-AD3'] and self.sourceidb==3 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3) 
+                 or (self.detectorid==Site.daq_id['EH3-AD3'] and self.sourceidc==3 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3)
+
+                 or (self.detectorid==Site.daq_id['EH3-AD4'] and self.sourceidb==3 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3) 
+                 or (self.detectorid==Site.daq_id['EH3-AD4'] and self.sourceidc==3 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3)
+            ):
+            self.sourcetype = 'Ge68'    
+
+        elif (self.lednumber1==0 and self.lednumber2==0
+            ) and ( (self.detectorid==Site.daq_id['EH1-AD1'] and self.sourceida==3 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH1)
+                 or (self.detectorid==Site.daq_id['EH1-AD1'] and self.sourceidc==3 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH1)
+             
+                 or (self.detectorid==Site.daq_id['EH1-AD2'] and self.sourceida==3 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH1)
+                 or (self.detectorid==Site.daq_id['EH1-AD2'] and self.sourceidc==3 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH1)
+
+                 or (self.detectorid==Site.daq_id['EH2-AD1'] and self.sourceidc==3 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH2)
+             
+                 or (self.detectorid==Site.daq_id['EH2-AD2'] and self.sourceida==3 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH2)
+                 or (self.detectorid==Site.daq_id['EH2-AD2'] and self.sourceidb==3 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH2)
+                 or (self.detectorid==Site.daq_id['EH2-AD2'] and self.sourceidc==3 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH2)
+
+                 or (self.detectorid==Site.daq_id['EH3-AD1'] and self.sourceidb==2 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3)
+                 or (self.detectorid==Site.daq_id['EH3-AD1'] and self.sourceidc==2 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3)
+             
+                 or (self.detectorid==Site.daq_id['EH3-AD2'] and self.sourceidb==2 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3)
+                 or (self.detectorid==Site.daq_id['EH3-AD2'] and self.sourceidc==2 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3)
+                 
+                 or (self.detectorid==Site.daq_id['EH3-AD3'] and self.sourceidb==2 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3)
+                 or (self.detectorid==Site.daq_id['EH3-AD3'] and self.sourceidc==2 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3)
+                 
+                 or (self.detectorid==Site.daq_id['EH3-AD4'] and self.sourceida==3 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3)
+                 or (self.detectorid==Site.daq_id['EH3-AD4'] and self.sourceidb==2 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3)
+                 or (self.detectorid==Site.daq_id['EH3-AD4'] and self.sourceidc==2 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3)
+                
+            ):
+            self.sourcetype = 'Co60'
+        
+        elif (self.lednumber1==0 and self.lednumber2==0 and self.runno<CalibruninfoManager.p2_runNo_EH3
             ) and ( (self.sourceida==2 and self.homea==0)
                  or (self.sourceidb==2 and self.homeb==0)
                  or (self.sourceidc==2 and self.homec==0) ):
             self.sourcetype = 'AmC_Co60'
+        elif (self.lednumber1==0 and self.lednumber2==0
+            ) and ( (self.detectorid==Site.daq_id['EH1-AD1'] and self.sourceidb==2 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH1)
+                 or (self.detectorid==Site.daq_id['EH1-AD2'] and self.sourceidb==2 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH1)
+                 
+                 or (self.detectorid==Site.daq_id['EH2-AD1'] and self.sourceida==2 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH2) 
+                 or (self.detectorid==Site.daq_id['EH2-AD1'] and self.sourceidb==2 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH2) 
+                 
+                 or (self.detectorid==Site.daq_id['EH3-AD1'] and self.sourceida==2 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3) 
+                 or (self.detectorid==Site.daq_id['EH3-AD2'] and self.sourceida==2 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3) 
+                 or (self.detectorid==Site.daq_id['EH3-AD3'] and self.sourceida==2 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3) 
+                 
+            ):
+            self.sourcetype = 'AmC_Co60'            
+        
+        elif (self.lednumber1==0 and self.lednumber2==0
+            ) and ( (self.detectorid==Site.daq_id['EH1-AD1'] and self.sourceida==2 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH1)
+                 or (self.detectorid==Site.daq_id['EH1-AD1'] and self.sourceidc==2 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH1)
+                 
+                 or (self.detectorid==Site.daq_id['EH1-AD2'] and self.sourceida==2 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH1)
+                 or (self.detectorid==Site.daq_id['EH1-AD2'] and self.sourceidc==2 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH1)
+                 
+                 or (self.detectorid==Site.daq_id['EH2-AD1'] and self.sourceidc==2 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH2) 
+                 
+                 or (self.detectorid==Site.daq_id['EH2-AD2'] and self.sourceida==2 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH2) 
+                 or (self.detectorid==Site.daq_id['EH2-AD2'] and self.sourceidb==2 and self.homeb==0 and self.runno>=CalibruninfoManager.p2_runNo_EH2) 
+                 or (self.detectorid==Site.daq_id['EH2-AD2'] and self.sourceidc==2 and self.homec==0 and self.runno>=CalibruninfoManager.p2_runNo_EH2) 
+                 
+                 or (self.detectorid==Site.daq_id['EH3-AD4'] and self.sourceida==2 and self.homea==0 and self.runno>=CalibruninfoManager.p2_runNo_EH3)                  
+            ):
+            self.sourcetype = 'AmC_Ge68'        
+        
         elif (self.homea==0 and self.lednumber1==1
             ) or (self.homeb==0 and self.lednumber1==2
             ) or (self.homec==0 and self.lednumber1==3):

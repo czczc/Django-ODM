@@ -28,7 +28,7 @@
     <div class="clear"></div> 
     
     <div class = "grid_24">
-        {% if sourcetype == "Ge68" or sourcetype == "AmC_Co60" %}
+        {% if sourcetype == "Ge68" or sourcetype == "Co60" or sourcetype == "K40" or sourcetype == "AmC_Co60" or sourcetype == "AmC_Ge68" %}
             {% include "run/calibration/source.html" %}
         {% endif %}
         

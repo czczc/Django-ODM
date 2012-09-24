@@ -410,7 +410,10 @@ def calibration(request, sourcetype, page=1, records=100):
     run_list = Daqcalibruninfo.objects.list_sourcetype(sourcetype)
     description = {
         'Ge68' : '<sup>68</sup>Ge',
+        'Co60' : '<sup>60</sup>Co',
+        'K40' : '<sup>40</sup>K',
         'AmC_Co60' : '<sup>241</sup>Am<sup>13</sup>C + <sup>60</sup>Co',
+        'AmC_Ge68' : '<sup>241</sup>Am<sup>13</sup>C + <sup>68</sup>Ge',
         'MO_LED' : 'MO LED',
         'ACU_LED' : 'ACU LED',
         'Double_Pulse' : 'Double Pulse',
