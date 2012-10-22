@@ -139,11 +139,12 @@ def DBI_trend(objects, site, detector, task, sim):
         vld__task=task,
     ).order_by('-vld__versiondate')
     # ).order_by('-vld__seqno')
-
     if not records:
         return {}
 
     first = records[0]
+    length = len(records) # needed to avoid cacheing
+    # print length, first.vld.timestart
     dbi_records = {
         first.vld.timestart : {
             'record' : first,
@@ -156,8 +157,12 @@ def DBI_trend(objects, site, detector, task, sim):
     ]
 
     for record in records[1:]:
+        # print record.vld.seqno, record.vld.timestart
         uncovered_periods = check_overlap(record, dbi_records, uncovered_periods)
 
+    # for key in dbi_records:
+    #     print dbi_records[key]['record'].vld.timestart
+    
     return dbi_records
 
 
@@ -165,7 +170,7 @@ def check_overlap(record, dbi_records, uncovered_periods):
 
     x = record.vld.timestart
     y = record.vld.timeend
-
+    
     new_uncovered_periods = []
     for uncovered_period in uncovered_periods:
         a, b = uncovered_period
@@ -173,29 +178,30 @@ def check_overlap(record, dbi_records, uncovered_periods):
             #        a ------ b
             # x ---- y        x ---- y
             # already covered, no action
+            # print 'here:', record.vld.seqno, record.vld.timestart
             new_uncovered_periods.append(uncovered_period)
         else:
             if x<=a and y>=b:
                 #    a ------ b
                 # x ------------ y
-                # covers all, add record
+                # covers all, add record                                
                 dbi_records[a] = {'record': record, 'end': b}
             elif x <= a <= y:
                 #    a -------- b
                 # x ---- y
-                # covers early portion, add record
+                # covers early portion, add record                
                 dbi_records[a] = {'record': record, 'end': y}
                 new_uncovered_periods.append( (y, b) )
             elif x <= b <= y:
                 # a -------- b
                 #        x ---- y
-                # covers late portion, add record
+                # covers late portion, add record                
                 dbi_records[x] = {'record': record, 'end': b}
                 new_uncovered_periods.append( (a, x) )
             elif x > a and y < b:
                 # a ------------ b
                 #     x ---- y
-                # covers mid portion, add record
+                # covers mid portion, add record                                
                 dbi_records[x] = {'record': record, 'end': y}
                 new_uncovered_periods += [ (a, x), (y, b) ]
     # print new_uncovered_periods

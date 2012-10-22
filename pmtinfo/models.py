@@ -277,7 +277,7 @@ class CalibpmtfinegainManager(models.Manager):
                 Site.site_id[site], 
                 Detector.detector_id[detector], 
                 board, connector)
-            print channelid
+            # print channelid
         except KeyError:
             return []
             
