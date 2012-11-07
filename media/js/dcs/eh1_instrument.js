@@ -47,7 +47,14 @@ function load_configs(){
         // renderTo, title, ymin, ymax, ysafemin, ysafemax
         Ad1Lidsensor : {
             // liquid levels change by 14 mm/C.  I set +/- 0.3C, +/-4.5 mm
-            ultrasonic_gdls:  ['AD1 GdLS Level: Ultrasonic [mm]',  65, 95, 80.6-4.5, 80.6+4.5],
+            var level=84.5;
+            var level_edge=15;
+            var level_limit=4.5;
+            var level_cap_limit=3;
+            var temp=22.5;
+            var temp_edge=1.5;
+            var temp_limit=0.4;
+            ultrasonic_gdls:  ['AD1 GdLS Level: Ultrasonic [mm]',  level-level_edge, level+level_edge, level-level_limit, level+level_limit],
             capacitance_gdls: ['AD1 GdLS Level: Capacitance [mm]', 65, 95, 80.6-4.5, 80.6+4.5],    
             ultrasonic_ls:    ['AD1 LS Level: Ultrasonic [mm]',    65, 95, 85.6-4.5, 85.6+4.5], 
             capacitance_ls:   ['AD1 LS Level: Capacitance [mm]',   65, 95, 85.6-4.5, 85.6+4.5],
