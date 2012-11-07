@@ -59,7 +59,7 @@ function load_formulas(){
             capacitance_gdls: function(x) { return 0.1471*x+0.6+41; },
             capacitance_ls:   function(x) { return 0.15125*x-1.21+23; },
             temp_gdls:        function(x) { return 0.997*x+0.283; },
-            temp_ls:          function(x) { return 0.995*x-0.160; }
+            temp_ls:          function(x) { return 0.995*x-0.160+0.3; } // sensor reads lower than expected, so bumped it up by 0.3
         },
         Ad7Lidsensor : { // Checked on Sept 7, 2012
             ultrasonic_gdls:  function(x) { return (2725.4-x)/11.397+41; },

@@ -46,14 +46,14 @@ function load_configs(){
     configs = {
         // renderTo, title, ymin, ymax, ysafemin, ysafemax
         Ad3Lidsensor : {
-            // liquid levels change by 14 mm/C.  I set +/- 0.3C, +/-4.5 mm
-            ultrasonic_gdls:  ['AD3 GdLS Level: Ultrasonic [mm]',  65, 95, 89.1-4.5, 89.1+4.5],
-            capacitance_gdls: ['AD3 GdLS Level: Capacitance [mm]', 65, 95, 89.1-4.5, 89.1+4.5],    
-            ultrasonic_ls:    ['AD3 LS Level: Ultrasonic [mm]',    65, 95, 85.0-4.5, 85.0+4.5], 
-            capacitance_ls:   ['AD3 LS Level: Capacitance [mm]',   65, 95, 85.0-4.5, 85.0+4.5],
-            capacitance_mo:   ['AD3 MO Level: Capacitance [mm]',   65, 95, 90.0-4.5, 90.0+4.5],
-            temp_gdls:        ['AD3 GdLS Temperature [C]', 21, 25, 22.4, 23],
-            temp_ls:          ['AD3 LS Temperature [C]',   21, 25, 22.4, 23],
+            // liquid levels change by 14 mm/C.  I set +/- 0.4C, +/-5.6 mm
+            ultrasonic_gdls:  ['AD3 GdLS Level: Ultrasonic [mm]',  92.3-15, 92.3+15, 92.3-5.6,     92.3+5.6],     // DMW
+            capacitance_gdls: ['AD3 GdLS Level: Capacitance [mm]', 92.3-15, 92.3+15, 92.3-5.6-3.0, 92.3+5.6+3.0], // DMW 
+            ultrasonic_ls:    ['AD3 LS Level: Ultrasonic [mm]',    80.4-15, 80.4+15, 80.4-5.6,     80.4+5.6],     // DMW
+            capacitance_ls:   ['AD3 LS Level: Capacitance [mm]',   80.4-15, 80.4+15, 80.4-5.6-3.0, 80.4+5.6+3.0], // DMW
+            capacitance_mo:   ['AD3 MO Level: Capacitance [mm]',   80.4-15, 80.4+15, 90.4-5.6,     90.4+5.6],
+            temp_gdls:        ['AD3 GdLS Temperature [C]', 21, 25, 22.5-0.4, 22.5+0.4],
+            temp_ls:          ['AD3 LS Temperature [C]',   21, 25, 22.5-0.4, 22.5+0.4],
             //capacitance_temp_gdls: ['AD3 GdLS Temperature [C]: Capacitance', 23, 28, 24, 27],
             //capacitance_temp_ls: ['AD3 LS Temperature [C]: Capacitance', 23, 28, 24, 27],
             //capacitance_temp_mo: ['AD3 MO Temperature [C]: Capacitance', 20, 26, 21, 25],
@@ -65,14 +65,14 @@ function load_configs(){
             tilty_sensor3: ['AD3 Tilt Y3 [deg]', -2, 2, -0.19, -0.15]
         },
         Ad8Lidsensor : {
-            // liquid levels change by 14 mm/C.  I set +/- 0.3C, +/-4.5 mm
-            ultrasonic_gdls:  ['AD8 GdLS Level: Ultrasonic [mm]',  65, 95, 89.1-4.5, 89.1+4.5],
-            capacitance_gdls: ['AD8 GdLS Level: Capacitance [mm]', 65, 95, 89.1-4.5, 89.1+4.5],    
-            ultrasonic_ls:    ['AD8 LS Level: Ultrasonic [mm]',    65, 95, 85.0-4.5, 85.0+4.5], 
-            capacitance_ls:   ['AD8 LS Level: Capacitance [mm]',   65, 95, 85.0-4.5, 85.0+4.5],
-            capacitance_mo:   ['AD8 MO Level: Capacitance [mm]',   65, 95, 90.0-4.5, 90.0+4.5],
-            temp_gdls:        ['AD8 GdLS Temperature [C]', 21, 25, 22.4, 23],
-            temp_ls:          ['AD8 LS Temperature [C]',   21, 25, 22.4, 23],
+            // liquid levels change by 14 mm/C.  I set +/- 0.4C, +/-5.6 mm
+            ultrasonic_gdls:  ['AD8 GdLS Level: Ultrasonic [mm]',  104.2-15, 104.2+15, 104.2-5.6,     104.2+5.6],     // DMW
+            capacitance_gdls: ['AD8 GdLS Level: Capacitance [mm]', 104.2-15, 104.2+15, 104.2-5.6-3.0, 104.2+5.6+3.0], // DMW
+            ultrasonic_ls:    ['AD8 LS Level: Ultrasonic [mm]',    106.1-15, 106.1+15, 106.1-5.6,     106.1+5.6],     // DMW
+            capacitance_ls:   ['AD8 LS Level: Capacitance [mm]',   106.1-15, 106.1+15, 106.1-5.6-3.0, 106.1+5.6+3.0], // DMW
+            capacitance_mo:   ['AD8 MO Level: Capacitance [mm]',   80.4-15, 80.4+15, 90.4-5.6,     90.4+5.6],
+            temp_gdls:        ['AD8 GdLS Temperature [C]', 21, 25, 22.5-0.4, 22.5+0.4],
+            temp_ls:          ['AD8 LS Temperature [C]',   21, 25, 22.5-0.4, 22.5+0.4],
             //capacitance_temp_gdls: ['AD8 GdLS Temperature [C]: Capacitance', 23, 28, 24, 27],
             //capacitance_temp_ls: ['AD8 LS Temperature [C]: Capacitance', 23, 28, 24, 27],
             //capacitance_temp_mo: ['AD8 MO Temperature [C]: Capacitance', 20, 26, 21, 25],

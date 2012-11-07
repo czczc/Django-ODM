@@ -46,21 +46,14 @@ function load_configs(){
     configs = {
         // renderTo, title, ymin, ymax, ysafemin, ysafemax
         Ad1Lidsensor : {
-            // liquid levels change by 14 mm/C.  I set +/- 0.3C, +/-4.5 mm
-            var level=84.5;
-            var level_edge=15;
-            var level_limit=4.5;
-            var level_cap_limit=3;
-            var temp=22.5;
-            var temp_edge=1.5;
-            var temp_limit=0.4;
-            ultrasonic_gdls:  ['AD1 GdLS Level: Ultrasonic [mm]',  level-level_edge, level+level_edge, level-level_limit, level+level_limit],
-            capacitance_gdls: ['AD1 GdLS Level: Capacitance [mm]', 65, 95, 80.6-4.5, 80.6+4.5],    
-            ultrasonic_ls:    ['AD1 LS Level: Ultrasonic [mm]',    65, 95, 85.6-4.5, 85.6+4.5], 
-            capacitance_ls:   ['AD1 LS Level: Capacitance [mm]',   65, 95, 85.6-4.5, 85.6+4.5],
-            capacitance_mo:   ['AD1 MO Level: Capacitance [mm]',   65, 95, 82.6-4.5, 82.6+4.5],
-            temp_gdls:        ['AD1 GdLS Temperature [C]', 21, 25, 22.4, 23],
-            temp_ls:          ['AD1 LS Temperature [C]',   21, 25, 22.4, 23],
+            // liquid levels change by 14 mm/C.  I set +/- 0.4C, +/-5.6 mm
+            ultrasonic_gdls:  ['AD1 GdLS Level: Ultrasonic [mm]',  75.5-15, 75.5+15, 75.5-5.6,     75.5+5.6],     // DMW 
+            capacitance_gdls: ['AD1 GdLS Level: Capacitance [mm]', 75.5-15, 75.5+15, 75.5-5.6-3.0, 75.5+5.6+3.0], // DMW   
+            ultrasonic_ls:    ['AD1 LS Level: Ultrasonic [mm]',    81.9-15, 81.9+15, 81.9-5.6,     81.9+5.6],     // DMW 
+            capacitance_ls:   ['AD1 LS Level: Capacitance [mm]',   81.9-15, 81.9+15, 81.9-5.6-3.0, 81.9+5.6+3.0], // DMW
+            capacitance_mo:   ['AD1 MO Level: Capacitance [mm]',   75.5-15, 75.5+15, 75.5-5.6,     75.5+5.6],
+            temp_gdls:        ['AD1 GdLS Temperature [C]', 21, 25, 22.5-0.4, 22.5+0.4],
+            temp_ls:          ['AD1 LS Temperature [C]',   21, 25, 22.5-0.4, 22.5+0.4],
             //capacitance_temp_gdls: ['AD1 GdLS Temperature: Capacitance [C]', 23, 28, 24, 27],
             //capacitance_temp_ls: ['AD1 LS Temperature: Capacitance [C]', 23, 28, 24, 27],
             //capacitance_temp_mo: ['AD1 MO Temperature: Capacitance [C]', 20, 26, 21, 25],
@@ -72,13 +65,13 @@ function load_configs(){
             tilty_sensor3: ['AD1 Tilt Y3 [deg]', -2, 2,  1.22,  1.26]
         },
         Ad2Lidsensor : {
-            ultrasonic_gdls:  ['AD2 GdLS Level: Ultrasonic [mm]',  65, 95, 85.0-4.5, 85.0+4.5],
-            capacitance_gdls: ['AD2 GdLS Level: Capacitance [mm]', 65, 95, 85.0-4.5, 85.0+4.5],    
-            ultrasonic_ls:    ['AD2 LS Level: Ultrasonic [mm]',    65, 95, 87.7-4.5, 87.7+4.5], 
-            capacitance_ls:   ['AD2 LS Level: Capacitance [mm]',   65, 95, 87.7-4.5, 87.7+4.5],
-            capacitance_mo:   ['AD2 MO Level: Capacitance [mm]',   65, 95, 84.3-4.5, 84.3+4.5],
-            temp_gdls:        ['AD2 GdLS Temperature [C]', 21, 25, 22.4, 23],
-            temp_ls:          ['AD2 LS Temperature [C]',   21, 25, 22.4, 23],
+            ultrasonic_gdls:  ['AD2 GdLS Level: Ultrasonic [mm]',  84.5-15, 84.5+15, 84.5-5.6,     84.5+5.6],     // DMW
+            capacitance_gdls: ['AD2 GdLS Level: Capacitance [mm]', 84.5-15, 84.5+15, 84.5-5.6-3.0, 84.5+5.6+3.0], // DMW
+            ultrasonic_ls:    ['AD2 LS Level: Ultrasonic [mm]',    86.8-15, 86.8+15, 86.8-5.6,     86.8+5.6],     // DMW
+            capacitance_ls:   ['AD2 LS Level: Capacitance [mm]',   86.8-15, 86.8+15, 86.8-5.6-3.0, 86.8+5.6+3.0], // DMW
+            capacitance_mo:   ['AD2 MO Level: Capacitance [mm]',   75.5-15, 75.5+15, 75.5-5.6,     75.5+5.6],
+            temp_gdls:        ['AD2 GdLS Temperature [C]', 21, 25, 22.5-0.4, 22.5+0.4],
+            temp_ls:          ['AD2 LS Temperature [C]',   21, 25, 22.5-0.4, 22.5+0.4],
             //capacitance_temp_gdls: ['AD2 GdLS Temperature: Capacitance [C]', 23, 28, 24, 27],
             //capacitance_temp_ls: ['AD2 LS Temperature: Capacitance [C]', 23, 28, 24, 27],
             //capacitance_temp_mo: ['AD2 MO Temperature: Capacitance [C]', 20, 26, 21, 25],
