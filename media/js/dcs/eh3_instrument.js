@@ -111,10 +111,10 @@ function load_configs(){
             tilty_sensor3: ['AD6 Tilt Y3 [deg]', -2, 2, -0.14, -0.10]
         },
         Ad7Lidsensor : {
-            ultrasonic_gdls:  ['AD7 GdLS Level: Ultrasonic [mm]',  105.1-15,  105.1+15,  105.1-5.6,      105.1+5.6],     // DMW
-            ultrasonic_ls:    ['AD7 LS Level: Ultrasonic [mm]',    101.1-15,  101.1+15,  101.1-5.6,      101.1+5.6],     // DMW
-            capacitance_gdls: ['AD7 GdLS Level: Capacitance [mm]', 105.1-15,  105.1+15,  105.1-5.6+3.0,  105.1+5.6+3.0], // DMW
-            capacitance_ls:   ['AD7 LS Level: Capacitance [mm]',   101.1-15,  101.1+15,  101.1-5.6+3.0,  101.1+5.6+3.0], // DMW
+            ultrasonic_gdls:  ['AD7 GdLS Level: Ultrasonic [mm]',  101.1-15,  101.1+15,  101.1-5.6,      101.1+5.6],     // DMW
+            ultrasonic_ls:    ['AD7 LS Level: Ultrasonic [mm]',    105.1-15,  105.1+15,  105.1-5.6,      105.1+5.6],     // DMW
+            capacitance_gdls: ['AD7 GdLS Level: Capacitance [mm]', 101.1-15,  101.1+15,  101.1-5.6+3.0,  101.1+5.6+3.0], // DMW
+            capacitance_ls:   ['AD7 LS Level: Capacitance [mm]',   105.1-15,  105.1+15,  105.1-5.6+3.0,  105.1+5.6+3.0], // DMW
             capacitance_mo:   ['AD7 MO Level: Capacitance [mm]',   109.4-15,  109.4+15,  109.4-5.6,      109.4+5.6],     // DMW
             temp_gdls:        ['AD7 GdLS Temperature [C]', 21, 25, 22.7-0.4, 22.7+0.4],                                  // DMW
             temp_ls:          ['AD7 LS Temperature [C]',   21, 25, 22.7-0.4, 22.7+0.4],                                  // DMW
