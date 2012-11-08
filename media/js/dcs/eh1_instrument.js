@@ -51,9 +51,9 @@ function load_configs(){
             capacitance_gdls: ['AD1 GdLS Level: Capacitance [mm]', 75.5-15, 75.5+15, 75.5-5.6-3.0, 75.5+5.6+3.0], // DMW   
             ultrasonic_ls:    ['AD1 LS Level: Ultrasonic [mm]',    81.9-15, 81.9+15, 81.9-5.6,     81.9+5.6],     // DMW 
             capacitance_ls:   ['AD1 LS Level: Capacitance [mm]',   81.9-15, 81.9+15, 81.9-5.6-3.0, 81.9+5.6+3.0], // DMW
-            capacitance_mo:   ['AD1 MO Level: Capacitance [mm]',   75.5-15, 75.5+15, 75.5-5.6,     75.5+5.6],
-            temp_gdls:        ['AD1 GdLS Temperature [C]', 21, 25, 22.5-0.4, 22.5+0.4],
-            temp_ls:          ['AD1 LS Temperature [C]',   21, 25, 22.5-0.4, 22.5+0.4],
+            capacitance_mo:   ['AD1 MO Level: Capacitance [mm]',   77.8-15, 77.8+15, 77.8-5.6,     77.8+5.6],     // DMW
+            temp_gdls:        ['AD1 GdLS Temperature [C]', 21, 25, 22.5-0.4, 22.5+0.4],                           // DMW
+            temp_ls:          ['AD1 LS Temperature [C]',   21, 25, 22.5-0.4, 22.5+0.4],                           // DMW
             //capacitance_temp_gdls: ['AD1 GdLS Temperature: Capacitance [C]', 23, 28, 24, 27],
             //capacitance_temp_ls: ['AD1 LS Temperature: Capacitance [C]', 23, 28, 24, 27],
             //capacitance_temp_mo: ['AD1 MO Temperature: Capacitance [C]', 20, 26, 21, 25],
@@ -69,9 +69,9 @@ function load_configs(){
             capacitance_gdls: ['AD2 GdLS Level: Capacitance [mm]', 84.5-15, 84.5+15, 84.5-5.6-3.0, 84.5+5.6+3.0], // DMW
             ultrasonic_ls:    ['AD2 LS Level: Ultrasonic [mm]',    86.8-15, 86.8+15, 86.8-5.6,     86.8+5.6],     // DMW
             capacitance_ls:   ['AD2 LS Level: Capacitance [mm]',   86.8-15, 86.8+15, 86.8-5.6-3.0, 86.8+5.6+3.0], // DMW
-            capacitance_mo:   ['AD2 MO Level: Capacitance [mm]',   75.5-15, 75.5+15, 75.5-5.6,     75.5+5.6],
-            temp_gdls:        ['AD2 GdLS Temperature [C]', 21, 25, 22.5-0.4, 22.5+0.4],
-            temp_ls:          ['AD2 LS Temperature [C]',   21, 25, 22.5-0.4, 22.5+0.4],
+            capacitance_mo:   ['AD2 MO Level: Capacitance [mm]',   82.0-15, 82.0+15, 82.0-5.6,     82.0+5.6],     // DMW
+            temp_gdls:        ['AD2 GdLS Temperature [C]', 21, 25, 22.5-0.4, 22.5+0.4],                           // DMW
+            temp_ls:          ['AD2 LS Temperature [C]',   21, 25, 22.5-0.4, 22.5+0.4],                           // DMW
             //capacitance_temp_gdls: ['AD2 GdLS Temperature: Capacitance [C]', 23, 28, 24, 27],
             //capacitance_temp_ls: ['AD2 LS Temperature: Capacitance [C]', 23, 28, 24, 27],
             //capacitance_temp_mo: ['AD2 MO Temperature: Capacitance [C]', 20, 26, 21, 25],
