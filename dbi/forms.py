@@ -82,6 +82,7 @@ class EnergyReconForm(DBIForm):
         label='Value',
         choices=(
             ('peevis', 'PE to Evis'),
+            ('seqno', 'seqno')
         ),
     )
 
@@ -137,6 +138,7 @@ class CalibPmtFineGainForm(ChannelForm):
         choices=(
             ('spehigh', 'High Gain SPE'),
             ('sigmaspehigh', 'High Gain SPE Width'),
+            ('seqno', 'seqno')
         ),
     )
 

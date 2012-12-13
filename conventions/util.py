@@ -137,8 +137,7 @@ def DBI_trend(objects, site, detector, task, sim):
         vld__subsite=detector,
         vld__simmask=sim,
         vld__task=task,
-    ).order_by('-vld__versiondate')
-    # ).order_by('-vld__seqno')
+    ).order_by('-vld__versiondate', '-vld__seqno')
     if not records:
         return {}
 
@@ -157,7 +156,7 @@ def DBI_trend(objects, site, detector, task, sim):
     ]
 
     for record in records[1:]:
-        # print record.vld.seqno, record.vld.timestart
+        print record.vld.seqno, record.vld.timestart
         uncovered_periods = check_overlap(record, dbi_records, uncovered_periods)
 
     # for key in dbi_records:

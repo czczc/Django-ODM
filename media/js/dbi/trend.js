@@ -191,7 +191,8 @@ function parse_datetime(datetime) {
 function load_configs() {
     configs = {
         'EnergyRecon' : {
-          'peevis' : {'title' : 'PE to Visible Energy/MeV'}
+          'peevis' : {'title' : 'PE to Visible Energy/MeV'},
+          'seqno' :  {'title' : 'seqno'}
         },
         'CalibPMTSpec' : {
           'pmtspehigh' : {'title' : 'High Gain SPE [ADC]'},
@@ -201,6 +202,7 @@ function load_configs() {
         'CalibPmtFineGain' : {
           'spehigh' : {'title' : 'High Gain SPE [ADC]'},
           'sigmaspehigh'  : {'title' : 'High Gain SPE Width [ADC]'},
+          'seqno' :  {'title' : 'seqno'}
         },
         'CableMap' : {
           'board' : {'title' : 'Board'},
