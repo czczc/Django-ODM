@@ -58,10 +58,10 @@ function load_configs(){
         // renderTo, title, ymin, ymax, ysafemin, ysafemax
         Ad4Lidsensor : {
             ultrasonic_gdls:  ['AD4 GdLS Level: Ultrasonic [mm]',  99.6-15, 99.6+15, 99.6-5.6,     99.6+5.6],     // DMW
-            ultrasonic_ls:    ['AD4 LS Level: Ultrasonic [mm]',    83.8-15, 83.8+15, 83.8-5.6,     83.8+5.6],     // DMW
+            ultrasonic_ls:    ['AD4 LS Level: Ultrasonic [mm]',    76.9-15, 76.9+15, 76.9-5.6,     76.9+5.6],     // DMW
             capacitance_gdls: ['AD4 GdLS Level: Capacitance [mm]', 99.6-15, 99.6+15, 99.6-5.6+3.0, 99.6+5.6+3.0], // DMW
-            capacitance_ls:   ['AD4 LS Level: Capacitance [mm]',   83.8-15, 83.8+15, 83.8-5.6+3.0, 83.8+5.6+3.0], // DMW
-            capacitance_mo:   ['AD4 MO Level: Capacitance [mm]',   90.7-15, 90.7+15, 90.7-5.6,     90.7+5.6],     // DMW
+            capacitance_ls:   ['AD4 LS Level: Capacitance [mm]',   76.9-15, 76.9+15, 76.9-5.6+3.0, 76.9+5.6+3.0], // DMW
+            capacitance_mo:   ['AD4 MO Level: Capacitance [mm]',   95.1-15, 95.1+15, 95.1-5.6,     95.1+5.6],     // DMW
             temp_gdls:        ['AD4 GdLS Temperature [C]', 21, 25, 22.7-0.4, 22.7+0.4],                           // DMW
             temp_ls:          ['AD4 LS Temperature [C]',   21, 25, 22.7-0.4, 22.7+0.4],                           // DMW
             //capacitance_temp_gdls: ['AD4 GdLS Temperature: Capacitance', 23, 28, 24, 27],
@@ -112,10 +112,10 @@ function load_configs(){
         },
         Ad7Lidsensor : {
             ultrasonic_gdls:  ['AD7 GdLS Level: Ultrasonic [mm]',  101.1-15,  101.1+15,  101.1-5.6,      101.1+5.6],     // DMW
-            ultrasonic_ls:    ['AD7 LS Level: Ultrasonic [mm]',    105.1-15,  105.1+15,  105.1-5.6,      105.1+5.6],     // DMW
+            ultrasonic_ls:    ['AD7 LS Level: Ultrasonic [mm]',    102.6-15,  102.6+15,  102.6-5.6,      102.6+5.6],     // DMW
             capacitance_gdls: ['AD7 GdLS Level: Capacitance [mm]', 101.1-15,  101.1+15,  101.1-5.6+3.0,  101.1+5.6+3.0], // DMW
-            capacitance_ls:   ['AD7 LS Level: Capacitance [mm]',   105.1-15,  105.1+15,  105.1-5.6+3.0,  105.1+5.6+3.0], // DMW
-            capacitance_mo:   ['AD7 MO Level: Capacitance [mm]',   109.4-15,  109.4+15,  109.4-5.6,      109.4+5.6],     // DMW
+            capacitance_ls:   ['AD7 LS Level: Capacitance [mm]',   102.6-15,  102.6+15,  102.6-5.6+3.0,  102.6+5.6+3.0], // DMW
+            capacitance_mo:   ['AD7 MO Level: Capacitance [mm]',   104.7-15,  104.7+15,  104.7-5.6,      104.7+5.6],     // DMW
             temp_gdls:        ['AD7 GdLS Temperature [C]', 21, 25, 22.7-0.4, 22.7+0.4],                                  // DMW
             temp_ls:          ['AD7 LS Temperature [C]',   21, 25, 22.7-0.4, 22.7+0.4],                                  // DMW
             //capacitance_temp_gdls: ['AD7 GdLS Temperature: Capacitance', 23, 28, 24, 27],

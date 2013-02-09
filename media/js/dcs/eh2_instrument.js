@@ -68,9 +68,9 @@ function load_configs(){
             // liquid levels change by 14 mm/C.  I set +/- 0.4C, +/-5.6 mm
             ultrasonic_gdls:  ['AD8 GdLS Level: Ultrasonic [mm]',  104.2-15, 104.2+15, 104.2-5.6,     104.2+5.6],     // DMW
             capacitance_gdls: ['AD8 GdLS Level: Capacitance [mm]', 104.2-15, 104.2+15, 104.2-5.6-3.0, 104.2+5.6+3.0], // DMW
-            ultrasonic_ls:    ['AD8 LS Level: Ultrasonic [mm]',    106.1-15, 106.1+15, 106.1-5.6,     106.1+5.6],     // DMW
-            capacitance_ls:   ['AD8 LS Level: Capacitance [mm]',   106.1-15, 106.1+15, 106.1-5.6-3.0, 106.1+5.6+3.0], // DMW
-            capacitance_mo:   ['AD8 MO Level: Capacitance [mm]',   107.1-15, 107.1+15, 107.1-5.6,     107.1+5.6],     // DMW
+            ultrasonic_ls:    ['AD8 LS Level: Ultrasonic [mm]',    102.2-15, 102.2+15, 102.2-5.6,     102.2+5.6],     // DMW
+            capacitance_ls:   ['AD8 LS Level: Capacitance [mm]',   102.2-15, 102.2+15, 102.2-5.6-3.0, 102.2+5.6+3.0], // DMW
+            capacitance_mo:   ['AD8 MO Level: Capacitance [mm]',   101.2-15, 101.2+15, 101.2-5.6,     101.2+5.6],     // DMW
             temp_gdls:        ['AD8 GdLS Temperature [C]', 21, 25, 22.7-0.4, 22.7+0.4],                               // DMW
             temp_ls:          ['AD8 LS Temperature [C]',   21, 25, 22.7-0.4, 22.7+0.4],                               // DMW
             //capacitance_temp_gdls: ['AD8 GdLS Temperature [C]: Capacitance', 23, 28, 24, 27],
