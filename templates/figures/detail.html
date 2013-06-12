@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/modal.css")?>
+{% endblock %}
+
+{% block title %}ODM | Figures {% endblock %}
+
+{% block content %}
+
+  {# figures #}
+  <div class="grid_24" id="figures_section" style='margin-top: 20px;'>
+
+    {% for section, figure_list in figures.items %}
+    <div class="grid_24">
+      <a name="{{section}}"></a>
+      <h2>
+           {{section}}
+      </h2>
+    </div>
+    <div class="clear"></div>
+
+    <div style="border: 1px solid #999;">
+      <table id="table_{{section}}" class='production'>
+        <tr>
+        {% for figname in figure_list %}
+        <td><image class="img_db" src="{{base_url}}{{section}}/{{figname}}/{{figname}}.png" width=300 height=225 />
+          <span class="figname">
+            {{figname}}<br />
+            ( <a href="{{base_url}}{{section}}/{{figname}}/{{figname}}.eps">eps</a>
+            | <a href="{{base_url}}{{section}}/{{figname}}/{{figname}}.pdf">pdf</a> )
+          </span>
+        </td>
+        {% if forloop.last %}
+          </tr>
+        {% else %}
+          {% if forloop.counter|divisibleby:"3" %}
+            </tr><tr>
+          {% endif %}
+        {% endif %}
+        {% endfor %}
+      </table>
+    </div>
+    {% endfor %}
+  </div>
+
+  </div>
+  <div class="clear"></div>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal.1.4.1.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/figures.js"></script>
+{% endblock %}
