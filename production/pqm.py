@@ -8,6 +8,17 @@ class Pqm(object):
     base_url = 'http://web.dyb.ihep.ac.cn/dqm/'
     runlist_file = 'HistLog/available_run_number'
     runlist_local = settings.PROJECT_PATH+'/../tmp/pqmlist.txt'
+    RPC_ordered_figs = [
+            'SysTrigRate',     'Rate4Fold', 'DeltaTrigTime', 
+                 'ErrFec',     'LayerMult', 'Delta4FoldTime', 
+                 'ErrRtm',    'ModuleMult', 'Delta4FoldLogTime', 
+           '4FoldMapRate', '4FoldMapPatch', '4FoldMultMap', 
+        'EfficiencyStats',           'Hit', 'NoiseRateStats',
+        'EfficiencyMapL1',      'HitMapL1', 'NoiseRateMapL1', 
+        'EfficiencyMapL2',      'HitMapL2', 'NoiseRateMapL2', 
+        'EfficiencyMapL3',      'HitMapL3', 'NoiseRateMapL3',
+        'EfficiencyMapL4',      'HitMapL4', 'NoiseRateMapL4'
+    ]
     
     def __init__(self, runno=''):
         self.runno = runno
@@ -19,6 +30,7 @@ class Pqm(object):
         self.info = {
             'base_url' : '',
             'figure_summary' : '',
+            'site' : '',
             'detectors' : {
                 # 'SABAD2' : [
                 #     {
@@ -94,13 +106,47 @@ class Pqm(object):
         for line in fh:
             figname, figpath = line.split()
             site, detector = figpath.split('/')[2:4]
+            self.info['site'] = site
             detname = site + detector
             figure_info = {}
             figure_info['figname'] = figname
             figure_info['figpath'] = figpath
             self.info['detectors'].setdefault(detname, []).append(figure_info)
-
-
+        
+        self._sort_RPC()
+    
+    def _sort_RPC(self):
+        figname_list = []
+        figpath_list = []
+        detname = self.info['site'] + 'RPC'
+        try:
+            for item in self.info['detectors'][detname]:
+                figname_list.append(item['figname'])
+                figpath_list.append(item['figpath'])
+        except KeyError:
+            return
+                    
+        ordered_figure_info = []
+        # append figs acoording to predefined order
+        for figname in self.RPC_ordered_figs:
+            try:
+                index = figname_list.index(figname)
+                ordered_figure_info.append({
+                    'figname' : figname_list[index],
+                    'figpath' : figpath_list[index],
+                })
+                figname_list.pop(index)
+                figpath_list.pop(index)
+            except ValueError:
+                pass
+        # append rest of figs
+        for index, figname in enumerate(figname_list):
+            ordered_figure_info.append({
+                'figname' : figname_list[index],
+                'figpath' : figpath_list[index],
+            })
+        self.info['detectors'][detname] = ordered_figure_info
+        
     def figure_choices(self):
         '''return a Field.Choices of available figures'''
         import os

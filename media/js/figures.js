@@ -1,6 +1,11 @@
 
 
 modal_by_click('.img_db');
+// $('.img_db').each(function(){
+//     src = $(this).attr("src");
+//     $(this).removeAttr("src").attr("src", src);
+//     // console.log($(this));
+// });
 
 // display image modal window by single click
 function modal_by_click(selector) {

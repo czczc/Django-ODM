@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     (r'^files/proxy/(.*)/$', 'odm.fileinfo.views.proxy'),
     (r'^files/catalog/run/(\d+)/$', 'odm.fileinfo.views.catalog'),
     (r'^files/catalog/run/(\d+)/appl/(\w+)/$', 'odm.fileinfo.views.catalog'),
+    (r'^shiftcheck/run/(\d+)/$', 'odm.production.views.shiftcheck'),
 
     (r'^run/', include('odm.runinfo.urls')),
     (r'^production/', include('odm.production.urls')),

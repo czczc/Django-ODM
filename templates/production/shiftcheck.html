@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/modal.css")?>
+{% endblock %}
+
+{% block title %}ODM | Shift Check | Run {{ runno }}{% endblock %}
+
+{% block content %}
+<div class = "grid_8 prefix_8 suffix_8">
+     <h1 align='center'>
+         {{hall}}  Run {{runno}} 
+    </h1>
+</div>    
+
+
+<div class="grid_24" style='margin-top: 20px;'>
+    <div style="border: 1px solid #999;">    
+    <table>
+      <tr>
+        <th></th>
+        <th>Number of Hit Channels</th>
+        <th>Channel Occupancy</th>
+        <th>Channel Fine &Delta;ADC</th>
+        <th>Calibrated Charge</th>
+      </tr>
+      {% for detector in info %}
+      <tr>
+        <td><h5>{{detector.0}}</h5></td>
+        {% for figure in detector.1 %}
+        <td>
+          <img class="img_db" src={{base_url}}{{figure.1}} width=200 height=150>
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+                 
+    </table>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="grid_24" style='margin-top: 20px;'>
+
+<h6>
+  Figures from reference run <span class='warning' id="ref_runno">{{ref_run}}</span> is displayed in the red frame. 
+  To toggle the visibility of reference run figures, press the backspace key '<span class='warning'>\</span>'.
+<h6>
+</div>
+<div class="clear"></div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal.1.4.1.min.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/sprintf.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/shiftcheck.js"></script>
+{% endblock %}

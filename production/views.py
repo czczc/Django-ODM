@@ -120,6 +120,67 @@ def diagnostics_cleantmp(request):
         
     return HttpResponse('<pre>' + log + '</pre>')
     
+
+@login_required      
+def shiftcheck(request, runno):
+    '''shift check on subset of figures'''
+    
+    run = Diagnostics(runno)
+    run.fetch_all()
+    try:
+        site = run.info['detectors'].keys()[0][:-3]
+    except IndexError:
+        return HttpResponse('cannot find diagnostic plots.')
+    
+    from odm.conventions.conf import Site, Detector
+    hall = Site.site_alias[site]
+    detectors = Detector.hall_detectors_alias[hall][:-1]
+    # print hall, detectors
+    
+    figs_for_check = ['nChannels', 'channelHits', 'channelDadcFine', 'adCharge', 'MuonCharge']
+    info_for_check = {
+        # detname : {
+           #  'nChannels' : 'path',
+           #  ...
+        # }
+    }
+    figs_for_template = []
+    
+    for detector, figure_list in run.info['detectors'].items():
+        info_for_check[detector] = {}
+        for x in figure_list:
+            if x['figname'] in figs_for_check:
+                info_for_check[detector][x['figname']] = x['figpath']
+    # print info_for_check
+    
+    for detector in detectors:
+        detname = site + detector
+        fig_list = []
+        for figname in figs_for_check:
+            try:
+                figpath = info_for_check[detname][figname]
+                fig_list.append((figname, figpath))
+            except KeyError:
+                pass
+        figs_for_template.append((detector, fig_list))
+    # print figs_for_template
+    
+    from odm.conventions.reference import ReferenceRun
+    ref_run = ReferenceRun.StandardRun.get(hall+'-Physics', 0)
+    
+    return direct_to_template(request, 
+        template = 'production/shiftcheck.html',
+        extra_context = {
+            'runno' : runno,
+            'hall' : hall,
+            'info' : figs_for_template,
+            'base_url' : run.info['xml_base_url'],
+            'ref_run' : ref_run,
+        })
+    
+    # for debug
+    # return HttpResponse('<pre>'+json.dumps(run.info, indent=4) + '</pre>')
+    
         
 # ======= Simulation =======
 

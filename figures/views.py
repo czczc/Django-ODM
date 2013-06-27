@@ -3,7 +3,7 @@ from django.views.generic.simple import direct_to_template
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
-import json
+import json, time, datetime
 
 @login_required
 def long(request):
@@ -19,7 +19,8 @@ def long(request):
     print figures
     return direct_to_template(request, template='figures/detail.html',
         extra_context={
-          'base_url' : 'http://portal.nersc.gov/project/dayabay/odm_figures/long/figures/',
+          'base_url' : 'https://portal.nersc.gov/project/dayabay/odm_figures/long/figures/',
           'figures' : figures,
+          'version' : '?v=%.0f' % (time.mktime(datetime.datetime.utcnow().timetuple()), ),
         }
     )

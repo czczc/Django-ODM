@@ -8,7 +8,7 @@ class Diagnostics(object):
     '''class to manage diagnositcs info '''
     
     local_base_dir = '/project/projectdirs/dayabay/www/dybprod'
-    xml_base_url = 'http://portal.nersc.gov/project/dayabay/dybprod/'
+    xml_base_url = 'https://portal.nersc.gov/project/dayabay/dybprod/'
     runs_xml = 'runs.xml'
     
     def __init__(self, runno=''):

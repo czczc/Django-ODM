@@ -24,11 +24,12 @@
       <table id="table_{{section}}" class='production'>
         <tr>
         {% for figname in figure_list %}
-        <td><image class="img_db" src="{{base_url}}{{section}}/{{figname}}/{{figname}}.png" width=300 height=225 />
+        <td><image class="img_db" src="{{base_url}}{{section}}/{{figname}}/{{figname}}.png{{version}}" width=300 height=225 />
           <span class="figname">
             {{figname}}<br />
             ( <a href="{{base_url}}{{section}}/{{figname}}/{{figname}}.eps">eps</a>
-            | <a href="{{base_url}}{{section}}/{{figname}}/{{figname}}.pdf">pdf</a> )
+            | <a href="{{base_url}}{{section}}/{{figname}}/{{figname}}.pdf">pdf</a>
+            | <a href="{{base_url}}{{section}}/{{figname}}/{{figname}}.png">png</a> )
           </span>
         </td>
         {% if forloop.last %}

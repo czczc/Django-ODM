@@ -21,10 +21,10 @@
               <th class='Site'>Site</th>
               <th class='StartTime hidden'>Start Time [UTC]</th>
               <th class='StartTimeBeijing'>Start Time [Beijing]</th>
-              <th class='RunLength'>Run Length</th>
               <th class='NumFiles'># Files</th>
               <th class='PQM'>PQM</th>
               <th class='Diagnostics'>Diagnostics</th>
+              <th class='ShiftCheck'>Shift Check</th>
               <th class='Elog'>Elog</th>
            </tr></thead>
            <tbody>
@@ -35,10 +35,11 @@
                        <td class='Site'>{{ run.partition }}</td>
                        <td class='StartTime hidden'>{{ run.vld.timestart }}</td>
                        <td class='StartTimeBeijing'>{{ run.vld.timestart_beijing }}</td>
-                       <td class='RunLength'>{{ run.vld.runlength }}</td>
+                       {# <td class='RunLength'>{{ run.vld.runlength }}</td> #}
                        <td class='NumFiles' runno='{{ run.runno }}'></td>                       
                        <td class='PQM' runno='{{ run.runno }}'></td>
                        <td class='Diagnostics' runno='{{ run.runno }}'></td>
+                       <td class='ShiftCheck'><a href="{{SITE_ROOT}}/shiftcheck/run/{{run.runno}}/">Shift Check</a></td>
                        <td class='Elog'>
                            <a href="http://web.dyb.ihep.ac.cn:8099/Shift/?mode=full&attach=1&reverse=0&reverse=1&all=1&npp=20&subtext={{run.runno}}">Elog</a>
                        </td>

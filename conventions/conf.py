@@ -96,6 +96,12 @@ class Detector(object):
         'EH3' : ['AD1', 'AD2', 'AD3', 'AD4', 'WPI', 'WPO', 'RPC'],
     }
     
+    hall_detectors_alias = {
+        'EH1' : ['AD1', 'AD2', 'IWS', 'OWS', 'RPC'],
+        'EH2' : ['AD1', 'AD2', 'IWS', 'OWS', 'RPC'],
+        'EH3' : ['AD1', 'AD2', 'AD3', 'AD4', 'IWS', 'OWS', 'RPC'],
+    }
+    
     detector_groups = {
         'AD' : ['AD1', 'AD2', 'AD3', 'AD4'],
         'WP' : ['WPI', 'WPO'],
