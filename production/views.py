@@ -121,7 +121,7 @@ def diagnostics_cleantmp(request):
     return HttpResponse('<pre>' + log + '</pre>')
     
 
-@login_required      
+# @login_required      
 def shiftcheck(request, runno):
     '''shift check on subset of figures'''
     
@@ -181,6 +181,102 @@ def shiftcheck(request, runno):
     # for debug
     # return HttpResponse('<pre>'+json.dumps(run.info, indent=4) + '</pre>')
     
+
+# @login_required      
+def ongoing_shiftcheck(request, siteno):
+    '''shift check on subset of figures for ongoing runs'''
+    from odm.fileinfo.models import Daqrawdatafileinfo
+    from odm.runinfo.models import Daqruninfo
+    from django.db.models import Max
+    
+    site = 'EH' + siteno
+    latest_runs_from_offline = [x['runno'] for x in Daqruninfo.objects.all()[:300].values('runno')]
+    ongoing_runs = Daqrawdatafileinfo.objects.all(
+        ).filter(runno__gt = latest_runs_from_offline[-1]
+        ).values('runno').annotate(max=Max('runno'))
+    
+    runnos = [ x['max'] for x in ongoing_runs ]
+    runnos = sorted(list(set(runnos) - set(latest_runs_from_offline)))
+    runnos.reverse()
+    ongoing_runno = None
+    for runno in runnos:
+        first_file = Daqrawdatafileinfo.objects.select_related().filter(runno=runno)[0]
+        runno = first_file.runno
+        tmp, tmp, tmp, runtype, partition, tmp, tmp, tmp = first_file.filename.split('.')
+        if partition.endswith('-Merged'):
+            partition = partition.replace('-Merged', '')
+        else:
+            continue
+        
+        if partition == site: 
+            ongoing_runno = str(runno)
+            break
+    
+    if ongoing_runno == None:
+        ongoing_runno = Daqruninfo.objects.select_related().all(
+        ).filter(
+            runtype='Physics'
+        ).filter(
+            partitionname = 'part_' + site
+        )[0]
+        ongoing_runno = str(ongoing_runno.runno)
+    
+    
+    run = Diagnostics(ongoing_runno)
+    run.fetch_all()
+    print ongoing_runno
+    # print run.info
+    
+    try:
+        site = run.info['detectors'].keys()[0][:-3]
+    except IndexError:
+        return HttpResponse('cannot find diagnostic plots.')
+    
+    from odm.conventions.conf import Site, Detector
+    hall = Site.site_alias[site]
+    detectors = Detector.hall_detectors_alias[hall][:-1]
+    # print hall, detectors
+    
+    figs_for_check = ['nChannels', 'channelHits', 'channelDadcFine', 'adCharge', 'MuonCharge']
+    info_for_check = {
+        # detname : {
+           #  'nChannels' : 'path',
+           #  ...
+        # }
+    }
+    figs_for_template = []
+    
+    for detector, figure_list in run.info['detectors'].items():
+        info_for_check[detector] = {}
+        for x in figure_list:
+            if x['figname'] in figs_for_check:
+                info_for_check[detector][x['figname']] = x['figpath']
+    # print info_for_check
+    
+    for detector in detectors:
+        detname = site + detector
+        fig_list = []
+        for figname in figs_for_check:
+            try:
+                figpath = info_for_check[detname][figname]
+                fig_list.append((figname, figpath))
+            except KeyError:
+                pass
+        figs_for_template.append((detector, fig_list))
+    # print figs_for_template
+    
+    from odm.conventions.reference import ReferenceRun
+    ref_run = ReferenceRun.StandardRun.get(hall+'-Physics', 0)
+    
+    return direct_to_template(request, 
+        template = 'production/shiftcheck.html',
+        extra_context = {
+            'runno' : ongoing_runno,
+            'hall' : hall,
+            'info' : figs_for_template,
+            'base_url' : run.info['xml_base_url'],
+            'ref_run' : ref_run,
+        })
         
 # ======= Simulation =======
 

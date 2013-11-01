@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "simple.html" %}
 
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/modal.css")?>
@@ -7,12 +7,16 @@
 {% block title %}ODM | Shift Check | Run {{ runno }}{% endblock %}
 
 {% block content %}
-<div class = "grid_8 prefix_8 suffix_8">
+<div class = "grid_10 prefix_7">
      <h1 align='center'>
-         {{hall}}  Run {{runno}} 
+         Shift Check: {{hall}} Run <span id="runno">{{runno}}</span>
     </h1>
 </div>    
 
+<div class = "grid_7">
+<h4>Not the current run? Find it <a href="{{SITE_ROOT}}/shiftcheck/site/{{hall|lower}}/" target="_blank">here</a>.</h4>
+</div>
+<div class="clear"></div>
 
 <div class="grid_24" style='margin-top: 20px;'>
     <div style="border: 1px solid #999;">    
@@ -45,6 +49,7 @@
   Figures from reference run <span class='warning' id="ref_runno">{{ref_run}}</span> is displayed in the red frame. 
   To toggle the visibility of reference run figures, press the backspace key '<span class='warning'>\</span>'.
 <h6>
+  <p style="margin-top:20px"></p>
 </div>
 <div class="clear"></div>
 

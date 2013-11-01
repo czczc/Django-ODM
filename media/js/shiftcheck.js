@@ -13,12 +13,14 @@ function set_ref(runno) {
 }
 // console.log(Ref);
 
-var this_url = window.location.href;
-var index_of_run = this_url.indexOf('run');
-var base_url = this_url.substring(0,index_of_run);
-var remainder_url = this_url.substring(index_of_run+4);
+// var this_url = window.location.href;
+// var index_of_run = this_url.indexOf('run');
+// var base_url = this_url.substring(0,index_of_run);
+// var remainder_url = this_url.substring(index_of_run+4);
 var Run = new Object;
-Run.runno = remainder_url.substring(0, remainder_url.indexOf('/'));
+// Run.runno = remainder_url.substring(0, remainder_url.indexOf('/'));
+
+Run.runno = parseInt($('#runno').html(), 10)
 Run.diagnostics_seg = sprintf('runs_%07d/runs_%07d/run_%07d', 
     Math.floor(Run.runno/1000)*1000, Math.floor(Run.runno/100)*100, Run.runno);
 

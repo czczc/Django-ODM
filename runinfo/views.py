@@ -404,6 +404,25 @@ def runtype(request, runtype='All', page=1, records=500):
         })
 
 
+# @login_required
+def shiftcheck(request, siteno, page=1, records=500):
+    '''shiftcheck by site'''
+    site = 'EH' + siteno
+    run_list = Daqruninfo.objects.list_runtype('Physics').filter(
+        partitionname = 'part_' + site
+    )
+    return object_list(request, 
+        template_name = 'run/shiftcheck.html',
+        queryset = run_list, 
+        template_object_name = 'run',
+        paginate_by = int(records),
+        page = int(page),
+        extra_context = {
+            'description'  : site,
+            'count'        : run_list.count(),  # total count, not per page
+            'base_url'     : settings.SITE_ROOT + '/shiftcheck/run/',
+        })
+
 @login_required
 def calibration(request, sourcetype, page=1, records=100):
     '''query by calibration source type'''

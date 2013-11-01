@@ -17,6 +17,8 @@ urlpatterns = patterns('',
     (r'^files/catalog/run/(\d+)/$', 'odm.fileinfo.views.catalog'),
     (r'^files/catalog/run/(\d+)/appl/(\w+)/$', 'odm.fileinfo.views.catalog'),
     (r'^shiftcheck/run/(\d+)/$', 'odm.production.views.shiftcheck'),
+    (r'^shiftcheck/ongoing/eh(\d)/$', 'odm.production.views.ongoing_shiftcheck'),
+    (r'^shiftcheck/site/eh(\d)/$', 'odm.runinfo.views.shiftcheck'),
 
     (r'^run/', include('odm.runinfo.urls')),
     (r'^production/', include('odm.production.urls')),
