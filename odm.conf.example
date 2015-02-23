@@ -1,0 +1,40 @@
+[common]
+SECRET_KEY = ********
+MAINTAINENCE =
+
+[default_db]
+NAME = /db/odm.db
+USER =
+PASSWORD =
+HOST =
+
+[lbl_db]
+NAME = offline_db
+USER = ********
+PASSWORD = ********
+HOST = dayabaydb.lbl.gov
+
+[ihep_db]
+NAME = offline_db
+USER = ********
+PASSWORD = ********
+HOST = dybdb2.ihep.ac.cn
+
+[dcs_db]
+NAME = dybdcsdb
+USER = ********
+PASSWORD = ********
+HOST = iago.lbl.gov
+PORT = 13306
+
+[dcs_db_ihep]
+NAME = dybdcsdb
+USER = ********
+PASSWORD = ********
+HOST = 202.122.37.89
+
+[dq_db]
+NAME = tmp_ligs_offline_db
+USER = ********
+PASSWORD = ********
+HOST = dayabaydb.lbl.gov
