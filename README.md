@@ -8,7 +8,7 @@ It's best to start in a new virtualenv (I recommend using [virtualenvwrapper](ht
 
     mkvirtualenv odm
     workon odm
-    git clone https://github.com/czczc/Django-ODM.git
+    git clone https://github.com/czczc/Django-ODM.git odm
     cd odm
     pip install -r requirements.txt
 
